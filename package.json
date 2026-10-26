@@ -7,9 +7,9 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "axios": "^1.6.8",
-    "express": "^4.19.2",
-    "tiktok-live-connector": "^1.2.6"
+    "axios": "latest",
+    "express": "latest",
+    "tiktok-live-connector": "latest"
   },
   "engines": {
     "node": "18.x"
