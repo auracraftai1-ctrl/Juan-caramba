@@ -1,11 +1,11 @@
-const { WebcastPushConnection } = require('tiktok-live-connector');
-const express = require('express');
-const axios = require('axios');
+import { WebcastPushConnection } from 'tiktok-live-connector';
+import express from 'express';
+import axios from 'axios';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// REEMPLAZA ESTO CON TU URL DE WEBHOOK DE MAKE.COM
+// REEMPLAZA ESTO CON TU URL DE WEBHOOK DE MAKE.COM SI NO USAS VARIABLES DE ENTORNO
 const MAKE_WEBHOOK_URL = process.env.MAKE_WEBHOOK_URL || 'TU_WEBHOOK_DE_MAKE_AQUI';
 
 // TU USUARIO DE TIKTOK LIVE (Sin el @)
