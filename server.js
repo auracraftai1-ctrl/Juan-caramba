@@ -1,5 +1,10 @@
 import express from 'express';
 import axios from 'axios';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // BLINDAJE TOTAL: Captura cualquier error o excepción para que el servidor NUNCA se caiga
 process.on('uncaughtException', (err) => {
@@ -12,6 +17,9 @@ process.on('unhandledRejection', (reason, promise) => {
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Configurar la carpeta estática 'public' para que lea overlay.html y las imágenes
+app.use(express.static(path.join(__dirname, 'public')));
 
 const MAKE_WEBHOOK_URL = process.env.MAKE_WEBHOOK_URL || '';
 const TIKTOK_USERNAME = process.env.TIKTOK_USERNAME || 'auracraftai';
@@ -87,8 +95,9 @@ async function enviarAlWebhook(payload) {
     }
 }
 
+// Ruta principal para servir el overlay visual directamente
 app.get('/', (req, res) => {
-    res.send('El conector de Juan Caramba Tarot AI está activo 24/7 en la nube.');
+    res.sendFile(path.join(__dirname, 'public', 'overlay.html'));
 });
 
 app.listen(PORT, () => {
