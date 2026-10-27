@@ -177,7 +177,7 @@
             color: #ff4654;
         }
 
-        /* CUADRO DE REGALOS VIP: PEQUEÑO, TRANSPARENTE Y ABAJO A LA IZQUIERDA */
+        /* CUADRO DE REGALOS VIP */
         .vip-gifts-guide {
             position: fixed;
             bottom: 12px;
@@ -218,7 +218,7 @@
             color: #ffdf73;
         }
 
-        /* VELA ANIMADA (MOVIMIENTO PERMANENTE DE PÍXELES ANTI-BANEO) */
+        /* VELA ANIMADA */
         .candle-container {
             position: fixed;
             bottom: 20px;
@@ -247,7 +247,7 @@
             100% { transform: translateX(-50%) scale(1.15) rotate(2deg); opacity: 1; }
         }
 
-        /* SALA DE ESPERA (10 USUARIOS ANGOSTA A LA DERECHA) */
+        /* SALA DE ESPERA */
         .waiting-queue {
             position: fixed;
             top: 10px;
@@ -338,7 +338,7 @@
             text-shadow: 1px 1px 2px #000;
         }
 
-        /* ANIMACIÓN FLOTANTE DE REGALO EN PANTALLA */
+        /* ANIMACIÓN FLOTANTE DE REGALO */
         .gift-popup-animation {
             position: absolute;
             top: 40%;
@@ -423,7 +423,6 @@
             width: 100%;
         }
 
-        /* REVERSO DE CARTA CON CSS PARA EL BARAJADO */
         .card-back-design {
             width: 100%;
             height: 60px;
@@ -474,7 +473,6 @@
             text-shadow: 2px 2px 6px #000, 0 0 8px rgba(0, 0, 0, 0.9);
         }
 
-        /* TAP TAP INTERACTIVO */
         .tap-heart {
             position: absolute;
             font-size: 24px;
@@ -491,10 +489,10 @@
 <body onclick="registrarTapTap(event)">
 
     <div class="container" id="mainContainer">
-        <!-- Fondo original de Don Juan Caramba -->
+        <!-- Fondo original -->
         <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image">
 
-        <!-- MÚSICA LLANERA DE FONDO -->
+        <!-- AUDIO DE FONDO -->
         <audio id="bgMusic" loop>
             <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=venezuelan-harp-instrumental-111394.mp3" type="audio/mpeg">
         </audio>
@@ -510,7 +508,7 @@
             <div class="follower-count" id="followerCount">Seguidores: 14.8K</div>
         </div>
 
-        <!-- BARRA DE ENERGÍA DE TAP TAPS -->
+        <!-- ENERGÍA DE TAP TAPS -->
         <div class="energy-bar-container">
             <div class="energy-title">⚡ ENERGÍA MÍSTICA</div>
             <div class="energy-outer">
@@ -518,36 +516,36 @@
             </div>
         </div>
 
-        <!-- CONTADOR DE CONCURSO TAP TAPS -->
+        <!-- CONCURSO -->
         <div class="contest-panel">
             <div class="contest-title">🏆 Concurso Taps</div>
             <div class="contest-stats"><span id="tapCountDisplay">0</span> / 100 Taps</div>
             <div class="contest-timer">Reinicia en: <span id="timerDisplay">59:59</span></div>
         </div>
 
-        <!-- CUADRO DE REGALOS VIP -->
+        <!-- GUÍA DE REGALOS -->
         <div class="vip-gifts-guide">
             <h6>🔮 Regalos & Lecturas</h6>
             <ul>
                 <li><strong>🌹 Rosa:</strong> 2 Cartas (70 p.)</li>
-                <li><strong>😎 Gafas/Sombrero:</strong> 4 Cartas (100 p.)</li>
+                <li><strong>😎 Gafas:</strong> 4 Cartas (100 p.)</li>
                 <li><strong>🦁 León:</strong> 10 Cartas (150 p.)</li>
                 <li><strong>🌌 Universo:</strong> 10 Cartas Comp. (160 p.)</li>
             </ul>
         </div>
 
-        <!-- VELA MÍSTICA -->
+        <!-- VELA -->
         <div class="candle-container">
             <div class="flame"></div>
         </div>
 
-        <!-- SALA DE ESPERA (10) -->
+        <!-- SALA DE ESPERA -->
         <div class="waiting-queue">
             <h4>Sala de Espera (10)</h4>
             <ul class="queue-list" id="queueList"></ul>
         </div>
 
-        <!-- FEED DE REGALOS -->
+        <!-- REGALOS RECIENTES -->
         <div class="gifts-panel">
             <h5>🎁 Recientes</h5>
             <div class="gift-feed" id="giftFeed">
@@ -556,7 +554,7 @@
             </div>
         </div>
 
-        <!-- ANIMACIÓN FLOTANTE DE REGALO -->
+        <!-- POPUP FLOTANTE DE REGALO -->
         <div class="gift-popup-animation" id="giftPopup">
             <div class="gift-popup-icon" id="giftPopupIcon">🎁</div>
             <div style="font-size: 11px; font-weight: bold; color: #ffdf73;" id="giftPopupUser">@Usuario</div>
@@ -566,7 +564,7 @@
         <!-- CARTAS -->
         <div class="tarot-slot" id="cardContainer"></div>
 
-        <!-- LECTURA FLOTANTE -->
+        <!-- LECTURA -->
         <div class="speech-floating">
             <h3>Don Juan Caramba</h3>
             <p id="speechText">"Saludos, alma errante... Envía tu Nombre Completo y Fecha de Nacimiento."</p>
@@ -581,31 +579,85 @@
             "Yajaira_77", "Ernesto_Tarot", "Marcos_Perez", "Astral_Ana", "Milagros_V"
         ];
 
-        // BARAJA COMPLETA RIDER-WAITE ESTABLE EN ESPAÑOL
-        const baraja = [
-            { nombre: "El Loco", img: "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "El Mago", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "La Sacerdotisa", img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "La Emperatriz", img: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "El Emperador", img: "https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "El Hierofante", img: "https://images.unsplash.com/photo-1514539079130-25950c84af65?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "Los Enamorados", img: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "El Carro", img: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "La Fuerza", img: "https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "El Ermitaño", img: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "La Rueda de la Fortuna", img: "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "La Justicia", img: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "La Muerte", img: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "La Torre", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "La Estrella", img: "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "La Luna", img: "https://images.unsplash.com/photo-1532693322450-2cb5c511067d?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "El Sol", img: "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "El Mundo", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "As de Copas", img: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "Tres de Copas", img: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "As de Oros", img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "As de Espadas", img: "https://images.unsplash.com/photo-1595590424283-b8f17842773f?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "As de Bastos", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=400&auto=format&fit=crop" }
+        // BARAJA COMPLETA LIMPIA Y SIN DUPLICADOS
+        const tarotDeck = [
+            { name: "El Loco", file: "454056.jpg" },
+            { name: "El Mago", file: "454057.jpg" },
+            { name: "La Sacerdotisa", file: "454639.jpg" },
+            { name: "La Emperatriz", file: "454507.jpg" },
+            { name: "El Emperador", file: "454508.jpg" },
+            { name: "El Hierofante", file: "454509.jpg" },
+            { name: "Los Enamorados", file: "454510.jpg" },
+            { name: "El Carro", file: "454540.jpg" },
+            { name: "La Fuerza", file: "454512.jpg" },
+            { name: "El Ermitaño", file: "454513.jpg" },
+            { name: "La Rueda de la Fortuna", file: "454514.jpg" },
+            { name: "La Justicia", file: "454515.jpg" },
+            { name: "La Muerte", file: "454541.jpg" },
+            { name: "La Templanza", file: "454518.jpg" },
+            { name: "El Diablo", file: "454519.jpg" },
+            { name: "La Torre", file: "454520.jpg" },
+            { name: "La Estrella", file: "454521.jpg" },
+            { name: "La Luna", file: "454522.jpg" },
+            { name: "El Sol", file: "454523.jpg" },
+            { name: "El Juicio", file: "454524.jpg" },
+            { name: "El Mundo", file: "454525.jpg" },
+
+            // Bastos
+            { name: "As de Bastos", file: "454623.jpg" },
+            { name: "Dos de Bastos", file: "454624.jpg" },
+            { name: "Tres de Bastos", file: "454625.jpg" },
+            { name: "Cuatro de Bastos", file: "454626.jpg" },
+            { name: "Cinco de Bastos", file: "454627.jpg" },
+            { name: "Seis de Bastos", file: "454628.jpg" },
+            { name: "Siete de Bastos", file: "454629.jpg" },
+            { name: "Ocho de Bastos", file: "454630.jpg" },
+            { name: "Nueve de Bastos", file: "454631.jpg" },
+            { name: "Diez de Bastos", file: "454632.jpg" },
+            { name: "Sota de Bastos", file: "454633.jpg" },
+            { name: "Caballo de Bastos", file: "454634.jpg" },
+            { name: "Reina de Bastos", file: "454635.jpg" },
+            { name: "Rey de Bastos", file: "454636.jpg" },
+
+            // Espadas
+            { name: "As de Espadas", file: "454558.jpg" },
+            { name: "Dos de Espadas", file: "454559.jpg" },
+            { name: "Tres de Espadas", file: "454560.jpg" },
+            { name: "Cuatro de Espadas", file: "454561.jpg" },
+            { name: "Cinco de Espadas", file: "454562.jpg" },
+            { name: "Seis de Espadas", file: "454563.jpg" },
+            { name: "Siete de Espadas", file: "454564.jpg" },
+            { name: "Ocho de Espadas", file: "454580.jpg" },
+            { name: "Nueve de Espadas", file: "454609.jpg" },
+            { name: "Diez de Espadas", file: "454618.jpg" },
+            { name: "Sota de Espadas", file: "454619.jpg" },
+            { name: "Caballo de Espadas", file: "454620.jpg" },
+            { name: "Reina de Espadas", file: "454621.jpg" },
+            { name: "Rey de Espadas", file: "454622.jpg" },
+
+            // Oros
+            { name: "As de Oros", file: "454543.jpg" },
+            { name: "Dos de Oros", file: "454544_2.jpg" },
+            { name: "Tres de Oros", file: "454545.jpg" },
+            { name: "Cuatro de Oros", file: "454546_2.jpg" },
+            { name: "Cinco de Oros", file: "454547_2.jpg" },
+            { name: "Sota de Oros", file: "454554_2.jpg" },
+
+            // Copas
+            { name: "As de Copas", file: "454526.jpg" },
+            { name: "Dos de Copas", file: "454529.jpg" },
+            { name: "Tres de Copas", file: "454528.jpg" },
+            { name: "Cuatro de Copas", file: "454530.jpg" },
+            { name: "Cinco de Copas", file: "454531.jpg" },
+            { name: "Seis de Copas", file: "454532.jpg" },
+            { name: "Siete de Copas", file: "454533.jpg" },
+            { name: "Ocho de Copas", file: "454534.jpg" },
+            { name: "Nueve de Copas", file: "454535.jpg" },
+            { name: "Diez de Copas", file: "454536.jpg" },
+            { name: "Sota de Copas", file: "454542.jpg" },
+            { name: "Caballo de Copas", file: "454538.jpg" },
+            { name: "Reina de Copas", file: "454637.jpg" },
+            { name: "Rey de Copas", file: "454638.jpg" }
         ];
 
         let totalTaps = 0;
@@ -752,7 +804,7 @@
                 container.innerHTML = '';
                 const seleccionadas = [];
                 while(seleccionadas.length < 4) {
-                    let carta = baraja[Math.floor(Math.random() * baraja.length)];
+                    let carta = tarotDeck[Math.floor(Math.random() * tarotDeck.length)];
                     if(!seleccionadas.includes(carta)) seleccionadas.push(carta);
                 }
 
@@ -763,14 +815,14 @@
                         cardDiv.className = `card ${esInvertida ? 'reversed' : ''}`;
                         
                         cardDiv.innerHTML = `
-                            <img src="${carta.img}" alt="${carta.nombre}">
-                            <span>${carta.nombre} ${esInvertida ? '(Inv.)' : ''}</span>
+                            <img src="${carta.file}" alt="${carta.name}" onerror="this.src='juan-caramba-bg.jpg'">
+                            <span>${carta.name} ${esInvertida ? '(Inv.)' : ''}</span>
                         `;
                         container.appendChild(cardDiv);
                     }, index * 250);
                 });
 
-                speechText.innerHTML = `"${usuarioActual}, aquí está tu lectura con el mazo Rider-Waite. ¡Atento al consejo!"`;
+                speechText.innerHTML = `"${usuarioActual}, aquí está tu lectura con tus cartas locales. ¡Atento al consejo!"`;
             }, 3000);
         }
 
