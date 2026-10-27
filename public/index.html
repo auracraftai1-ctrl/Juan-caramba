@@ -145,28 +145,29 @@
             color: #ff4654;
         }
 
-        /* SALA DE ESPERA PEQUEÑA EN LA ESQUINA SUPERIOR DERECHA */
+        /* SALA DE ESPERA TRANSPARENTE (SIN FONDO NEGRO SÓLIDO) */
         .waiting-queue {
             position: fixed;
             top: 10px;
             right: 10px;
             width: 170px;
-            background: rgba(0, 0, 0, 0.85);
-            border: 1.5px solid #d4af37;
+            background: transparent; /* Sin fondo negro */
+            border: 1.5px solid rgba(212, 175, 55, 0.7);
             border-radius: 6px;
             padding: 5px;
             color: #fff;
             z-index: 100;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.8);
+            backdrop-filter: blur(2px); /* Ligero efecto cristal sin oscurecer */
         }
         .waiting-queue h4 {
             margin: 0 0 3px 0;
             color: #d4af37;
             font-size: 10px;
             text-align: center;
-            border-bottom: 1px solid #d4af37;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.5);
             padding-bottom: 2px;
             text-transform: uppercase;
+            text-shadow: 1px 1px 3px #000;
         }
         .queue-list {
             list-style: none;
@@ -181,32 +182,33 @@
         .queue-item {
             font-size: 9px;
             padding: 2px 4px;
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(0, 0, 0, 0.35); /* Fondo ultra sutil solo en cada línea */
             border-radius: 3px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            text-shadow: 1px 1px 2px #000;
         }
         .queue-item.active {
-            background: rgba(212, 175, 55, 0.35);
+            background: rgba(212, 175, 55, 0.3);
             border: 1px solid #d4af37;
             font-weight: bold;
             color: #ffdf73;
         }
 
-        /* CUADRO DE REGALOS COMPACTO DEBAJO DE LA SALA DE ESPERA */
+        /* CUADRO DE REGALOS TRANSPARENTE DEBAJO DE LA SALA DE ESPERA */
         .gifts-panel {
             position: fixed;
             top: 145px;
             right: 10px;
             width: 170px;
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid #fe2c55;
+            background: transparent;
+            border: 1px solid rgba(254, 44, 85, 0.7);
             border-radius: 6px;
             padding: 5px;
             color: #fff;
             z-index: 90;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+            backdrop-filter: blur(2px);
         }
         .gifts-panel h5 {
             margin: 0 0 2px 0;
@@ -214,6 +216,7 @@
             font-size: 9px;
             text-align: center;
             text-transform: uppercase;
+            text-shadow: 1px 1px 3px #000;
         }
         .gift-feed {
             font-size: 8px;
@@ -224,12 +227,13 @@
             overflow: hidden;
         }
         .gift-item {
-            background: rgba(254, 44, 85, 0.15);
+            background: rgba(0, 0, 0, 0.35);
             padding: 2px 4px;
             border-radius: 2px;
             display: flex;
             align-items: center;
             gap: 3px;
+            text-shadow: 1px 1px 2px #000;
         }
 
         /* CARTAS PEQUEÑAS ADAPTABLES PARA TIRADAS AMPLIAS */
@@ -337,6 +341,7 @@
 <body onclick="registrarTapTap(event)">
 
     <div class="container" id="mainContainer">
+        <!-- Imagen de fondo de Juan Caramba -->
         <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image">
 
         <!-- ACCIONES TIKTOK -->
@@ -362,13 +367,13 @@
             <div class="contest-timer">Próximo en: <span id="timerDisplay">59:59</span></div>
         </div>
 
-        <!-- SALA DE ESPERA -->
+        <!-- SALA DE ESPERA TRANSPARENTE -->
         <div class="waiting-queue">
             <h4>Sala de Espera</h4>
             <ul class="queue-list" id="queueList"></ul>
         </div>
 
-        <!-- REGALOS RECIBIDOS -->
+        <!-- REGALOS RECIBIDOS TRANSPARENTE -->
         <div class="gifts-panel">
             <h5>🎁 Regalos Recientes</h5>
             <div class="gift-feed" id="giftFeed">
