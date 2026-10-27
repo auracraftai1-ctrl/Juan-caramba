@@ -40,7 +40,7 @@
         }
         .card {
             width: 130px;
-            height: 200px;
+main            height: 200px;
             background: #1a1a1a;
             border-radius: 10px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.9);
@@ -98,27 +98,27 @@
             font-size: 15px;
             line-height: 1.3;
         }
-        /* Cuadro lateral de espera para 10 usuarios */
+        /* Cuadro lateral de espera para 10 usuarios (Más grande y legible) */
         .waiting-queue {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 260px;
-            background: rgba(0, 0, 0, 0.85);
-            border: 2px solid #d4af37;
-            border-radius: 10px;
-            padding: 12px;
+            top: 25px;
+            right: 25px;
+            width: 330px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 3px solid #d4af37;
+            border-radius: 12px;
+            padding: 15px;
             color: #fff;
             z-index: 4;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.8);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.9);
         }
         .waiting-queue h4 {
-            margin: 0 0 8px 0;
+            margin: 0 0 10px 0;
             color: #d4af37;
-            font-size: 14px;
+            font-size: 16px;
             text-align: center;
-            border-bottom: 1px solid #d4af37;
-            padding-bottom: 5px;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -126,25 +126,26 @@
             list-style: none;
             padding: 0;
             margin: 0;
-            max-height: 220px;
+            max-height: 310px;
             overflow-y: hidden;
         }
         .queue-item {
-            font-size: 13px;
-            padding: 5px 8px;
-            margin-bottom: 4px;
+            font-size: 15px;
+            padding: 7px 10px;
+            margin-bottom: 6px;
             background: rgba(255, 255, 255, 0.08);
-            border-radius: 4px;
+            border-radius: 6px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             animation: fadeIn 0.5s ease-in-out;
         }
         .queue-item.active {
-            background: rgba(212, 175, 55, 0.3);
+            background: rgba(212, 175, 55, 0.35);
             border: 1px solid #d4af37;
             font-weight: bold;
             color: #ffdf73;
+            font-size: 16px;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -158,7 +159,7 @@
         <!-- Imagen de fondo principal -->
         <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image">
 
-        <!-- Fila de espera de usuarios -->
+        <!-- Fila de espera de usuarios (Ampliada) -->
         <div class="waiting-queue">
             <h4>Sala de Espera (Turnos)</h4>
             <ul class="queue-list" id="queueList">
@@ -176,94 +177,4 @@
         </div>
     </div>
 
-    <script>
-        // Lista de nombres falsos para simular la cola de espera en vivo
-        const nombresUsuarios = [
-            "Mariana_92", "CarlosVe", "Alejandro_X", "Sofia_Tarot", "Daniel_88",
-            "Valeria_Moon", "JoseGoyo", "CarmenRosa", "Luis_Mistic", "Gabriela_St",
-            "Franklin_V", "Oriana_Sol", "PedroPerez", "KeniaFan", "Rosa_Mystica"
-        ];
-
-        // Baraja de cartas
-        const baraja = [
-            { nombre: "El Loco", img: "loco.jpg", significado: "Nuevos comienzos y saltos de fe." },
-            { nombre: "El Mago", img: "mago.jpg", significado: "Tienes todo el poder para manifestar tu realidad." },
-            { nombre: "La Sacerdotisa", img: "sacerdotisa.jpg", significado: "Secretos ocultos y sabiduría interior." },
-            { nombre: "La Emperatriz", img: "emperatriz.jpg", significado: "Abundancia, crecimiento y fertilidad." },
-            { nombre: "La Rueda", img: "rueda.jpg", significado: "Los giros inesperados del destino." },
-            { nombre: "El Ermitaño", img: "ermitano.jpg", significado: "Búsqueda interior y reflexión profunda." },
-            { nombre: "La Muerte", img: "muerte.jpg", significado: "Transformación radical y cierre de ciclos." },
-            { nombre: "El Sol", img: "sol.jpg", significado: "Felicidad plena, éxito y claridad absoluta." }
-        ];
-
-        let colaUsuarios = [];
-
-        // Inicializar 10 usuarios en la cola
-        function inicializarCola() {
-            colaUsuarios = [];
-            for(let i = 0; i < 10; i++) {
-                const nombreAleatorio = nombresUsuarios[Math.floor(Math.random() * nombresUsuarios.length)];
-                if(!colaUsuarios.includes(nombreAleatorio)) {
-                    colaUsuarios.push(nombreAleatorio);
-                } else {
-                    colaUsuarios.push(nombreAleatorio + "_" + i);
-                }
-            }
-            actualizarVistaCola();
-        }
-
-        function actualizarVistaCola() {
-            const queueList = document.getElementById('queueList');
-            queueList.innerHTML = '';
-
-            colaUsuarios.forEach((usuario, index) => {
-                const li = document.createElement('li');
-                li.className = `queue-item ${index === 0 ? 'active' : ''}`;
-                li.innerHTML = `<span>${index + 1}. @${usuario}</span> <span>${index === 0 ? 'Consultando 🔮' : 'En espera'}</span>`;
-                queueList.appendChild(li);
-            });
-        }
-
-        function realizarTirada() {
-            const container = document.getElementById('cardContainer');
-            const speechText = document.getElementById('speechText');
-            
-            container.innerHTML = '';
-
-            // Rotar la cola: el primero sale y entra uno nuevo al final
-            const usuarioActual = colaUsuarios.shift();
-            const nuevoUsuario = nombresUsuarios[Math.floor(Math.random() * nombresUsuarios.length)];
-            colaUsuarios.push(nuevoUsuario);
-            actualizarVistaCola();
-
-            // Seleccionar 3 cartas aleatorias
-            const seleccionadas = [];
-            while(seleccionadas.length < 3) {
-                let cartaAleatoria = baraja[Math.floor(Math.random() * baraja.length)];
-                if(!seleccionadas.includes(cartaAleatoria)) {
-                    seleccionadas.push(cartaAleatoria);
-                }
-            }
-
-            seleccionadas.forEach((carta, index) => {
-                setTimeout(() => {
-                    const cardDiv = document.createElement('div');
-                    cardDiv.className = 'card';
-                    cardDiv.innerHTML = `
-                        <img src="${carta.img}" alt="${carta.nombre}" onerror="this.src='juan-caramba-bg.jpg'">
-                        <span>${carta.nombre}</span>
-                    `;
-                    container.appendChild(cardDiv);
-                }, index * 400);
-            });
-
-            speechText.innerHTML = `"${usuarioActual}, las cartas para ti son: ${seleccionadas[0].nombre}, ${seleccionadas[1].nombre} y ${seleccionadas[2].nombre}. Presta mucha atención a tu destino."`;
-        }
-
-        // Arrancar
-        inicializarCola();
-        setInterval(realizarTirada, 12000);
-        setTimeout(realizarTirada, 3000);
-    </script>
-</body>
-</html>
+    
