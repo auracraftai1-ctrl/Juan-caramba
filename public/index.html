@@ -13,6 +13,7 @@
             height: 100vh;
             overflow: hidden;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none;
         }
         .container {
             position: relative;
@@ -98,7 +99,7 @@
             font-size: 15px;
             line-height: 1.3;
         }
-        /* Cuadro lateral de espera: Más largo hacia abajo para los 10 usuarios y sin estorbar arriba */
+        /* Cuadro lateral de espera (10 usuarios) */
         .waiting-queue {
             position: absolute;
             top: 20px;
@@ -133,131 +134,4 @@
         .queue-item {
             font-size: 13px;
             padding: 6px 8px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        .queue-item.active {
-            background: rgba(212, 175, 55, 0.35);
-            border: 1px solid #d4af37;
-            font-weight: bold;
-            color: #ffdf73;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <!-- Imagen de fondo principal -->
-        <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image">
-
-        <!-- Fila de espera de usuarios (Larga hacia abajo para los 10 puestos) -->
-        <div class="waiting-queue">
-            <h4>Sala de Espera (Turnos)</h4>
-            <ul class="queue-list" id="queueList">
-                <!-- Se llenará dinámicamente -->
-            </ul>
-        </div>
-
-        <!-- Espacio de las cartas grandes -->
-        <div class="tarot-slot" id="cardContainer"></div>
-
-        <!-- Cuadro de texto de Juan Caramba -->
-        <div class="speech-box">
-            <h3>Juan Caramba</h3>
-            <p id="speechText">"Saludos, alma errante... Deja que las cartas revelen lo que el destino tiene guardado para ti."</p>
-        </div>
-    </div>
-
-    <script>
-        const nombresUsuarios = [
-            "Mariana_92", "CarlosVe", "Alejandro_X", "Sofia_Tarot", "Daniel_88",
-            "Valeria_Moon", "JoseGoyo", "CarmenRosa", "Luis_Mistic", "Gabriela_St",
-            "Franklin_V", "Oriana_Sol", "PedroPerez", "KeniaFan", "Rosa_Mystica"
-        ];
-
-        const baraja = [
-            { nombre: "El Loco", img: "loco.jpg", significado: "Nuevos comienzos y saltos de fe." },
-            { nombre: "El Mago", img: "mago.jpg", significado: "Tienes todo el poder para manifestar tu realidad." },
-            { nombre: "La Sacerdotisa", img: "sacerdotisa.jpg", significado: "Secretos ocultos y sabiduría interior." },
-            { nombre: "La Emperatriz", img: "emperatriz.jpg", significado: "Abundancia, crecimiento y fertilidad." },
-            { nombre: "La Rueda", img: "rueda.jpg", significado: "Los giros inesperados del destino." },
-            { nombre: "El Ermitaño", img: "ermitano.jpg", significado: "Búsqueda interior y reflexión profunda." },
-            { nombre: "La Muerte", img: "muerte.jpg", significado: "Transformación radical y cierre de ciclos." },
-            { nombre: "El Sol", img: "sol.jpg", significado: "Felicidad plena, éxito y claridad absoluta." }
-        ];
-
-        let colaUsuarios = [];
-
-        function inicializarCola() {
-            colaUsuarios = [];
-            for(let i = 0; i < 10; i++) {
-                const nombreAleatorio = nombresUsuarios[Math.floor(Math.random() * nombresUsuarios.length)];
-                if(!colaUsuarios.includes(nombreAleatorio)) {
-                    colaUsuarios.push(nombreAleatorio);
-                } else {
-                    colaUsuarios.push(nombreAleatorio + "_" + i);
-                }
-            }
-            actualizarVistaCola();
-        }
-
-        function actualizarVistaCola() {
-            const queueList = document.getElementById('queueList');
-            queueList.innerHTML = '';
-
-            colaUsuarios.forEach((usuario, index) => {
-                const li = document.createElement('li');
-                li.className = `queue-item ${index === 0 ? 'active' : ''}`;
-                li.innerHTML = `<span>${index + 1}. @${usuario}</span> <span>${index === 0 ? 'Consultando 🔮' : 'En espera'}</span>`;
-                queueList.appendChild(li);
-            });
-        }
-
-        function realizarTirada() {
-            const container = document.getElementById('cardContainer');
-            const speechText = document.getElementById('speechText');
-            
-            container.innerHTML = '';
-
-            const usuarioActual = colaUsuarios.shift();
-            const nuevoUsuario = nombresUsuarios[Math.floor(Math.random() * nombresUsuarios.length)];
-            colaUsuarios.push(nuevoUsuario);
-            actualizarVistaCola();
-
-            const seleccionadas = [];
-            while(seleccionadas.length < 3) {
-                let cartaAleatoria = baraja[Math.floor(Math.random() * baraja.length)];
-                if(!seleccionadas.includes(cartaAleatoria)) {
-                    seleccionadas.push(cartaAleatoria);
-                }
-            }
-
-            seleccionadas.forEach((carta, index) => {
-                setTimeout(() => {
-                    const cardDiv = document.createElement('div');
-                    cardDiv.className = 'card';
-                    cardDiv.innerHTML = `
-                        <img src="${carta.img}" alt="${carta.nombre}" onerror="this.src='juan-caramba-bg.jpg'">
-                        <span>${carta.nombre}</span>
-                    `;
-                    container.appendChild(cardDiv);
-                }, index * 400);
-            });
-
-            speechText.innerHTML = `"${usuarioActual}, las cartas para ti son: ${seleccionadas[0].nombre}, ${seleccionadas[1].nombre} y ${seleccionadas[2].nombre}. Presta mucha atención a tu destino."`;
-        }
-
-        inicializarCola();
-        setInterval(realizarTirada, 12000);
-        setTimeout(realizarTirada, 3000);
-    </script>
-</body>
-</html>
+            background: rgba
