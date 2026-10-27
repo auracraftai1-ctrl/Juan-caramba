@@ -66,7 +66,7 @@
             z-index: 100;
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 4px;
             align-items: flex-start;
         }
 
@@ -74,15 +74,15 @@
             background: linear-gradient(135deg, #fe2c55, #ff4654);
             color: white;
             border: none;
-            padding: 5px 12px;
-            font-size: 12px;
+            padding: 4px 10px;
+            font-size: 11px;
             font-weight: bold;
-            border-radius: 18px;
+            border-radius: 16px;
             cursor: pointer;
             box-shadow: 0 3px 8px rgba(254, 44, 85, 0.5);
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
         }
         .follow-btn.followed {
             background: rgba(255, 255, 255, 0.25);
@@ -93,88 +93,80 @@
             background: linear-gradient(135deg, #ff007f, #e6005c);
             color: white;
             border: none;
-            padding: 4px 10px;
-            font-size: 11px;
+            padding: 3px 8px;
+            font-size: 10px;
             font-weight: bold;
-            border-radius: 15px;
+            border-radius: 14px;
             cursor: pointer;
             box-shadow: 0 2px 6px rgba(255, 0, 127, 0.4);
             display: flex;
             align-items: center;
-            gap: 3px;
+            gap: 2px;
         }
 
         .follower-count {
             color: #fff;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: bold;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.6);
             padding: 2px 5px;
-            border-radius: 6px;
-            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 5px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
         }
 
         /* CONTADOR DE CONCURSO TAP TAPS */
         .contest-panel {
             position: fixed;
-            top: 95px;
+            top: 90px;
             left: 10px;
             z-index: 100;
-            background: rgba(0, 0, 0, 0.85);
-            border: 1.5px solid #fe2c55;
-            border-radius: 8px;
-            padding: 4px 8px;
+            background: rgba(0, 0, 0, 0.65);
+            border: 1px solid #fe2c55;
+            border-radius: 6px;
+            padding: 3px 6px;
             color: #fff;
             text-align: center;
-            max-width: 175px;
-            box-shadow: 0 3px 10px rgba(254, 44, 85, 0.5);
+            max-width: 140px;
+            backdrop-filter: blur(2px);
         }
         .contest-title {
-            font-size: 8px;
+            font-size: 7.5px;
             color: #d4af37;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
         .contest-stats {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: bold;
             color: #fff;
         }
         .contest-timer {
-            font-size: 8px;
+            font-size: 7.5px;
             color: #ff4654;
         }
 
-        /* GUÍA DETALLADA DE REGALOS VIP (IZQUIERDA) */
+        /* CUADRO DE REGALOS VIP: PEQUEÑO, TRANSPARENTE Y ABAJO A LA IZQUIERDA */
         .vip-gifts-guide {
             position: fixed;
-            top: 170px;
+            bottom: 12px;
             left: 10px;
             z-index: 90;
-            background: rgba(0, 0, 0, 0.82);
-            border: 1px solid #d4af37;
+            background: rgba(0, 0, 0, 0.45); /* Muy transparente / translúcido */
+            border: 1px solid rgba(212, 175, 55, 0.6);
             border-radius: 6px;
-            padding: 6px 8px;
+            padding: 4px 6px;
             color: #fff;
-            max-width: 185px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.8);
-            backdrop-filter: blur(2px);
+            max-width: 170px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            backdrop-filter: blur(3px); /* Efecto cristal sutil */
         }
         .vip-gifts-guide h6 {
-            margin: 0 0 4px 0;
-            color: #d4af37;
-            font-size: 9px;
+            margin: 0 0 2px 0;
+            color: #ffdf73;
+            font-size: 8px;
             text-align: center;
             text-transform: uppercase;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.4);
-            padding-bottom: 2px;
-        }
-        .vip-gifts-guide p.note {
-            margin: 0 0 5px 0;
-            font-size: 7px;
-            color: #ffdf73;
-            text-align: center;
-            font-style: italic;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 1px;
         }
         .vip-gifts-guide ul {
             list-style: none;
@@ -182,16 +174,15 @@
             margin: 0;
             display: flex;
             flex-direction: column;
-            gap: 4px;
-            font-size: 7px;
+            gap: 2px;
+            font-size: 6.5px; /* Letra ultra compacta y limpia */
         }
         .vip-gifts-guide li {
-            line-height: 1.2;
-            border-bottom: 1px dashed rgba(255,255,255,0.1);
-            padding-bottom: 2px;
+            line-height: 1.1;
+            color: #f5f5f5;
         }
         .vip-gifts-guide li strong {
-            color: #d4af37;
+            color: #ffdf73;
         }
 
         /* SALA DE ESPERA (10 USUARIOS ANGOSTA A LA DERECHA) */
@@ -199,7 +190,7 @@
             position: fixed;
             top: 10px;
             right: 10px;
-            width: 135px;
+            width: 130px;
             background: transparent;
             border: 1.5px solid rgba(212, 175, 55, 0.7);
             border-radius: 6px;
@@ -211,7 +202,7 @@
         .waiting-queue h4 {
             margin: 0 0 2px 0;
             color: #d4af37;
-            font-size: 9px;
+            font-size: 8.5px;
             text-align: center;
             border-bottom: 1px solid rgba(212, 175, 55, 0.5);
             padding-bottom: 2px;
@@ -225,13 +216,13 @@
             display: flex;
             flex-direction: column;
             gap: 2px;
-            max-height: 155px;
+            max-height: 145px;
             overflow: hidden;
         }
         .queue-item {
-            font-size: 8px;
+            font-size: 7.5px;
             padding: 2px 3px;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 2px;
             display: flex;
             justify-content: space-between;
@@ -239,22 +230,22 @@
             text-shadow: 1px 1px 2px #000;
         }
         .queue-item.active {
-            background: rgba(212, 175, 55, 0.35);
+            background: rgba(212, 175, 55, 0.3);
             border: 1px solid #d4af37;
             font-weight: bold;
             color: #ffdf73;
         }
 
-        /* CUADRO DE REGALOS RECIENTES */
+        /* CUADRO DE REGALOS RECIENTES (DEBAJO DE LA SALA DE ESPERA) */
         .gifts-panel {
             position: fixed;
-            top: 180px;
+            top: 170px;
             right: 10px;
-            width: 135px;
+            width: 130px;
             background: transparent;
-            border: 1px solid rgba(254, 44, 85, 0.7);
+            border: 1px solid rgba(254, 44, 85, 0.6);
             border-radius: 6px;
-            padding: 4px;
+            padding: 3px;
             color: #fff;
             z-index: 90;
             backdrop-filter: blur(2px);
@@ -262,21 +253,21 @@
         .gifts-panel h5 {
             margin: 0 0 2px 0;
             color: #fe2c55;
-            font-size: 8px;
+            font-size: 7.5px;
             text-align: center;
             text-transform: uppercase;
             text-shadow: 1px 1px 3px #000;
         }
         .gift-feed {
-            font-size: 7.5px;
+            font-size: 7px;
             display: flex;
             flex-direction: column;
             gap: 2px;
-            max-height: 65px;
+            max-height: 55px;
             overflow: hidden;
         }
         .gift-item {
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.3);
             padding: 2px 3px;
             border-radius: 2px;
             display: flex;
@@ -330,10 +321,10 @@
             z-index: 3;
         }
         .card {
-            width: 55px;
-            height: 85px;
+            width: 50px;
+            height: 75px;
             background: #1a1a1a;
-            border-radius: 5px;
+            border-radius: 4px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.9);
             border: 1.5px solid #d4af37;
             display: flex;
@@ -343,20 +334,20 @@
             text-align: center;
             padding: 2px;
             font-weight: bold;
-            font-size: 7px;
+            font-size: 6.5px;
             color: #fff;
             overflow: hidden;
             transition: transform 0.3s;
         }
         .card img {
             width: 100%;
-            height: 65px;
+            height: 55px;
             object-fit: cover;
-            border-radius: 3px;
+            border-radius: 2px;
             border: 1px solid #d4af37;
         }
         .card span {
-            font-size: 6px;
+            font-size: 5.5px;
             color: #d4af37;
             margin-top: 1px;
             text-transform: uppercase;
@@ -372,14 +363,14 @@
         }
         @keyframes shuffleCard {
             0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-6px) rotate(3deg); }
+            50% { transform: translateY(-5px) rotate(3deg); }
             100% { transform: translateY(5px) rotate(-3deg); }
         }
 
         /* LECTURA FLOTANTE */
         .speech-floating {
             position: absolute;
-            bottom: 3%;
+            bottom: 2%;
             left: 50%;
             transform: translateX(-50%);
             width: 90%;
@@ -389,15 +380,14 @@
             pointer-events: none;
         }
         .speech-floating h3 {
-            margin: 0 0 2px 0;
+            margin: 0 0 1px 0;
             color: #d4af37;
-            font-size: 13px;
-            text-shadow: 2px 2px 6px #000, 0 0 10px rgba(212, 175, 55, 0.8);
-            letter-spacing: 0.5px;
+            font-size: 11px;
+            text-shadow: 2px 2px 6px #000, 0 0 8px rgba(212, 175, 55, 0.8);
         }
         .speech-floating p {
             margin: 0;
-            font-size: 12px;
+            font-size: 10.5px;
             font-weight: bold;
             color: #fff;
             line-height: 1.2;
@@ -442,20 +432,19 @@
 
         <!-- CONTADOR DE CONCURSO TAP TAPS -->
         <div class="contest-panel">
-            <div class="contest-title">🏆 Concurso Tap Taps</div>
+            <div class="contest-title">🏆 Concurso Taps</div>
             <div class="contest-stats"><span id="tapCountDisplay">0</span> / 100 Taps</div>
-            <div class="contest-timer">Próximo en: <span id="timerDisplay">59:59</span></div>
+            <div class="contest-timer">Reinicia en: <span id="timerDisplay">59:59</span></div>
         </div>
 
-        <!-- CUADRO DE REGALOS ACTUALIZADO Y DETALLADO -->
+        <!-- CUADRO DE REGALOS VIP: PEQUEÑO, TRANSPARENTE Y ABAJO A LA IZQUIERDA -->
         <div class="vip-gifts-guide">
-            <h6>🔮 Menú de Lecturas VIP</h6>
-            <p class="note">Enviar: Nombre Completo y Fecha de Nacimiento</p>
+            <h6>🔮 Regalos & Lecturas</h6>
             <ul>
-                <li><strong>🌹 Rosa:</strong> 2 Cartas | Lectura exacta y personal (70 palabras).</li>
-                <li><strong>😎 Gafas / 🤠 Sombrero:</strong> 4 Cartas | Don Juan Caramba, Arcángel regente, Serafines y Numerología (100 palabras).</li>
-                <li><strong>🦁 León:</strong> 10 Cartas | Don Juan Caramba, Arcángel, Serafín, Numerología, Ciclo lunar, Vela del día y Baño herbal (150 palabras).</li>
-                <li><strong>🌌 Universo:</strong> 10 Cartas Completa | Arcángeles, Numerología, Ciclo lunar/solar, Vela, Baño herbal, Libro Secretos y Afirmación (160 palabras).</li>
+                <li><strong>🌹 Rosa:</strong> 2 Cartas (70 p.)</li>
+                <li><strong>😎 Gafas/Sombrero:</strong> 4 Cartas (100 p.)</li>
+                <li><strong>🦁 León:</strong> 10 Cartas (150 p.)</li>
+                <li><strong>🌌 Universo:</strong> 10 Cartas Comp. (160 p.)</li>
             </ul>
         </div>
 
@@ -467,7 +456,7 @@
 
         <!-- FEED DE REGALOS -->
         <div class="gifts-panel">
-            <h5>🎁 Regalos</h5>
+            <h5>🎁 Recientes</h5>
             <div class="gift-feed" id="giftFeed">
                 <div class="gift-item">🌹 @Mariana_92 Rosa</div>
                 <div class="gift-item">😎 @CarlosVe Gafas</div>
@@ -487,7 +476,7 @@
         <!-- LECTURA FLOTANTE -->
         <div class="speech-floating">
             <h3>Don Juan Caramba</h3>
-            <p id="speechText">"Saludos, alma errante... Envía tu Nombre Completo y Fecha de Nacimiento para tu lectura personal."</p>
+            <p id="speechText">"Saludos, alma errante... Envía tu Nombre Completo y Fecha de Nacimiento."</p>
         </div>
     </div>
 
@@ -665,7 +654,7 @@
                     }, index * 250);
                 });
 
-                speechText.innerHTML = `"${usuarioActual}, tu lectura revela tu verdad con seriedad. ¡Escucha el consejo de los astros!"`;
+                speechText.innerHTML = `"${usuarioActual}, tu lectura revela tu verdad con seriedad. ¡Escucha el consejo!"`;
             }, 3000);
         }
 
@@ -685,10 +674,10 @@
         }, 1000);
 
         const listaRegalos = [
-            { icono: "🌹", nombre: "una Rosa (2 Cartas - 70 palabras)" },
-            { icono: "😎", nombre: "unas Gafas (4 Cartas - 100 palabras)" },
-            { icono: "🦁", nombre: "un León (10 Cartas - 150 palabras)" },
-            { icono: "🌌", nombre: "un Universo (10 Cartas Completa - 160 palabras)" }
+            { icono: "🌹", nombre: "una Rosa (2 Cartas - 70 p.)" },
+            { icono: "😎", nombre: "unas Gafas (4 Cartas - 100 p.)" },
+            { icono: "🦁", nombre: "un León (10 Cartas - 150 p.)" },
+            { icono: "🌌", nombre: "un Universo (10 Cartas Comp. - 160 p.)" }
         ];
 
         setInterval(() => {
