@@ -28,50 +28,66 @@
             left: 0;
             z-index: 1;
         }
-        /* Contenedor donde aparecerán las cartas dinámicas de la tirada */
+        /* Contenedor de las cartas más grande y centrado en la mesa */
         .tarot-slot {
             position: absolute;
-            bottom: 15%;
+            bottom: 22%;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 20px;
+            gap: 25px;
             z-index: 2;
         }
+        /* Estilo mejorado para que las cartas sean más grandes y parezcan cartas reales */
         .card {
-            width: 90px;
-            height: 140px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.8);
-            border: 2px solid #d4af37; /* Borde dorado místico */
+            width: 130px;
+            height: 200px;
+            background: #1a1a1a;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.9);
+            border: 3px solid #d4af37; /* Borde dorado místico */
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             text-align: center;
-            padding: 5px;
+            padding: 8px;
             font-weight: bold;
-            font-size: 14px;
-            color: #222;
+            font-size: 13px;
+            color: #fff;
             animation: fadeIn 0.8s ease-in-out;
+            overflow: hidden;
         }
-        /* Cuadro de diálogo inferior para que Juan Caramba hable */
+        .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid #d4af37;
+        }
+        .card span {
+            font-size: 11px;
+            color: #d4af37;
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        /* Cuadro de diálogo inferior para Juan Caramba */
         .speech-box {
             position: absolute;
-            bottom: 30px;
+            bottom: 25px;
             left: 50%;
             transform: translateX(-50%);
             width: 80%;
-            max-width: 700px;
-            background: rgba(0, 0, 0, 0.85);
+            max-width: 750px;
+            background: rgba(0, 0, 0, 0.88);
             border: 2px solid #d4af37;
             border-radius: 12px;
             padding: 15px 20px;
             color: #f3f3f3;
             text-align: center;
             z-index: 3;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.9);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.9);
         }
         .speech-box h3 {
             margin: 0 0 5px 0;
@@ -92,15 +108,13 @@
 <body>
 
     <div class="container">
-        <!-- Imagen de fondo que ya subiste -->
+        <!-- Imagen de fondo principal -->
         <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image">
 
-        <!-- Las cartas de la tirada actual (aparecen de forma dinámica) -->
-        <div class="tarot-slot" id="cardContainer">
-            <!-- Las cartas se inyectarán aquí automáticamente -->
-        </div>
+        <!-- Espacio donde aparecerán las cartas grandes -->
+        <div class="tarot-slot" id="cardContainer"></div>
 
-        <!-- Cuadro de texto donde Juan Caramba habla -->
+        <!-- Cuadro de texto de Juan Caramba -->
         <div class="speech-box">
             <h3>Juan Caramba</h3>
             <p id="speechText">"Saludos, alma errante... Deja que las cartas revelen lo que el destino tiene guardado para ti."</p>
@@ -108,27 +122,24 @@
     </div>
 
     <script>
-        // Lista de cartas de ejemplo para la tirada aleatoria
+        // Baraja con nombres y sus respectivas imágenes (puedes subir las imágenes a la carpeta public)
         const baraja = [
-            { nombre: "El Loco", significado: "Nuevos comienzos y saltos de fe." },
-            { nombre: "El Mago", significado: "Tienes todo el poder para manifestar tu realidad." },
-            { nombre: "La Sacerdotisa", significado: "Secretos ocultos y sabiduría interior." },
-            { nombre: "La Emperatriz", significado: "Abundancia, crecimiento y fertilidad." },
-            { nombre: "La Rueda de la Fortuna", significado: "Los giros inesperados del destino." },
-            { nombre: "El Ermitaño", significado: "Búsqueda interior y reflexión profunda." },
-            { nombre: "La Muerte", significado: "Transformación radical y cierre de ciclos." },
-            { nombre: "El Sol", significado: "Felicidad plena, éxito y claridad absoluta." }
+            { nombre: "El Loco", img: "loco.jpg", significado: "Nuevos comienzos y saltos de fe." },
+            { nombre: "El Mago", img: "mago.jpg", significado: "Tienes todo el poder para manifestar tu realidad." },
+            { nombre: "La Sacerdotisa", img: "sacerdotisa.jpg", significado: "Secretos ocultos y sabiduría interior." },
+            { nombre: "La Emperatriz", img: "emperatriz.jpg", significado: "Abundancia, crecimiento y fertilidad." },
+            { nombre: "La Rueda", img: "rueda.jpg", significado: "Los giros inesperados del destino." },
+            { nombre: "El Ermitaño", img: "ermitano.jpg", significado: "Búsqueda interior y reflexión profunda." },
+            { nombre: "La Muerte", img: "muerte.jpg", significado: "Transformación radical y cierre de ciclos." },
+            { nombre: "El Sol", img: "sol.jpg", significado: "Felicidad plena, éxito y claridad absoluta." }
         ];
 
-        // Función para simular el turno de la persona y sacar cartas aleatorias
         function realizarTirada() {
             const container = document.getElementById('cardContainer');
             const speechText = document.getElementById('speechText');
             
-            // Limpiamos las cartas anteriores
             container.innerHTML = '';
 
-            // Elegimos 3 cartas al azar de la baraja
             const seleccionadas = [];
             while(seleccionadas.length < 3) {
                 let cartaAleatoria = baraja[Math.floor(Math.random() * baraja.length)];
@@ -137,24 +148,24 @@
                 }
             }
 
-            // Mostramos las cartas en pantalla con animación
             seleccionadas.forEach((carta, index) => {
                 setTimeout(() => {
                     const cardDiv = document.createElement('div');
                     cardDiv.className = 'card';
-                    cardDiv.innerHTML = `<span>🃏</span><div style="margin-top:8px;">${carta.nombre}</div>`;
+                    // Renderiza la imagen de la carta y su nombre abajo
+                    cardDiv.innerHTML = `
+                        <img src="${carta.img}" alt="${carta.nombre}" onerror="this.src='juan-caramba-bg.jpg'">
+                        <span>${carta.nombre}</span>
+                    `;
                     container.appendChild(cardDiv);
-                }, index * 400); // Efecto de aparición escalonada
+                }, index * 400);
             });
 
-            // Hacemos que Juan Caramba hable sobre la tirada
             speechText.innerHTML = `"${seleccionadas[0].nombre}, ${seleccionadas[1].nombre} y ${seleccionadas[2].nombre}... Veo grandes movimientos en tu camino. Escucha bien lo que las cartas dictan."`;
         }
 
-        // Ejecutar una tirada automáticamente cada 12 segundos (simulando los turnos en vivo)
+        // Cambia la tirada automáticamente cada 12 segundos
         setInterval(realizarTirada, 12000);
-
-        // Ejecutar la primera tirada a los 3 segundos de cargar
         setTimeout(realizarTirada, 3000);
     </script>
 </body>
