@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Bot de conexion para TikTok Live y Juan Caramba AI",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "start": "node server.js"
   },
