@@ -43,7 +43,7 @@
             z-index: 100;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
             align-items: flex-start;
         }
 
@@ -51,15 +51,15 @@
             background: linear-gradient(135deg, #fe2c55, #ff4654);
             color: white;
             border: none;
-            padding: 8px 16px;
-            font-size: 14px;
+            padding: 6px 14px;
+            font-size: 13px;
             font-weight: bold;
-            border-radius: 25px;
+            border-radius: 20px;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(254, 44, 85, 0.5);
+            box-shadow: 0 4px 10px rgba(254, 44, 85, 0.5);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
         .follow-btn.followed {
             background: rgba(255, 255, 255, 0.25);
@@ -70,15 +70,15 @@
             background: linear-gradient(135deg, #ff007f, #e6005c);
             color: white;
             border: none;
-            padding: 7px 14px;
-            font-size: 13px;
+            padding: 5px 12px;
+            font-size: 12px;
             font-weight: bold;
-            border-radius: 20px;
+            border-radius: 18px;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(255, 0, 127, 0.4);
+            box-shadow: 0 3px 8px rgba(255, 0, 127, 0.4);
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
         }
 
         .follower-count {
@@ -86,88 +86,87 @@
             font-size: 11px;
             font-weight: bold;
             background: rgba(0, 0, 0, 0.7);
-            padding: 3px 8px;
-            border-radius: 10px;
+            padding: 2px 6px;
+            border-radius: 8px;
             border: 1px solid rgba(212, 175, 55, 0.4);
         }
 
-        /* 7. CUADRO "SÍGUEME Y TAP TAP PARA LECTURA GRATIS" */
+        /* CUADRO LLAMADO A LA ACCIÓN "SÍGUEME Y TAP TAP" */
         .call-to-action-box {
             position: fixed;
-            top: 140px;
+            top: 125px;
             left: 15px;
             z-index: 90;
-            background: rgba(0, 0, 0, 0.85);
-            border: 2px solid #d4af37;
-            border-radius: 10px;
-            padding: 8px 12px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1.5px solid #d4af37;
+            border-radius: 8px;
+            padding: 6px 10px;
             color: #fff;
-            max-width: 200px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.8);
-            animation: pulseGlow 2s infinite ease-in-out;
+            max-width: 180px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.8);
         }
         .call-to-action-box p {
             margin: 0;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: bold;
             color: #ffdf73;
             text-align: center;
-            line-height: 1.3;
+            line-height: 1.2;
         }
 
-        /* 3. CONTADOR Y CONCURSO DE TAP TAPS */
+        /* CONTADOR DE CONCURSO TAP TAPS */
         .contest-panel {
             position: fixed;
             top: 15px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 100;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.85);
             border: 2px solid #fe2c55;
-            border-radius: 12px;
-            padding: 6px 16px;
+            border-radius: 10px;
+            padding: 5px 14px;
             color: #fff;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(254, 44, 85, 0.6);
+            box-shadow: 0 4px 12px rgba(254, 44, 85, 0.5);
         }
         .contest-title {
-            font-size: 11px;
+            font-size: 10px;
             color: #d4af37;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 2px;
+            margin-bottom: 1px;
         }
         .contest-stats {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
             color: #fff;
         }
         .contest-timer {
-            font-size: 11px;
+            font-size: 10px;
             color: #ff4654;
         }
 
-        /* 8. CUADRO DE ESPERA DE 10 USUARIOS (DERECHA) */
+        /* SALA DE ESPERA PEQUEÑA Y COMPACTA (ARRIBA A LA DERECHA) */
         .waiting-queue {
             position: fixed;
             top: 15px;
             right: 15px;
-            width: 250px;
-            background: rgba(0, 0, 0, 0.88);
+            width: 210px;
+            background: rgba(0, 0, 0, 0.85);
             border: 2px solid #d4af37;
-            border-radius: 10px;
-            padding: 10px;
+            border-radius: 8px;
+            padding: 8px;
             color: #fff;
             z-index: 100;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.9);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
         }
         .waiting-queue h4 {
-            margin: 0 0 6px 0;
+            margin: 0 0 5px 0;
             color: #d4af37;
-            font-size: 12px;
+            font-size: 11px;
             text-align: center;
             border-bottom: 1px solid #d4af37;
-            padding-bottom: 4px;
+            padding-bottom: 3px;
             text-transform: uppercase;
         }
         .queue-list {
@@ -176,13 +175,15 @@
             margin: 0;
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 2px;
+            max-height: 180px;
+            overflow: hidden;
         }
         .queue-item {
-            font-size: 11px;
-            padding: 4px 6px;
+            font-size: 10px;
+            padding: 3px 5px;
             background: rgba(255, 255, 255, 0.08);
-            border-radius: 4px;
+            border-radius: 3px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -194,147 +195,144 @@
             color: #ffdf73;
         }
 
-        /* 9. CUADRO DE REGALOS ESPECÍFICO */
+        /* CUADRO DE REGALOS COMPACTO */
         .gifts-panel {
             position: fixed;
-            top: 260px;
+            top: 215px;
             right: 15px;
-            width: 250px;
-            background: rgba(0, 0, 0, 0.85);
-            border: 2px solid #fe2c55;
-            border-radius: 10px;
-            padding: 8px;
+            width: 210px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1.5px solid #fe2c55;
+            border-radius: 8px;
+            padding: 6px;
             color: #fff;
             z-index: 90;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.7);
         }
         .gifts-panel h5 {
-            margin: 0 0 5px 0;
+            margin: 0 0 3px 0;
             color: #fe2c55;
-            font-size: 11px;
+            font-size: 10px;
             text-align: center;
             text-transform: uppercase;
         }
         .gift-feed {
-            font-size: 10px;
+            font-size: 9px;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 3px;
         }
         .gift-item {
             background: rgba(254, 44, 85, 0.15);
-            padding: 4px 6px;
-            border-radius: 4px;
+            padding: 3px 5px;
+            border-radius: 3px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
         }
 
-        /* 6. ESPACIO DE LAS CARTAS Y ANIMACIÓN DE BARAJADO */
+        /* CARTAS AJUSTADAS PARA NO TAPAR A JUAN CARAMBA */
         .tarot-slot {
             position: absolute;
-            bottom: 24%;
+            bottom: 22%;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 20px;
+            gap: 15px;
             z-index: 2;
         }
         .card {
-            width: 120px;
-            height: 180px;
+            width: 85px;
+            height: 125px;
             background: #1a1a1a;
-            border-radius: 10px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.9);
-            border: 3px solid #d4af37;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.9);
+            border: 2px solid #d4af37;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
             text-align: center;
-            padding: 6px;
+            padding: 4px;
             font-weight: bold;
-            font-size: 12px;
+            font-size: 10px;
             color: #fff;
             overflow: hidden;
             transition: transform 0.5s;
         }
         .card img {
             width: 100%;
-            height: 130px;
+            height: 95px;
             object-fit: cover;
-            border-radius: 6px;
+            border-radius: 5px;
             border: 1px solid #d4af37;
         }
         .card span {
-            font-size: 10px;
+            font-size: 9px;
             color: #d4af37;
             margin-top: 2px;
             text-transform: uppercase;
         }
 
         .shuffling {
-            animation: shuffleCard 0.6s infinite alternate ease-in-out;
+            animation: shuffleCard 0.5s infinite alternate ease-in-out;
             filter: brightness(0.7);
         }
         @keyframes shuffleCard {
             0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(5deg); }
-            100% { transform: translateY(10px) rotate(-5deg); }
+            50% { transform: translateY(-10px) rotate(4deg); }
+            100% { transform: translateY(8px) rotate(-4deg); }
         }
 
         /* DIÁLOGO DE JUAN CARAMBA */
         .speech-box {
             position: absolute;
-            bottom: 15px;
+            bottom: 12px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80%;
-            max-width: 700px;
-            background: rgba(0, 0, 0, 0.9);
+            width: 75%;
+            max-width: 650px;
+            background: rgba(0, 0, 0, 0.88);
             border: 2px solid #d4af37;
-            border-radius: 12px;
-            padding: 10px 15px;
+            border-radius: 10px;
+            padding: 8px 12px;
             color: #f3f3f3;
             text-align: center;
             z-index: 3;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.9);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.9);
         }
         .speech-box h3 {
             margin: 0 0 2px 0;
             color: #d4af37;
-            font-size: 16px;
+            font-size: 14px;
         }
         .speech-box p {
             margin: 0;
-            font-size: 14px;
-            line-height: 1.3;
+            font-size: 13px;
+            line-height: 1.2;
         }
 
-        /* 4. TAP TAPS DE CORAZONES EN PANTALLA */
+        /* ANIMACIÓN DE TAP TAPS EN PANTALLA */
         .tap-heart {
             position: absolute;
-            font-size: 28px;
+            font-size: 26px;
             animation: floatUpHeart 1.2s ease-out forwards;
             pointer-events: none;
             z-index: 200;
         }
         @keyframes floatUpHeart {
             0% { transform: translateY(0) scale(0.6); opacity: 1; }
-            100% { transform: translateY(-130px) scale(1.5); opacity: 0; }
-        }
-        @keyframes pulseGlow {
-            0%, 100% { border-color: #d4af37; }
-            50% { border-color: #fe2c55; }
+            100% { transform: translateY(-120px) scale(1.4); opacity: 0; }
         }
     </style>
 </head>
 <body onclick="registrarTapTap(event)">
 
     <div class="container" id="mainContainer">
+        <!-- Imagen de fondo de Juan Caramba -->
         <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image">
 
-        <!-- 1. BOTONES ESTILO TIKTOK -->
+        <!-- BOTONES TIKTOK -->
         <div class="tiktok-actions-container">
             <button class="follow-btn" id="followBtn" onclick="seguirAccion(event)">
                 <span id="followIcon">➔❤️</span> <span id="followText">Seguir</span>
@@ -345,34 +343,34 @@
             <div class="follower-count" id="followerCount">Seguidores: 14.8K</div>
         </div>
 
-        <!-- 7. CUADRO "SÍGUEME Y TAP TAP" -->
+        <!-- CUADRO LLAMADO A LA ACCIÓN -->
         <div class="call-to-action-box">
-            <p>✨ ¡Sígueme y da Tap Tap en pantalla para tu lectura GRATIS! ✨</p>
+            <p>✨ ¡Sígueme y da Tap Tap para lectura GRATIS! ✨</p>
         </div>
 
-        <!-- 3. CONTADOR DE CONCURSO TAP TAPS -->
+        <!-- CONCURSO TAP TAPS -->
         <div class="contest-panel">
-            <div class="contest-title">🏆 Concurso Tap Taps (Primer Puesto)</div>
+            <div class="contest-title">🏆 Concurso Tap Taps</div>
             <div class="contest-stats"><span id="tapCountDisplay">0</span> / 1000 Taps</div>
-            <div class="contest-timer">Siguiente concurso en: <span id="timerDisplay">59:59</span></div>
+            <div class="contest-timer">Próximo en: <span id="timerDisplay">59:59</span></div>
         </div>
 
-        <!-- 8. SALA DE ESPERA DE 10 USUARIOS -->
+        <!-- SALA DE ESPERA PEQUEÑA -->
         <div class="waiting-queue">
-            <h4>Sala de Espera (Turnos)</h4>
+            <h4>Sala de Espera</h4>
             <ul class="queue-list" id="queueList"></ul>
         </div>
 
-        <!-- 9. CUADRO DE REGALOS -->
+        <!-- CUADRO DE REGALOS COMPACTO -->
         <div class="gifts-panel">
-            <h5>🎁 Regalos en Vivo</h5>
+            <h5>🎁 Regalos Recientes</h5>
             <div class="gift-feed" id="giftFeed">
-                <div class="gift-item">🌹 @Mariana_92 envió una Rosa</div>
-                <div class="gift-item">🤠 @CarlosVe envió un Sombrero</div>
+                <div class="gift-item">🌹 @Mariana_92 envió Rosa</div>
+                <div class="gift-item">🤠 @CarlosVe envió Sombrero</div>
             </div>
         </div>
 
-        <!-- 6. CARTAS -->
+        <!-- CARTAS -->
         <div class="tarot-slot" id="cardContainer"></div>
 
         <!-- DIÁLOGO -->
@@ -416,7 +414,7 @@
             colaUsuarios.forEach((usuario, index) => {
                 const li = document.createElement('li');
                 li.className = `queue-item ${index === 0 ? 'active' : ''}`;
-                li.innerHTML = `<span>${index + 1}. @${usuario}</span> <span>${index === 0 ? 'Consultando 🔮' : 'En espera'}</span>`;
+                li.innerHTML = `<span>${index + 1}. @${usuario}</span> <span>${index === 0 ? '🔮' : 'Espera'}</span>`;
                 queueList.appendChild(li);
             });
         }
@@ -479,7 +477,7 @@
             for(let i = 0; i < 3; i++) {
                 const cardDiv = document.createElement('div');
                 cardDiv.className = 'card shuffling';
-                cardDiv.innerHTML = `<img src="juan-caramba-bg.jpg" alt="Barajando"><span>Barajando...</span>`;
+                cardDiv.innerHTML = `<img src="juan-caramba-bg.jpg" alt="Barajando"><span>Barajando</span>`;
                 container.appendChild(cardDiv);
             }
 
