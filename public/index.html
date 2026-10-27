@@ -358,7 +358,7 @@
             font-size: 30px;
         }
 
-        /* --- CONTENEDOR DE CARTAS AL FRENTE ABSOLUTO --- */
+        /* --- CONTENEDOR DE CARTAS AL FRENTE ABSOLUTO (Z-INDEX 150) --- */
         .tarot-slot {
             position: absolute;
             bottom: 14vh;
@@ -397,10 +397,12 @@
             border: 1px solid #d4af37;
             display: block;
         }
+        /* SOLO LA IMAGEN GIRA CUANDO ESTÁ INVERTIDA */
         .card img.reversed {
             transform: rotate(180deg);
             filter: brightness(0.9);
         }
+        /* EL TEXTO SE QUEDA SIEMPRE DERECHO Y LEGIBLE */
         .card span {
             font-size: 5.5px;
             color: #ffdf73;
@@ -410,14 +412,6 @@
             overflow: hidden;
             text-overflow: ellipsis;
             width: 100%;
-        }
-        /* REVERSO DE LAS CARTAS CON TU IMAGEN DE AURACRAFT AI */
-        .card-back-img {
-            width: 100%;
-            height: 62px;
-            object-fit: cover;
-            border-radius: 2px;
-            border: 1px dashed #d4af37;
         }
 
         /* ANIMACIÓN DE BARAJA */
@@ -569,85 +563,75 @@
             "Yajaira_77", "Ernesto_Tarot", "Marcos_Perez", "Astral_Ana", "Milagros_V"
         ];
 
-        // BARAJA COMPLETA LIMPIA Y SIN DUPLICADOS
+        // BARAJA ACTUALIZADA CON LOS NOMBRES EXACTOS DE TUS ARCHIVOS EN GITHUB
         const tarotDeck = [
-            { name: "El Loco", file: "454056.jpg" },
-            { name: "El Mago", file: "454057.jpg" },
-            { name: "La Sacerdotisa", file: "454639.jpg" },
-            { name: "La Emperatriz", file: "454507.jpg" },
-            { name: "El Emperador", file: "454508.jpg" },
-            { name: "El Hierofante", file: "454509.jpg" },
-            { name: "Los Enamorados", file: "454510.jpg" },
-            { name: "El Carro", file: "454540.jpg" },
-            { name: "La Fuerza", file: "454512.jpg" },
-            { name: "El Ermitaño", file: "454513.jpg" },
-            { name: "La Rueda de la Fortuna", file: "454514.jpg" },
-            { name: "La Justicia", file: "454515.jpg" },
-            { name: "La Muerte", file: "454541.jpg" },
-            { name: "La Templanza", file: "454518.jpg" },
-            { name: "El Diablo", file: "454519.jpg" },
-            { name: "La Torre", file: "454520.jpg" },
-            { name: "La Estrella", file: "454521.jpg" },
-            { name: "La Luna", file: "454522.jpg" },
-            { name: "El Sol", file: "454523.jpg" },
-            { name: "El Juicio", file: "454524.jpg" },
-            { name: "El Mundo", file: "454525.jpg" },
-
-            // Bastos
-            { name: "As de Bastos", file: "454623.jpg" },
-            { name: "Dos de Bastos", file: "454624.jpg" },
-            { name: "Tres de Bastos", file: "454625.jpg" },
-            { name: "Cuatro de Bastos", file: "454626.jpg" },
-            { name: "Cinco de Bastos", file: "454627.jpg" },
-            { name: "Seis de Bastos", file: "454628.jpg" },
-            { name: "Siete de Bastos", file: "454629.jpg" },
-            { name: "Ocho de Bastos", file: "454630.jpg" },
-            { name: "Nueve de Bastos", file: "454631.jpg" },
-            { name: "Diez de Bastos", file: "454632.jpg" },
-            { name: "Sota de Bastos", file: "454633.jpg" },
-            { name: "Caballo de Bastos", file: "454634.jpg" },
-            { name: "Reina de Bastos", file: "454635.jpg" },
-            { name: "Rey de Bastos", file: "454636.jpg" },
-
-            // Espadas
-            { name: "As de Espadas", file: "454558.jpg" },
-            { name: "Dos de Espadas", file: "454559.jpg" },
-            { name: "Tres de Espadas", file: "454560.jpg" },
-            { name: "Cuatro de Espadas", file: "454561.jpg" },
-            { name: "Cinco de Espadas", file: "454562.jpg" },
-            { name: "Seis de Espadas", file: "454563.jpg" },
-            { name: "Siete de Espadas", file: "454564.jpg" },
-            { name: "Ocho de Espadas", file: "454580.jpg" },
-            { name: "Nueve de Espadas", file: "454609.jpg" },
-            { name: "Diez de Espadas", file: "454618.jpg" },
-            { name: "Sota de Espadas", file: "454619.jpg" },
-            { name: "Caballo de Espadas", file: "454620.jpg" },
-            { name: "Reina de Espadas", file: "454621.jpg" },
-            { name: "Rey de Espadas", file: "454622.jpg" },
-
-            // Oros
-            { name: "As de Oros", file: "454543.jpg" },
-            { name: "Dos de Oros", file: "454544_2.jpg" },
-            { name: "Tres de Oros", file: "454545.jpg" },
-            { name: "Cuatro de Oros", file: "454546_2.jpg" },
-            { name: "Cinco de Oros", file: "454547_2.jpg" },
-            { name: "Sota de Oros", file: "454554_2.jpg" },
+            { name: "El Loco", file: "El loco.jpg" },
+            { name: "El Mago", file: "El Mago.jpg" },
+            { name: "La Sacerdotisa", file: "La Sacerdotisa.jpg" },
+            { name: "La Emperatriz", file: "La emperatriz.jpg" },
+            { name: "El Emperador", file: "El emperador.jpg" },
+            { name: "El Ermitaño", file: "El ermitaño.jpg" },
+            { name: "El Carro", file: "El carro.jpg" },
+            { name: "La Fuerza", file: "La fuerza.jpg" },
+            { name: "La Justicia", file: "La justicia.jpg" },
+            { name: "La Muerte", file: "La muerte.jpg" },
+            { name: "La Templanza", file: "La templanza.jpg" },
+            { name: "El Diablo", file: "El diablo.jpg" },
+            { name: "La Torre", file: "La torres.jpg" },
+            { name: "La Estrella", file: "La estrella.jpg" },
+            { name: "La Luna", file: "La luna.jpg" },
+            { name: "El Sol", file: "El sol.jpg" },
+            { name: "El Mundo", file: "El mundo.jpg" },
+            { name: "Los Amantes", file: "Los amantes.jpg" },
+            { name: "La Rueda de la Fortuna", file: "La rueda de la fortuna.jpg" },
 
             // Copas
-            { name: "As de Copas", file: "454526.jpg" },
-            { name: "Dos de Copas", file: "454529.jpg" },
-            { name: "Tres de Copas", file: "454528.jpg" },
-            { name: "Cuatro de Copas", file: "454530.jpg" },
-            { name: "Cinco de Copas", file: "454531.jpg" },
-            { name: "Seis de Copas", file: "454532.jpg" },
-            { name: "Siete de Copas", file: "454533.jpg" },
-            { name: "Ocho de Copas", file: "454534.jpg" },
-            { name: "Nueve de Copas", file: "454535.jpg" },
-            { name: "Diez de Copas", file: "454536.jpg" },
-            { name: "Sota de Copas", file: "454542.jpg" },
-            { name: "Caballo de Copas", file: "454538.jpg" },
-            { name: "Reina de Copas", file: "454637.jpg" },
-            { name: "Rey de Copas", file: "454638.jpg" }
+            { name: "Dos de Copas", file: "Dos de copas.jpg" },
+            { name: "Tres de Copas", file: "Tres de copas.jpg" },
+            { name: "Cuatro de Copas", file: "Cuatro de copas.jpg" },
+            { name: "Cinco de Copas", file: "Cinco de copas.jpg" },
+            { name: "Seis de Copas", file: "Seis de copas.jpg" },
+            { name: "Siete de Copas", file: "Siete de copas.jpg" },
+            { name: "Ocho de Copas", file: "Ocho de copas.jpg" },
+            { name: "Nueve de Copas", file: "Nueve de copas.jpg" },
+            { name: "Sota de Copas", file: "Sota de copas.jpg" },
+            { name: "Caballo de Copas", file: "Caballo de copas.jpg" },
+            { name: "Reina de Copas", file: "Reina de copas.jpg" },
+            { name: "Rey de Copas", file: "Rey de copas.jpg" },
+
+            // Espadas
+            { name: "As de Espadas", file: "As de espadas.jpg" },
+            { name: "Dos de Espadas", file: "Dos de espadas.jpg" },
+            { name: "Tres de Espadas", file: "Tres de espadas.jpg" },
+            { name: "Cuatro de Espadas", file: "Cuatro de espadas.jpg" },
+            { name: "Cinco de Espadas", file: "Cinco de espadas.jpg" },
+            { name: "Seis de Espadas", file: "Seis de espadas.jpg" },
+            { name: "Siete de Espadas", file: "Siete de espadas.jpg" },
+            { name: "Ocho de Espadas", file: "Ocho de espadas.jpg" },
+            { name: "Nueve de Espadas", file: "Nueve de espadas.jpg" },
+            { name: "Caballo de Espadas", file: "Caballo de espadas.jpg" },
+            { name: "Reina de Espadas", file: "Reina de espadas.jpg" },
+            { name: "Rey de Espadas", file: "Rey de espadas.jpg" },
+
+            // Oros / Bajos
+            { name: "As de Oro", file: "As de oro.jpg" },
+            { name: "Dos de Oro", file: "Dos de oro.jpg" },
+            { name: "Tres de Oro", file: "Tres de oro.jpg" },
+            { name: "Cuatro de Oro", file: "Cuatro de oro.jpg" },
+            { name: "Cinco de Oro", file: "Cinco de oro.jpg" },
+            { name: "Seis de Oro", file: "Seis de oro.jpg" },
+            { name: "Siete de Oro", file: "Siete de oro.jpg" },
+            { name: "Ocho de Oro", file: "Ocho de oro.jpg" },
+            { name: "Nueve de Oro", file: "Nueve de oro.jpg" },
+            { name: "Diez de Oro", file: "Diez de oro.jpg" },
+            { name: "Reina de Oro", file: "Reina de oro.jpg" },
+            { name: "Rey de Oro", file: "Rey de oro.jpg" },
+
+            // Bastos / Bajos (adaptados a los archivos que tienes)
+            { name: "Nueve de Bastos", file: "Nueve de bastos.jpg" },
+            { name: "Seis de Bastos", file: "Seis de bastos.jpg" },
+            { name: "Siete de Bastos", file: "Siete de bajos.jpg" },
+            { name: "Ocho de Bastos", file: "Ocho de bajos.jpg" }
         ];
 
         let totalTaps = 0;
@@ -783,11 +767,11 @@
             container.innerHTML = '';
             speechText.innerHTML = `"Atención @${usuarioActual}... Don Juan Caramba está barajando las cartas..."`;
 
-            // BARAJEO USANDO TU IMAGEN NUEVA DE REVERSO
+            // BARAJEO USANDO 454972.jpg COMO DORSO MÍSTICO
             for(let i = 0; i < 4; i++) {
                 const cardDiv = document.createElement('div');
                 cardDiv.className = 'card shuffling';
-                cardDiv.innerHTML = `<img src="429524.webp" class="card-back-img" alt="Reverso"><span>Barajando</span>`;
+                cardDiv.innerHTML = `<img src="454972.jpg" alt="Barajando"><span>Barajando</span>`;
                 container.appendChild(cardDiv);
             }
 
@@ -805,8 +789,9 @@
                         const cardDiv = document.createElement('div');
                         cardDiv.className = `card`;
                         
+                        // IMAGEN EXACTA Y CORRESPONDIENTE CON RESPALDO DE SEGURIDAD
                         cardDiv.innerHTML = `
-                            <img class="${esInvertida ? 'reversed' : ''}" src="${carta.file}" alt="${carta.name}" onerror="this.onerror=null; this.src='429524.webp';">
+                            <img class="${esInvertida ? 'reversed' : ''}" src="${carta.file}" alt="${carta.name}" onerror="this.onerror=null; this.src='454972.jpg';">
                             <span>${carta.name} ${esInvertida ? '(Inv.)' : ''}</span>
                         `;
                         container.appendChild(cardDiv);
