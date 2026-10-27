@@ -28,24 +28,23 @@
             left: 0;
             z-index: 1;
         }
-        /* Contenedor de las cartas más grande y centrado en la mesa */
+        /* Contenedor de las cartas grandes sobre la mesa */
         .tarot-slot {
             position: absolute;
-            bottom: 22%;
+            bottom: 25%;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             gap: 25px;
             z-index: 2;
         }
-        /* Estilo mejorado para que las cartas sean más grandes y parezcan cartas reales */
         .card {
             width: 130px;
             height: 200px;
             background: #1a1a1a;
             border-radius: 10px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.9);
-            border: 3px solid #d4af37; /* Borde dorado místico */
+            border: 3px solid #d4af37;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -75,32 +74,80 @@
         /* Cuadro de diálogo inferior para Juan Caramba */
         .speech-box {
             position: absolute;
-            bottom: 25px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80%;
-            max-width: 750px;
+            width: 75%;
+            max-width: 700px;
             background: rgba(0, 0, 0, 0.88);
             border: 2px solid #d4af37;
             border-radius: 12px;
-            padding: 15px 20px;
+            padding: 12px 20px;
             color: #f3f3f3;
             text-align: center;
             z-index: 3;
             box-shadow: 0 5px 20px rgba(0,0,0,0.9);
         }
         .speech-box h3 {
-            margin: 0 0 5px 0;
+            margin: 0 0 3px 0;
             color: #d4af37;
-            font-size: 18px;
+            font-size: 17px;
         }
         .speech-box p {
             margin: 0;
-            font-size: 16px;
-            line-height: 1.4;
+            font-size: 15px;
+            line-height: 1.3;
+        }
+        /* Cuadro lateral de espera para 10 usuarios */
+        .waiting-queue {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 260px;
+            background: rgba(0, 0, 0, 0.85);
+            border: 2px solid #d4af37;
+            border-radius: 10px;
+            padding: 12px;
+            color: #fff;
+            z-index: 4;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.8);
+        }
+        .waiting-queue h4 {
+            margin: 0 0 8px 0;
+            color: #d4af37;
+            font-size: 14px;
+            text-align: center;
+            border-bottom: 1px solid #d4af37;
+            padding-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .queue-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 220px;
+            overflow-y: hidden;
+        }
+        .queue-item {
+            font-size: 13px;
+            padding: 5px 8px;
+            margin-bottom: 4px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .queue-item.active {
+            background: rgba(212, 175, 55, 0.3);
+            border: 1px solid #d4af37;
+            font-weight: bold;
+            color: #ffdf73;
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
     </style>
@@ -111,7 +158,15 @@
         <!-- Imagen de fondo principal -->
         <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image">
 
-        <!-- Espacio donde aparecerán las cartas grandes -->
+        <!-- Fila de espera de usuarios -->
+        <div class="waiting-queue">
+            <h4>Sala de Espera (Turnos)</h4>
+            <ul class="queue-list" id="queueList">
+                <!-- Se llenará dinámicamente -->
+            </ul>
+        </div>
+
+        <!-- Espacio de las cartas grandes -->
         <div class="tarot-slot" id="cardContainer"></div>
 
         <!-- Cuadro de texto de Juan Caramba -->
@@ -122,7 +177,14 @@
     </div>
 
     <script>
-        // Baraja con nombres y sus respectivas imágenes (puedes subir las imágenes a la carpeta public)
+        // Lista de nombres falsos para simular la cola de espera en vivo
+        const nombresUsuarios = [
+            "Mariana_92", "CarlosVe", "Alejandro_X", "Sofia_Tarot", "Daniel_88",
+            "Valeria_Moon", "JoseGoyo", "CarmenRosa", "Luis_Mistic", "Gabriela_St",
+            "Franklin_V", "Oriana_Sol", "PedroPerez", "KeniaFan", "Rosa_Mystica"
+        ];
+
+        // Baraja de cartas
         const baraja = [
             { nombre: "El Loco", img: "loco.jpg", significado: "Nuevos comienzos y saltos de fe." },
             { nombre: "El Mago", img: "mago.jpg", significado: "Tienes todo el poder para manifestar tu realidad." },
@@ -134,12 +196,47 @@
             { nombre: "El Sol", img: "sol.jpg", significado: "Felicidad plena, éxito y claridad absoluta." }
         ];
 
+        let colaUsuarios = [];
+
+        // Inicializar 10 usuarios en la cola
+        function inicializarCola() {
+            colaUsuarios = [];
+            for(let i = 0; i < 10; i++) {
+                const nombreAleatorio = nombresUsuarios[Math.floor(Math.random() * nombresUsuarios.length)];
+                if(!colaUsuarios.includes(nombreAleatorio)) {
+                    colaUsuarios.push(nombreAleatorio);
+                } else {
+                    colaUsuarios.push(nombreAleatorio + "_" + i);
+                }
+            }
+            actualizarVistaCola();
+        }
+
+        function actualizarVistaCola() {
+            const queueList = document.getElementById('queueList');
+            queueList.innerHTML = '';
+
+            colaUsuarios.forEach((usuario, index) => {
+                const li = document.createElement('li');
+                li.className = `queue-item ${index === 0 ? 'active' : ''}`;
+                li.innerHTML = `<span>${index + 1}. @${usuario}</span> <span>${index === 0 ? 'Consultando 🔮' : 'En espera'}</span>`;
+                queueList.appendChild(li);
+            });
+        }
+
         function realizarTirada() {
             const container = document.getElementById('cardContainer');
             const speechText = document.getElementById('speechText');
             
             container.innerHTML = '';
 
+            // Rotar la cola: el primero sale y entra uno nuevo al final
+            const usuarioActual = colaUsuarios.shift();
+            const nuevoUsuario = nombresUsuarios[Math.floor(Math.random() * nombresUsuarios.length)];
+            colaUsuarios.push(nuevoUsuario);
+            actualizarVistaCola();
+
+            // Seleccionar 3 cartas aleatorias
             const seleccionadas = [];
             while(seleccionadas.length < 3) {
                 let cartaAleatoria = baraja[Math.floor(Math.random() * baraja.length)];
@@ -152,7 +249,6 @@
                 setTimeout(() => {
                     const cardDiv = document.createElement('div');
                     cardDiv.className = 'card';
-                    // Renderiza la imagen de la carta y su nombre abajo
                     cardDiv.innerHTML = `
                         <img src="${carta.img}" alt="${carta.nombre}" onerror="this.src='juan-caramba-bg.jpg'">
                         <span>${carta.nombre}</span>
@@ -161,10 +257,11 @@
                 }, index * 400);
             });
 
-            speechText.innerHTML = `"${seleccionadas[0].nombre}, ${seleccionadas[1].nombre} y ${seleccionadas[2].nombre}... Veo grandes movimientos en tu camino. Escucha bien lo que las cartas dictan."`;
+            speechText.innerHTML = `"${usuarioActual}, las cartas para ti son: ${seleccionadas[0].nombre}, ${seleccionadas[1].nombre} y ${seleccionadas[2].nombre}. Presta mucha atención a tu destino."`;
         }
 
-        // Cambia la tirada automáticamente cada 12 segundos
+        // Arrancar
+        inicializarCola();
         setInterval(realizarTirada, 12000);
         setTimeout(realizarTirada, 3000);
     </script>
