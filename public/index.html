@@ -478,8 +478,8 @@
 <body onclick="registrarTapTap(event)">
 
     <div class="container" id="mainContainer">
-        <!-- Fondo -->
-        <img src="https://images.unsplash.com/photo-1514539079130-25950c84af65?q=80&w=1000&auto=format&fit=crop" alt="Juan Caramba Tarot" class="bg-image">
+        <!-- Fondo original de Don Juan Caramba -->
+        <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image">
 
         <!-- MÚSICA LLANERA DE FONDO -->
         <audio id="bgMusic" loop>
@@ -567,16 +567,17 @@
             "Franklin_V", "Oriana_Sol", "PedroPerez", "KeniaFan", "Rosa_Mystica"
         ];
 
-        // ENLACES DIRECTOS PÚBLICOS PARA CADA CARTA (SIN SUBIR ARCHIVOS)
+        // TUS CARTAS LOCALES EN FORMATO .JPG (INCLUYENDO EL TRES DE COPAS)
         const baraja = [
-            { nombre: "El Loco", img: "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "El Mago", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "La Sacerdotisa", img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "La Emperatriz", img: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "La Rueda", img: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "El Ermitaño", img: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "La Muerte", img: "https://images.unsplash.com/photo-1514539079130-25950c84af65?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "El Sol", img: "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?q=80&w=400&auto=format&fit=crop" }
+            { nombre: "Tres de Copas", img: "Tres de copas.jpg" },
+            { nombre: "El Loco", img: "loco.jpg" },
+            { nombre: "El Mago", img: "mago.jpg" },
+            { nombre: "La Sacerdotisa", img: "sacerdotisa.jpg" },
+            { nombre: "La Emperatriz", img: "emperatriz.jpg" },
+            { nombre: "La Rueda", img: "rueda.jpg" },
+            { nombre: "El Ermitaño", img: "ermitano.jpg" },
+            { nombre: "La Muerte", img: "muerte.jpg" },
+            { nombre: "El Sol", img: "sol.jpg" }
         ];
 
         let totalTaps = 0;
@@ -718,7 +719,7 @@
             for(let i = 0; i < 4; i++) {
                 const cardDiv = document.createElement('div');
                 cardDiv.className = 'card shuffling';
-                cardDiv.innerHTML = `<img src="https://images.unsplash.com/photo-1514539079130-25950c84af65?q=80&w=400&auto=format&fit=crop" alt="Barajando"><span>Barajando</span>`;
+                cardDiv.innerHTML = `<img src="juan-caramba-bg.jpg" alt="Barajando"><span>Barajando</span>`;
                 container.appendChild(cardDiv);
             }
 
@@ -738,7 +739,7 @@
                         cardDiv.className = `card ${esInvertida ? 'reversed' : ''}`;
                         
                         cardDiv.innerHTML = `
-                            <img src="${carta.img}" alt="${carta.nombre}">
+                            <img src="${carta.img}" alt="${carta.nombre}" onerror="this.src='juan-caramba-bg.jpg'">
                             <span>${carta.nombre} ${esInvertida ? '(Inv.)' : ''}</span>
                         `;
                         container.appendChild(cardDiv);
