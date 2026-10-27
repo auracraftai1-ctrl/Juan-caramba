@@ -26,7 +26,7 @@
             overflow: hidden;
         }
 
-        /* IMAGEN DE FONDO CON DINÁMICA ANTI-BAJO (Efecto respiración / pulso místico) */
+        /* FONDO DINÁMICO CON PULSO MÍSTICO */
         .bg-image {
             width: 100%;
             height: 100%;
@@ -43,7 +43,7 @@
             100% { transform: scale(1); filter: brightness(1); }
         }
 
-        /* PARTÍCULAS MÍSTICAS FLOTANTES (Anti-baneo por imagen estática) */
+        /* PARTÍCULAS MÍSTICAS (ANTI-BANEO TIKTOK) */
         .mystic-particle {
             position: absolute;
             background: rgba(212, 175, 55, 0.7);
@@ -58,7 +58,7 @@
             100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
-        /* 1. BOTONES ESTILO TIKTOK (ARRIBA A LA IZQUIERDA) */
+        /* ACCIONES TIKTOK (IZQUIERDA SUPERIOR) */
         .tiktok-actions-container {
             position: fixed;
             top: 10px;
@@ -114,46 +114,23 @@
             border: 1px solid rgba(212, 175, 55, 0.4);
         }
 
-        /* LLAMADO A LA ACCIÓN */
-        .call-to-action-box {
-            position: fixed;
-            top: 110px;
-            left: 10px;
-            z-index: 90;
-            background: rgba(0, 0, 0, 0.75);
-            border: 1px solid #d4af37;
-            border-radius: 6px;
-            padding: 5px 8px;
-            color: #fff;
-            max-width: 160px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.8);
-        }
-        .call-to-action-box p {
-            margin: 0;
-            font-size: 9px;
-            font-weight: bold;
-            color: #ffdf73;
-            text-align: center;
-            line-height: 1.1;
-        }
-
-        /* CONTADOR DE CONCURSO TAP TAPS (CENTRO) */
+        /* CONTADOR DE CONCURSO TAP TAPS (REUBICADO A LA IZQUIERDA SÚPER DESPEJADO) */
         .contest-panel {
             position: fixed;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
+            top: 100px;
+            left: 10px;
             z-index: 100;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             border: 1.5px solid #fe2c55;
             border-radius: 8px;
-            padding: 4px 10px;
+            padding: 5px 10px;
             color: #fff;
             text-align: center;
-            box-shadow: 0 3px 10px rgba(254, 44, 85, 0.4);
+            max-width: 160px;
+            box-shadow: 0 3px 10px rgba(254, 44, 85, 0.5);
         }
         .contest-title {
-            font-size: 9px;
+            font-size: 8.5px;
             color: #d4af37;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -164,16 +141,55 @@
             color: #fff;
         }
         .contest-timer {
-            font-size: 9px;
+            font-size: 8.5px;
             color: #ff4654;
         }
 
-        /* SALA DE ESPERA PARA 10 USUARIOS (MÁS ANGOSTA Y TRANSPARENTE A LA DERECHA) */
+        /* LEYENDA Y BENEFICIOS DE REGALOS VIP (IZQUIERDA) */
+        .vip-gifts-guide {
+            position: fixed;
+            top: 180px;
+            left: 10px;
+            z-index: 90;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #d4af37;
+            border-radius: 6px;
+            padding: 6px 8px;
+            color: #fff;
+            max-width: 165px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.8);
+        }
+        .vip-gifts-guide h6 {
+            margin: 0 0 4px 0;
+            color: #d4af37;
+            font-size: 9px;
+            text-align: center;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+            padding-bottom: 2px;
+        }
+        .vip-gifts-guide ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            font-size: 7.5px;
+        }
+        .vip-gifts-guide li {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: #f0f0f0;
+        }
+
+        /* SALA DE ESPERA (10 USUARIOS ANGOSTA A LA DERECHA) */
         .waiting-queue {
             position: fixed;
             top: 10px;
             right: 10px;
-            width: 135px; /* Más angosta para dejar ver el centro y contador */
+            width: 135px;
             background: transparent;
             border: 1.5px solid rgba(212, 175, 55, 0.7);
             border-radius: 6px;
@@ -199,7 +215,7 @@
             display: flex;
             flex-direction: column;
             gap: 2px;
-            max-height: 155px; /* Altura para mostrar los 10 usuarios de forma compacta */
+            max-height: 155px;
             overflow: hidden;
         }
         .queue-item {
@@ -219,7 +235,7 @@
             color: #ffdf73;
         }
 
-        /* CUADRO DE REGALOS TRANSPARENTE DEBAJO DE LA SALA DE ESPERA */
+        /* CUADRO DE REGALOS RECIENTES */
         .gifts-panel {
             position: fixed;
             top: 180px;
@@ -259,7 +275,38 @@
             text-shadow: 1px 1px 2px #000;
         }
 
-        /* CARTAS PEQUEÑAS ADAPTABLES PARA TIRADAS AMPLIAS */
+        /* ANIMACIÓN FLOTANTE PRINCIPAL CUANDO LLEGA UN REGALO */
+        .gift-popup-animation {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: rgba(0, 0, 0, 0.85);
+            border: 2px solid #fe2c55;
+            border-radius: 12px;
+            padding: 10px 20px;
+            color: #fff;
+            text-align: center;
+            z-index: 150;
+            pointer-events: none;
+            box-shadow: 0 0 20px rgba(254, 44, 85, 0.8);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .gift-popup-animation.show {
+            transform: translate(-50%, -50%) scale(1.1);
+            opacity: 1;
+        }
+        .gift-popup-icon {
+            font-size: 30px;
+            animation: bounceGift 0.6s infinite alternate ease-in-out;
+        }
+        @keyframes bounceGift {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-8px); }
+        }
+
+        /* CARTAS PEQUEÑAS ADAPTABLES */
         .tarot-slot {
             position: absolute;
             bottom: 12%;
@@ -319,7 +366,7 @@
             100% { transform: translateY(5px) rotate(-3deg); }
         }
 
-        /* ESCRITURA DE LA LECTURA FLOTANTE */
+        /* LECTURA FLOTANTE */
         .speech-floating {
             position: absolute;
             bottom: 3%;
@@ -347,7 +394,7 @@
             text-shadow: 2px 2px 6px #000, 0 0 8px rgba(0, 0, 0, 0.9);
         }
 
-        /* ANIMACIÓN TAP TAP */
+        /* TAP TAP INTERACTIVO */
         .tap-heart {
             position: absolute;
             font-size: 24px;
@@ -367,7 +414,7 @@
         <!-- Imagen de fondo de Juan Caramba -->
         <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image">
 
-        <!-- MÚSICA LLANERA INSTRUMENTAL DE FONDO (Volumen bajo al 30%) -->
+        <!-- MÚSICA LLANERA DE FONDO -->
         <audio id="bgMusic" loop>
             <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=venezuelan-harp-instrumental-111394.mp3" type="audio/mpeg">
         </audio>
@@ -383,31 +430,43 @@
             <div class="follower-count" id="followerCount">Seguidores: 14.8K</div>
         </div>
 
-        <!-- LLAMADO A LA ACCIÓN -->
-        <div class="call-to-action-box">
-            <p>✨ ¡Sígueme y da Tap Tap para lectura GRATIS! ✨</p>
-        </div>
-
-        <!-- CONCURSO TAP TAPS -->
+        <!-- CONTADOR DE CONCURSO TAP TAPS -->
         <div class="contest-panel">
             <div class="contest-title">🏆 Concurso Tap Taps</div>
             <div class="contest-stats"><span id="tapCountDisplay">0</span> / 1000 Taps</div>
             <div class="contest-timer">Próximo en: <span id="timerDisplay">59:59</span></div>
         </div>
 
-        <!-- SALA DE ESPERA (10 USUARIOS, ANGOSTA Y TRANSPARENTE) -->
+        <!-- GUÍA DE REGALOS VIP PARA LECTURAS -->
+        <div class="vip-gifts-guide">
+            <h6>🔮 Regalos VIP Lecturas</h6>
+            <ul>
+                <li>🌹/🤠 Respuesta Corta (+2 Turnos)</li>
+                <li>💎 Turno Inmediato (Puesto #1)</li>
+                <li>🦁/🪙 Lectura VIP 10 Cartas</li>
+            </ul>
+        </div>
+
+        <!-- SALA DE ESPERA (10) -->
         <div class="waiting-queue">
             <h4>Sala de Espera (10)</h4>
             <ul class="queue-list" id="queueList"></ul>
         </div>
 
-        <!-- REGALOS RECIBIDOS -->
+        <!-- FEED DE REGALOS -->
         <div class="gifts-panel">
             <h5>🎁 Regalos</h5>
             <div class="gift-feed" id="giftFeed">
                 <div class="gift-item">🌹 @Mariana_92 Rosa</div>
                 <div class="gift-item">🤠 @CarlosVe Sombrero</div>
             </div>
+        </div>
+
+        <!-- ANIMACIÓN FLOTANTE DE REGALO EN PANTALLA -->
+        <div class="gift-popup-animation" id="giftPopup">
+            <div class="gift-popup-icon" id="giftPopupIcon">🎁</div>
+            <div style="font-size: 11px; font-weight: bold; color: #ffdf73;" id="giftPopupUser">@Usuario</div>
+            <div style="font-size: 9px; color: #fff;" id="giftPopupText">¡Envió un regalo VIP!</div>
         </div>
 
         <!-- CARTAS -->
@@ -445,7 +504,6 @@
         let tiempoRestanteContrato = 3600;
         let musicaActivada = false;
 
-        // Generar partículas místicas flotantes automáticas para evitar baneos de TikTok por imagen estática
         function generarParticulas() {
             const container = document.getElementById('mainContainer');
             setInterval(() => {
@@ -462,7 +520,6 @@
         }
 
         function inicializarCola() {
-            // Seleccionar 10 usuarios exactos para la cola
             colaUsuarios = [];
             for(let i = 0; i < 10; i++) {
                 colaUsuarios.push(nombresUsuarios[i % nombresUsuarios.length]);
@@ -483,11 +540,10 @@
         }
 
         function registrarTapTap(event) {
-            // Activar música al primer toque del usuario (requisito de los navegadores)
             if (!musicaActivada) {
                 const bgMusic = document.getElementById('bgMusic');
                 if(bgMusic) {
-                    bgMusic.volume = 0.3; // Volumen bajo al 30%
+                    bgMusic.volume = 0.3;
                     bgMusic.play().catch(() => {});
                     musicaActivada = true;
                 }
@@ -537,6 +593,24 @@
             event.stopPropagation();
             const speechText = document.getElementById('speechText');
             if(speechText) speechText.innerHTML = `"¡Gracias por ese cariño! Juan Caramba también te quiere, mi pana."`;
+        }
+
+        function mostrarAnimacionRegalo(usuario, regaloIcono, regaloNombre) {
+            const popup = document.getElementById('giftPopup');
+            const icon = document.getElementById('giftPopupIcon');
+            const user = document.getElementById('giftPopupUser');
+            const text = document.getElementById('giftPopupText');
+
+            if(popup && icon && user && text) {
+                icon.innerText = regaloIcono;
+                user.innerText = `@${usuario}`;
+                text.innerText = `¡Envió ${regaloNombre}!`;
+
+                popup.classList.add('show');
+                setTimeout(() => {
+                    popup.classList.remove('show');
+                }, 2500);
+            }
         }
 
         function realizarTirada() {
@@ -598,16 +672,26 @@
             }
         }, 1000);
 
-        const listaRegalos = ["🌹 Rosa", "🤠 Sombrero", "💎 Diamante", "🦁 León", "🪙 Cofre"];
+        const listaRegalos = [
+            { icono: "🌹", nombre: "una Rosa" },
+            { icono: "🤠", nombre: "un Sombrero" },
+            { icono: "💎", nombre: "un Diamante VIP" },
+            { icono: "🦁", nombre: "un León Imperial" },
+            { icono: "🪙", nombre: "un Cofre del Tesoro" }
+        ];
+
         setInterval(() => {
             const giftFeed = document.getElementById('giftFeed');
             if(!giftFeed) return;
             const randomUser = nombresUsuarios[Math.floor(Math.random() * nombresUsuarios.length)];
             const randomGift = listaRegalos[Math.floor(Math.random() * listaRegalos.length)];
-            giftFeed.innerHTML = `<div class="gift-item">${randomGift} @${randomUser}</div>` + giftFeed.innerHTML;
-        }, 15000);
+            
+            giftFeed.innerHTML = `<div class="gift-item">${randomGift.icono} @${randomUser}</div>` + giftFeed.innerHTML;
+            
+            // Disparar animación flotante central de regalo
+            mostrarAnimacionRegalo(randomUser, randomGift.icono, randomGift.nombre);
+        }, 12000);
 
-        // Iniciar automatizaciones
         inicializarCola();
         generarParticulas();
         setInterval(realizarTirada, 18000);
