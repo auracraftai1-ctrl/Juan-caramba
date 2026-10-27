@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Tarot 24/7 Juan Caramba",
   "main": "server.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node server.js"
   },
