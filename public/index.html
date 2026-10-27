@@ -26,7 +26,7 @@
             overflow: hidden;
         }
 
-        /* FONDO DINÁMICO CON EL NOMBRE CORRECTO */
+        /* FONDO DE PANTALLA ORIGINAL */
         .bg-image {
             width: 100%;
             height: 100%;
@@ -473,8 +473,8 @@
 <body onclick="registrarTapTap(event)">
 
     <div class="container" id="mainContainer">
-        <!-- Fondo actualizado con Auracraftai-bg.jpg -->
-        <img src="Auracraftai-bg.jpg" alt="AuraCraft AI Tarot" class="bg-image">
+        <!-- Fondo de pantalla original de Juan Caramba -->
+        <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image">
 
         <!-- AUDIO DE FONDO -->
         <audio id="bgMusic" loop>
@@ -563,7 +563,7 @@
             "Yajaira_77", "Ernesto_Tarot", "Marcos_Perez", "Astral_Ana", "Milagros_V"
         ];
 
-        // BARAJA CON TUS NOMBRES OFICIALES DE GITHUB
+        // BARAJA OFICIAL
         const tarotDeck = [
             { name: "El Loco", file: "El loco.jpg" },
             { name: "El Mago", file: "El Mago.jpg" },
@@ -767,11 +767,11 @@
             container.innerHTML = '';
             speechText.innerHTML = `"Atención @${usuarioActual}... Don Juan Caramba está barajando las cartas..."`;
 
-            // BARAJEO USANDO TU REVERSO OFICIAL 454972.jpg[span_0](start_span)[span_0](end_span)
+            // BARAJEO USANDO EXCLUSIVAMENTE Auracraftai-bg.jpg COMO REVERSO DE LAS CARTAS
             for(let i = 0; i < 4; i++) {
                 const cardDiv = document.createElement('div');
                 cardDiv.className = 'card shuffling';
-                cardDiv.innerHTML = `<img src="454972.jpg" alt="Reverso"><span>Barajando</span>`;
+                cardDiv.innerHTML = `<img src="Auracraftai-bg.jpg" alt="Reverso"><span>Barajando</span>`;
                 container.appendChild(cardDiv);
             }
 
@@ -789,9 +789,9 @@
                         const cardDiv = document.createElement('div');
                         cardDiv.className = `card`;
                         
-                        // CARTA CORRESPONDIENTE + RESPALDO SEGURO AL REVERSO 454972.jpg[span_1](start_span)[span_1](end_span)
+                        // CARTA CORRESPONDIENTE + RESPALDO SEGURO AL REVERSO Auracraftai-bg.jpg
                         cardDiv.innerHTML = `
-                            <img class="${esInvertida ? 'reversed' : ''}" src="${carta.file}" alt="${carta.name}" onerror="this.onerror=null; this.src='454972.jpg';">
+                            <img class="${esInvertida ? 'reversed' : ''}" src="${carta.file}" alt="${carta.name}" onerror="this.onerror=null; this.src='Auracraftai-bg.jpg';">
                             <span>${carta.name} ${esInvertida ? '(Inv.)' : ''}</span>
                         `;
                         container.appendChild(cardDiv);
