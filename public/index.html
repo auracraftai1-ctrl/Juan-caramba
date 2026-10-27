@@ -298,7 +298,7 @@
             color: #ffdf73;
         }
 
-        /* CUADRO DE REGALOS RECIENTES (DEBAJO DE LA SALA DE ESPERA) */
+        /* CUADRO DE REGALOS RECIENTES */
         .gifts-panel {
             position: fixed;
             top: 170px;
@@ -369,7 +369,7 @@
             100% { transform: translateY(-8px); }
         }
 
-        /* CARTAS PEQUEÑAS ADAPTABLES */
+        /* CARTAS EN MESA */
         .tarot-slot {
             position: absolute;
             bottom: 12%;
@@ -378,13 +378,13 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
             max-width: 90vw;
             z-index: 3;
         }
         .card {
-            width: 50px;
-            height: 75px;
+            width: 55px;
+            height: 85px;
             background: #1a1a1a;
             border-radius: 4px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.9);
@@ -396,20 +396,25 @@
             text-align: center;
             padding: 2px;
             font-weight: bold;
-            font-size: 6.5px;
+            font-size: 6px;
             color: #fff;
             overflow: hidden;
-            transition: transform 0.3s;
+            transition: transform 0.4s ease;
         }
         .card img {
             width: 100%;
-            height: 55px;
+            height: 60px;
             object-fit: cover;
             border-radius: 2px;
             border: 1px solid #d4af37;
         }
+        /* CLASES PARA CARTA AL DERECHO O INVERTIDA */
+        .card.reversed img {
+            transform: rotate(180deg);
+            filter: brightness(0.9);
+        }
         .card span {
-            font-size: 5.5px;
+            font-size: 5px;
             color: #d4af37;
             margin-top: 1px;
             text-transform: uppercase;
@@ -449,7 +454,7 @@
         }
         .speech-floating p {
             margin: 0;
-            font-size: 10.5px;
+            font-size: 10px;
             font-weight: bold;
             color: #fff;
             line-height: 1.2;
@@ -473,7 +478,7 @@
 <body onclick="registrarTapTap(event)">
 
     <div class="container" id="mainContainer">
-        <!-- Imagen de fondo de Juan Caramba -->
+        <!-- Fondo -->
         <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image">
 
         <!-- MÚSICA LLANERA DE FONDO -->
@@ -507,7 +512,7 @@
             <div class="contest-timer">Reinicia en: <span id="timerDisplay">59:59</span></div>
         </div>
 
-        <!-- CUADRO DE REGALOS VIP: PEQUEÑO, TRANSPARENTE Y ABAJO A LA IZQUIERDA -->
+        <!-- CUADRO DE REGALOS VIP -->
         <div class="vip-gifts-guide">
             <h6>🔮 Regalos & Lecturas</h6>
             <ul>
@@ -518,7 +523,7 @@
             </ul>
         </div>
 
-        <!-- VELA MÍSTICA CON LLAMA ANIMADA (ESQUINA INFERIOR DERECHA) -->
+        <!-- VELA MÍSTICA -->
         <div class="candle-container">
             <div class="flame"></div>
         </div>
@@ -538,7 +543,7 @@
             </div>
         </div>
 
-        <!-- ANIMACIÓN FLOTANTE DE REGALO EN PANTALLA -->
+        <!-- ANIMACIÓN FLOTANTE DE REGALO -->
         <div class="gift-popup-animation" id="giftPopup">
             <div class="gift-popup-icon" id="giftPopupIcon">🎁</div>
             <div style="font-size: 11px; font-weight: bold; color: #ffdf73;" id="giftPopupUser">@Usuario</div>
@@ -562,6 +567,7 @@
             "Franklin_V", "Oriana_Sol", "PedroPerez", "KeniaFan", "Rosa_Mystica"
         ];
 
+        // Nombres de archivos .jpg exactos que subiste
         const baraja = [
             { nombre: "El Loco", img: "loco.jpg" },
             { nombre: "El Mago", img: "mago.jpg" },
@@ -629,7 +635,6 @@
             const tapDisplay = document.getElementById('tapCountDisplay');
             if(tapDisplay) tapDisplay.innerText = totalTaps;
 
-            // ACTUALIZAR BARRA DE ENERGÍA
             const energyFill = document.getElementById('energyFill');
             if (energyFill) {
                 let porcentaje = (totalTaps % 100);
@@ -696,6 +701,7 @@
             }
         }
 
+        // TIRADA DE CARTAS CON PROBABILIDAD DE SALIR AL DERECHO O INVERTIDA
         function realizarTirada() {
             const container = document.getElementById('cardContainer');
             const speechText = document.getElementById('speechText');
@@ -709,6 +715,7 @@
             container.innerHTML = '';
             speechText.innerHTML = `"Atención @${usuarioActual}... Don Juan Caramba está consultando el oráculo..."`;
 
+            // Fase 1: Cartas barajándose
             for(let i = 0; i < 4; i++) {
                 const cardDiv = document.createElement('div');
                 cardDiv.className = 'card shuffling';
@@ -716,6 +723,7 @@
                 container.appendChild(cardDiv);
             }
 
+            // Fase 2: Revelar cartas con posición aleatoria (Derecha o Invertida)
             setTimeout(() => {
                 container.innerHTML = '';
                 const seleccionadas = [];
@@ -726,17 +734,22 @@
 
                 seleccionadas.forEach((carta, index) => {
                     setTimeout(() => {
+                        // 50% de probabilidad de salir invertida
+                        const esInvertida = Math.random() < 0.5;
                         const cardDiv = document.createElement('div');
-                        cardDiv.className = 'card';
+                        
+                        // Añadimos la clase 'reversed' si cae invertida
+                        cardDiv.className = `card ${esInvertida ? 'reversed' : ''}`;
+                        
                         cardDiv.innerHTML = `
                             <img src="${carta.img}" alt="${carta.nombre}" onerror="this.src='juan-caramba-bg.jpg'">
-                            <span>${carta.nombre}</span>
+                            <span>${carta.nombre} ${esInvertida ? '(Inv.)' : ''}</span>
                         `;
                         container.appendChild(cardDiv);
                     }, index * 250);
                 });
 
-                speechText.innerHTML = `"${usuarioActual}, tu lectura revela tu verdad con seriedad. ¡Escucha el consejo!"`;
+                speechText.innerHTML = `"${usuarioActual}, aquí está tu verdad. Las cartas hablan con seriedad."`;
             }, 3000);
         }
 
