@@ -232,9 +232,7 @@
             gap: 3px;
         }
 
-        /* -------------------------------------------------------------
-           CARTAS MÁS PEQUEÑAS (LISTAS PARA TIRADAS DE HASTA 10 CARTAS)
-        ------------------------------------------------------------- */
+        /* CARTAS PEQUEÑAS ADAPTABLES PARA TIRADAS AMPLIAS */
         .tarot-slot {
             position: absolute;
             bottom: 12%;
@@ -294,9 +292,7 @@
             100% { transform: translateY(5px) rotate(-3deg); }
         }
 
-        /* -------------------------------------------------------------
-           ESCRITURA DE LA LECTURA FLOTANTE SIN CUADRO INFERIOR
-        ------------------------------------------------------------- */
+        /* ESCRITURA DE LA LECTURA FLOTANTE (SIN CUADRO) */
         .speech-floating {
             position: absolute;
             bottom: 3%;
@@ -324,7 +320,7 @@
             text-shadow: 2px 2px 6px #000, 0 0 8px rgba(0, 0, 0, 0.9);
         }
 
-        /* ANIMACIÓN DE TAP TAPS EN PANTALLA */
+        /* ANIMACIÓN TAP TAP */
         .tap-heart {
             position: absolute;
             font-size: 24px;
@@ -341,10 +337,9 @@
 <body onclick="registrarTapTap(event)">
 
     <div class="container" id="mainContainer">
-        <!-- Imagen de fondo de Juan Caramba -->
         <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image">
 
-        <!-- BOTONES TIKTOK -->
+        <!-- ACCIONES TIKTOK -->
         <div class="tiktok-actions-container">
             <button class="follow-btn" id="followBtn" onclick="seguirAccion(event)">
                 <span id="followIcon">➔❤️</span> <span id="followText">Seguir</span>
@@ -355,7 +350,7 @@
             <div class="follower-count" id="followerCount">Seguidores: 14.8K</div>
         </div>
 
-        <!-- CUADRO LLAMADO A LA ACCIÓN -->
+        <!-- LLAMADO A LA ACCIÓN -->
         <div class="call-to-action-box">
             <p>✨ ¡Sígueme y da Tap Tap para lectura GRATIS! ✨</p>
         </div>
@@ -367,13 +362,13 @@
             <div class="contest-timer">Próximo en: <span id="timerDisplay">59:59</span></div>
         </div>
 
-        <!-- SALA DE ESPERA SUPERIOR DERECHA (COMPACTA) -->
+        <!-- SALA DE ESPERA -->
         <div class="waiting-queue">
             <h4>Sala de Espera</h4>
             <ul class="queue-list" id="queueList"></ul>
         </div>
 
-        <!-- CUADRO DE REGALOS COMPACTO -->
+        <!-- REGALOS RECIBIDOS -->
         <div class="gifts-panel">
             <h5>🎁 Regalos Recientes</h5>
             <div class="gift-feed" id="giftFeed">
@@ -382,10 +377,10 @@
             </div>
         </div>
 
-        <!-- CONTENEDOR DE CARTAS (SOPORTA MÚLTIPLES CARTAS) -->
+        <!-- CARTAS -->
         <div class="tarot-slot" id="cardContainer"></div>
 
-        <!-- TEXTO FLOTANTE DE LA LECTURA (SIN CUADRO NEGRO) -->
+        <!-- LECTURA FLOTANTE -->
         <div class="speech-floating">
             <h3>Juan Caramba</h3>
             <p id="speechText">"Saludos, alma errante... ¡Lleguemos a los 1000 Tap Taps para iniciar las lecturas místicas!"</p>
@@ -422,6 +417,7 @@
 
         function actualizarVistaCola() {
             const queueList = document.getElementById('queueList');
+            if(!queueList) return;
             queueList.innerHTML = '';
             colaUsuarios.forEach((usuario, index) => {
                 const li = document.createElement('li');
@@ -433,18 +429,20 @@
 
         function registrarTapTap(event) {
             totalTaps++;
-            document.getElementById('tapCountDisplay').innerText = totalTaps;
+            const tapDisplay = document.getElementById('tapCountDisplay');
+            if(tapDisplay) tapDisplay.innerText = totalTaps;
 
             const heart = document.createElement('div');
             heart.className = 'tap-heart';
             heart.innerText = ['❤️', '💖', '✨', '🔥'][Math.floor(Math.random() * 4)];
-            heart.style.left = (event.clientX - 15) + 'px';
-            heart.style.top = (event.clientY - 20) + 'px';
+            heart.style.left = (event.clientX - 12) + 'px';
+            heart.style.top = (event.clientY - 12) + 'px';
             document.getElementById('mainContainer').appendChild(heart);
             setTimeout(() => heart.remove(), 1200);
 
             if(totalTaps === 1000) {
-                document.getElementById('speechText').innerHTML = `"¡Caramba! ¡Alcanzamos la meta de 1000 Tap Taps! ¡Las energías están en su punto máximo!"`;
+                const speech = document.getElementById('speechText');
+                if(speech) speech.innerHTML = `"¡Caramba! ¡Alcanzamos la meta de 1000 Tap Taps! ¡Las energías están en su punto máximo!"`;
             }
         }
 
@@ -457,26 +455,29 @@
             if (!yaSiguio) {
                 numSeguidores++;
                 yaSiguio = true;
-                btn.classList.add('followed');
-                text.innerText = "Siguiendo";
-                speechText.innerHTML = `"¡Muchas gracias por seguir la cuenta de Juan Caramba, mi pana! Que los astros te bendigan."`;
+                if(btn) btn.classList.add('followed');
+                if(text) text.innerText = "Siguiendo";
+                if(speechText) speechText.innerHTML = `"¡Muchas gracias por seguir la cuenta de Juan Caramba, mi pana! Que los astros te bendigan."`;
             } else {
                 numSeguidores--;
                 yaSiguio = false;
-                btn.classList.remove('followed');
-                text.innerText = "Seguir";
+                if(btn) btn.classList.remove('followed');
+                if(text) text.innerText = "Seguir";
             }
-            document.getElementById('followerCount').innerText = `Seguidores: ${(numSeguidores / 1000).toFixed(1)}K`;
+            const countDiv = document.getElementById('followerCount');
+            if(countDiv) countDiv.innerText = `Seguidores: ${(numSeguidores / 1000).toFixed(1)}K`;
         }
 
         function quieremeAccion(event) {
             event.stopPropagation();
-            document.getElementById('speechText').innerHTML = `"¡Gracias por ese cariño! Juan Caramba también te quiere, mi pana."`;
+            const speechText = document.getElementById('speechText');
+            if(speechText) speechText.innerHTML = `"¡Gracias por ese cariño! Juan Caramba también te quiere, mi pana."`;
         }
 
         function realizarTirada() {
             const container = document.getElementById('cardContainer');
             const speechText = document.getElementById('speechText');
+            if(!container || !speechText) return;
 
             const usuarioActual = colaUsuarios.shift();
             const nuevoUsuario = "Usuario_" + Math.floor(Math.random() * 900 + 100);
@@ -486,7 +487,6 @@
             container.innerHTML = '';
             speechText.innerHTML = `"Atención @${usuarioActual}... Juan Caramba está barajando las cartas..."`;
 
-            // Simulamos una tirada de 5 cartas para ver el diseño compacto y elegante
             for(let i = 0; i < 5; i++) {
                 const cardDiv = document.createElement('div');
                 cardDiv.className = 'card shuffling';
@@ -523,17 +523,20 @@
                 tiempoRestanteContrato--;
                 let m = Math.floor(tiempoRestanteContrato / 60);
                 let s = tiempoRestanteContrato % 60;
-                document.getElementById('timerDisplay').innerText = `${m < 10 ? '0'+m : m}:${s < 10 ? '0'+s : s}`;
+                const timerDisp = document.getElementById('timerDisplay');
+                if(timerDisp) timerDisp.innerText = `${m < 10 ? '0'+m : m}:${s < 10 ? '0'+s : s}`;
             } else {
                 tiempoRestanteContrato = 3600;
                 totalTaps = 0;
-                document.getElementById('tapCountDisplay').innerText = 0;
+                const tapDisp = document.getElementById('tapCountDisplay');
+                if(tapDisp) tapDisp.innerText = 0;
             }
         }, 1000);
 
         const listaRegalos = ["🌹 Rosa", "🤠 Sombrero", "💎 Diamante", "🦁 León", "🪙 Cofre"];
         setInterval(() => {
             const giftFeed = document.getElementById('giftFeed');
+            if(!giftFeed) return;
             const randomUser = nombresUsuarios[Math.floor(Math.random() * nombresUsuarios.length)];
             const randomGift = listaRegalos[Math.floor(Math.random() * listaRegalos.length)];
             giftFeed.innerHTML = `<div class="gift-item">${randomGift} @${randomUser}</div>` + giftFeed.innerHTML;
