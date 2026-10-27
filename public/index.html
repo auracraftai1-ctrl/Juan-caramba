@@ -38,12 +38,12 @@
         /* 1. BOTONES ESTILO TIKTOK (ARRIBA A LA IZQUIERDA) */
         .tiktok-actions-container {
             position: fixed;
-            top: 15px;
-            left: 15px;
+            top: 10px;
+            left: 10px;
             z-index: 100;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 5px;
             align-items: flex-start;
         }
 
@@ -51,15 +51,15 @@
             background: linear-gradient(135deg, #fe2c55, #ff4654);
             color: white;
             border: none;
-            padding: 6px 14px;
-            font-size: 13px;
+            padding: 5px 12px;
+            font-size: 12px;
             font-weight: bold;
-            border-radius: 20px;
+            border-radius: 18px;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(254, 44, 85, 0.5);
+            box-shadow: 0 3px 8px rgba(254, 44, 85, 0.5);
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
         }
         .follow-btn.followed {
             background: rgba(255, 255, 255, 0.25);
@@ -70,103 +70,102 @@
             background: linear-gradient(135deg, #ff007f, #e6005c);
             color: white;
             border: none;
-            padding: 5px 12px;
-            font-size: 12px;
+            padding: 4px 10px;
+            font-size: 11px;
             font-weight: bold;
-            border-radius: 18px;
+            border-radius: 15px;
             cursor: pointer;
-            box-shadow: 0 3px 8px rgba(255, 0, 127, 0.4);
+            box-shadow: 0 2px 6px rgba(255, 0, 127, 0.4);
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
         }
 
         .follower-count {
             color: #fff;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: bold;
             background: rgba(0, 0, 0, 0.7);
-            padding: 2px 6px;
-            border-radius: 8px;
+            padding: 2px 5px;
+            border-radius: 6px;
             border: 1px solid rgba(212, 175, 55, 0.4);
         }
 
-        /* CUADRO LLAMADO A LA ACCIÓN "SÍGUEME Y TAP TAP" */
+        /* LLAMADO A LA ACCIÓN */
         .call-to-action-box {
             position: fixed;
-            top: 125px;
-            left: 15px;
+            top: 110px;
+            left: 10px;
             z-index: 90;
-            background: rgba(0, 0, 0, 0.8);
-            border: 1.5px solid #d4af37;
-            border-radius: 8px;
-            padding: 6px 10px;
+            background: rgba(0, 0, 0, 0.75);
+            border: 1px solid #d4af37;
+            border-radius: 6px;
+            padding: 5px 8px;
             color: #fff;
-            max-width: 180px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.8);
+            max-width: 160px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.8);
         }
         .call-to-action-box p {
             margin: 0;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: bold;
             color: #ffdf73;
             text-align: center;
-            line-height: 1.2;
+            line-height: 1.1;
         }
 
         /* CONTADOR DE CONCURSO TAP TAPS */
         .contest-panel {
             position: fixed;
-            top: 15px;
+            top: 10px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 100;
-            background: rgba(0, 0, 0, 0.85);
-            border: 2px solid #fe2c55;
-            border-radius: 10px;
-            padding: 5px 14px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1.5px solid #fe2c55;
+            border-radius: 8px;
+            padding: 4px 10px;
             color: #fff;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(254, 44, 85, 0.5);
+            box-shadow: 0 3px 10px rgba(254, 44, 85, 0.4);
         }
         .contest-title {
-            font-size: 10px;
+            font-size: 9px;
             color: #d4af37;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 1px;
         }
         .contest-stats {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
             color: #fff;
         }
         .contest-timer {
-            font-size: 10px;
+            font-size: 9px;
             color: #ff4654;
         }
 
-        /* SALA DE ESPERA PEQUEÑA Y COMPACTA (ARRIBA A LA DERECHA) */
+        /* SALA DE ESPERA PEQUEÑA EN LA ESQUINA SUPERIOR DERECHA */
         .waiting-queue {
             position: fixed;
-            top: 15px;
-            right: 15px;
-            width: 210px;
+            top: 10px;
+            right: 10px;
+            width: 170px;
             background: rgba(0, 0, 0, 0.85);
-            border: 2px solid #d4af37;
-            border-radius: 8px;
-            padding: 8px;
+            border: 1.5px solid #d4af37;
+            border-radius: 6px;
+            padding: 5px;
             color: #fff;
             z-index: 100;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.8);
         }
         .waiting-queue h4 {
-            margin: 0 0 5px 0;
+            margin: 0 0 3px 0;
             color: #d4af37;
-            font-size: 11px;
+            font-size: 10px;
             text-align: center;
             border-bottom: 1px solid #d4af37;
-            padding-bottom: 3px;
+            padding-bottom: 2px;
             text-transform: uppercase;
         }
         .queue-list {
@@ -176,12 +175,12 @@
             display: flex;
             flex-direction: column;
             gap: 2px;
-            max-height: 180px;
+            max-height: 110px;
             overflow: hidden;
         }
         .queue-item {
-            font-size: 10px;
-            padding: 3px 5px;
+            font-size: 9px;
+            padding: 2px 4px;
             background: rgba(255, 255, 255, 0.08);
             border-radius: 3px;
             display: flex;
@@ -195,134 +194,147 @@
             color: #ffdf73;
         }
 
-        /* CUADRO DE REGALOS COMPACTO */
+        /* CUADRO DE REGALOS COMPACTO DEBAJO DE LA SALA DE ESPERA */
         .gifts-panel {
             position: fixed;
-            top: 215px;
-            right: 15px;
-            width: 210px;
+            top: 145px;
+            right: 10px;
+            width: 170px;
             background: rgba(0, 0, 0, 0.8);
-            border: 1.5px solid #fe2c55;
-            border-radius: 8px;
-            padding: 6px;
+            border: 1px solid #fe2c55;
+            border-radius: 6px;
+            padding: 5px;
             color: #fff;
             z-index: 90;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.7);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.7);
         }
         .gifts-panel h5 {
-            margin: 0 0 3px 0;
+            margin: 0 0 2px 0;
             color: #fe2c55;
-            font-size: 10px;
+            font-size: 9px;
             text-align: center;
             text-transform: uppercase;
         }
         .gift-feed {
-            font-size: 9px;
+            font-size: 8px;
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 2px;
+            max-height: 80px;
+            overflow: hidden;
         }
         .gift-item {
             background: rgba(254, 44, 85, 0.15);
-            padding: 3px 5px;
-            border-radius: 3px;
+            padding: 2px 4px;
+            border-radius: 2px;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
         }
 
-        /* CARTAS AJUSTADAS PARA NO TAPAR A JUAN CARAMBA */
+        /* -------------------------------------------------------------
+           CARTAS MÁS PEQUEÑAS (LISTAS PARA TIRADAS DE HASTA 10 CARTAS)
+        ------------------------------------------------------------- */
         .tarot-slot {
             position: absolute;
-            bottom: 22%;
+            bottom: 12%;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            max-width: 90vw;
             z-index: 2;
         }
         .card {
-            width: 85px;
-            height: 125px;
+            width: 55px;
+            height: 85px;
             background: #1a1a1a;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.9);
-            border: 2px solid #d4af37;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.9);
+            border: 1.5px solid #d4af37;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
             text-align: center;
-            padding: 4px;
+            padding: 2px;
             font-weight: bold;
-            font-size: 10px;
+            font-size: 7px;
             color: #fff;
             overflow: hidden;
-            transition: transform 0.5s;
+            transition: transform 0.3s;
         }
         .card img {
             width: 100%;
-            height: 95px;
+            height: 65px;
             object-fit: cover;
-            border-radius: 5px;
+            border-radius: 3px;
             border: 1px solid #d4af37;
         }
         .card span {
-            font-size: 9px;
+            font-size: 6px;
             color: #d4af37;
-            margin-top: 2px;
+            margin-top: 1px;
             text-transform: uppercase;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
         }
 
         .shuffling {
-            animation: shuffleCard 0.5s infinite alternate ease-in-out;
+            animation: shuffleCard 0.4s infinite alternate ease-in-out;
             filter: brightness(0.7);
         }
         @keyframes shuffleCard {
             0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(4deg); }
-            100% { transform: translateY(8px) rotate(-4deg); }
+            50% { transform: translateY(-6px) rotate(3deg); }
+            100% { transform: translateY(5px) rotate(-3deg); }
         }
 
-        /* DIÁLOGO DE JUAN CARAMBA */
-        .speech-box {
+        /* -------------------------------------------------------------
+           ESCRITURA DE LA LECTURA FLOTANTE SIN CUADRO INFERIOR
+        ------------------------------------------------------------- */
+        .speech-floating {
             position: absolute;
-            bottom: 12px;
+            bottom: 3%;
             left: 50%;
             transform: translateX(-50%);
-            width: 75%;
-            max-width: 650px;
-            background: rgba(0, 0, 0, 0.88);
-            border: 2px solid #d4af37;
-            border-radius: 10px;
-            padding: 8px 12px;
-            color: #f3f3f3;
+            width: 90%;
+            max-width: 800px;
             text-align: center;
-            z-index: 3;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.9);
+            z-index: 5;
+            pointer-events: none;
         }
-        .speech-box h3 {
+        .speech-floating h3 {
             margin: 0 0 2px 0;
             color: #d4af37;
-            font-size: 14px;
-        }
-        .speech-box p {
-            margin: 0;
             font-size: 13px;
+            text-shadow: 2px 2px 6px #000, 0 0 10px rgba(212, 175, 55, 0.8);
+            letter-spacing: 0.5px;
+        }
+        .speech-floating p {
+            margin: 0;
+            font-size: 12px;
+            font-weight: bold;
+            color: #fff;
             line-height: 1.2;
+            text-shadow: 2px 2px 6px #000, 0 0 8px rgba(0, 0, 0, 0.9);
         }
 
         /* ANIMACIÓN DE TAP TAPS EN PANTALLA */
         .tap-heart {
             position: absolute;
-            font-size: 26px;
+            font-size: 24px;
             animation: floatUpHeart 1.2s ease-out forwards;
             pointer-events: none;
             z-index: 200;
         }
         @keyframes floatUpHeart {
             0% { transform: translateY(0) scale(0.6); opacity: 1; }
-            100% { transform: translateY(-120px) scale(1.4); opacity: 0; }
+            100% { transform: translateY(-110px) scale(1.3); opacity: 0; }
         }
     </style>
 </head>
@@ -355,7 +367,7 @@
             <div class="contest-timer">Próximo en: <span id="timerDisplay">59:59</span></div>
         </div>
 
-        <!-- SALA DE ESPERA PEQUEÑA -->
+        <!-- SALA DE ESPERA SUPERIOR DERECHA (COMPACTA) -->
         <div class="waiting-queue">
             <h4>Sala de Espera</h4>
             <ul class="queue-list" id="queueList"></ul>
@@ -365,16 +377,16 @@
         <div class="gifts-panel">
             <h5>🎁 Regalos Recientes</h5>
             <div class="gift-feed" id="giftFeed">
-                <div class="gift-item">🌹 @Mariana_92 envió Rosa</div>
-                <div class="gift-item">🤠 @CarlosVe envió Sombrero</div>
+                <div class="gift-item">🌹 @Mariana_92 Rosa</div>
+                <div class="gift-item">🤠 @CarlosVe Sombrero</div>
             </div>
         </div>
 
-        <!-- CARTAS -->
+        <!-- CONTENEDOR DE CARTAS (SOPORTA MÚLTIPLES CARTAS) -->
         <div class="tarot-slot" id="cardContainer"></div>
 
-        <!-- DIÁLOGO -->
-        <div class="speech-box">
+        <!-- TEXTO FLOTANTE DE LA LECTURA (SIN CUADRO NEGRO) -->
+        <div class="speech-floating">
             <h3>Juan Caramba</h3>
             <p id="speechText">"Saludos, alma errante... ¡Lleguemos a los 1000 Tap Taps para iniciar las lecturas místicas!"</p>
         </div>
@@ -474,7 +486,8 @@
             container.innerHTML = '';
             speechText.innerHTML = `"Atención @${usuarioActual}... Juan Caramba está barajando las cartas..."`;
 
-            for(let i = 0; i < 3; i++) {
+            // Simulamos una tirada de 5 cartas para ver el diseño compacto y elegante
+            for(let i = 0; i < 5; i++) {
                 const cardDiv = document.createElement('div');
                 cardDiv.className = 'card shuffling';
                 cardDiv.innerHTML = `<img src="juan-caramba-bg.jpg" alt="Barajando"><span>Barajando</span>`;
@@ -484,7 +497,7 @@
             setTimeout(() => {
                 container.innerHTML = '';
                 const seleccionadas = [];
-                while(seleccionadas.length < 3) {
+                while(seleccionadas.length < 5) {
                     let carta = baraja[Math.floor(Math.random() * baraja.length)];
                     if(!seleccionadas.includes(carta)) seleccionadas.push(carta);
                 }
@@ -498,10 +511,10 @@
                             <span>${carta.nombre}</span>
                         `;
                         container.appendChild(cardDiv);
-                    }, index * 300);
+                    }, index * 250);
                 });
 
-                speechText.innerHTML = `"${usuarioActual}, tus cartas son: ${seleccionadas[0].nombre}, ${seleccionadas[1].nombre} y ${seleccionadas[2].nombre}. ¡Escucha lo que revela el destino!"`;
+                speechText.innerHTML = `"${usuarioActual}, tu tirada revela grandes misterios. ¡Escucha el destino!"`;
             }, 3000);
         }
 
@@ -523,11 +536,11 @@
             const giftFeed = document.getElementById('giftFeed');
             const randomUser = nombresUsuarios[Math.floor(Math.random() * nombresUsuarios.length)];
             const randomGift = listaRegalos[Math.floor(Math.random() * listaRegalos.length)];
-            giftFeed.innerHTML = `<div class="gift-item">${randomGift} de @${randomUser}</div>` + giftFeed.innerHTML;
+            giftFeed.innerHTML = `<div class="gift-item">${randomGift} @${randomUser}</div>` + giftFeed.innerHTML;
         }, 15000);
 
         inicializarCola();
-        setInterval(realizarTirada, 15000);
+        setInterval(realizarTirada, 18000);
         setTimeout(realizarTirada, 2000);
     </script>
 </body>
