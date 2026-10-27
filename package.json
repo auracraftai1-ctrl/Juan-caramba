@@ -1,4 +1,16 @@
-{
+{{
+  "name": "juan-caramba",
+  "version": "1.0.0",
+  "description": "Tarot 24/7 Juan Caramba",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
+
   "name": "juan-caramba-tiktok-bot",
   "version": "1.0.0",
   "description": "Bot de conexion para TikTok Live y Juan Caramba AI",
