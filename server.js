@@ -1,3 +1,14 @@
+const express = require('express');
+const path = require('path');
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Servir archivos estáticos (donde tienes tu imagen y diseño)
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.listen(PORT, () => {
+  console.log(`Juan Caramba corriendo en el puerto ${PORT}`);
+});
 import express from 'express';
 import axios from 'axios';
 import path from 'path';
