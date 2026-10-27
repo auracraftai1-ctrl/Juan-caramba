@@ -177,18 +177,18 @@
             color: #ff4654;
         }
 
-        /* GUÍA DE REGALOS */
+        /* GUÍA DE REGALOS (UBICADA ARRIBA Y SIN ESTORBAR) */
         .vip-gifts-guide {
             position: fixed;
-            bottom: 45px;
+            bottom: 115px;
             left: 10px;
             z-index: 90;
-            background: rgba(0, 0, 0, 0.55);
+            background: rgba(0, 0, 0, 0.65);
             border: 1px solid rgba(212, 175, 55, 0.6);
             border-radius: 6px;
             padding: 4px 6px;
             color: #fff;
-            max-width: 170px;
+            max-width: 160px;
             backdrop-filter: blur(3px);
         }
         .vip-gifts-guide h6 {
@@ -358,42 +358,42 @@
             font-size: 30px;
         }
 
-        /* CONTENEDOR DE CARTAS EN LA MESA */
+        /* --- CONTENEDOR DE CARTAS CORREGIDO Y EN SU POSICIÓN EXACTA --- */
         .tarot-slot {
             position: absolute;
-            bottom: 15vh;
+            bottom: 24vh; /* Subidas para que queden perfectas sobre la mesa */
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             z-index: 10;
             width: 100%;
             padding: 0 10px;
         }
         .card {
-            width: 65px;
-            height: 95px;
+            width: 48px;  /* Tamaño pequeño y original */
+            height: 72px; /* Tamaño pequeño y original */
             background: #1a1a1a;
-            border-radius: 5px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.9);
-            border: 2px solid #d4af37;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.9);
+            border: 1.5px solid #d4af37;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
             text-align: center;
-            padding: 3px;
+            padding: 2px;
             font-weight: bold;
             color: #fff;
             overflow: hidden;
         }
         .card img {
             width: 100%;
-            height: 68px;
+            height: 52px;
             object-fit: cover;
-            border-radius: 3px;
+            border-radius: 2px;
             border: 1px solid #d4af37;
         }
         .card.reversed img {
@@ -401,9 +401,9 @@
             filter: brightness(0.9);
         }
         .card span {
-            font-size: 6px;
+            font-size: 5px;
             color: #ffdf73;
-            margin-top: 2px;
+            margin-top: 1px;
             text-transform: uppercase;
             white-space: nowrap;
             overflow: hidden;
@@ -412,15 +412,15 @@
         }
         .card-back-design {
             width: 100%;
-            height: 68px;
+            height: 52px;
             background: radial-gradient(circle, #d4af37 20%, #1a1a1a 80%);
             border: 1px dashed #d4af37;
-            border-radius: 3px;
+            border-radius: 2px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #ffdf73;
-            font-size: 16px;
+            font-size: 12px;
         }
 
         /* ANIMACIÓN DE BARAJA */
@@ -430,8 +430,8 @@
         }
         @keyframes shuffleCard {
             0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(4deg); }
-            100% { transform: translateY(8px) rotate(-4deg); }
+            50% { transform: translateY(-6px) rotate(3deg); }
+            100% { transform: translateY(6px) rotate(-3deg); }
         }
 
         /* TEXTO FLOTANTE DE LECTURA */
@@ -516,7 +516,7 @@
             <div class="contest-timer">Reinicia en: <span id="timerDisplay">59:59</span></div>
         </div>
 
-        <!-- GUÍA DE REGALOS -->
+        <!-- GUÍA DE REGALOS (REUBICADA ARRIBA PARA NO CHOCAR) -->
         <div class="vip-gifts-guide">
             <h6>🔮 Regalos & Lecturas</h6>
             <ul>
@@ -554,7 +554,7 @@
             <div style="font-size: 9px; color: #fff;" id="giftPopupText">¡Envió un regalo VIP!</div>
         </div>
 
-        <!-- CARTAS EN MESA -->
+        <!-- CARTAS EN MESA (TAMAÑO PEQUEÑO Y BIEN UBICADAS) -->
         <div class="tarot-slot" id="cardContainer"></div>
 
         <!-- LECTURA -->
@@ -786,7 +786,7 @@
             container.innerHTML = '';
             speechText.innerHTML = `"Atención @${usuarioActual}... Don Juan Caramba está barajando las cartas..."`;
 
-            // CARTAS SALTANDO (BARAJEO)
+            // CARTAS SALTANDO (BARAJEO) EN TAMAÑO PEQUEÑO
             for(let i = 0; i < 4; i++) {
                 const cardDiv = document.createElement('div');
                 cardDiv.className = 'card shuffling';
@@ -808,7 +808,6 @@
                         const cardDiv = document.createElement('div');
                         cardDiv.className = `card ${esInvertida ? 'reversed' : ''}`;
                         
-                        // RUTA LIMPIA CON RESGUARDO LOCAL SEGURO
                         cardDiv.innerHTML = `
                             <img src="${carta.file}" alt="${carta.name}" onerror="this.onerror=null; this.src='${carta.file}';">
                             <span>${carta.name} ${esInvertida ? '(Inv.)' : ''}</span>
