@@ -415,7 +415,7 @@
         }
         .card span {
             font-size: 5px;
-            color: #d4af37;
+            color: #ffdf73;
             margin-top: 1px;
             text-transform: uppercase;
             white-space: nowrap;
@@ -564,20 +564,42 @@
         const nombresUsuarios = [
             "Mariana_92", "CarlosVe", "Alejandro_X", "Sofia_Tarot", "Daniel_88",
             "Valeria_Moon", "JoseGoyo", "CarmenRosa", "Luis_Mistic", "Gabriela_St",
-            "Franklin_V", "Oriana_Sol", "PedroPerez", "KeniaFan", "Rosa_Mystica"
+            "Franklin_V", "Oriana_Sol", "PedroPerez", "KeniaFan", "Rosa_Mystica",
+            "Yajaira_77", "Ernesto_Tarot", "Marcos_Perez", "Astral_Ana", "Milagros_V"
         ];
 
-        // ENLACES WEB DIRECTOS Y SEGUROS PARA CADA CARTA (¡CARGARÁN AL INSTANTE!)
+        // BARAJA COMPLETA EN ESPAÑOL (ARCANOS MAYORES + MENORES AMPLIADOS)
         const baraja = [
-            { nombre: "Tres de Copas", img: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "El Loco", img: "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "El Mago", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "La Sacerdotisa", img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "La Emperatriz", img: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "La Rueda", img: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "El Ermitaño", img: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "La Muerte", img: "https://images.unsplash.com/photo-1514539079130-25950c84af65?q=80&w=400&auto=format&fit=crop" },
-            { nombre: "El Sol", img: "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?q=80&w=400&auto=format&fit=crop" }
+            { nombre: "El Loco", img: "https://upload.wikimedia.org/wikipedia/commons/9/90/Rider-Waite_Tarot_00_Fool.jpg" },
+            { nombre: "El Mago", img: "https://upload.wikimedia.org/wikipedia/commons/d/de/Rider-Waite_Tarot_01_Magician.jpg" },
+            { nombre: "La Sacerdotisa", img: "https://upload.wikimedia.org/wikipedia/commons/8/88/Rider-Waite_Tarot_02_High_Priestess.jpg" },
+            { nombre: "La Emperatriz", img: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Rider-Waite_Tarot_03_Empress.jpg" },
+            { nombre: "El Emperador", img: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Rider-Waite_Tarot_04_Emperor.jpg" },
+            { nombre: "El Hierofante", img: "https://upload.wikimedia.org/wikipedia/commons/8/8d/Rider-Waite_Tarot_05_Hierophant.jpg" },
+            { nombre: "Los Enamorados", img: "https://upload.wikimedia.org/wikipedia/commons/d/db/Rider-Waite_Tarot_06_Lovers.jpg" },
+            { nombre: "El Carro", img: "https://upload.wikimedia.org/wikipedia/commons/9/9b/Rider-Waite_Tarot_07_Chariot.jpg" },
+            { nombre: "La Fuerza", img: "https://upload.wikimedia.org/wikipedia/commons/f/f5/Rider-Waite_Tarot_08_Strength.jpg" },
+            { nombre: "El Ermitaño", img: "https://upload.wikimedia.org/wikipedia/commons/4/4d/Rider-Waite_Tarot_09_Hermit.jpg" },
+            { nombre: "La Rueda de la Fortuna", img: "https://upload.wikimedia.org/wikipedia/commons/3/3c/Rider-Waite_Tarot_10_Wheel_of_Fortune.jpg" },
+            { nombre: "La Justicia", img: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Rider-Waite_Tarot_11_Justice.jpg" },
+            { nombre: "El Colgado", img: "https://upload.wikimedia.org/wikipedia/commons/2/2b/Rider-Waite_Tarot_12_Hanged_Man.jpg" },
+            { nombre: "La Muerte", img: "https://upload.wikimedia.org/wikipedia/commons/d/d7/Rider-Waite_Tarot_13_Death.jpg" },
+            { nombre: "La Templanza", img: "https://upload.wikimedia.org/wikipedia/commons/f/f8/Rider-Waite_Tarot_14_Temperance.jpg" },
+            { nombre: "El Diablo", img: "https://upload.wikimedia.org/wikipedia/commons/5/55/Rider-Waite_Tarot_15_Devil.jpg" },
+            { nombre: "La Torre", img: "https://upload.wikimedia.org/wikipedia/commons/5/53/Rider-Waite_Tarot_16_Tower.jpg" },
+            { nombre: "La Estrella", img: "https://upload.wikimedia.org/wikipedia/commons/d/db/Rider-Waite_Tarot_17_Star.jpg" },
+            { nombre: "La Luna", img: "https://upload.wikimedia.org/wikipedia/commons/7/7f/Rider-Waite_Tarot_18_Moon.jpg" },
+            { nombre: "El Sol", img: "https://upload.wikimedia.org/wikipedia/commons/1/17/Rider-Waite_Tarot_19_Sun.jpg" },
+            { nombre: "El Juicio", img: "https://upload.wikimedia.org/wikipedia/commons/d/dd/Rider-Waite_Tarot_20_Judgement.jpg" },
+            { nombre: "El Mundo", img: "https://upload.wikimedia.org/wikipedia/commons/f/ff/Rider-Waite_Tarot_21_World.jpg" },
+            { nombre: "As de Copas", img: "https://upload.wikimedia.org/wikipedia/commons/3/36/Cups01.jpg" },
+            { nombre: "Dos de Copas", img: "https://upload.wikimedia.org/wikipedia/commons/f/f8/Cups02.jpg" },
+            { nombre: "Tres de Copas", img: "https://upload.wikimedia.org/wikipedia/commons/2/2a/Cups03.jpg" },
+            { nombre: "Cuatro de Copas", img: "https://upload.wikimedia.org/wikipedia/commons/3/3b/Cups04.jpg" },
+            { nombre: "Cinco de Copas", img: "https://upload.wikimedia.org/wikipedia/commons/d/d7/Cups05.jpg" },
+            { nombre: "As de Oros", img: "https://upload.wikimedia.org/wikipedia/commons/f/fd/Pents01.jpg" },
+            { nombre: "As de Espadas", img: "https://upload.wikimedia.org/wikipedia/commons/1/1a/Swords01.jpg" },
+            { nombre: "As de Bastos", img: "https://upload.wikimedia.org/wikipedia/commons/1/11/Wands01.jpg" }
         ];
 
         let totalTaps = 0;
@@ -667,7 +689,7 @@
                 yaSiguio = true;
                 if(btn) btn.classList.add('followed');
                 if(text) text.innerText = "Siguiendo";
-                if(speechText) speechText.innerHTML = `"¡Muchas gracias por seguir la cuenta de Don Juan Caramba, mi pana! Que los astros te bendigan."`;
+                if(speechText) speechText.innerHTML = `"¡Muchas gracias por seguir la cuenta de Don Juan Caramba, mi pana!"`;
             } else {
                 numSeguidores--;
                 yaSiguio = false;
@@ -681,7 +703,7 @@
         function quieremeAccion(event) {
             event.stopPropagation();
             const speechText = document.getElementById('speechText');
-            if(speechText) speechText.innerHTML = `"¡Gracias por ese cariño! Don Juan Caramba también te respeta y bendice, mi pana."`;
+            if(speechText) speechText.innerHTML = `"¡Gracias por ese cariño, mi pana!"`;
         }
 
         function mostrarAnimacionRegalo(usuario, regaloIcono, regaloNombre) {
@@ -696,9 +718,7 @@
                 text.innerText = `¡Envió ${regaloNombre}!`;
 
                 popup.classList.add('show');
-                setTimeout(() => {
-                    popup.classList.remove('show');
-                }, 2500);
+                setTimeout(() => { popup.classList.remove('show'); }, 2500);
             }
         }
 
@@ -713,12 +733,12 @@
             actualizarVistaCola();
 
             container.innerHTML = '';
-            speechText.innerHTML = `"Atención @${usuarioActual}... Don Juan Caramba está consultando el oráculo..."`;
+            speechText.innerHTML = `"Atención @${usuarioActual}... Don Juan Caramba está barajando con energía..."`;
 
             for(let i = 0; i < 4; i++) {
                 const cardDiv = document.createElement('div');
                 cardDiv.className = 'card shuffling';
-                cardDiv.innerHTML = `<img src="https://images.unsplash.com/photo-1514539079130-25950c84af65?q=80&w=400&auto=format&fit=crop" alt="Barajando"><span>Barajando</span>`;
+                cardDiv.innerHTML = `<img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Rider-Waite_Tarot_00_Fool.jpg" alt="Barajando"><span>Barajando</span>`;
                 container.appendChild(cardDiv);
             }
 
@@ -734,7 +754,6 @@
                     setTimeout(() => {
                         const esInvertida = Math.random() < 0.5;
                         const cardDiv = document.createElement('div');
-                        
                         cardDiv.className = `card ${esInvertida ? 'reversed' : ''}`;
                         
                         cardDiv.innerHTML = `
@@ -745,7 +764,7 @@
                     }, index * 250);
                 });
 
-                speechText.innerHTML = `"${usuarioActual}, aquí está tu verdad. Las cartas hablan con seriedad."`;
+                speechText.innerHTML = `"${usuarioActual}, tu lectura con el mazo Rider-Waite está lista. ¡Atento al consejo!"`;
             }, 3000);
         }
 
@@ -780,7 +799,6 @@
             const randomGift = listaRegalos[Math.floor(Math.random() * listaRegalos.length)];
             
             giftFeed.innerHTML = `<div class="gift-item">${randomGift.icono} @${randomUser}</div>` + giftFeed.innerHTML;
-            
             mostrarAnimacionRegalo(randomUser, randomGift.icono, randomGift.nombre);
         }, 12000);
 
