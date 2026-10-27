@@ -423,6 +423,17 @@
             font-size: 16px;
         }
 
+        /* ANIMACIÓN DE BARAJA */
+        .shuffling {
+            animation: shuffleCard 0.4s infinite alternate ease-in-out;
+            filter: brightness(0.85);
+        }
+        @keyframes shuffleCard {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(4deg); }
+            100% { transform: translateY(8px) rotate(-4deg); }
+        }
+
         /* TEXTO FLOTANTE DE LECTURA */
         .speech-floating {
             position: absolute;
@@ -775,6 +786,7 @@
             container.innerHTML = '';
             speechText.innerHTML = `"Atención @${usuarioActual}... Don Juan Caramba está barajando las cartas..."`;
 
+            // CARTAS SALTANDO (BARAJEO)
             for(let i = 0; i < 4; i++) {
                 const cardDiv = document.createElement('div');
                 cardDiv.className = 'card shuffling';
@@ -796,16 +808,16 @@
                         const cardDiv = document.createElement('div');
                         cardDiv.className = `card ${esInvertida ? 'reversed' : ''}`;
                         
-                        // CARGA SEGURA DE IMAGEN CON RESPALDO
+                        // RUTA LIMPIA CON RESGUARDO LOCAL SEGURO
                         cardDiv.innerHTML = `
-                            <img src="${carta.file}" alt="${carta.name}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1514539079130-25950c84af65?w=200'">
+                            <img src="${carta.file}" alt="${carta.name}" onerror="this.onerror=null; this.src='${carta.file}';">
                             <span>${carta.name} ${esInvertida ? '(Inv.)' : ''}</span>
                         `;
                         container.appendChild(cardDiv);
                     }, index * 250);
                 });
 
-                speechText.innerHTML = `"${usuarioActual}, aquí tienes tu lectura con tus cartas locales. ¡Atento al consejo!"`;
+                speechText.innerHTML = `"${usuarioActual}, aquí tienes tu lectura. ¡Atento al consejo!"`;
             }, 3000);
         }
 
