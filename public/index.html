@@ -25,6 +25,8 @@
             height: 100vh;
             overflow: hidden;
         }
+
+        /* IMAGEN DE FONDO CON DINÁMICA ANTI-BAJO (Efecto respiración / pulso místico) */
         .bg-image {
             width: 100%;
             height: 100%;
@@ -33,6 +35,27 @@
             top: 0;
             left: 0;
             z-index: 1;
+            animation: backgroundPulse 8s infinite alternate ease-in-out;
+        }
+        @keyframes backgroundPulse {
+            0% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.02); filter: brightness(1.05); }
+            100% { transform: scale(1); filter: brightness(1); }
+        }
+
+        /* PARTÍCULAS MÍSTICAS FLOTANTES (Anti-baneo por imagen estática) */
+        .mystic-particle {
+            position: absolute;
+            background: rgba(212, 175, 55, 0.7);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2;
+            animation: floatParticle 6s infinite linear;
+        }
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) scale(0.2); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
         /* 1. BOTONES ESTILO TIKTOK (ARRIBA A LA IZQUIERDA) */
@@ -114,7 +137,7 @@
             line-height: 1.1;
         }
 
-        /* CONTADOR DE CONCURSO TAP TAPS */
+        /* CONTADOR DE CONCURSO TAP TAPS (CENTRO) */
         .contest-panel {
             position: fixed;
             top: 10px;
@@ -145,24 +168,24 @@
             color: #ff4654;
         }
 
-        /* SALA DE ESPERA TRANSPARENTE (SIN FONDO NEGRO SÓLIDO) */
+        /* SALA DE ESPERA PARA 10 USUARIOS (MÁS ANGOSTA Y TRANSPARENTE A LA DERECHA) */
         .waiting-queue {
             position: fixed;
             top: 10px;
             right: 10px;
-            width: 170px;
-            background: transparent; /* Sin fondo negro */
+            width: 135px; /* Más angosta para dejar ver el centro y contador */
+            background: transparent;
             border: 1.5px solid rgba(212, 175, 55, 0.7);
             border-radius: 6px;
-            padding: 5px;
+            padding: 4px;
             color: #fff;
             z-index: 100;
-            backdrop-filter: blur(2px); /* Ligero efecto cristal sin oscurecer */
+            backdrop-filter: blur(2px);
         }
         .waiting-queue h4 {
-            margin: 0 0 3px 0;
+            margin: 0 0 2px 0;
             color: #d4af37;
-            font-size: 10px;
+            font-size: 9px;
             text-align: center;
             border-bottom: 1px solid rgba(212, 175, 55, 0.5);
             padding-bottom: 2px;
@@ -176,21 +199,21 @@
             display: flex;
             flex-direction: column;
             gap: 2px;
-            max-height: 110px;
+            max-height: 155px; /* Altura para mostrar los 10 usuarios de forma compacta */
             overflow: hidden;
         }
         .queue-item {
-            font-size: 9px;
-            padding: 2px 4px;
-            background: rgba(0, 0, 0, 0.35); /* Fondo ultra sutil solo en cada línea */
-            border-radius: 3px;
+            font-size: 8px;
+            padding: 2px 3px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 2px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             text-shadow: 1px 1px 2px #000;
         }
         .queue-item.active {
-            background: rgba(212, 175, 55, 0.3);
+            background: rgba(212, 175, 55, 0.35);
             border: 1px solid #d4af37;
             font-weight: bold;
             color: #ffdf73;
@@ -199,13 +222,13 @@
         /* CUADRO DE REGALOS TRANSPARENTE DEBAJO DE LA SALA DE ESPERA */
         .gifts-panel {
             position: fixed;
-            top: 145px;
+            top: 180px;
             right: 10px;
-            width: 170px;
+            width: 135px;
             background: transparent;
             border: 1px solid rgba(254, 44, 85, 0.7);
             border-radius: 6px;
-            padding: 5px;
+            padding: 4px;
             color: #fff;
             z-index: 90;
             backdrop-filter: blur(2px);
@@ -213,26 +236,26 @@
         .gifts-panel h5 {
             margin: 0 0 2px 0;
             color: #fe2c55;
-            font-size: 9px;
+            font-size: 8px;
             text-align: center;
             text-transform: uppercase;
             text-shadow: 1px 1px 3px #000;
         }
         .gift-feed {
-            font-size: 8px;
+            font-size: 7.5px;
             display: flex;
             flex-direction: column;
             gap: 2px;
-            max-height: 80px;
+            max-height: 65px;
             overflow: hidden;
         }
         .gift-item {
-            background: rgba(0, 0, 0, 0.35);
-            padding: 2px 4px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 2px 3px;
             border-radius: 2px;
             display: flex;
             align-items: center;
-            gap: 3px;
+            gap: 2px;
             text-shadow: 1px 1px 2px #000;
         }
 
@@ -247,7 +270,7 @@
             justify-content: center;
             gap: 8px;
             max-width: 90vw;
-            z-index: 2;
+            z-index: 3;
         }
         .card {
             width: 55px;
@@ -296,7 +319,7 @@
             100% { transform: translateY(5px) rotate(-3deg); }
         }
 
-        /* ESCRITURA DE LA LECTURA FLOTANTE (SIN CUADRO) */
+        /* ESCRITURA DE LA LECTURA FLOTANTE */
         .speech-floating {
             position: absolute;
             bottom: 3%;
@@ -344,6 +367,11 @@
         <!-- Imagen de fondo de Juan Caramba -->
         <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image">
 
+        <!-- MÚSICA LLANERA INSTRUMENTAL DE FONDO (Volumen bajo al 30%) -->
+        <audio id="bgMusic" loop>
+            <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=venezuelan-harp-instrumental-111394.mp3" type="audio/mpeg">
+        </audio>
+
         <!-- ACCIONES TIKTOK -->
         <div class="tiktok-actions-container">
             <button class="follow-btn" id="followBtn" onclick="seguirAccion(event)">
@@ -367,15 +395,15 @@
             <div class="contest-timer">Próximo en: <span id="timerDisplay">59:59</span></div>
         </div>
 
-        <!-- SALA DE ESPERA TRANSPARENTE -->
+        <!-- SALA DE ESPERA (10 USUARIOS, ANGOSTA Y TRANSPARENTE) -->
         <div class="waiting-queue">
-            <h4>Sala de Espera</h4>
+            <h4>Sala de Espera (10)</h4>
             <ul class="queue-list" id="queueList"></ul>
         </div>
 
-        <!-- REGALOS RECIBIDOS TRANSPARENTE -->
+        <!-- REGALOS RECIBIDOS -->
         <div class="gifts-panel">
-            <h5>🎁 Regalos Recientes</h5>
+            <h5>🎁 Regalos</h5>
             <div class="gift-feed" id="giftFeed">
                 <div class="gift-item">🌹 @Mariana_92 Rosa</div>
                 <div class="gift-item">🤠 @CarlosVe Sombrero</div>
@@ -395,7 +423,8 @@
     <script>
         const nombresUsuarios = [
             "Mariana_92", "CarlosVe", "Alejandro_X", "Sofia_Tarot", "Daniel_88",
-            "Valeria_Moon", "JoseGoyo", "CarmenRosa", "Luis_Mistic", "Gabriela_St"
+            "Valeria_Moon", "JoseGoyo", "CarmenRosa", "Luis_Mistic", "Gabriela_St",
+            "Franklin_V", "Oriana_Sol", "PedroPerez", "KeniaFan", "Rosa_Mystica"
         ];
 
         const baraja = [
@@ -414,9 +443,30 @@
         let numSeguidores = 14820;
         let yaSiguio = false;
         let tiempoRestanteContrato = 3600;
+        let musicaActivada = false;
+
+        // Generar partículas místicas flotantes automáticas para evitar baneos de TikTok por imagen estática
+        function generarParticulas() {
+            const container = document.getElementById('mainContainer');
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.className = 'mystic-particle';
+                const size = Math.random() * 4 + 2 + 'px';
+                particle.style.width = size;
+                particle.style.height = size;
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                container.appendChild(particle);
+                setTimeout(() => particle.remove(), 6000);
+            }, 800);
+        }
 
         function inicializarCola() {
-            colaUsuarios = [...nombresUsuarios];
+            // Seleccionar 10 usuarios exactos para la cola
+            colaUsuarios = [];
+            for(let i = 0; i < 10; i++) {
+                colaUsuarios.push(nombresUsuarios[i % nombresUsuarios.length]);
+            }
             actualizarVistaCola();
         }
 
@@ -427,12 +477,22 @@
             colaUsuarios.forEach((usuario, index) => {
                 const li = document.createElement('li');
                 li.className = `queue-item ${index === 0 ? 'active' : ''}`;
-                li.innerHTML = `<span>${index + 1}. @${usuario}</span> <span>${index === 0 ? '🔮' : 'Espera'}</span>`;
+                li.innerHTML = `<span>${index + 1}. @${usuario}</span> <span>${index === 0 ? '🔮' : ''}</span>`;
                 queueList.appendChild(li);
             });
         }
 
         function registrarTapTap(event) {
+            // Activar música al primer toque del usuario (requisito de los navegadores)
+            if (!musicaActivada) {
+                const bgMusic = document.getElementById('bgMusic');
+                if(bgMusic) {
+                    bgMusic.volume = 0.3; // Volumen bajo al 30%
+                    bgMusic.play().catch(() => {});
+                    musicaActivada = true;
+                }
+            }
+
             totalTaps++;
             const tapDisplay = document.getElementById('tapCountDisplay');
             if(tapDisplay) tapDisplay.innerText = totalTaps;
@@ -485,7 +545,7 @@
             if(!container || !speechText) return;
 
             const usuarioActual = colaUsuarios.shift();
-            const nuevoUsuario = "Usuario_" + Math.floor(Math.random() * 900 + 100);
+            const nuevoUsuario = nombresUsuarios[Math.floor(Math.random() * nombresUsuarios.length)];
             colaUsuarios.push(nuevoUsuario);
             actualizarVistaCola();
 
@@ -547,7 +607,9 @@
             giftFeed.innerHTML = `<div class="gift-item">${randomGift} @${randomUser}</div>` + giftFeed.innerHTML;
         }, 15000);
 
+        // Iniciar automatizaciones
         inicializarCola();
+        generarParticulas();
         setInterval(realizarTirada, 18000);
         setTimeout(realizarTirada, 2000);
     </script>
