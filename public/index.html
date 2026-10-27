@@ -177,7 +177,7 @@
             color: #ff4654;
         }
 
-        /* GUÍA DE REGALOS (Z-INDEX BAJO PARA QUE LAS CARTAS PASEN POR ENCIMA) */
+        /* GUÍA DE REGALOS */
         .vip-gifts-guide {
             position: fixed;
             bottom: 30vh;
@@ -358,7 +358,7 @@
             font-size: 30px;
         }
 
-        /* --- CONTENEDOR DE CARTAS BLINDADO (Z-INDEX 150 AL FRENTE DE TODO) --- */
+        /* --- CONTENEDOR DE CARTAS AL FRENTE ABSOLUTO --- */
         .tarot-slot {
             position: absolute;
             bottom: 14vh;
@@ -411,17 +411,13 @@
             text-overflow: ellipsis;
             width: 100%;
         }
-        .card-back-design {
+        /* REVERSO DE LAS CARTAS CON TU IMAGEN DE AURACRAFT AI */
+        .card-back-img {
             width: 100%;
             height: 62px;
-            background: radial-gradient(circle, #d4af37 20%, #1a1a1a 80%);
-            border: 1px dashed #d4af37;
+            object-fit: cover;
             border-radius: 2px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffdf73;
-            font-size: 14px;
+            border: 1px dashed #d4af37;
         }
 
         /* ANIMACIÓN DE BARAJA */
@@ -555,7 +551,7 @@
             <div style="font-size: 9px; color: #fff;" id="giftPopupText">¡Envió un regalo VIP!</div>
         </div>
 
-        <!-- CARTAS EN MESA (AL FRENTE ABSOLUTO) -->
+        <!-- CARTAS EN MESA -->
         <div class="tarot-slot" id="cardContainer"></div>
 
         <!-- LECTURA -->
@@ -787,10 +783,11 @@
             container.innerHTML = '';
             speechText.innerHTML = `"Atención @${usuarioActual}... Don Juan Caramba está barajando las cartas..."`;
 
+            // BARAJEO USANDO TU IMAGEN NUEVA DE REVERSO
             for(let i = 0; i < 4; i++) {
                 const cardDiv = document.createElement('div');
                 cardDiv.className = 'card shuffling';
-                cardDiv.innerHTML = `<div class="card-back-design">🔮</div><span>Barajando</span>`;
+                cardDiv.innerHTML = `<img src="429524.webp" class="card-back-img" alt="Reverso"><span>Barajando</span>`;
                 container.appendChild(cardDiv);
             }
 
@@ -809,7 +806,7 @@
                         cardDiv.className = `card`;
                         
                         cardDiv.innerHTML = `
-                            <img class="${esInvertida ? 'reversed' : ''}" src="${carta.file}" alt="${carta.name}" onerror="this.onerror=null; this.src='${carta.file}';">
+                            <img class="${esInvertida ? 'reversed' : ''}" src="${carta.file}" alt="${carta.name}" onerror="this.onerror=null; this.src='429524.webp';">
                             <span>${carta.name} ${esInvertida ? '(Inv.)' : ''}</span>
                         `;
                         container.appendChild(cardDiv);
