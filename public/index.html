@@ -114,10 +114,43 @@
             border: 1px solid rgba(212, 175, 55, 0.3);
         }
 
+        /* BARRA DE ENERGÍA DE TAP TAPS */
+        .energy-bar-container {
+            position: fixed;
+            top: 90px;
+            left: 10px;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.65);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            padding: 3px 6px;
+            border-radius: 6px;
+            width: 140px;
+            backdrop-filter: blur(2px);
+        }
+        .energy-title {
+            font-size: 7px;
+            color: #ffdf73;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 2px;
+        }
+        .energy-outer {
+            width: 100%;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .energy-inner {
+            height: 100%;
+            background: linear-gradient(90deg, #fe2c55, #ffdf73);
+            transition: width 0.3s ease;
+        }
+
         /* CONTADOR DE CONCURSO TAP TAPS */
         .contest-panel {
             position: fixed;
-            top: 90px;
+            top: 125px;
             left: 10px;
             z-index: 100;
             background: rgba(0, 0, 0, 0.65);
@@ -150,14 +183,14 @@
             bottom: 12px;
             left: 10px;
             z-index: 90;
-            background: rgba(0, 0, 0, 0.45); /* Muy transparente / translúcido */
+            background: rgba(0, 0, 0, 0.45);
             border: 1px solid rgba(212, 175, 55, 0.6);
             border-radius: 6px;
             padding: 4px 6px;
             color: #fff;
             max-width: 170px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-            backdrop-filter: blur(3px); /* Efecto cristal sutil */
+            backdrop-filter: blur(3px);
         }
         .vip-gifts-guide h6 {
             margin: 0 0 2px 0;
@@ -175,7 +208,7 @@
             display: flex;
             flex-direction: column;
             gap: 2px;
-            font-size: 6.5px; /* Letra ultra compacta y limpia */
+            font-size: 6.5px;
         }
         .vip-gifts-guide li {
             line-height: 1.1;
@@ -183,6 +216,35 @@
         }
         .vip-gifts-guide li strong {
             color: #ffdf73;
+        }
+
+        /* VELA ANIMADA (MOVIMIENTO PERMANENTE DE PÍXELES ANTI-BANEO) */
+        .candle-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 18px;
+            height: 55px;
+            background: linear-gradient(#d4af37, #8b5a2b);
+            border-radius: 4px;
+            z-index: 80;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+        .flame {
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 20px;
+            background: #ff9d00;
+            border-radius: 50% 50% 20% 20%;
+            box-shadow: 0 0 12px #ff4500, 0 0 22px #ffd700;
+            animation: flicker 0.1s infinite alternate ease-in-out;
+        }
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1) rotate(-1deg); opacity: 0.85; }
+            100% { transform: translateX(-50%) scale(1.15) rotate(2deg); opacity: 1; }
         }
 
         /* SALA DE ESPERA (10 USUARIOS ANGOSTA A LA DERECHA) */
@@ -430,6 +492,14 @@
             <div class="follower-count" id="followerCount">Seguidores: 14.8K</div>
         </div>
 
+        <!-- BARRA DE ENERGÍA DE TAP TAPS -->
+        <div class="energy-bar-container">
+            <div class="energy-title">⚡ ENERGÍA MÍSTICA</div>
+            <div class="energy-outer">
+                <div class="energy-inner" id="energyFill" style="width: 0%;"></div>
+            </div>
+        </div>
+
         <!-- CONTADOR DE CONCURSO TAP TAPS -->
         <div class="contest-panel">
             <div class="contest-title">🏆 Concurso Taps</div>
@@ -446,6 +516,11 @@
                 <li><strong>🦁 León:</strong> 10 Cartas (150 p.)</li>
                 <li><strong>🌌 Universo:</strong> 10 Cartas Comp. (160 p.)</li>
             </ul>
+        </div>
+
+        <!-- VELA MÍSTICA CON LLAMA ANIMADA (ESQUINA INFERIOR DERECHA) -->
+        <div class="candle-container">
+            <div class="flame"></div>
         </div>
 
         <!-- SALA DE ESPERA (10) -->
@@ -553,6 +628,13 @@
             totalTaps++;
             const tapDisplay = document.getElementById('tapCountDisplay');
             if(tapDisplay) tapDisplay.innerText = totalTaps;
+
+            // ACTUALIZAR BARRA DE ENERGÍA
+            const energyFill = document.getElementById('energyFill');
+            if (energyFill) {
+                let porcentaje = (totalTaps % 100);
+                energyFill.style.width = porcentaje + '%';
+            }
 
             const heart = document.createElement('div');
             heart.className = 'tap-heart';
@@ -670,6 +752,8 @@
                 totalTaps = 0;
                 const tapDisp = document.getElementById('tapCountDisplay');
                 if(tapDisp) tapDisp.innerText = 0;
+                const energyFill = document.getElementById('energyFill');
+                if(energyFill) energyFill.style.width = '0%';
             }
         }, 1000);
 
