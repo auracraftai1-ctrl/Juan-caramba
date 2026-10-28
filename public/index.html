@@ -58,7 +58,7 @@
             100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
-        /* ACCIONES TIKTOK (IZQUIERDA SUPERIOR) */
+        /* ACCIONES KICK / SOCIALES (IZQUIERDA SUPERIOR - 100% TRANSPARENTE) */
         .tiktok-actions-container {
             position: fixed;
             top: 10px;
@@ -68,24 +68,26 @@
             flex-direction: column;
             gap: 4px;
             align-items: flex-start;
+            background: transparent;
         }
 
         .follow-btn {
-            background: linear-gradient(135deg, #fe2c55, #ff4654);
-            color: white;
+            background: linear-gradient(135deg, #53fc18, #2ebd0e);
+            color: #000;
             border: none;
             padding: 4px 10px;
             font-size: 11px;
             font-weight: bold;
             border-radius: 16px;
             cursor: pointer;
-            box-shadow: 0 3px 8px rgba(254, 44, 85, 0.5);
+            box-shadow: 0 3px 8px rgba(83, 252, 24, 0.5);
             display: flex;
             align-items: center;
             gap: 3px;
         }
         .follow-btn.followed {
             background: rgba(255, 255, 255, 0.25);
+            color: #fff;
             border: 1px solid rgba(255, 255, 255, 0.5);
         }
 
@@ -108,31 +110,28 @@
             color: #fff;
             font-size: 9px;
             font-weight: bold;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 2px 5px;
-            border-radius: 5px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: transparent;
+            padding: 2px 0;
+            text-shadow: 1px 1px 3px #000;
         }
 
-        /* BARRA DE ENERGÍA */
+        /* BARRA DE ENERGÍA (TRANSPARENTE) */
         .energy-bar-container {
             position: fixed;
             top: 90px;
             left: 10px;
             z-index: 100;
-            background: rgba(0, 0, 0, 0.65);
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            padding: 3px 6px;
-            border-radius: 6px;
+            background: transparent;
+            padding: 3px 0;
             width: 140px;
-            backdrop-filter: blur(2px);
         }
         .energy-title {
             font-size: 7px;
             color: #ffdf73;
             font-weight: bold;
-            text-align: center;
+            text-align: left;
             margin-bottom: 2px;
+            text-shadow: 1px 1px 3px #000;
         }
         .energy-outer {
             width: 100%;
@@ -143,24 +142,22 @@
         }
         .energy-inner {
             height: 100%;
-            background: linear-gradient(90deg, #fe2c55, #ffdf73);
+            background: linear-gradient(90deg, #53fc18, #ffdf73);
             transition: width 0.3s ease;
         }
 
-        /* CONCURSO */
+        /* CONCURSO (TRANSPARENTE) */
         .contest-panel {
             position: fixed;
             top: 125px;
             left: 10px;
             z-index: 100;
-            background: rgba(0, 0, 0, 0.65);
-            border: 1px solid #fe2c55;
-            border-radius: 6px;
-            padding: 3px 6px;
+            background: transparent;
+            padding: 3px 0;
             color: #fff;
-            text-align: center;
+            text-align: left;
             max-width: 140px;
-            backdrop-filter: blur(2px);
+            text-shadow: 1px 1px 3px #000;
         }
         .contest-title {
             font-size: 7.5px;
@@ -174,30 +171,28 @@
         }
         .contest-timer {
             font-size: 7.5px;
-            color: #ff4654;
+            color: #53fc18;
         }
 
-        /* GUÍA DE REGALOS */
+        /* GUÍA DE REGALOS KICK (TRANSPARENTE) */
         .vip-gifts-guide {
             position: fixed;
             bottom: 20vh;
             left: 10px;
             z-index: 50;
-            background: rgba(0, 0, 0, 0.75);
-            border: 1px solid rgba(212, 175, 55, 0.6);
-            border-radius: 6px;
-            padding: 4px 6px;
+            background: transparent;
+            padding: 4px 0;
             color: #fff;
             max-width: 150px;
-            backdrop-filter: blur(3px);
+            text-shadow: 1px 1px 3px #000;
         }
         .vip-gifts-guide h6 {
             margin: 0 0 2px 0;
             color: #ffdf73;
             font-size: 8px;
-            text-align: center;
+            text-align: left;
             text-transform: uppercase;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.5);
             padding-bottom: 1px;
         }
         .vip-gifts-guide ul {
@@ -207,7 +202,7 @@
             display: flex;
             flex-direction: column;
             gap: 2px;
-            font-size: 6px;
+            font-size: 6.5px;
         }
         .vip-gifts-guide li {
             line-height: 1.1;
@@ -246,25 +241,23 @@
             100% { transform: translateX(-50%) scale(1.15) rotate(2deg); opacity: 1; }
         }
 
-        /* SALA DE ESPERA */
+        /* SALA DE ESPERA (TRANSPARENTE) */
         .waiting-queue {
             position: fixed;
             top: 10px;
             right: 10px;
             width: 130px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1.5px solid rgba(212, 175, 55, 0.7);
-            border-radius: 6px;
-            padding: 4px;
+            background: transparent;
+            padding: 4px 0;
             color: #fff;
             z-index: 100;
-            backdrop-filter: blur(2px);
+            text-shadow: 1px 1px 3px #000;
         }
         .waiting-queue h4 {
             margin: 0 0 2px 0;
             color: #d4af37;
             font-size: 8.5px;
-            text-align: center;
+            text-align: right;
             border-bottom: 1px solid rgba(212, 175, 55, 0.5);
             padding-bottom: 2px;
             text-transform: uppercase;
@@ -282,38 +275,35 @@
         .queue-item {
             font-size: 7.5px;
             padding: 2px 3px;
-            background: rgba(0, 0, 0, 0.3);
+            background: transparent;
             border-radius: 2px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         .queue-item.active {
-            background: rgba(212, 175, 55, 0.3);
-            border: 1px solid #d4af37;
-            font-weight: bold;
             color: #ffdf73;
+            font-weight: bold;
+            text-shadow: 0 0 6px #d4af37;
         }
 
-        /* REGALOS RECIENTES */
+        /* REGALOS RECIENTES (TRANSPARENTE) */
         .gifts-panel {
             position: fixed;
             top: 170px;
             right: 10px;
             width: 130px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(254, 44, 85, 0.6);
-            border-radius: 6px;
-            padding: 3px;
+            background: transparent;
+            padding: 3px 0;
             color: #fff;
             z-index: 90;
-            backdrop-filter: blur(2px);
+            text-shadow: 1px 1px 3px #000;
         }
         .gifts-panel h5 {
             margin: 0 0 2px 0;
-            color: #fe2c55;
+            color: #53fc18;
             font-size: 7.5px;
-            text-align: center;
+            text-align: right;
             text-transform: uppercase;
         }
         .gift-feed {
@@ -323,25 +313,23 @@
             gap: 2px;
             max-height: 55px;
             overflow: hidden;
+            align-items: flex-end;
         }
         .gift-item {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 2px 3px;
-            border-radius: 2px;
+            background: transparent;
+            padding: 1px 0;
             display: flex;
             align-items: center;
             gap: 2px;
         }
 
-        /* POPUP DE REGALO */
+        /* POPUP DE REGALO FLOTANTE (TRANSPARENTE) */
         .gift-popup-animation {
             position: absolute;
             top: 35%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0);
-            background: rgba(0, 0, 0, 0.85);
-            border: 2px solid #fe2c55;
-            border-radius: 12px;
+            background: transparent;
             padding: 10px 20px;
             color: #fff;
             text-align: center;
@@ -349,45 +337,46 @@
             pointer-events: none;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             opacity: 0;
+            text-shadow: 2px 2px 8px #000, 0 0 15px rgba(83, 252, 24, 0.8);
         }
         .gift-popup-animation.show {
-            transform: translate(-50%, -50%) scale(1.1);
+            transform: translate(-50%, -50%) scale(1.2);
             opacity: 1;
         }
         .gift-popup-icon {
-            font-size: 30px;
+            font-size: 38px;
         }
 
-        /* SUBTÍTULOS FLOTANTES SIN CUADRO NEGRO (SOLO LETRAS CON SOMBRA) */
+        /* SUBTÍTULOS DINÁMICOS 100% TRANSPARENTES */
         .speech-floating {
             position: absolute;
             bottom: 24vh;
             left: 50%;
             transform: translateX(-50%);
-            width: 92%;
-            max-width: 800px;
+            width: 95%;
+            max-width: 850px;
             text-align: center;
             z-index: 160;
             pointer-events: none;
             padding: 4px;
-            background: transparent; /* Cero cuadro negro */
+            background: transparent;
             border: none;
         }
         .speech-floating h3 {
-            margin: 0 0 3px 0;
+            margin: 0 0 4px 0;
             color: #ffdf73;
-            font-size: 11px;
+            font-size: 11.5px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            text-shadow: 2px 2px 6px #000, 0 0 10px rgba(212, 175, 55, 0.8);
+            text-shadow: 2px 2px 8px #000, 0 0 12px rgba(212, 175, 55, 0.9);
         }
         .speech-floating p {
             margin: 0;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: bold;
             color: #ffffff;
             line-height: 1.4;
-            text-shadow: 2px 2px 8px #000, 0 0 12px rgba(0, 0, 0, 0.9);
+            text-shadow: 2px 2px 8px #000, 0 0 15px rgba(0, 0, 0, 0.95);
         }
 
         /* CONTENEDOR DE CARTAS */
@@ -479,10 +468,10 @@
             <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=venezuelan-harp-instrumental-111394.mp3" type="audio/mpeg">
         </audio>
 
-        <!-- ACCIONES TIKTOK -->
+        <!-- ACCIONES KICK -->
         <div class="tiktok-actions-container">
             <button class="follow-btn" id="followBtn" onclick="seguirAccion(event)">
-                <span id="followIcon">➔❤️</span> <span id="followText">Seguir</span>
+                <span id="followIcon">➔💚</span> <span id="followText">Seguir</span>
             </button>
             <button class="love-btn" onclick="quieremeAccion(event)">
                 <span>💖</span> <span>Quiéreme</span>
@@ -490,7 +479,7 @@
             <div class="follower-count" id="followerCount">Seguidores: 14.8K</div>
         </div>
 
-        <!-- ENERGÍA DE TAP TAPS -->
+        <!-- ENERGÍA DE CLICKS -->
         <div class="energy-bar-container">
             <div class="energy-title">⚡ ENERGÍA MÍSTICA</div>
             <div class="energy-outer">
@@ -505,14 +494,14 @@
             <div class="contest-timer">Reinicia en: <span id="timerDisplay">59:59</span></div>
         </div>
 
-        <!-- GUÍA DE REGALOS -->
+        <!-- GUÍA DE REGALOS KICK -->
         <div class="vip-gifts-guide">
-            <h6>🔮 Regalos & Lecturas</h6>
+            <h6>🔮 Regalos Kick & Lecturas</h6>
             <ul>
-                <li><strong>🌹 Rosa:</strong> 2 Cartas (70 p.)</li>
-                <li><strong>😎 Gafas:</strong> 4 Cartas (100 p.)</li>
-                <li><strong>🦁 León:</strong> 10 Cartas (150 p.)</li>
-                <li><strong>🌌 Universo:</strong> 10 Cartas Comp. (160 p.)</li>
+                <li><strong>🚗 Coche:</strong> 2 Cartas (VIP)</li>
+                <li><strong>✈️ Caza:</strong> 4 Cartas (VIP)</li>
+                <li><strong>🛸 OVNI:</strong> 10 Cartas (Max)</li>
+                <li><strong>🛥️ Yate:</strong> 10 Cartas Comp.</li>
             </ul>
         </div>
 
@@ -523,30 +512,30 @@
 
         <!-- SALA DE ESPERA -->
         <div class="waiting-queue">
-            <h4>Sala de Espera (10)</h4>
+            <h4>Sala de Espera (5)</h4>
             <ul class="queue-list" id="queueList"></ul>
         </div>
 
         <!-- REGALOS RECIENTES -->
         <div class="gifts-panel">
-            <h5>🎁 Recientes</h5>
+            <h5>🎁 Recientes Kick</h5>
             <div class="gift-feed" id="giftFeed">
-                <div class="gift-item">🌹 @Mariana_92 Rosa</div>
-                <div class="gift-item">😎 @CarlosVe Gafas</div>
+                <div class="gift-item">🚗 @Mariana_92 Coche</div>
+                <div class="gift-item">✈️ @CarlosVe Caza</div>
             </div>
         </div>
 
-        <!-- POPUP DE REGALO -->
+        <!-- POPUP DE REGALO FLOTANTE -->
         <div class="gift-popup-animation" id="giftPopup">
             <div class="gift-popup-icon" id="giftPopupIcon">🎁</div>
-            <div style="font-size: 11px; font-weight: bold; color: #ffdf73;" id="giftPopupUser">@Usuario</div>
-            <div style="font-size: 9px; color: #fff;" id="giftPopupText">¡Envió un regalo VIP!</div>
+            <div style="font-size: 12px; font-weight: bold; color: #ffdf73;" id="giftPopupUser">@Usuario</div>
+            <div style="font-size: 10px; color: #fff;" id="giftPopupText">¡Envió un regalo VIP en Kick!</div>
         </div>
 
-        <!-- SUBTÍTULOS DINÁMICOS SIN CAJA NEGRA (SOLO LETRAS CON SOMBRA) -->
+        <!-- SUBTÍTULOS DINÁMICOS 100% TRANSPARENTES -->
         <div class="speech-floating">
             <h3 id="speechTitle">Asistente de Don Juan Caramba</h3>
-            <p id="speechText">"Hola, soy la asistente de Don Juan Caramba, él en este momento no se encuentra..."</p>
+            <p id="speechText">"Hola, soy la asistente de Don Juan Caramba..."</p>
         </div>
 
         <!-- CARTAS EN MESA -->
@@ -569,12 +558,12 @@
                 bano: "Baño de Claridad con manzanilla, sal marina y pétalos de rosa.",
                 paraQueBano: "Para limpiar tu campo energético de pensamientos intrusivos antes de dormir.",
                 numerologia: "Número 6 de Armonía y Vínculos", significadoNum: "Cierra tu ciclo de soledad para dar paso a un compromiso firme.",
-                consejo: "Ay, mi Mariana de Caracas... Como dice el dicho: el amor es como el arroz, el que no se aviva se queda sin comer y con la olla raspada. Sella este proceso."
+                consejo: "Ay, mi Mariana de Caracas... Como dice el dicho: el amor es como el arroz, el que no se aviva se queda sin comer y con la olla raspada. Sella este proceso con fe."
             },
             { 
                 user: "CarlosVe", nombre: "Carlos Pérez", fecha: "22/07/1988", lugar: "Valencia, Venezuela",
                 veredicto: "¡SÍ!", pregunta: "¿Se destrabará mi negocio y entrará liquidez a mis bolsillos?",
-                matrizAstral: "Sol en Cáncer y Ascendente Tauro: arraigo material y protection de los frutos comerciales.",
+                matrizAstral: "Sol en Cáncer y Ascendente Tauro: arraigo material y protección de los frutos comerciales.",
                 arcangel: "Arcángel Jofiel", consejoArcangel: "Ilumina tu mente para romper la escasez material y comercial.",
                 serafin: "Serafín de los Siete Cielos", consejoSerafin: "Abre portales dimensionales de prosperidad en tus empresas.",
                 accionFuego: "Analiza con frialdad la estrategia comercial de tu inventario.",
@@ -613,7 +602,7 @@
                 evitarFuego: "Evita sobrepensar escenarios que aún no han ocurrido.",
                 momentoFuego: "Realiza tu pausa sanadora al caer la tarde.",
                 colorDia: "Verde Esmeralda para equilibrar tus emociones y mente.",
-                vela: "Vela Verde", whenVela: "Jueves a las 6 PM", cuandoVela: "Jueves a las 6 PM", paraQueVela: "Para calmar la mente y sintonizar guías de luz.",
+                vela: "Vela Verde", cuandoVela: "Jueves a las 6 PM", paraQueVela: "Para calmar la mente y sintonizar guías de luz.",
                 bano: "Baño de Eucalipto y Manzanilla fresca.",
                 paraQueBano: "Para despejar el pensamiento y aclarar tus sueños premonitorios.",
                 numerologia: "Número 7 de Sabiduría e Intuición", significadoNum: "Confirma que tu voz interior es tu guía más fiel.",
@@ -637,7 +626,7 @@
             }
         ];
 
-        let nombresUsuarios = consultantesPool.map(c => c.user);
+        let colaConsultantes = [...consultantesPool];
 
         const tarotDeck = [
             { name: "El Loco", file: "El loco.jpg", significado: "Inicios inesperados, saltos al vacío con fe ciega y libertad absoluta." },
@@ -662,12 +651,11 @@
         ];
 
         let totalTaps = 0;
-        let colaConsultantes = [];
         let numSeguidores = 14820;
         let yaSiguio = false;
         let tiempoRestanteContrato = 3600;
 
-        // MOTOR DE ASISTENTE DE VOZ Y SUBTÍTULOS SIN CAJA NEGRA Y TIEMPO RETRASADO (8 SEGUNDOS POR BLOQUE)
+        // MOTOR DE VOZ AUTOMÁTICO Y SUBTÍTULOS AMPLIADOS (9 SEGUNDOS POR BLOQUE)
         function hablarYSubtitularBloques(textoCompleto, titulo) {
             if (!('speechSynthesis' in window)) return;
             window.speechSynthesis.cancel();
@@ -677,10 +665,9 @@
             const speechText = document.getElementById('speechText');
             if(speechTitle) speechTitle.innerText = titulo;
 
-            // 1. Lanzar la voz de la asistente con velocidad reposada
             let utterance = new SpeechSynthesisUtterance(textoCompleto);
             utterance.lang = 'es-ES';
-            utterance.rate = 0.80; // Un toque más pausada para perfecta sincronía
+            utterance.rate = 0.78; 
             utterance.pitch = 0.95; 
 
             let voices = window.speechSynthesis.getVoices();
@@ -696,16 +683,16 @@
                 utterance.voice = vozAsistente;
             }
 
+            // Reproducción automática nativa
             window.speechSynthesis.speak(utterance);
 
-            // 2. Dividir el texto en bloques de 14 palabras
             let palabras = textoCompleto.split(" ");
             let bloques = [];
             let bloqueActual = "";
 
             palabras.forEach((palabra) => {
                 bloqueActual += palabra + " ";
-                if (bloqueActual.split(" ").length >= 14) {
+                if (bloqueActual.split(" ").length >= 13) {
                     bloques.push(bloqueActual.trim());
                     bloqueActual = "";
                 }
@@ -714,7 +701,6 @@
                 bloques.push(bloqueActual.trim());
             }
 
-            // 3. Rotar los bloques cada 8 segundos para que vayan lentos y sincronizados
             let indexBloque = 0;
             if(speechText && bloques.length > 0) {
                 speechText.innerText = `"${bloques[0]}"`;
@@ -729,33 +715,13 @@
                 } else {
                     clearInterval(window.currentBlockTimer);
                 }
-            }, 8000); // 8 segundos exactos por bloque
+            }, 9000);
         }
 
         if ('speechSynthesis' in window) {
             window.speechSynthesis.onvoiceschanged = () => {
                 window.speechSynthesis.getVoices();
             };
-        }
-
-        function generarParticulas() {
-            const container = document.getElementById('mainContainer');
-            setInterval(() => {
-                const particle = document.createElement('div');
-                particle.className = 'mystic-particle';
-                const size = Math.random() * 4 + 2 + 'px';
-                particle.style.width = size;
-                particle.style.height = size;
-                particle.style.left = Math.random() * 100 + 'vw';
-                particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
-                container.appendChild(particle);
-                setTimeout(() => particle.remove(), 6000);
-            }, 800);
-        }
-
-        function inicializarCola() {
-            colaConsultantes = [...consultantesPool];
-            actualizarVistaCola();
         }
 
         function actualizarVistaCola() {
@@ -765,11 +731,12 @@
             colaConsultantes.forEach((item, index) => {
                 const li = document.createElement('li');
                 li.className = `queue-item ${index === 0 ? 'active' : ''}`;
-                li.innerHTML = `<span>${index + 1}. @${item.user}</span> <span>${index === 0 ? '🔮' : ''}</span>`;
+                li.innerHTML = `<span>${index === 0 ? '🔮' : ''}</span> <span>${index + 1}. @${item.user}</span>`;
                 queueList.appendChild(li);
             });
         }
 
+        // Clicks solo para acumular taps y corazones flotantes (la voz ya no depende de esto)
         window.addEventListener('click', (event) => {
             totalTaps++;
             const tapDisplay = document.getElementById('tapCountDisplay');
@@ -800,7 +767,7 @@
                 yaSiguio = true;
                 if(btn) btn.classList.add('followed');
                 if(text) text.innerText = "Siguiendo";
-                hablarYSubtitularBloques("¡Muchas gracias por seguir el canal! Don Juan Caramba te envía bendiciones desde el llano.", "Asistente de Don Juan Caramba");
+                hablarYSubtitularBloques("¡Muchas gracias por seguir el canal en Kick! Don Juan Caramba te envía bendiciones desde el llano.", "Asistente de Don Juan Caramba");
             } else {
                 numSeguidores--;
                 yaSiguio = false;
@@ -813,7 +780,7 @@
 
         function quieremeAccion(event) {
             event.stopPropagation();
-            hablarYSubtitularBloques("¡Eso me gusta! Sigan mandando cariño y energía positiva al chat de la transmisión.", "Asistente de Don Juan Caramba");
+            hablarYSubtitularBloques("¡Eso me gusta! Sigan mandando cariño y energía positiva al chat de la transmisión en Kick.", "Asistente de Don Juan Caramba");
         }
 
         function mostrarAnimacionRegalo(usuario, regaloIcono, regaloNombre) {
@@ -825,10 +792,10 @@
             if(popup && icon && user && text) {
                 icon.innerText = regaloIcono;
                 user.innerText = `@${usuario}`;
-                text.innerText = `¡Envió ${regaloNombre}!`;
+                text.innerText = `¡Envió ${regaloNombre} en Kick!`;
 
                 popup.classList.add('show');
-                setTimeout(() => { popup.classList.remove('show'); }, 2500);
+                setTimeout(() => { popup.classList.remove('show'); }, 3000);
             }
         }
 
@@ -874,8 +841,7 @@
                     }, index * 250);
                 });
 
-                // LECTURA COMPLETA, CON EL SALUDO OFICIAL Y LA FRASE DE CIERRE EXACTA
-                const lecturaCompleta = `Hola, soy la asistente de Don Juan Caramba, él en este momento no se encuentra, pero yo le daré su lectura a ${actual.nombre}. Atendiendo a tu consulta sobre "${actual.pregunta}"... ¡${actual.veredicto} Estimado o estimada ${actual.nombre}, tu matriz astral (${actual.matrizAstral}) se conecta con el oráculo! La tirada nos muestra en mesa a ${descripcionesCartas[0]}, seguida por ${descripcionesCartas[1]}, y culminando con ${descripcionesCartas[2]}. Ante esta situación, el arcángel protector ${actual.arcangel} te aconseja: ${actual.consejoArcangel}. De igual manera, el serafín ${actual.serafin} te transmite: ${actual.consejoSerafin}. Como acción espiritual de fuego debes cumplir con lo siguiente: ${actual.accionFuego} Y recuerda evitar por completo: ${actual.evitarFuego} Sella este propósito en el momento indicado: ${actual.momentoFuego} Utiliza el color protector ${actual.colorDia}, enciende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}) y prepara tu baño especial de ${actual.bano} (${actual.paraQueBano}). Tu vibración numérica es el ${actual.numerologia}, lo que nos indica que ${actual.significadoNum}. Presta mucha atención a este consejo final: ${actual.consejo}. Bueno, hasta aquí llegó tu consulta. Que la luz del oráculo te acompañe.`;
+                const lecturaCompleta = `Hola, soy la asistente de Don Juan Caramba, él en este momento no se encuentra, pero yo le daré su lectura a ${actual.nombre}. Atendiendo a tu consulta sobre "${actual.pregunta}"... ¡${actual.veredicto} Estimado o estimada ${actual.nombre}, tu matriz astral (${actual.matrizAstral}) se conecta profundamente con el oráculo! La tirada nos muestra en mesa a ${descripcionesCartas[0]}, seguida por ${descripcionesCartas[1]}, y culminando con ${descripcionesCartas[2]}. Ante esta situación, el arcángel protector ${actual.arcangel} te aconseja: ${actual.consejoArcangel}. De igual manera, el serafín ${actual.serafin} te transmite: ${actual.consejoSerafin}. Como acción espiritual de fuego debes cumplir estrictamente con lo siguiente: ${actual.accionFuego} Y recuerda evitar por completo: ${actual.evitarFuego} Sella este propósito en el momento indicado: ${actual.momentoFuego} Utiliza el color protector ${actual.colorDia}, enciende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}) y prepara tu baño especial de ${actual.bano} (${actual.paraQueBano}). Tu vibración numérica es el ${actual.numerologia}, lo que nos indica que ${actual.significadoNum}. Presta mucha atención a este consejo final: ${actual.consejo}. Bueno, hasta aquí llegó tu consulta. Que la luz del oráculo te acompañe y te guíe siempre en tu camino.`;
                 
                 hablarYSubtitularBloques(lecturaCompleta, `Oráculo para ${actual.nombre}`);
             }, 4000);
@@ -899,10 +865,10 @@
         }, 1000);
 
         const listaRegalos = [
-            { icono: "🌹", nombre: "una Rosa (2 Cartas - 70 p.)" },
-            { icono: "😎", nombre: "unas Gafas (4 Cartas - 100 p.)" },
-            { icono: "🦁", nombre: "un León (10 Cartas - 150 p.)" },
-            { icono: "🌌", nombre: "un Universo (10 Cartas Comp. - 160 p.)" }
+            { icono: "🚗", nombre: "un Coche VIP" },
+            { icono: "✈️", nombre: "un Caza VIP" },
+            { icono: "🛸", nombre: "un OVNI Max" },
+            { icono: "🛥️", nombre: "un Yate Completo" }
         ];
 
         setInterval(() => {
@@ -913,14 +879,27 @@
             
             giftFeed.innerHTML = `<div class="gift-item">${randomGift.icono} @${randomUser}</div>` + giftFeed.innerHTML;
             mostrarAnimacionRegalo(randomUser, randomGift.icono, randomGift.nombre);
-        }, 12000);
+        }, 14000);
 
-        inicializarCola();
-        generarParticulas();
+        actualizarVistaCola();
+
+        // PARTÍCULAS
+        const container = document.getElementById('mainContainer');
+        setInterval(() => {
+            const particle = document.createElement('div');
+            particle.className = 'mystic-particle';
+            const size = Math.random() * 4 + 2 + 'px';
+            particle.style.width = size;
+            particle.style.height = size;
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            container.appendChild(particle);
+            setTimeout(() => particle.remove(), 6000);
+        }, 800);
         
-        // TIEMPO AMPLIADO A 170 SEGUNDOS PARA QUE LA VOZ TERMINE DE CABO A RABO SIN APURO
-        setInterval(realizarTirada, 170000);
-        setTimeout(realizarTirada, 2000);
+        // CICLO DE 200 SEGUNDOS Y ARRANQUE AUTOMÁTICO DE LA VOZ
+        setInterval(realizarTirada, 200000);
+        setTimeout(realizarTirada, 1500);
     </script>
 </body>
 </html>
