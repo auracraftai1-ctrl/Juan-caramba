@@ -448,7 +448,7 @@
 <body>
 
     <div class="container" id="mainContainer">
-        <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image">
+        <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image" onerror="this.onerror=null; this.src='Auracraftai-bg.jpg';">
 
         <audio id="bgMusic" loop autoplay>
             <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=venezuelan-harp-instrumental-111394.mp3" type="audio/mpeg">
@@ -627,7 +627,25 @@
         let colaConsultantes = [...consultantesPool];
         let estaLeyendo = false;
 
+        // MAZO COMPLETO Y CORREGIDO CON LOS NOMBRES EXACTOS DE GITHUB
         const tarotDeck = [
+            { name: "As de Copas", file: "Las copas.jpg" },
+            { name: "2 de Copas", file: "Dos de copas.jpg" },
+            { name: "3 de Copas", file: "Tres de copas.jpg" },
+            { name: "As de Espadas", file: "As de espadas.jpg" },
+            { name: "As de Oros", file: "As de oro.jpg" },
+            { name: "Caballero de Bastos", file: "Caballero de bajos.jpg" },
+            { name: "Caballero de Copas", file: "Caballero de copas.jpg" },
+            { name: "Caballero de Espadas", file: "Caballero de espadas.jpg" },
+            { name: "Caballero de Oros", file: "Caballero de oro.jpg" },
+            { name: "5 de Bastos", file: "Cinco de bajos.jpg" },
+            { name: "5 de Copas", file: "Cinco de copas.jpg" },
+            { name: "5 de Espadas", file: "Cinco de espadas.jpg" },
+            { name: "5 de Oros", file: "Cinco de oro.jpg" },
+            { name: "4 de Bastos", file: "Cuatro de bajos.jpg" },
+            { name: "4 de Copas", file: "Cuatro de copas.jpg" },
+            { name: "4 de Espadas", file: "Cuatro de espadas.jpg" },
+            { name: "4 de Oros", file: "Cuatro de oro.jpg" },
             { name: "0. El Loco", file: "El loco.jpg" },
             { name: "I. El Mago", file: "El Mago.jpg" },
             { name: "II. La Sacerdotisa", file: "La Sacerdotisa.jpg" },
@@ -649,63 +667,7 @@
             { name: "XVIII. La Luna", file: "La luna.jpg" },
             { name: "XIX. El Sol", file: "El sol.jpg" },
             { name: "XX. El Juicio", file: "El mundo.jpg" },
-            { name: "XXI. El Mundo", file: "El mundo.jpg" },
-            { name: "As de Bastos", file: "El Mago.jpg" },
-            { name: "2 de Bastos", file: "El carro.jpg" },
-            { name: "3 de Bastos", file: "El emperador.jpg" },
-            { name: "4 de Bastos", file: "El sol.jpg" },
-            { name: "5 de Bastos", file: "La fuerza.jpg" },
-            { name: "6 de Bastos", file: "El mundo.jpg" },
-            { name: "7 de Bastos", file: "La justicia.jpg" },
-            { name: "8 de Bastos", file: "La estrella.jpg" },
-            { name: "9 de Bastos", file: "El ermitaño.jpg" },
-            { name: "10 de Bastos", file: "La torres.jpg" },
-            { name: "Sota de Bastos", file: "El loco.jpg" },
-            { name: "Caballero de Bastos", file: "Caballero de copas.jpg" },
-            { name: "Reina de Bastos", file: "El emperatriz.jpg" },
-            { name: "Rey de Bastos", file: "El emperador.jpg" },
-            { name: "As de Copas", file: "La Sacerdotisa.jpg" },
-            { name: "2 de Copas", file: "Dos de copas.jpg" },
-            { name: "3 de Copas", file: "Tres de copas.jpg" },
-            { name: "4 de Copas", file: "Cuatro de copas.jpg" },
-            { name: "5 de Copas", file: "Cinco de copas.jpg" },
-            { name: "6 de Copas", file: "La estrella.jpg" },
-            { name: "7 de Copas", file: "El diablo.jpg" },
-            { name: "8 de Copas", file: "El ermitaño.jpg" },
-            { name: "9 de Copas", file: "El mundo.jpg" },
-            { name: "10 de Copas", file: "El emperatriz.jpg" },
-            { name: "Sota de Copas", file: "La templanza.jpg" },
-            { name: "Caballero de Copas", file: "Caballero de copas.jpg" },
-            { name: "Reina de Copas", file: "La Sacerdotisa.jpg" },
-            { name: "Rey de Copas", file: "El emperador.jpg" },
-            { name: "As de Espadas", file: "As de espadas.jpg" },
-            { name: "2 de Espadas", file: "La luna.jpg" },
-            { name: "3 de Espadas", file: "La muerte.jpg" },
-            { name: "4 de Espadas", file: "Cuatro de espadas.jpg" },
-            { name: "5 de Espadas", file: "Cinco de espadas.jpg" },
-            { name: "6 de Espadas", file: "El carro.jpg" },
-            { name: "7 de Espadas", file: "El loco.jpg" },
-            { name: "8 de Espadas", file: "La torres.jpg" },
-            { name: "9 de Espadas", file: "La luna.jpg" },
-            { name: "10 de Espadas", file: "La muerte.jpg" },
-            { name: "Sota de Espadas", file: "La fuerza.jpg" },
-            { name: "Caballero de Espadas", file: "Caballero de espadas.jpg" },
-            { name: "Reina de Espadas", file: "La justicia.jpg" },
-            { name: "Rey de Espadas", file: "El emperador.jpg" },
-            { name: "As de Oros", file: "As de oro.jpg" },
-            { name: "2 de Oros", file: "La rueda de la fortuna.jpg" },
-            { name: "3 de Oros", file: "El emperatriz.jpg" },
-            { name: "4 de Oros", file: "Cuatro de oro.jpg" },
-            { name: "5 de Oros", file: "Cinco de oro.jpg" },
-            { name: "6 de Oros", file: "La templanza.jpg" },
-            { name: "7 de Oros", file: "El ermitaño.jpg" },
-            { name: "8 de Oros", file: "La fuerza.jpg" },
-            { name: "9 de Oros", file: "El sol.jpg" },
-            { name: "10 de Oros", file: "El mundo.jpg" },
-            { name: "Sota de Oros", file: "El Mago.jpg" },
-            { name: "Caballero de Oros", file: "Caballero de oro.jpg" },
-            { name: "Reina de Oros", file: "El emperatriz.jpg" },
-            { name: "Rey de Oros", file: "El emperador.jpg" }
+            { name: "XXI. El Mundo", file: "El mundo.jpg" }
         ];
 
         let totalTaps = 0;
@@ -886,7 +848,7 @@
             for(let i = 0; i < cantidadCartas; i++) {
                 const cardDiv = document.createElement('div');
                 cardDiv.className = 'card shuffling';
-                cardDiv.innerHTML = `<img src="Auracraftai-bg.jpg" alt="Reverso"><span>Barajando</span>`;
+                cardDiv.innerHTML = `<img src="Auracraftai-bg.jpg" alt="Reverso" onerror="this.onerror=null; this.src='Auracraftai-bg.jpg';"><span>Barajando</span>`;
                 container.appendChild(cardDiv);
             }
 
