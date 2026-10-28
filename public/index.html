@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juan Caramba - Super Tarot 24/7 Live Stream</title>
+    <title>Don Juan Caramba - Tarot 24/7 Live Kick</title>
     <style>
         * {
             box-sizing: border-box;
@@ -26,7 +26,6 @@
             overflow: hidden;
         }
 
-        /* FONDO DE PANTALLA */
         .bg-image {
             width: 100%;
             height: 100%;
@@ -43,7 +42,6 @@
             100% { transform: scale(1); filter: brightness(1); }
         }
 
-        /* PARTÍCULAS MÍSTICAS */
         .mystic-particle {
             position: absolute;
             background: rgba(212, 175, 55, 0.7);
@@ -58,7 +56,6 @@
             100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
-        /* ACCIONES KICK / SOCIALES (IZQUIERDA SUPERIOR) */
         .tiktok-actions-container {
             position: fixed;
             top: 8px;
@@ -115,7 +112,6 @@
             text-shadow: 1px 1px 3px #000;
         }
 
-        /* BARRA DE ENERGÍA */
         .energy-bar-container {
             position: fixed;
             top: 75px;
@@ -146,7 +142,6 @@
             transition: width 0.3s ease;
         }
 
-        /* CONCURSO */
         .contest-panel {
             position: fixed;
             top: 105px;
@@ -174,7 +169,6 @@
             color: #53fc18;
         }
 
-        /* GUÍA DE REGALOS KICK */
         .vip-gifts-guide {
             position: fixed;
             bottom: 26vh;
@@ -212,7 +206,6 @@
             color: #ffdf73;
         }
 
-        /* VELA */
         .candle-container {
             position: fixed;
             bottom: 20px;
@@ -241,7 +234,6 @@
             100% { transform: translateX(-50%) scale(1.15) rotate(2deg); opacity: 1; }
         }
 
-        /* SALA DE ESPERA (SUPERIOR DERECHA) */
         .waiting-queue {
             position: fixed;
             top: 2px;
@@ -287,7 +279,6 @@
             text-shadow: 0 0 6px #d4af37;
         }
 
-        /* REGALOS RECIENTES DE KICK (UBICACIÓN ALTA) */
         .gifts-panel {
             position: fixed;
             top: 85px;
@@ -323,7 +314,6 @@
             gap: 2px;
         }
 
-        /* POPUP DE REGALO FLOTANTE */
         .gift-popup-animation {
             position: absolute;
             top: 35%;
@@ -347,7 +337,6 @@
             font-size: 38px;
         }
 
-        /* SUBTÍTULOS TELEPROMPTER SINCRONIZADOS */
         .speech-floating {
             position: absolute;
             bottom: 28vh;
@@ -379,7 +368,6 @@
             text-shadow: 2px 2px 8px #000, 0 0 15px rgba(0, 0, 0, 0.95);
         }
 
-        /* CONTENEDOR DE CARTAS */
         .tarot-slot {
             position: absolute;
             bottom: 16vh;
@@ -388,15 +376,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             z-index: 150;
             width: 100%;
             padding: 0 10px;
             flex-wrap: wrap;
         }
         .card {
-            width: 60px;
-            height: 90px;
+            width: 58px;
+            height: 88px;
             background: #1a1a1a;
             border-radius: 6px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.95);
@@ -413,7 +401,7 @@
         }
         .card img {
             width: 100%;
-            height: 65px;
+            height: 63px;
             object-fit: cover;
             border-radius: 4px;
             border: 1px solid #d4af37;
@@ -421,10 +409,10 @@
         }
         .card img.reversed {
             transform: rotate(180deg);
-            filter: brightness(0.9);
+            filter: brightness(0.85);
         }
         .card span {
-            font-size: 5.5px;
+            font-size: 5px;
             color: #ffdf73;
             margin-top: 2px;
             text-transform: uppercase;
@@ -434,7 +422,6 @@
             width: 100%;
         }
 
-        /* ANIMACIÓN DE BARAJA */
         .shuffling {
             animation: shuffleCard 0.4s infinite alternate ease-in-out;
             filter: brightness(0.85);
@@ -461,15 +448,12 @@
 <body>
 
     <div class="container" id="mainContainer">
-        <!-- Fondo de pantalla original -->
         <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image">
 
-        <!-- AUDIO DE FONDO AUTOMÁTICO (MÚSICA DE ARPA) -->
         <audio id="bgMusic" loop autoplay>
             <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=venezuelan-harp-instrumental-111394.mp3" type="audio/mpeg">
         </audio>
 
-        <!-- ACCIONES KICK -->
         <div class="tiktok-actions-container">
             <button class="follow-btn" id="followBtn" onclick="seguirAccion(event)">
                 <span id="followIcon">➔💚</span> <span id="followText">Seguir</span>
@@ -480,7 +464,6 @@
             <div class="follower-count" id="followerCount">Seguidores: 14.8K</div>
         </div>
 
-        <!-- ENERGÍA DE CLICKS -->
         <div class="energy-bar-container">
             <div class="energy-title">⚡ ENERGÍA MÍSTICA</div>
             <div class="energy-outer">
@@ -488,14 +471,12 @@
             </div>
         </div>
 
-        <!-- CONCURSO -->
         <div class="contest-panel">
             <div class="contest-title">🏆 Concurso Taps</div>
             <div class="contest-stats"><span id="tapCountDisplay">0</span> / 100 Taps</div>
             <div class="contest-timer">Reinicia en: <span id="timerDisplay">59:59</span></div>
         </div>
 
-        <!-- GUÍA DE REGALOS KICK -->
         <div class="vip-gifts-guide">
             <h6>🔮 Regalos Kick & Lecturas</h6>
             <ul>
@@ -506,18 +487,15 @@
             </ul>
         </div>
 
-        <!-- VELA -->
         <div class="candle-container">
             <div class="flame"></div>
         </div>
 
-        <!-- SALA DE ESPERA (SUBIDA Y LIBRE DE LAS LETRAS) -->
         <div class="waiting-queue">
             <h4>Sala de Espera</h4>
             <ul class="queue-list" id="queueList"></ul>
         </div>
 
-        <!-- REGALOS RECIENTES DE KICK -->
         <div class="gifts-panel">
             <h5>🎁 Recientes Kick</h5>
             <div class="gift-feed" id="giftFeed">
@@ -526,20 +504,17 @@
             </div>
         </div>
 
-        <!-- POPUP DE REGALO FLOTANTE -->
         <div class="gift-popup-animation" id="giftPopup">
             <div class="gift-popup-icon" id="giftPopupIcon">🎁</div>
             <div style="font-size: 12px; font-weight: bold; color: #ffdf73;" id="giftPopupUser">@Usuario</div>
             <div style="font-size: 10px; color: #fff;" id="giftPopupText">¡Envió un regalo VIP en Kick!</div>
         </div>
 
-        <!-- TELEPROMPTER SUBTÍTULOS DINÁMICOS -->
         <div class="speech-floating">
             <h3 id="speechTitle">Asistente de Don Juan Caramba</h3>
             <p id="speechText">"Iniciando transmisión en vivo por Kick..."</p>
         </div>
 
-        <!-- CARTAS EN MESA -->
         <div class="tarot-slot" id="cardContainer"></div>
     </div>
 
@@ -555,27 +530,29 @@
                 sol: "Escorpio", 
                 luna: "Piscis", 
                 ascendente: "Leo",
-                frecuencia: "528 Hz (Transformación y Sanación)",
+                frecuencia: "528 Hz",
                 numPoderPersonal: "7",
                 numPoderDia: "21",
-                recomendacionExplicita: "Acepta las invitaciones sociales este fin de semana y corta contacto definitivo con exparejas.",
+                recomendacionExplicita: "Corta contacto con tu pasado sentimental y mantén tus emociones bajo custodia.",
                 arcangel: "Arcángel Chamuel", 
-                consejoArcangel: "Te otorga el perdón profundo para sanar las heridas sentimentales.",
-                invocacionArcangel: "Invocalo los martes al atardecer para abrir los caminos del afecto puro.",
+                consejoArcangel: "Perdona de corazón las faltas pasadas para liberar tu alma.",
+                invocacionArcangel: "Invocálo los martes al atardecer en un rincón tranquilo.",
                 cuandoInvocarsArcangel: "martes al atardecer",
                 serafin: "Serafín de la Llama Celeste", 
-                consejoSerafin: "Te alinea con el fuego de la verdad para despejar sombras mentales.",
-                cuandoInvocarsSerafin: "Al romper el alba los viernes", 
-                paraQueInvocarsSerafin: "Para quemar ilusiones falsas y limpiar tu mente de dudas.",
-                vela: "Vela Azul Claro", 
-                cuandoVela: "Martes al atardecer", 
-                paraQueVela: "Para disipar las dudas y revelar tu valor interior.",
-                accionFuegoBano: "Baño sagrado con pétalos de rosa roja, miel y esónica de canela durante tres noches seguidas.",
-                prohibicionEstricta: "Prohibido guardar objetos o fotografías de exparejas bajo tu almohada.",
-                diagnosticoGeneral: "La combinación de tus cartas revela que estás cerrando un ciclo de desamor doloroso pero necesario; al unir tu energía al fuego de Chamuel, el universo te prepara para un encuentro con bases firmes y sin ataduras del pasado.",
-                libroSecretos: "El secreto del corazón abierto radica en soltar el control y permitir que la energía del universo te guíe sin resistencia.",
-                afirmacion: "Yo merezco un amor sincero, puro y libre de cargas pasadas.",
-                consejo: "Ay, mi Mariana de Caracas... Como dice el dicho: el amor es como el arroz, el que no se aviva se queda sin comer y con la olla raspada. Sella este proceso con fe."
+                consejoSerafin: "Purifica tus emociones para no repetir ciclos dolorosos.",
+                cuandoInvocarsSerafin: "al amanecer de un viernes", 
+                paraQueInvocarsSerafin: "quemar dudas e ilusiones falsas",
+                vela: "Vela Rosada o Azul Claro", 
+                cuandoVela: "martes a las 6 PM", 
+                paraQueVela: "atraer afecto sincero y disipar amarguras",
+                accionFuegoBano: "Baño de rosas rojas con miel y canela en rama durante tres noches seguidas.",
+                prohibicionEstricta: "Prohibido revisar redes sociales de amores pasados.",
+                diagnosticoPositivo: "Tus cartas marcan el florecimiento definitivo de tu corazón y la llegada de un ser con intenciones nobles.",
+                diagnosticoDenso: "Las sombras en mesa revelan apegos tóxicos; debes sanar primero antes de entregar tu corazón.",
+                libroSecretos: "El amor verdadero no se suplica ni se fuerza, nace de la paz espiritual.",
+                afirmacion: "Yo merezco un amor sincero, puro y respetuoso.",
+                consejo: "Mariana, como decía mi abuela: el que no limpia la casa antes de recibir visitas, termina ofreciendo café sobre el polvo.",
+                advertencia: "Atenta con las falsas promesas de quien no ha demostrado cambios reales."
             },
             { 
                 user: "CarlosVe", 
@@ -587,27 +564,29 @@
                 sol: "Cáncer", 
                 luna: "Tauro", 
                 ascendente: "Tauro",
-                frecuencia: "888 Hz (Abundancia e Inflorescencia Financiera)",
+                frecuencia: "888 Hz",
                 numPoderPersonal: "8",
                 numPoderDia: "44",
-                recomendacionExplicita: "Revisa las cuentas pendientes y firma los nuevos contratos antes del jueves al mediodía.",
+                recomendacionExplicita: "Audita tus números, firma con prudencia y exige garantías en cada transacción.",
                 arcangel: "Arcángel Jofiel", 
-                consejoArcangel: "Ilumina tu mente para romper la escasez material y comercial.",
-                invocacionArcangel: "Invocalo los domingos a las 7 AM para atraer clientes y liquidez inmediata.",
+                consejoArcangel: "Aclara tu mente comercial para ver oportunidades donde otros ven crisis.",
+                invocacionArcangel: "Invocálo los domingos al salir el sol.",
                 cuandoInvocarsArcangel: "domingos a las 7 AM",
-                serafin: "Serafín de los Siete Cielos", 
-                consejoSerafin: "Abre portales dimensionales de prosperidad en tus empresas.",
-                cuandoInvocarsSerafin: "Al mediodía del domingo", 
-                paraQueInvocarsSerafin: "Para blindar tus negocios contra la escasez y la mala racha.",
+                serafin: "Serafín de la Prosperidad Divina", 
+                consejoSerafin: "Mantén la ética en tus negocios para que la abundancia sea duradera.",
+                cuandoInvocarsSerafin: "los domingos al mediodía", 
+                paraQueInvocarsSerafin: "proteger tu capital contra pérdidas injustificadas",
                 vela: "Vela Amarilla o Naranja", 
-                cuandoVela: "Domingo a las 7 AM", 
-                paraQueVela: "Para atraer clientes y liquidez inmediata.",
-                accionFuegoBano: "Limpieza de negocio quemando cáscaras de mandarina seca con carbón dulce al iniciar la mañana.",
-                prohibicionEstricta: "Prohibido prestar dinero o mercancía fiada durante los próximos catorce días.",
-                diagnosticoGeneral: "El diagnóstico unificado de tu tirada señala que las trabas comerciales que tenías se desvanecen; la energía de Jofiel combinada con tus cartas marca el inicio de una etapa de entrada fluida de dinero y consolidación de tus proyectos.",
-                libroSecretos: "La riqueza verdadera no solo se cuenta en billetes, sino en la solidez de las bases que construyes cada mañana con disciplina.",
-                afirmacion: "La abundancia fluye hacia mis manos de forma constante y abundante.",
-                consejo: "Mi estimado Carlos de Valencia, recuerda lo que decía mi abuelo en el estero: camarón que se duerme se lo lleva la corriente, se queda sin billete y comiendo casabe seco."
+                cuandoVela: "domingo al despuntar el alba", 
+                paraQueVela: "atraer clientes y movimiento comercial",
+                accionFuegoBano: "Sahumerio de cáscara de mandarina seca con azúcar y café molido en la entrada de tu local.",
+                prohibicionEstricta: "Prohibido prestar dinero o dar mercancía fiada por los próximos catorce días.",
+                diagnosticoPositivo: "El oráculo decreta una apertura financiera inminente y la entrada de recursos que estabas esperando.",
+                diagnosticoDenso: "Hay fuga de recursos y desorden contable; las cartas invertidas advierten pérdidas si no ajustas las tuercas.",
+                libroSecretos: "La prosperidad real es hija de la disciplina y madre de la libertad.",
+                afirmacion: "La abundancia fluye hacia mí de forma limpia y constante.",
+                consejo: "Carlos, recuerda en el comercio: camarón que se duerme se lo lleva la corriente y se queda sin billete.",
+                advertencia: "No firmes ningún documento sin leer minuciosamente las letras pequeñas."
             },
             { 
                 user: "Alejandro_X", 
@@ -619,117 +598,125 @@
                 sol: "Escorpio", 
                 luna: "Aries", 
                 ascendente: "Aries",
-                frecuencia: "417 Hz (Disolución de Patrones Negativos)",
+                frecuencia: "417 Hz",
                 numPoderPersonal: "5",
                 numPoderDia: "13",
-                recomendacionExplicita: "Exige auditoría por escrito y rechaza acuerdos verbales sin respaldo legal inmediato.",
+                recomendacionExplicita: "Exige auditoría previa por escrito y no te dejes llevar por palabras bonitas.",
                 arcangel: "Arcángel Miguel", 
-                consejoArcangel: "Te envuelve en su manto para cortar toda energía densa y oscura.",
-                invocacionArcangel: "Invocalo los lunes a las 9 PM para romper envidias y blindar tu entorno.",
+                consejoArcangel: "Corta con tu espada de luz todo lazo engañoso o propuesta sospechosa.",
+                invocacionArcangel: "Invocálo los lunes por la noche.",
                 cuandoInvocarsArcangel: "lunes a las 9 PM",
-                serafin: "Serafín del Fuego Sagrado", 
-                consejoSerafin: "Quema los obstáculos y falsas alianzas que sabotean tus metas.",
-                cuandoInvocarsSerafin: "Al iniciar la noche del lunes", 
-                paraQueInvocarsSerafin: "Para destruir trabajos oscuros y cortar traiciones.",
-                vela: "Vela Azul Fuerte", 
-                cuandoVela: "Lunes a las 9 PM", 
-                paraQueVela: "Para romper envidias y blindar tu entorno.",
-                accionFuegoBano: "Baño de despojo con ruda, albahaca y sal marina disuelta en agua tibia de la cabeza a los pies.",
-                prohibicionEstricta: "Prohibido revelar tus planes financieros o montos de inversión a personas fuera del núcleo familiar.",
-                diagnosticoGeneral: "Al juntar el mensaje de tus cartas, el oráculo advierte una trampa oculta detrás de esa propuesta; las energías apuntan a falsas alianzas y pérdidas si te arriesgas a firmar sin revisar cada detalle.",
-                libroSecretos: "El escudo más poderoso contra la traición es la intuición alerta combinada con la prudencia absoluta en tus decisiones.",
-                afirmacion: "Mi camino está blindado y protegido de toda energía malintencionada.",
-                consejo: "Ajá, mi compadre Alejandro desde Maracaibo; ojo pelao con esa gente, porque el que tenga rabo de paja que no se acerque a la candela porque aquí se quema hasta el apellido."
-            },
-            { 
-                user: "Sofia_Tarot", 
-                nombre: "Sofía Montenegro", 
-                fecha: "10/01/1996", 
-                lugar: "Barquisimeto, Venezuela",
-                veredicto: "¡SÍ!", 
-                pregunta: "¿Encontraré la paz mental y la respuesta que tanto busco?",
-                sol: "Capricornio", 
-                luna: "Virgo", 
-                ascendente: "Virgo",
-                frecuencia: "741 Hz (Despertar de la Intuición y Claridad)",
-                numPoderPersonal: "11",
-                numPoderDia: "33",
-                recomendacionExplicita: "Practica silencio consciente al despertar y escribe tus sueños en una libreta antes del mediodía.",
-                arcangel: "Arcángel Rafael", 
-                consejoArcangel: "Sana tu cuerpo físico y eleva tu percepción espiritual al máximo.",
-                invocacionArcangel: "Invocalo los jueves a las 6 PM para calmar la mente y sintonizar guías de luz.",
-                cuandoInvocarsArcangel: "jueves a las 6 PM",
-                serafin: "Serafín de la Estrella del Alba", 
-                consejoSerafin: "Te guía hacia la revelación de verdades ocultas.",
-                cuandoInvocarsSerafin: "Al caer la tarde del jueves", 
-                paraQueInvocarsSerafin: "Para despejar el pensamiento y aclarar sueños premonitorios.",
-                vela: "Vela Verde", 
-                cuandoVela: "Jueves a las 6 PM", 
-                paraQueVela: "Para calmar la mente y sintonizar guías de luz.",
-                accionFuegoBano: "Limpia con incienso de sándalo y baño armonizador de hojas de menta con manzanilla.",
-                prohibicionEstricta: "Prohibido engancharte en discusiones ajenas o cargar con culpas que no te pertenecen.",
-                diagnosticoGeneral: "El análisis conjunto de tus cartas confirma que la confusión mental que te atormentaba llega a su fin; la sanación de Rafael disipa la neblina y te devuelve la certeza absoluta que estabas esperando.",
-                libroSecretos: "La verdadera paz mental nace al aceptar que el universo tiene sus propios tiempos perfectos para revelarte la verdad.",
-                afirmacion: "Mi mente es un templo de paz, claridad y sabiduría divina.",
-                consejo: "Mi querida Sofía de Barquisimeto, no comas cuento de nadie; más sabe el diablo por viejo que por diablo."
-            },
-            { 
-                user: "Daniel_88", 
-                nombre: "Daniel Rodríguez", 
-                fecha: "30/09/1988", 
-                lugar: "San Antonio de los Altos",
-                veredicto: "¡SÍ!", 
-                pregunta: "¿Se resolverá a mi favor este ciclo legal y de deudas?",
-                sol: "Libra", 
-                luna: "Escorpio", 
-                ascendente: "Escorpio",
-                frecuencia: "963 Hz (Conexión Divina y Cierre de Kármicos)",
-                numPoderPersonal: "9",
-                numPoderDia: "18",
-                recomendacionExplicita: "Mantén orden riguroso en tus folios legales y acude a las citaciones vistiendo prenda blanca o azul.",
-                arcangel: "Arcángel Zadquiel", 
-                consejoArcangel: "Transmuta el dolor y las deudas del pasado en sabiduría pura.",
-                invocacionArcangel: "Invocalo los sábados a las 8 PM para soltar ataduras y deudas kármicas.",
-                cuandoInvocarsArcangel: "sábados a las 8 PM",
-                serafin: "Serafín de la Divina Misericordia", 
-                consejoSerafin: "Te otorga gracia divina ante juicios y cierres difíciles.",
-                cuandoInvocarsSerafin: "Al anochecer del sábado", 
-                paraQueInvocarsSerafin: "Para armonizar el espíritu y dar paso a la victoria judicial.",
-                vela: "Vela Violeta", 
-                cuandoVela: "Sábado a las 8 PM", 
-                paraQueVela: "Para soltar ataduras y deudas kármicas.",
-                accionFuegoBano: "Acción de fuego encendiendo una vela morada sobre sal gruesa para consumir ataduras legales.",
-                prohibicionEstricta: "Prohibido guardar resentimientos hacia tus contrapartes; delega la justicia en el oráculo.",
-                diagnosticoGeneral: "La lectura unificada de tus cartas decreta una victoria inminente en tus asuntos legales; la balanza se inclina a tu favor, cerrando de manera definitiva los ciclos de deudas y cargas pesadas.",
-                libroSecretos: "Cerrar un ciclo con honor es abrirle la puerta dorada a la justicia divina y a la prosperidad inquebrantable.",
-                afirmacion: "Libero el pasado con gracia y recibo la victoria que me corresponde por derecho divino.",
-                consejo: "Daniel de los Altos Mirandinos, al mal tiempo buena cara y al acreedor... ¡que espere sentado en la talanquera!"
+                serafin: "Serafín del Fuego Purificador", 
+                consejoSerafin: "Quema la falsedad de quienes intentan usar tu esfuerzo en su beneficio.",
+                cuandoInvocarsSerafin: "al anochecer del lunes", 
+                paraQueInvocarsSerafin: "destruir traiciones y malas intenciones",
+                vela: "Vela Azul Oscuro", 
+                cuandoVela: "lunes a las 9 PM", 
+                paraQueVela: "blindar tus proyectos contra la envidia",
+                accionFuegoBano: "Baño de despojo con ruda, albahaca y sal gruesa de la cabeza a los pies.",
+                prohibicionEstricta: "Prohibido revelar tus números o estrategias a personas ajenas.",
+                diagnosticoPositivo: "A pesar de las dudas, la alianza se muestra sólida si se respalda legalmente.",
+                diagnosticoDenso: "Las cartas denotan engaños y dobles intenciones; entrar en esa sociedad sería una trampa financiera.",
+                libroSecretos: "Quien camina con precaución jamás cae en el foso de la traición.",
+                afirmacion: "Mi sabiduría protege mis bienes y mi destino.",
+                consejo: "Alejandro, compadre: el que tiene rabo de paja no se acerca a la candela ni por equivocación.",
+                advertencia: "Ojo pelao, no entregues tu esfuerzo a manos dudosas."
             }
         ];
 
         let colaConsultantes = [...consultantesPool];
         let estaLeyendo = false;
 
+        // BARAJA COMPLETA DE 78 CARTAS DE TAROT
         const tarotDeck = [
-            { name: "El Loco", file: "El loco.jpg" },
-            { name: "El Mago", file: "El Mago.jpg" },
-            { name: "La Sacerdotisa", file: "La Sacerdotisa.jpg" },
-            { name: "La Emperatriz", file: "El emperatriz.jpg" },
-            { name: "El Emperador", file: "El emperador.jpg" },
-            { name: "El Ermitaño", file: "El ermitaño.jpg" },
-            { name: "El Carro", file: "El carro.jpg" },
-            { name: "La Fuerza", file: "La fuerza.jpg" },
-            { name: "La Justicia", file: "La justicia.jpg" },
-            { name: "La Muerte", file: "La muerte.jpg" },
-            { name: "La Templanza", file: "La templanza.jpg" },
-            { name: "El Diablo", file: "El diablo.jpg" },
-            { name: "La Torre", file: "La torres.jpg" },
-            { name: "La Estrella", file: "La estrella.jpg" },
-            { name: "La Luna", file: "La luna.jpg" },
-            { name: "El Sol", file: "El sol.jpg" },
-            { name: "El Mundo", file: "El mundo.jpg" },
-            { name: "Los Amantes", file: "Los amantes.jpg" },
-            { name: "La Rueda de la Fortuna", file: "La rueda de la fortuna.jpg" }
+            // 22 ARCANOS MAYORES
+            { name: "0. El Loco", file: "El loco.jpg" },
+            { name: "I. El Mago", file: "El Mago.jpg" },
+            { name: "II. La Sacerdotisa", file: "La Sacerdotisa.jpg" },
+            { name: "III. La Emperatriz", file: "El emperatriz.jpg" },
+            { name: "IV. El Emperador", file: "El emperador.jpg" },
+            { name: "V. El Sumo Sacerdote", file: "El ermitaño.jpg" },
+            { name: "VI. Los Enamorados", file: "Los amantes.jpg" },
+            { name: "VII. El Carro", file: "El carro.jpg" },
+            { name: "VIII. La Fuerza", file: "La fuerza.jpg" },
+            { name: "IX. El Ermitaño", file: "El ermitaño.jpg" },
+            { name: "X. La Rueda de la Fortuna", file: "La rueda de la fortuna.jpg" },
+            { name: "XI. La Justicia", file: "La justicia.jpg" },
+            { name: "XII. El Colgado", file: "El loco.jpg" },
+            { name: "XIII. La Muerte", file: "La muerte.jpg" },
+            { name: "XIV. La Templanza", file: "La templanza.jpg" },
+            { name: "XV. El Diablo", file: "El diablo.jpg" },
+            { name: "XVI. La Torre", file: "La torres.jpg" },
+            { name: "XVII. La Estrella", file: "La estrella.jpg" },
+            { name: "XVIII. La Luna", file: "La luna.jpg" },
+            { name: "XIX. El Sol", file: "El sol.jpg" },
+            { name: "XX. El Juicio", file: "El mundo.jpg" },
+            { name: "XXI. El Mundo", file: "El mundo.jpg" },
+
+            // 56 ARCANOS MENORES
+            // BASTOS
+            { name: "As de Bastos", file: "El Mago.jpg" },
+            { name: "2 de Bastos", file: "El carro.jpg" },
+            { name: "3 de Bastos", file: "El emperador.jpg" },
+            { name: "4 de Bastos", file: "El sol.jpg" },
+            { name: "5 de Bastos", file: "La fuerza.jpg" },
+            { name: "6 de Bastos", file: "El mundo.jpg" },
+            { name: "7 de Bastos", file: "La justicia.jpg" },
+            { name: "8 de Bastos", file: "La estrella.jpg" },
+            { name: "9 de Bastos", file: "El ermitaño.jpg" },
+            { name: "10 de Bastos", file: "La torres.jpg" },
+            { name: "Sota de Bastos", file: "El loco.jpg" },
+            { name: "Caballero de Bastos", file: "El carro.jpg" },
+            { name: "Reina de Bastos", file: "El emperatriz.jpg" },
+            { name: "Rey de Bastos", file: "El emperador.jpg" },
+
+            // COPAS
+            { name: "As de Copas", file: "La Sacerdotisa.jpg" },
+            { name: "2 de Copas", file: "Los amantes.jpg" },
+            { name: "3 de Copas", file: "El sol.jpg" },
+            { name: "4 de Copas", file: "La luna.jpg" },
+            { name: "5 de Copas", file: "La muerte.jpg" },
+            { name: "6 de Copas", file: "La estrella.jpg" },
+            { name: "7 de Copas", file: "El diablo.jpg" },
+            { name: "8 de Copas", file: "El ermitaño.jpg" },
+            { name: "9 de Copas", file: "El mundo.jpg" },
+            { name: "10 de Copas", file: "El emperatriz.jpg" },
+            { name: "Sota de Copas", file: "La templanza.jpg" },
+            { name: "Caballero de Copas", file: "Los amantes.jpg" },
+            { name: "Reina de Copas", file: "La Sacerdotisa.jpg" },
+            { name: "Rey de Copas", file: "El emperador.jpg" },
+
+            // ESPADAS
+            { name: "As de Espadas", file: "La justicia.jpg" },
+            { name: "2 de Espadas", file: "La luna.jpg" },
+            { name: "3 de Espadas", file: "La muerte.jpg" },
+            { name: "4 de Espadas", file: "El ermitaño.jpg" },
+            { name: "5 de Espadas", file: "El diablo.jpg" },
+            { name: "6 de Espadas", file: "El carro.jpg" },
+            { name: "7 de Espadas", file: "El loco.jpg" },
+            { name: "8 de Espadas", file: "La torres.jpg" },
+            { name: "9 de Espadas", file: "La luna.jpg" },
+            { name: "10 de Espadas", file: "La muerte.jpg" },
+            { name: "Sota de Espadas", file: "La fuerza.jpg" },
+            { name: "Caballero de Espadas", file: "El carro.jpg" },
+            { name: "Reina de Espadas", file: "La justicia.jpg" },
+            { name: "Rey de Espadas", file: "El emperador.jpg" },
+
+            // OROS
+            { name: "As de Oros", file: "El Mago.jpg" },
+            { name: "2 de Oros", file: "La rueda de la fortuna.jpg" },
+            { name: "3 de Oros", file: "El emperatriz.jpg" },
+            { name: "4 de Oros", file: "El emperador.jpg" },
+            { name: "5 de Oros", file: "La torres.jpg" },
+            { name: "6 de Oros", file: "La templanza.jpg" },
+            { name: "7 de Oros", file: "El ermitaño.jpg" },
+            { name: "8 de Oros", file: "La fuerza.jpg" },
+            { name: "9 de Oros", file: "El sol.jpg" },
+            { name: "10 de Oros", file: "El mundo.jpg" },
+            { name: "Sota de Oros", file: "El Mago.jpg" },
+            { name: "Caballero de Oros", file: "El carro.jpg" },
+            { name: "Reina de Oros", file: "El emperatriz.jpg" },
+            { name: "Rey de Oros", file: "El emperador.jpg" }
         ];
 
         let totalTaps = 0;
@@ -737,7 +724,7 @@
         let yaSiguio = false;
         let tiempoRestanteContrato = 3600;
 
-        function hablarYSubtitularBloques(textoCompleto, titulo, onCompleteCallback) {
+        function hablarYSubtitularSincronizado(textoCompleto, titulo, onCompleteCallback) {
             if (!('speechSynthesis' in window)) {
                 if(onCompleteCallback) onCompleteCallback();
                 return;
@@ -751,7 +738,7 @@
 
             let utterance = new SpeechSynthesisUtterance(textoCompleto);
             utterance.lang = 'es-ES';
-            utterance.rate = 0.85; 
+            utterance.rate = 0.86; 
             utterance.pitch = 0.95; 
 
             let voices = window.speechSynthesis.getVoices();
@@ -767,22 +754,13 @@
                 utterance.voice = vozAsistente;
             }
 
-            utterance.onend = () => {
-                if(onCompleteCallback) onCompleteCallback();
-            };
-            utterance.onerror = () => {
-                if(onCompleteCallback) onCompleteCallback();
-            };
-
-            window.speechSynthesis.speak(utterance);
-
             let palabras = textoCompleto.split(" ");
             let bloques = [];
             let bloqueActual = "";
 
             palabras.forEach((palabra) => {
                 bloqueActual += palabra + " ";
-                if (bloqueActual.split(" ").length >= 6) {
+                if (bloqueActual.split(" ").length >= 4) {
                     bloques.push(bloqueActual.trim());
                     bloqueActual = "";
                 }
@@ -796,16 +774,45 @@
                 speechText.innerText = `"${bloques[0]}"`;
             }
 
-            window.currentBlockTimer = setInterval(() => {
-                indexBloque++;
-                if (indexBloque < bloques.length) {
-                    if(speechText) {
+            let sincroPorBoundary = false;
+
+            utterance.onboundary = function(event) {
+                if (event.name === 'word' && bloques.length > 0) {
+                    sincroPorBoundary = true;
+                    let charIndex = event.charIndex;
+                    let textoProcesado = textoCompleto.substring(0, charIndex);
+                    let palabrasHabladas = textoProcesado.trim().split(/\s+/).length;
+                    let nuevoIndex = Math.min(Math.floor(palabrasHabladas / 4), bloques.length - 1);
+                    if (nuevoIndex !== indexBloque && speechText) {
+                        indexBloque = nuevoIndex;
                         speechText.innerText = `"${bloques[indexBloque]}"`;
                     }
-                } else {
-                    clearInterval(window.currentBlockTimer);
                 }
-            }, 3100);
+            };
+
+            utterance.onend = () => {
+                if(window.currentBlockTimer) clearInterval(window.currentBlockTimer);
+                if(onCompleteCallback) onCompleteCallback();
+            };
+            utterance.onerror = () => {
+                if(window.currentBlockTimer) clearInterval(window.currentBlockTimer);
+                if(onCompleteCallback) onCompleteCallback();
+            };
+
+            window.speechSynthesis.speak(utterance);
+
+            window.currentBlockTimer = setInterval(() => {
+                if (!sincroPorBoundary) {
+                    indexBloque++;
+                    if (indexBloque < bloques.length) {
+                        if(speechText) {
+                            speechText.innerText = `"${bloques[indexBloque]}"`;
+                        }
+                    } else {
+                        clearInterval(window.currentBlockTimer);
+                    }
+                }
+            }, 1950);
         }
 
         if ('speechSynthesis' in window) {
@@ -915,6 +922,8 @@
             setTimeout(() => {
                 container.innerHTML = '';
                 const seleccionadas = [];
+                
+                // Selección aleatoria sobre las 78 cartas sin repetir
                 while(seleccionadas.length < cantidadCartas) {
                     let carta = tarotDeck[Math.floor(Math.random() * tarotDeck.length)];
                     if(!seleccionadas.includes(carta)) seleccionadas.push(carta);
@@ -941,18 +950,12 @@
                             <span>${carta.name}</span>
                         `;
                         container.appendChild(cardDiv);
-                    }, index * 200);
+                    }, index * 180);
                 });
 
-                let estadoTiradaTexto = "";
-                let diagnosticoReal = actual.diagnosticoGeneral;
-
-                if (contadorInvertidas >= Math.ceil(cantidadCartas / 2)) {
-                    estadoTiradaTexto = `¡Atención! Las cartas muestran una fuerte carga de bloqueos e inversión en mesa.`;
-                    diagnosticoReal = `La presencia de cartas invertidas frena temporalmente tus aspiraciones y te exige precaución absoluta; ${actual.diagnosticoGeneral.toLowerCase()}`;
-                } else {
-                    estadoTiradaTexto = `¡${actual.veredicto} El flujo energético se muestra propicio en la mesa!`;
-                }
+                // Evaluación de coherencia entre cartas invertidas y el diagnóstico
+                let esTiradaDensa = contadorInvertidas >= Math.ceil(cantidadCartas / 2);
+                let diagnosticoReal = esTiradaDensa ? actual.diagnosticoDenso : actual.diagnosticoPositivo;
 
                 let nombresSalidaTexto = datosCartasMesa.map(c => `${c.nombre} ${c.invertida ? 'invertida' : 'al derecho'}`).join(", ");
 
@@ -960,46 +963,46 @@
 
                 if (cantidadCartas === 4) {
                     // 4 CARTAS (VIP - COCHE / CAZA)
-                    lecturaCompleta = `Atendiendo la consulta VIP de ${actual.nombre} sobre "${actual.pregunta}"... ${estadoTiradaTexto} Cartas en mesa: ${nombresSalidaTexto}. `;
-                    lecturaCompleta += `Diagnóstico del oráculo y tarot: La combinación de tus cartas señala que ${diagnosticoReal} `;
-                    lecturaCompleta += `Matriz Astral: Sol en ${actual.sol}, Luna en ${actual.luna}, Ascendente en ${actual.ascendente}. Tu Frecuencia Vibracional es de ${actual.frecuencia}. Tu Número de Poder Personal es el ${actual.numPoderPersonal} y tu Número de Poder del Día es el ${actual.numPoderDia}. `;
+                    lecturaCompleta = `Atendiendo la consulta VIP de ${actual.nombre} sobre "${actual.pregunta}"... Cartas en mesa: ${nombresSalidaTexto}. `;
+                    lecturaCompleta += `Diagnóstico unificado del oráculo y tarot: La combinación de tus cartas revela que ${diagnosticoReal} `;
+                    lecturaCompleta += `Matriz Astral: Sol en ${actual.sol}, Luna en ${actual.luna}, Ascendente en ${actual.ascendente}. Frecuencia Energética: ${actual.frecuencia}. Número de Poder Personal: ${actual.numPoderPersonal}. Número de Poder del Día: ${actual.numPoderDia}. `;
                     lecturaCompleta += `Recomendación Explícita: ${actual.recomendacionExplicita} `;
-                    lecturaCompleta += `Te rige el ${actual.arcangel}: ${actual.consejoArcangel}. Debes invocarlo ${actual.cuandoInvocarsArcangel}. `;
-                    lecturaCompleta += `Te acompaña el ${actual.serafin}: ${actual.consejoSerafin}. Invocálo ${actual.cuandoInvocarsSerafin} para ${actual.paraQueInvocarsSerafin}. `;
-                    lecturaCompleta += `Consagra tu ${actual.vela} el día ${actual.cuandoVela} (${actual.paraQueVela}). `;
+                    lecturaCompleta += `Arcángel: ${actual.arcangel}. Consejo: ${actual.consejoArcangel}. Invocación: ${actual.invocacionArcangel}. `;
+                    lecturaCompleta += `Serafín Guardián: ${actual.serafin}. Consejo: ${actual.consejoSerafin}. Debes invocarlo ${actual.cuandoInvocarsSerafin} para ${actual.paraQueInvocarsSerafin}. `;
+                    lecturaCompleta += `Vela Ritual: ${actual.vela}. Enciéndela el ${actual.cuandoVela} (${actual.paraQueVela}). `;
                     lecturaCompleta += `Acción de Fuego y Baño Sagrado: ${actual.accionFuegoBano} `;
-                    lecturaCompleta += `Prohibición Estricta: ${actual.prohibicionEstricta} `;
-                    lecturaCompleta += `Consejo final: ${actual.consejo} Hasta aquí tu consulta VIP.`;
+                    lecturaCompleta += `Prohibición Estricta Energética: ${actual.prohibicionEstricta} `;
+                    lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura VIP.`;
 
                 } else if (cantidadCartas === 10) {
                     // 10 CARTAS (CRUZ CELTA / MÁXIMA - OVNI / YATE)
-                    lecturaCompleta = `Atendiendo la tirada Máxima de Cruz Celta para ${actual.nombre} sobre "${actual.pregunta}"... ${estadoTiradaTexto} Cartas reveladas: ${nombresSalidaTexto}. `;
-                    lecturaCompleta += `Diagnóstico unificado del oráculo y tarot: La combinación de tus cartas revela que ${diagnosticoReal} `;
+                    lecturaCompleta = `Atendiendo la tirada Máxima de Cruz Celta para ${actual.nombre} sobre "${actual.pregunta}"... Cartas reveladas: ${nombresSalidaTexto}. `;
+                    lecturaCompleta += `Diagnóstico unificado profundo del oráculo y tarot: La combinación de tus diez cartas indica que ${diagnosticoReal} `;
                     lecturaCompleta += `Matriz Astral completa: Sol en ${actual.sol}, Luna en ${actual.luna}, Ascendente en ${actual.ascendente}. Frecuencia Energética: ${actual.frecuencia}. Número de Poder Personal: ${actual.numPoderPersonal}. Número de Poder del Día: ${actual.numPoderDia}. `;
                     lecturaCompleta += `Recomendación Explícita: ${actual.recomendacionExplicita} `;
-                    lecturaCompleta += `Para tu pregunta te guía el ${actual.arcangel}: ${actual.consejoArcangel}. Invocálo ${actual.cuandoInvocarsArcangel}. `;
-                    lecturaCompleta += `Te respalda el ${actual.serafin}: ${actual.consejoSerafin}. Invocálo ${actual.cuandoInvocarsSerafin} para ${actual.paraQueInvocarsSerafin}. `;
-                    lecturaCompleta += `Ritual de Vela: Enciende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}). `;
+                    lecturaCompleta += `Arcángel: ${actual.arcangel}. Consejo ajustado a tu pregunta: ${actual.consejoArcangel}. Debes invocarlo ${actual.cuandoInvocarsArcangel}. `;
+                    lecturaCompleta += `Serafín Guardián: ${actual.serafin}. Consejo: ${actual.consejoSerafin}. Debes invocarlo ${actual.cuandoInvocarsSerafin}. `;
+                    lecturaCompleta += `Vela Ritual de Consagración: ${actual.vela}. Enciéndela el ${actual.cuandoVela} (${actual.paraQueVela}). `;
                     lecturaCompleta += `Acción de Fuego / Baño de Transmutación: ${actual.accionFuegoBano} `;
-                    lecturaCompleta += `Prohibición energética: ${actual.prohibicionEstricta} `;
-                    lecturaCompleta += `Secreto del Libro de los Secretos: ${actual.libroSecretos} `;
+                    lecturaCompleta += `Prohibición Energética Estricta: ${actual.prohibicionEstricta} `;
+                    lecturaCompleta += `Secreto revelado del Libro de los Secretos: ${actual.libroSecretos} `;
                     lecturaCompleta += `Afirmación de Poder: "${actual.afirmacion}" `;
-                    lecturaCompleta += `Consejo final: ${actual.consejo} Hasta aquí tu consulta Máxima.`;
+                    lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura Máxima.`;
 
                 } else {
                     // 2 CARTAS (GRATIS)
-                    lecturaCompleta = `Atendiendo la consulta gratis de ${actual.nombre} sobre "${actual.pregunta}"... ${estadoTiradaTexto} Cartas en mesa: ${nombresSalidaTexto}. `;
-                    lecturaCompleta += `Diagnóstico unificado del oráculo: ${diagnosticoReal} `;
+                    lecturaCompleta = `Atendiendo la consulta gratis para ${actual.nombre} sobre "${actual.pregunta}"... Cartas en mesa: ${nombresSalidaTexto}. `;
+                    lecturaCompleta += `Diagnóstico unificado directo del oráculo y tarot: ${diagnosticoReal} `;
                     lecturaCompleta += `Matriz Astral: Sol en ${actual.sol} y Luna en ${actual.luna}. `;
-                    lecturaCompleta += `Te rige el ${actual.arcangel}, cuyo consejo es: ${actual.consejoArcangel}. ${actual.invocacionArcangel}. `;
-                    lecturaCompleta += `Prende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}). `;
-                    lecturaCompleta += `Consejo final: ${actual.consejo} Hasta aquí tu lectura gratis.`;
+                    lecturaCompleta += `Arcángel Regente: ${actual.arcangel}. Consejo puntual: ${actual.consejoArcangel}. Deberás invocarlo ${actual.cuandoInvocarsArcangel} (${actual.invocacionArcangel}). `;
+                    lecturaCompleta += `Vela de Poder: ${actual.vela}. Encender el ${actual.cuandoVela}. `;
+                    lecturaCompleta += `Consejo Final y Advertencia: ${actual.consejo} ${actual.advertencia} Hasta aquí tu lectura gratis.`;
                 }
                 
-                hablarYSubtitularBloques(lecturaCompleta, `Oráculo para ${actual.nombre} (${cantidadCartas} Cartas)`, () => {
+                hablarYSubtitularSincronizado(lecturaCompleta, `Oráculo para ${actual.nombre} (${cantidadCartas} Cartas)`, () => {
                     estaLeyendo = false;
                 });
-            }, 4000);
+            }, 3800);
         }
 
         setInterval(() => {
@@ -1046,7 +1049,6 @@
 
         actualizarVistaCola();
 
-        // PARTÍCULAS
         const container = document.getElementById('mainContainer');
         setInterval(() => {
             const particle = document.createElement('div');
