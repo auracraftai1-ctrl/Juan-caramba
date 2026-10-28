@@ -241,14 +241,14 @@
             100% { transform: translateX(-50%) scale(1.15) rotate(2deg); opacity: 1; }
         }
 
-        /* SALA DE ESPERA (REUBICADA ARRIBA A LA DERECHA, LIBRE DE CRUCES) */
+        /* SALA DE ESPERA (SUBIDA AL MÁXIMO ARRIBA A LA DERECHA) */
         .waiting-queue {
             position: fixed;
-            top: 15px;
+            top: 5px;
             right: 15px;
             width: 160px;
             background: transparent;
-            padding: 4px 0;
+            padding: 2px 0;
             color: #fff;
             z-index: 100;
             text-shadow: 1px 1px 3px #000;
@@ -256,10 +256,10 @@
         .waiting-queue h4 {
             margin: 0 0 2px 0;
             color: #d4af37;
-            font-size: 8.5px;
+            font-size: 8px;
             text-align: right;
             border-bottom: 1px solid rgba(212, 175, 55, 0.5);
-            padding-bottom: 2px;
+            padding-bottom: 1px;
             text-transform: uppercase;
         }
         .queue-list {
@@ -268,13 +268,13 @@
             margin: 0;
             display: flex;
             flex-direction: column;
-            gap: 2px;
-            max-height: 110px;
+            gap: 1px;
+            max-height: 90px;
             overflow: hidden;
         }
         .queue-item {
-            font-size: 7.5px;
-            padding: 2px 4px;
+            font-size: 7px;
+            padding: 1px 3px;
             background: transparent;
             border-radius: 2px;
             display: flex;
@@ -287,14 +287,14 @@
             text-shadow: 0 0 6px #d4af37;
         }
 
-        /* REGALOS RECIENTES DE KICK (REUBICADOS ARRIBA A LA DERECHA, BIEN VISIBLES) */
+        /* REGALOS RECIENTES DE KICK (SUBIDO Y LIBRE DE CRUCES CON LAS LETRAS) */
         .gifts-panel {
             position: fixed;
-            top: 145px;
+            top: 110px;
             right: 15px;
             width: 160px;
             background: transparent;
-            padding: 3px 0;
+            padding: 2px 0;
             color: #fff;
             z-index: 90;
             text-shadow: 1px 1px 3px #000;
@@ -310,8 +310,8 @@
             font-size: 7px;
             display: flex;
             flex-direction: column;
-            gap: 2px;
-            max-height: 65px;
+            gap: 1px;
+            max-height: 55px;
             overflow: hidden;
             align-items: flex-end;
         }
@@ -511,13 +511,13 @@
             <div class="flame"></div>
         </div>
 
-        <!-- SALA DE ESPERA (ARRIBA DERECHA) -->
+        <!-- SALA DE ESPERA (BIEN ARRIBA A LA DERECHA) -->
         <div class="waiting-queue">
             <h4>Sala de Espera</h4>
             <ul class="queue-list" id="queueList"></ul>
         </div>
 
-        <!-- REGALOS RECIENTES DE KICK (ARRIBA DERECHA, LIBRE DE CRUCES) -->
+        <!-- REGALOS RECIENTES DE KICK (SUBIDO Y LIBRE DE LAS LETRAS) -->
         <div class="gifts-panel">
             <h5>🎁 Recientes Kick</h5>
             <div class="gift-feed" id="giftFeed">
@@ -550,15 +550,7 @@
                 veredicto: "¡SÍ!", pregunta: "¿Sanaré este dolor del corazón y encontraré el amor sincero?",
                 matrizAstral: "Sol en Escorpio y Ascendente Leo: intensidad emocional profunda.",
                 arcangel: "Arcángel Chamuel", consejoArcangel: "Te otorga el perdón profundo para sanar las heridas sentimentales.",
-                serafin: "Serafín de la Llama Celeste", consejoSerafin: "Te alinea con el fuego de la verdad para despejar sombras mentales.",
-                accionFuego: "Cuestiona tus suposiciones sobre por qué los demás actúan como lo hacen.",
-                evitarFuego: "Evita dramatizar situaciones sociales o alimentar la queja constante.",
-                momentoFuego: "Sella al caer el sol encendiendo una vela azul.",
-                colorDia: "Azul Zafiro para proyectar serenidad y seguridad emocional.",
                 vela: "Vela Azul Claro", cuandoVela: "Al atardecer", paraQueVela: "Para disipar las dudas y revelar tu valor interior.",
-                bano: "Baño de Claridad con manzanilla, sal marina y pétalos de rosa.",
-                paraQueBano: "Para limpiar tu campo energético de pensamientos intrusivos antes de dormir.",
-                numerologia: "Número 6 de Armonía y Vínculos", significadoNum: "Cierra tu ciclo de soledad para dar paso a un compromiso firme.",
                 libroSecretos: "El secreto del corazón abierto radica en soltar el control y permitir que la energía del universo te guíe sin resistencia.",
                 afirmacion: "Yo merezco un amor sincero, puro y libre de cargas pasadas.",
                 consejo: "Ay, mi Mariana de Caracas... Como dice el dicho: el amor es como el arroz, el que no se aviva se queda sin comer y con la olla raspada. Sella este proceso con fe."
@@ -568,15 +560,7 @@
                 veredicto: "¡SÍ!", pregunta: "¿Se destrabará mi negocio y entrará liquidez a mis bolsillos?",
                 matrizAstral: "Sol en Cáncer y Ascendente Tauro: arraigo material y protección de los frutos comerciales.",
                 arcangel: "Arcángel Jofiel", consejoArcangel: "Ilumina tu mente para romper la escasez material y comercial.",
-                serafin: "Serafín de los Siete Cielos", consejoSerafin: "Abre portales dimensionales de prosperidad en tus empresas.",
-                accionFuego: "Analiza con frialdad la estrategia comercial de tu inventario.",
-                evitarFuego: "Evita gastar en lo que no produce riqueza a corto plazo.",
-                momentoFuego: "Prende tu luz dorada al romper el alba del domingo.",
-                colorDia: "Amarillo Solar para atraer la energía de la abundancia líquida.",
                 vela: "Vela Amarilla o Naranja", cuandoVela: "Domingo a las 7 AM", paraQueVela: "Para atraer clientes y liquidez inmediata.",
-                bano: "Baño de Oro y Miel con girasol, miel pura y canela.",
-                paraQueBano: "Para barrer salaciones financieras y abrir caminos de prosperidad.",
-                numerologia: "Número 8 de Poder y Abundancia", significadoNum: "Te recuerda que eres arquitecto de tu propia realidad económica.",
                 libroSecretos: "La riqueza verdadera no solo se cuenta en billetes, sino en la solidez de las bases que construyes cada mañana con disciplina.",
                 afirmacion: "La abundancia fluye hacia mis manos de forma constante y abundante.",
                 consejo: "Mi estimado Carlos de Valencia, recuerda lo que decía mi abuelo en el estero: camarón que se duerme se lo lleva la corriente, se queda sin billete y comiendo casabe seco."
@@ -586,15 +570,7 @@
                 veredicto: "¡NO!", pregunta: "¿Debo confiar en esta nueva sociedad comercial que me proponen?",
                 matrizAstral: "Sol en Escorpio y Ascendente Aries: impulso de lucha que choca con sombras ocultas.",
                 arcangel: "Arcángel Miguel", consejoArcangel: "Te envuelve en su manto para cortar toda energía densa y oscura.",
-                serafin: "Serafín del Fuego Sagrado", consejoSerafin: "Quema los obstáculos y falsas alianzas que sabotean tus metas.",
-                accionFuego: "Protege tu espacio vital de opiniones ajenas y personas malintencionadas.",
-                evitarFuego: "Evita firmar papeles importantes sin revisar la letra pequeña.",
-                momentoFuego: "Enciende tu protección al iniciar la semana.",
-                colorDia: "Azul Cobalto para blindar tu aura de cualquier maldad.",
                 vela: "Vela Azul Fuerte", cuandoVela: "Lunes a las 9 PM", paraQueVela: "Para romper envidias y blindar tu entorno.",
-                bano: "Baño de Ruda macho y Romero fresco.",
-                paraQueBano: "Para una limpieza profunda contra trabajos oscuros y pesadez.",
-                numerologia: "Número 1 de Liderazgo y Poder Personal", significadoNum: "Te impulsa a brillar con luz propia sin depender de socios dudosos.",
                 libroSecretos: "El escudo más poderoso contra la traición es la intuición alerta combinada con la prudencia absoluta en tus decisiones.",
                 afirmacion: "Mi camino está blindado y protegido de toda energía malintencionada.",
                 consejo: "Ajá, mi compadre Alejandro desde Maracaibo; ojo pelao con esa gente, porque el que tenga rabo de paja que no se acerque a la candela porque aquí se quema hasta el apellido."
@@ -604,15 +580,7 @@
                 veredicto: "¡SÍ!", pregunta: "¿Encontraré la paz mental y la respuesta que tanto busco?",
                 matrizAstral: "Sol en Capricornio y Ascendente Virgo: mente analítica que busca claridad.",
                 arcangel: "Arcángel Rafael", consejoArcangel: "Sana tu cuerpo físico y eleva tu percepción espiritual al máximo.",
-                serafin: "Serafín de la Estrella del Alba", consejoSerafin: "Te guía hacia la revelación de verdades ocultas.",
-                accionFuego: "Medita en silencio para escuchar las respuestas de tu voz interior.",
-                evitarFuego: "Evita sobrepensar escenarios que aún no han ocurrido.",
-                momentoFuego: "Realiza tu pausa sanadora al caer la tarde.",
-                colorDia: "Verde Esmeralda para equilibrar tus emociones y mente.",
                 vela: "Vela Verde", cuandoVela: "Jueves a las 6 PM", paraQueVela: "Para calmar la mente y sintonizar guías de luz.",
-                bano: "Baño de Eucalipto y Manzanilla fresca.",
-                paraQueBano: "Para despejar el pensamiento y aclarar tu mente intuitiva.",
-                numerologia: "Número 7 de Sabiduría e Intuición", significadoNum: "Confirma que tu voz interior es tu guía más fiel.",
                 libroSecretos: "La verdadera paz mental nace al aceptar que el universo tiene sus propios tiempos perfectos para revelarte la verdad.",
                 afirmacion: "Mi mente es un templo de paz, claridad y sabiduría divina.",
                 consejo: "Mi querida Sofía de Barquisimeto, no comas cuento de nadie; más sabe el diablo por viejo que por diablo."
@@ -622,15 +590,7 @@
                 veredicto: "¡SÍ!", pregunta: "¿Se resolverá a mi favor este ciclo legal y de deudas?",
                 matrizAstral: "Sol en Libra y Ascendente Escorpio: balanza de justicia impulsada por transformación.",
                 arcangel: "Arcángel Zadquiel", consejoArcangel: "Transmuta el dolor y las deudas del pasado en sabiduría pura.",
-                serafin: "Serafín de la Divina Misericordia", consejoSerafin: "Te otorga gracia divina ante juicios y cierres difíciles.",
-                accionFuego: "Firma, decide y corta de raíz aquello que ya cumplió su tiempo.",
-                evitarFuego: "Evita mirar atrás con nostalgia o culpa innecesaria.",
-                momentoFuego: "Sella tu liberación sabatina con fuego violeta.",
-                colorDia: "Violeta Transmutador para elevar tu vibración kármica.",
                 vela: "Vela Violeta", cuandoVela: "Sábado a las 8 PM", paraQueVela: "Para soltar ataduras y deudas kármicas.",
-                bano: "Baño de Lavanda e Incienso natural.",
-                paraQueBano: "Para armonizar el espíritu y dar paso a la victoria.",
-                numerologia: "Número 9 de Evolución y Cierre", significadoNum: "Anuncia el fin de la tormenta para abrir portales de éxito.",
                 libroSecretos: "Cerrar un ciclo con honor es abrirle la puerta dorada a la justicia divina y a la prosperidad inquebrantable.",
                 afirmacion: "Libero el pasado con gracia y recibo la victoria que me corresponde por derecho divino.",
                 consejo: "Daniel de los Altos Mirandinos, al mal tiempo buena cara y al acreedor... ¡que espere sentado en la talanquera!"
@@ -667,7 +627,6 @@
         let yaSiguio = false;
         let tiempoRestanteContrato = 3600;
 
-        // MOTOR DE VOZ Y SUBTÍTULOS MILIMÉTRICAMENTE SINCRONIZADOS A LA VELOCIDAD DE LA VOZ
         function hablarYSubtitularBloques(textoCompleto, titulo, onCompleteCallback) {
             if (!('speechSynthesis' in window)) {
                 if(onCompleteCallback) onCompleteCallback();
@@ -698,7 +657,6 @@
                 utterance.voice = vozAsistente;
             }
 
-            // Al terminar la voz de forma natural, liberamos el estado de lectura
             utterance.onend = () => {
                 if(onCompleteCallback) onCompleteCallback();
             };
@@ -708,7 +666,6 @@
 
             window.speechSynthesis.speak(utterance);
 
-            // Sincronización perfecta de bloques de texto según la velocidad de la voz
             let palabras = textoCompleto.split(" ");
             let bloques = [];
             let bloqueActual = "";
@@ -738,7 +695,7 @@
                 } else {
                     clearInterval(window.currentBlockTimer);
                 }
-            }, 6800); // 6.8 segundos por bloque exactos para caminar al mismo paso de la voz
+            }, 6800);
         }
 
         if ('speechSynthesis' in window) {
@@ -819,9 +776,8 @@
             }
         }
 
-        // FUNCIÓN MAESTRA DE TIRADAS QUE RESPETA COLA Y BLOQUEOS
         function ejecutarLecturaProxima() {
-            if (estaLeyendo) return; // Si ya hay una lectura en curso, esperamos a que termine
+            if (estaLeyendo) return;
             estaLeyendo = true;
 
             const container = document.getElementById('cardContainer');
@@ -831,12 +787,11 @@
             }
 
             const actual = colaConsultantes.shift();
-            colaConsultantes.push(actual); // Rotación de cola
+            colaConsultantes.push(actual);
             actualizarVistaCola();
 
-            // Determinamos si este consultante trae una tirada especial VIP o es de 2 cartas por defecto
             let cantidadCartas = actual.cartasAsignadas || 2;
-            delete actual.cartasAsignadas; // Limpiamos para el próximo ciclo
+            delete actual.cartasAsignadas;
 
             container.innerHTML = '';
             
@@ -888,21 +843,15 @@
 
                 if (cantidadCartas === 4) {
                     lecturaCompleta += `Analizamos tu tirada VIP de cuatro cartas: primero, ${descripcionesCartas[0]}. Segundo, ${descripcionesCartas[1]}. Tercero, ${descripcionesCartas[2]}. Y cuarto, ${descripcionesCartas[3]}. `;
+                    lecturaCompleta += `Ante esta situación, el arcángel ${actual.arcangel} te aconseja: ${actual.consejoArcangel}. Enciende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}). Presta atención a este consejo final: ${actual.consejo} Bueno, hasta aquí llegó tu consulta.`;
                 } else if (cantidadCartas === 10) {
                     lecturaCompleta += `Abrimos la Cruz Celta completa de diez cartas: 1, ${descripcionesCartas[0]}. 2, ${descripcionesCartas[1]}. 3, ${descripcionesCartas[2]}. 4, ${descripcionesCartas[3]}. 5, ${descripcionesCartas[4]}. 6, ${descripcionesCartas[5]}. 7, ${descripcionesCartas[6]}. 8, ${descripcionesCartas[7]}. 9, ${descripcionesCartas[8]}. 10, ${descripcionesCartas[9]}. `;
+                    lecturaCompleta += `Ante esta situación, el arcángel ${actual.arcangel} te aconseja: ${actual.consejoArcangel}. Enciende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}). Como consejo supremo del libro de los secretos: ${actual.libroSecretos} Y tu afirmación de poder para hoy es: "${actual.afirmacion}" Presta atención a este consejo final: ${actual.consejo} Bueno, hasta aquí llegó tu consulta.`;
                 } else {
-                    lecturaCompleta += `La tirada muestra a ${descripcionesCartas[0]} y ${descripcionesCartas[1]}. `;
+                    // LECTURA GRATIS DE 2 CARTAS (CORTA, DIRECTA Y EXACTA COMO LO PEDISTE)
+                    lecturaCompleta += `La tirada muestra en mesa a ${descripcionesCartas[0]} y ${descripcionesCartas[1]}. Para tu situación, el arcángel protector ${actual.arcangel} te aconseja: ${actual.consejoArcangel}. Prende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}). Y presta mucha atención a este consejo final: ${actual.consejo} Hasta aquí tu lectura gratis.`;
                 }
-
-                lecturaCompleta += `Ante esta situación, el arcángel ${actual.arcangel} te aconseja: ${actual.consejoArcangel}. El serafín ${actual.serafin} te transmite: ${actual.consejoSerafin}. Como acción de fuego debes cumplir: ${actual.accionFuego} Evita por completo: ${actual.evitarFuego} Sella tu propósito: ${actual.momentoFuego} Usa el color ${actual.colorDia}, enciende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}) y toma tu baño de ${actual.bano} (${actual.paraQueBano}). Tu número es el ${actual.numerologia}: ${actual.significadoNum}. `;
-
-                if (cantidadCartas === 10) {
-                    lecturaCompleta += `Como consejo supremo del libro de los secretos: ${actual.libroSecretos} Y tu afirmación de poder para hoy es: "${actual.afirmacion}" `;
-                }
-
-                lecturaCompleta += `Presta atención a este consejo final: ${actual.consejo} Bueno, hasta aquí llegó tu consulta. Que la luz del oráculo te acompañe siempre.`;
                 
-                // Al finalizar por completo la voz, liberamos la bandera 'estaLeyendo' para que el sistema continúe
                 hablarYSubtitularBloques(lecturaCompleta, `Oráculo para ${actual.nombre} (${cantidadCartas} Cartas)`, () => {
                     estaLeyendo = false;
                 });
@@ -933,19 +882,16 @@
             { icono: "🛥️", nombre: "un Yate Completo", cartas: 10 }
         ];
 
-        // LLEGADA DE REGALOS DE KICK: SE POSICIONAN DE PRIMEROS EN LA COLA SEGÚN SU PRIORIDAD
         setInterval(() => {
             const giftFeed = document.getElementById('giftFeed');
             if(!giftFeed) return;
 
-            // Seleccionamos un consultante al azar o creamos uno nuevo VIP
             let indiceAleatorio = Math.floor(Math.random() * consultantesPool.length);
             let consultanteElegido = {...consultantesPool[indiceAleatorio]};
             const randomGift = listaRegalos[Math.floor(Math.random() * listaRegalos.length)];
             
             consultanteElegido.cartasAsignadas = randomGift.cartas;
 
-            // Insertamos el regalo de primero en la cola para que sea el siguiente en atenderse
             colaConsultantes.unshift(consultanteElegido);
             actualizarVistaCola();
 
@@ -970,7 +916,6 @@
             setTimeout(() => particle.remove(), 6000);
         }, 800);
         
-        // MOTOR DE ARRANQUE AUTOMÁTICO INICIAL Y BUCLE CONTINUO DE LECTURAS SECUENCIALES
         setTimeout(() => {
             ejecutarLecturaProxima();
         }, 2000);
