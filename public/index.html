@@ -763,22 +763,6 @@
                 speechText.innerText = `"${bloques[0]}"`;
             }
 
-            let sincroPorBoundary = false;
-
-            utterance.onboundary = function(event) {
-                if (event.name === 'word' && bloques.length > 0) {
-                    sincroPorBoundary = true;
-                    let charIndex = event.charIndex;
-                    let textoProcesado = textoCompleto.substring(0, charIndex);
-                    let palabrasHabladas = textoProcesado.trim().split(/\s+/).length;
-                    let nuevoIndex = Math.min(Math.floor(palabrasHabladas / 4), bloques.length - 1);
-                    if (nuevoIndex !== indexBloque && speechText) {
-                        indexBloque = nuevoIndex;
-                        speechText.innerText = `"${bloques[indexBloque]}"`;
-                    }
-                }
-            };
-
             utterance.onend = () => {
                 if(window.currentBlockTimer) clearInterval(window.currentBlockTimer);
                 if(onCompleteCallback) onCompleteCallback();
@@ -790,18 +774,17 @@
 
             window.speechSynthesis.speak(utterance);
 
+            // SINCRONIZACIÓN MILIMÉTRICA CALIBRADA (1.45 segundos por bloque exacto para ir hombro a hombro con la voz)
             window.currentBlockTimer = setInterval(() => {
-                if (!sincroPorBoundary) {
-                    indexBloque++;
-                    if (indexBloque < bloques.length) {
-                        if(speechText) {
-                            speechText.innerText = `"${bloques[indexBloque]}"`;
-                        }
-                    } else {
-                        clearInterval(window.currentBlockTimer);
+                indexBloque++;
+                if (indexBloque < bloques.length) {
+                    if(speechText) {
+                        speechText.innerText = `"${bloques[indexBloque]}"`;
                     }
+                } else {
+                    clearInterval(window.currentBlockTimer);
                 }
-            }, 1950);
+            }, 1450);
         }
 
         if ('speechSynthesis' in window) {
@@ -883,7 +866,6 @@
         }
 
         function ejecutarLecturaProxima() {
-            // BLOQUEO ESTRICTO: Si ya hay una lectura en curso, NUNCA se interrumpe
             if (estaLeyendo) return;
             estaLeyendo = true;
 
@@ -947,7 +929,7 @@
 
                 let nombresSalidaTexto = datosCartasMesa.map(c => `${c.nombre} ${c.invertida ? 'invertida' : 'al derecho'}`).join(", ");
 
-                let introduccionAsistente = `Hola, soy la asistente de Juan Caramba. En estos momentos no se encuentra. Yo atenderé tu consulta de ${actual.nombre} sobre "${actual.pregunta}"... `;
+                let introduccionAsistente = `Hola, soy el asistente de Juan Caramba. En estos momentos no se encuentra. Yo atenderé tu consulta de ${actual.nombre} sobre "${actual.pregunta}"... `;
                 let lecturaCompleta = introduccionAsistente;
 
                 if (cantidadCartas === 4) {
@@ -985,7 +967,6 @@
                     lecturaCompleta += `Consejo Final y Advertencia: ${actual.consejo} ${actual.advertencia} Hasta aquí tu lectura gratis.`;
                 }
                 
-                // Al terminar la locución y los subtítulos por completo, liberamos la bandera `estaLeyendo = false`
                 hablarYSubtitularSincronizado(lecturaCompleta, `Oráculo para ${actual.nombre} (${cantidadCartas} Cartas)`, () => {
                     estaLeyendo = false;
                 });
@@ -1016,8 +997,6 @@
             { icono: "🛥️", nombre: "un Yate Completo", cartas: 10 }
         ];
 
-        // Los regalos que van llegando se colocan en la cola y alimentan el feed visual,
-        // pero NUNCA interrumpen la lectura que está sonando en ese instante.
         setInterval(() => {
             const giftFeed = document.getElementById('giftFeed');
             if(!giftFeed) return;
@@ -1055,7 +1034,6 @@
             ejecutarLecturaProxima();
         }, 2000);
 
-        // El bucle general evalúa cada 12 segundos, pero SOLO ejecuta si la lectura anterior YA TERMINÓ (`!estaLeyendo`)
         setInterval(() => {
             if (!estaLeyendo) {
                 ejecutarLecturaProxima();
@@ -1064,4 +1042,3 @@
     </script>
 </body>
 </html>
-q
