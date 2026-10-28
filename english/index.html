@@ -5,18 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Don Juan Caramba - English Stream Overlay</title>
     <style>
-        body {
+        body, html {
             margin: 0;
             padding: 0;
+            width: 100%;
+            height: 100%;
             background: transparent;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #fff;
             overflow: hidden;
         }
         .overlay-container {
-            position: relative;
-            width: 1920px;
-            height: 1080px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             background-image: url('../juan-caramba-bg.jpg');
             background-size: cover;
             background-position: center;
@@ -28,6 +32,7 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
+            z-index: 10;
         }
         .btn-action {
             background: linear-gradient(45deg, #ff416c, #ff4b2b);
@@ -48,6 +53,7 @@
             border-radius: 10px;
             padding: 15px;
             width: 320px;
+            z-index: 10;
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
         }
         .queue-title {
@@ -56,7 +62,6 @@
             margin-bottom: 10px;
             text-align: center;
             font-size: 16px;
-            letter-spacing: 1px;
         }
         .queue-list {
             list-style: none;
@@ -79,6 +84,7 @@
             border-radius: 10px;
             padding: 15px;
             width: 340px;
+            z-index: 10;
         }
         .rules-title {
             color: #ffd700;
@@ -93,12 +99,12 @@
         }
         .card-container {
             position: absolute;
-            top: 45%;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             display: flex;
             gap: 25px;
-            perspective: 1000px;
+            z-index: 10;
         }
         .tarot-card {
             width: 150px;
@@ -109,10 +115,6 @@
             background-image: url('../card-back.jpg');
             background-size: cover;
             box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
-            transition: transform 0.6s ease;
-        }
-        .tarot-card.flipped {
-            transform: rotateY(180deg);
         }
         .candle {
             position: absolute;
@@ -123,6 +125,7 @@
             background: linear-gradient(to top, #ff8c00, #ffd700);
             border-radius: 10px;
             box-shadow: 0 0 35px #ff4500;
+            z-index: 10;
         }
     </style>
 </head>
@@ -133,7 +136,7 @@
         <div class="hud-top-left">
             <button class="btn-action">❤️ Follow</button>
             <button class="btn-action">⭐ Subscribe</button>
-            <div style="font-weight: bold; margin-top: 5px;">Followers: <span id="follower-count">14,800</span></div>
+            <div style="font-weight: bold; margin-top: 5px; text-shadow: 1px 1px 2px black;">Followers: <span id="follower-count">14,800</span></div>
         </div>
 
         <!-- Cola de Espera de Kick -->
@@ -148,12 +151,14 @@
             </ul>
         </div>
 
-        <!-- Zona de Cartas Dinámica (Cambia entre 3 y 5 cartas) -->
+        <!-- Zona de Cartas Dinámica -->
         <div class="card-container" id="card-slot">
-            <!-- Se generan mediante JavaScript -->
+            <div class="tarot-card"></div>
+            <div class="tarot-card"></div>
+            <div class="tarot-card"></div>
         </div>
 
-        <!-- Reglas de Donaciones y Regalos específicos para Kick -->
+        <!-- Reglas de Regalos y Tiradas para Kick -->
         <div class="rules-box">
             <div class="rules-title">🎁 KICK GIFTS & READINGS</div>
             <ul class="rules-list">
@@ -173,47 +178,24 @@
     </audio>
 
     <script>
-        // Reproducir música ambiental
         window.addEventListener('DOMContentLoaded', () => {
             const music = document.getElementById('bg-music');
             if(music) {
                 music.volume = 0.25;
                 music.play().catch(e => console.log("Audio autoplay restricted"));
             }
-            // Iniciar con la tirada estándar de 3 cartas
-            setupTable(3);
         });
 
-        // Motor de voz mística en inglés para Don Juan Caramba
         function speakEnglishMessage(text) {
             if ('speechSynthesis' in window) {
                 const utterance = new SpeechSynthesisUtterance(text);
                 utterance.lang = 'en-US';
-                utterance.pitch = 0.75; // Voz grave y misteriosa
+                utterance.pitch = 0.75;
                 utterance.rate = 0.95;
                 window.speechSynthesis.speak(utterance);
             }
         }
 
-        // Función para cambiar dinámicamente el número de cartas en la mesa (3 o 5)
-        function setupTable(cardCount) {
-            const container = document.getElementById('card-slot');
-            container.innerHTML = ''; // Limpiar cartas anteriores
-            
-            for (let i = 0; i < cardCount; i++) {
-                const card = document.createElement('div');
-                card.className = 'tarot-card';
-                container.appendChild(card);
-            }
-        }
-
-        // Simulación de eventos en vivo para Kick (Ej: Al recibir una donación épica cambia a 5 cartas)
-        function triggerEpicDonation(username) {
-            speakEnglishMessage(`Attention! Epic donation from ${username}! The spirits summon the ultimate 5-card master reading!`);
-            setupTable(5); // Cambia automáticamente a 5 cartas
-        }
-
-        // Mensaje de bienvenida inicial de Don Juan
         setTimeout(() => {
             speakEnglishMessage("Welcome to the English sanctuary of Don Juan Caramba. The cards never lie.");
         }, 2500);
