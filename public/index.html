@@ -774,7 +774,6 @@
 
             window.speechSynthesis.speak(utterance);
 
-            // SINCRONIZACIÓN MILIMÉTRICA CALIBRADA (1.45 segundos por bloque exacto para ir hombro a hombro con la voz)
             window.currentBlockTimer = setInterval(() => {
                 indexBloque++;
                 if (indexBloque < bloques.length) {
@@ -930,6 +929,7 @@
                 let nombresSalidaTexto = datosCartasMesa.map(c => `${c.nombre} ${c.invertida ? 'invertida' : 'al derecho'}`).join(", ");
 
                 let introduccionAsistente = `Hola, soy el asistente de Juan Caramba. En estos momentos no se encuentra. Yo atenderé tu consulta de ${actual.nombre} sobre "${actual.pregunta}"... `;
+                let llamadaAccionFinal = ` Para más lecturas, te invito a entrar en aura-craft-mystic.base44.app. Y recuerda suscribirte a mi cuenta en Kick para no perderte ninguna transmisión.`;
                 let lecturaCompleta = introduccionAsistente;
 
                 if (cantidadCartas === 4) {
@@ -942,7 +942,7 @@
                     lecturaCompleta += `Vela Ritual: ${actual.vela}. Enciéndela el ${actual.cuandoVela} (${actual.paraQueVela}). `;
                     lecturaCompleta += `Acción de Fuego y Baño Sagrado: ${actual.accionFuegoBano} `;
                     lecturaCompleta += `Prohibición Estricta Energética: ${actual.prohibicionEstricta} `;
-                    lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura VIP.`;
+                    lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura VIP.${llamadaAccionFinal}`;
 
                 } else if (cantidadCartas === 10) {
                     lecturaCompleta += `Cruz Celta revelada: ${nombresSalidaTexto}. `;
@@ -956,7 +956,7 @@
                     lecturaCompleta += `Prohibición Energética Estricta: ${actual.prohibicionEstricta} `;
                     lecturaCompleta += `Secreto revelado del Libro de los Secretos: ${actual.libroSecretos} `;
                     lecturaCompleta += `Afirmación de Poder: "${actual.afirmacion}" `;
-                    lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura Máxima.`;
+                    lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura Máxima.${llamadaAccionFinal}`;
 
                 } else {
                     lecturaCompleta += `Cartas en mesa: ${nombresSalidaTexto}. `;
@@ -964,7 +964,7 @@
                     lecturaCompleta += `Matriz Astral: Sol en ${actual.sol} y Luna en ${actual.luna}. `;
                     lecturaCompleta += `Arcángel Regente: ${actual.arcangel}. Consejo puntual: ${actual.consejoArcangel}. Deberás invocarlo ${actual.cuandoInvocarsArcangel} (${actual.invocacionArcangel}). `;
                     lecturaCompleta += `Vela de Poder: ${actual.vela}. Encender el ${actual.cuandoVela}. `;
-                    lecturaCompleta += `Consejo Final y Advertencia: ${actual.consejo} ${actual.advertencia} Hasta aquí tu lectura gratis.`;
+                    lecturaCompleta += `Consejo Final y Advertencia: ${actual.consejo} ${actual.advertencia} Hasta aquí tu lectura gratis.${llamadaAccionFinal}`;
                 }
                 
                 hablarYSubtitularSincronizado(lecturaCompleta, `Oráculo para ${actual.nombre} (${cantidadCartas} Cartas)`, () => {
