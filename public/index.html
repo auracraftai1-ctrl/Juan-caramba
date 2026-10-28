@@ -581,7 +581,7 @@
                 paraQueVela: "atraer clientes y movimiento comercial",
                 accionFuegoBano: "Sahumerio de cáscara de mandarina seca con azúcar y café molido en la entrada de tu local.",
                 prohibicionEstricta: "Prohibido prestar dinero o dar mercancía fiada por los próximos catorce días.",
-                diagnosticoPositivo: "El oráculo decreta una apertura financiera inminente y la entrada de recursos que estabas esperando.",
+                diagnosticoPositivo: "El oráculo decreta una apertura financiera inminente y la entrada de recursos que esperabas.",
                 diagnosticoDenso: "Hay fuga de recursos y desorden contable; las cartas invertidas advierten pérdidas si no ajustas las tuercas.",
                 libroSecretos: "La prosperidad real es hija de la disciplina y madre de la libertad.",
                 afirmacion: "La abundancia fluye hacia mí de forma limpia y constante.",
@@ -942,7 +942,7 @@
                     lecturaCompleta += `Vela Ritual: ${actual.vela}. Enciéndela el ${actual.cuandoVela} (${actual.paraQueVela}). `;
                     lecturaCompleta += `Acción de Fuego y Baño Sagrado: ${actual.accionFuegoBano} `;
                     lecturaCompleta += `Prohibición Estricta Energética: ${actual.prohibicionEstricta} `;
-                    lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura VIP.${llamadaAccionFinal}`;
+                    lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta hier tu lectura VIP.${llamadaAccionFinal}`;
 
                 } else if (cantidadCartas === 10) {
                     lecturaCompleta += `Cruz Celta revelada: ${nombresSalidaTexto}. `;
@@ -1039,6 +1039,30 @@
                 ejecutarLecturaProxima();
             }
         }, 12000);
+    </script>
+
+    <!-- ======================================================= -->
+    <!-- PUENTE DE CONEXIÓN CON EL CHAT DE RENDER                -->
+    <!-- ======================================================= -->
+    <script>
+        async function verificarChatRealDeKick() {
+            try {
+                let respuesta = await fetch('/obtener-siguiente-usuario');
+                let usuarioReal = await respuesta.json();
+                
+                if (usuarioReal && typeof colaConsultantes !== 'undefined') {
+                    colaConsultantes.unshift(usuarioReal);
+                    if (typeof actualizarVistaCola === 'function') {
+                        actualizarVistaCola();
+                    }
+                    console.log("¡Nuevo consultante real inyectado desde el chat:", usuarioReal.nombre);
+                }
+            } catch (e) {
+                // Modo silencioso
+            }
+        }
+
+        setInterval(verificarChatRealDeKick, 10000);
     </script>
 </body>
 </html>
