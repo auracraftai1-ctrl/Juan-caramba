@@ -4,12 +4,17 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-// Permite servir todos los archivos y carpetas estáticas (incluyendo /en/)
+// Servir de forma automática toda la carpeta del proyecto (esto lee la raíz y carpetas como /english/)
 app.use(express.static(path.join(__dirname)));
 
-// Ruta principal para el español
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+// Si entran a la raíz y no carga automático, redirige o busca el index principal
+app.get('/', (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'index.html'), (err) => {
+        if (err) {
+            // Si el index principal está en otra ruta, evitamos que se caiga el servidor
+            next();
+        }
+    });
 });
 
 app.listen(PORT, () => {
