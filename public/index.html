@@ -361,7 +361,7 @@
         /* CONTENEDOR DE CARTAS */
         .tarot-slot {
             position: absolute;
-            bottom: 16vh;
+            bottom: 10vh;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -423,34 +423,34 @@
             100% { transform: translateY(6px) rotate(-3deg); }
         }
 
-        /* TEXTO FLOTANTE INFERIOR (SIN CUADRO CENTRAL, SOLO LETRAS LIMPIAS) */
+        /* SUBTÍTULOS ESTILO PELÍCULA (JUSTO ARRIBA DE LAS CARTAS) */
         .speech-floating {
             position: absolute;
-            bottom: 2vh;
+            bottom: 30vh;
             left: 50%;
             transform: translateX(-50%);
-            width: 95%;
-            max-width: 800px;
+            width: 90%;
+            max-width: 750px;
             text-align: center;
-            z-index: 120;
+            z-index: 160;
             pointer-events: none;
-            padding: 4px 10px;
+            padding: 4px 12px;
         }
         .speech-floating h3 {
             margin: 0 0 2px 0;
-            color: #d4af37;
-            font-size: 9.5px;
-            text-shadow: 2px 2px 4px #000, 0 0 10px rgba(212, 175, 55, 0.7);
+            color: #ffdf73;
+            font-size: 11px;
+            text-shadow: 2px 2px 5px #000, 0 0 12px rgba(212, 175, 55, 0.9);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
         }
         .speech-floating p {
             margin: 0;
-            font-size: 8.5px;
+            font-size: 9.5px;
             font-weight: bold;
-            color: #fff;
-            line-height: 1.25;
-            text-shadow: 2px 2px 4px #000, 0 0 8px rgba(0, 0, 0, 0.9);
+            color: #ffffff;
+            line-height: 1.3;
+            text-shadow: 2px 2px 4px #000, 0 0 8px rgba(0, 0, 0, 0.95);
         }
 
         .tap-heart {
@@ -541,18 +541,17 @@
             <div style="font-size: 9px; color: #fff;" id="giftPopupText">¡Envió un regalo VIP!</div>
         </div>
 
-        <!-- CARTAS EN MESA -->
-        <div class="tarot-slot" id="cardContainer"></div>
-
-        <!-- LECTURA FLUIDA EN TEXTO INFERIOR (SIN CUADROS, VOZ DE DON JUAN CARAMBA) -->
+        <!-- SUBTÍTULOS FLOTANTES TIPO PELÍCULA (JUSTO ARRIBA DE LAS CARTAS) -->
         <div class="speech-floating">
             <h3 id="speechTitle">Don Juan Caramba</h3>
             <p id="speechText">"Saludos, alma errante... Envía tu Nombre Completo, Fecha de Nacimiento y Lugar de Nacimiento para abrir tu oráculo."</p>
         </div>
+
+        <!-- CARTAS EN MESA -->
+        <div class="tarot-slot" id="cardContainer"></div>
     </div>
 
     <script>
-        // CONSULTANTES PERSONALIZADOS CON SUS DATOS Y CONSEJOS ESPECÍFICOS COMPLETOS
         const consultantesPool = [
             { 
                 user: "Mariana_92", nombre: "Mariana Gómez", fecha: "14/03/1995", lugar: "Caracas, Venezuela",
@@ -599,7 +598,7 @@
                 palabras: "Ciclo, Cierre, Puerta, Salida, Éxito, Norte, Ley",
                 arcangel: "Arcángel Zadquiel (Rayo Violeta)", consejoArcangel: "Transmuta el dolor y las deudas del pasado en sabiduría pura.",
                 serafin: "Serafín de la Divina Misericordia", consejoSerafin: "Te otorga gracia divina ante situaciones legales o bloqueos difíciles.",
-                vela: "Violeta o Lila", cuandoVela: "Sábado a las 8:00 PM", paraQueVela: "Para cerrar ciclos kármicos pesados y liberar juicios.",
+                vela: "Violeta o Lila", whenVela: "Sábado a las 8:00 PM", paraQueVela: "Para cerrar ciclos kármicos pesados y liberar juicios.",
                 bano: "Lavanda e Incienso natural", paraQueBano: "Para armonizar la energía del hogar y cortar ataduras.",
                 numerologia: "Número 9 (Cierre de Etapas y Evolución)", significadoNum: "Anuncia el fin de un ciclo doloroso para abrir la puerta del éxito.",
                 consejo: "Daniel de los Altos Mirandinos, cierra ciclos con firmeza; enciende vela violeta los sábados a las 8 PM y usa lavanda. Para el contenido completo entra y regístrate con alguno de los planes en https://aura-craft-mystic.base44.app/"
@@ -608,7 +607,6 @@
 
         let nombresUsuarios = consultantesPool.map(c => c.user);
 
-        // BARAJA OFICIAL
         const tarotDeck = [
             { name: "El Loco", file: "El loco.jpg" },
             { name: "El Mago", file: "El Mago.jpg" },
@@ -629,8 +627,6 @@
             { name: "El Mundo", file: "El mundo.jpg" },
             { name: "Los Amantes", file: "Los amantes.jpg" },
             { name: "La Rueda de la Fortuna", file: "La rueda de la fortuna.jpg" },
-
-            // Copas
             { name: "Dos de Copas", file: "Dos de copas.jpg" },
             { name: "Tres de Copas", file: "Tres de copas.jpg" },
             { name: "Cuatro de Copas", file: "Cuatro de copas.jpg" },
@@ -643,8 +639,6 @@
             { name: "Caballo de Copas", file: "Caballo de copas.jpg" },
             { name: "Reina de Copas", file: "Reina de copas.jpg" },
             { name: "Rey de Copas", file: "Rey de copas.jpg" },
-
-            // Espadas
             { name: "As de Espadas", file: "As de espadas.jpg" },
             { name: "Dos de Espadas", file: "Dos de espadas.jpg" },
             { name: "Tres de Espadas", file: "Tres de espadas.jpg" },
@@ -657,8 +651,6 @@
             { name: "Caballo de Espadas", file: "Caballo de espadas.jpg" },
             { name: "Reina de Espadas", file: "Reina de espadas.jpg" },
             { name: "Rey de Espadas", file: "Rey de espadas.jpg" },
-
-            // Oros
             { name: "As de Oro", file: "As de oro.jpg" },
             { name: "Dos de Oro", file: "Dos de oro.jpg" },
             { name: "Tres de Oro", file: "Tres de oro.jpg" },
@@ -671,8 +663,6 @@
             { name: "Diez de Oro", file: "Diez de oro.jpg" },
             { name: "Reina de Oro", file: "Reina de oro.jpg" },
             { name: "Rey de Oro", file: "Rey de oro.jpg" },
-
-            // Bastos
             { name: "Nueve de Bastos", file: "Nueve de bastos.jpg" },
             { name: "Seis de Bastos", file: "Seis de bastos.jpg" },
             { name: "Siete de Bastos", file: "Siete de bajos.jpg" },
@@ -747,8 +737,7 @@
             setTimeout(() => heart.remove(), 1200);
 
             if(totalTaps === 100) {
-                const speech = document.getElementById('speechText');
-                if(speech) speech.innerHTML = `"¡Caramba! Alcanzamos los 100 Tap Taps. ¡Iniciando lectura gratuita de la sala!"`;
+                escribirEfectoMaquina("¡Caramba! Alcanzamos los 100 Tap Taps. ¡Iniciando lectura gratuita de la sala!", "Don Juan Caramba");
             }
         }
 
@@ -756,14 +745,13 @@
             event.stopPropagation();
             const btn = document.getElementById('followBtn');
             const text = document.getElementById('followText');
-            const speechText = document.getElementById('speechText');
             
             if (!yaSiguio) {
                 numSeguidores++;
                 yaSiguio = true;
                 if(btn) btn.classList.add('followed');
                 if(text) text.innerText = "Siguiendo";
-                if(speechText) speechText.innerHTML = `"¡Muchas gracias por seguir la cuenta de Don Juan Caramba, mi pana!"`;
+                escribirEfectoMaquina("¡Muchas gracias por seguir la cuenta de Don Juan Caramba, mi pana!", "Don Juan Caramba");
             } else {
                 numSeguidores--;
                 yaSiguio = false;
@@ -776,8 +764,7 @@
 
         function quieremeAccion(event) {
             event.stopPropagation();
-            const speechText = document.getElementById('speechText');
-            if(speechText) speechText.innerHTML = `"¡Gracias por ese cariño, mi pana!"`;
+            escribirEfectoMaquina("¡Gracias por ese cariño, mi pana!", "Don Juan Caramba");
         }
 
         function mostrarAnimacionRegalo(usuario, regaloIcono, regaloNombre) {
@@ -796,20 +783,37 @@
             }
         }
 
-        // LECTURA DE 3 CARTAS CON VOZ FLUIDA Y DETALLADA DE DON JUAN CARAMBA (SIN CUADROS)
-        function realizarTirada() {
-            const container = document.getElementById('cardContainer');
+        function escribirEfectoMaquina(textoCompleto, titulo) {
             const speechTitle = document.getElementById('speechTitle');
             const speechText = document.getElementById('speechText');
-            if(!container || !speechText) return;
+            if(!speechTitle || !speechText) return;
+
+            speechTitle.innerText = titulo;
+            speechText.innerHTML = "";
+            let i = 0;
+            
+            if (window.currentTyping) clearInterval(window.currentTyping);
+
+            window.currentTyping = setInterval(() => {
+                if (i < textoCompleto.length) {
+                    speechText.innerHTML += textoCompleto.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(window.currentTyping);
+                }
+            }, 25);
+        }
+
+        function realizarTirada() {
+            const container = document.getElementById('cardContainer');
+            if(!container) return;
 
             const actual = colaConsultantes.shift();
             colaConsultantes.push(actual);
             actualizarVistaCola();
 
             container.innerHTML = '';
-            speechTitle.innerText = `Don Juan Caramba para ${actual.nombre} (@${actual.user})`;
-            speechText.innerHTML = `"Canalizando energía de ${actual.nombre}, nacido el ${actual.fecha} en ${actual.lugar}. Barajando cartas sagradas..."`;
+            escribirEfectoMaquina(`Canalizando energía de ${actual.nombre}, nacido el ${actual.fecha} en ${actual.lugar}. Barajando cartas sagradas...`, `Don Juan Caramba para ${actual.nombre} (@${actual.user})`);
 
             for(let i = 0; i < 3; i++) {
                 const cardDiv = document.createElement('div');
@@ -840,8 +844,9 @@
                     }, index * 250);
                 });
 
-                // Texto fluido completo con todos los detalles específicos solicitados
-                speechText.innerHTML = `"${actual.nombre}, tus 7 palabras (${actual.palabras}). El ${actual.arcangel} te aconseja: ${actual.consejoArcangel} Te asiste el ${actual.serafin} (${actual.consejoSerafin}). Prende tu vela ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}). Usa el baño de ${actual.bano} (${actual.paraQueBano}). Tu ${actual.numerologia} significa: ${actual.significadoNum}. ${actual.consejo}"`;
+                const mensajeFinal = `${actual.nombre}, tus 7 palabras (${actual.palabras}). El ${actual.arcangel} te aconseja: ${actual.consejoArcangel} Te asiste el ${actual.serafin} (${actual.consejoSerafin}). Prende tu vela ${actual.vela} el ${actual.cuandoVela || actual.whenVela} (${actual.paraQueVela}). Usa el baño de ${actual.bano} (${actual.paraQueBano}). Tu ${actual.numerologia} significa: ${actual.significadoNum}. ${actual.consejo} Para el contenido completo entra y regístrate con alguno de los planes en https://aura-craft-mystic.base44.app/`;
+                
+                escribirEfectoMaquina(mensajeFinal, `Oráculo Sagrado para ${actual.nombre}`);
             }, 3000);
         }
 
