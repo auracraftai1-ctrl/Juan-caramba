@@ -58,15 +58,15 @@
             100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
-        /* ACCIONES KICK / SOCIALES (IZQUIERDA SUPERIOR - 100% TRANSPARENTE) */
+        /* ACCIONES KICK / SOCIALES (IZQUIERDA SUPERIOR) */
         .tiktok-actions-container {
             position: fixed;
-            top: 15px;
+            top: 8px;
             left: 15px;
             z-index: 100;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 3px;
             align-items: flex-start;
             background: transparent;
         }
@@ -75,10 +75,10 @@
             background: linear-gradient(135deg, #53fc18, #2ebd0e);
             color: #000;
             border: none;
-            padding: 4px 10px;
-            font-size: 11px;
+            padding: 3px 8px;
+            font-size: 10px;
             font-weight: bold;
-            border-radius: 16px;
+            border-radius: 14px;
             cursor: pointer;
             box-shadow: 0 3px 8px rgba(83, 252, 24, 0.5);
             display: flex;
@@ -95,10 +95,10 @@
             background: linear-gradient(135deg, #ff007f, #e6005c);
             color: white;
             border: none;
-            padding: 3px 8px;
-            font-size: 10px;
+            padding: 2px 7px;
+            font-size: 9.5px;
             font-weight: bold;
-            border-radius: 14px;
+            border-radius: 12px;
             cursor: pointer;
             box-shadow: 0 2px 6px rgba(255, 0, 127, 0.4);
             display: flex;
@@ -108,21 +108,21 @@
 
         .follower-count {
             color: #fff;
-            font-size: 9px;
+            font-size: 8.5px;
             font-weight: bold;
             background: transparent;
-            padding: 2px 0;
+            padding: 1px 0;
             text-shadow: 1px 1px 3px #000;
         }
 
         /* BARRA DE ENERGÍA (TRANSPARENTE) */
         .energy-bar-container {
             position: fixed;
-            top: 95px;
+            top: 75px;
             left: 15px;
             z-index: 100;
             background: transparent;
-            padding: 3px 0;
+            padding: 2px 0;
             width: 140px;
         }
         .energy-title {
@@ -135,7 +135,7 @@
         }
         .energy-outer {
             width: 100%;
-            height: 5px;
+            height: 4px;
             background: rgba(255, 255, 255, 0.2);
             border-radius: 3px;
             overflow: hidden;
@@ -149,32 +149,32 @@
         /* CONCURSO (TRANSPARENTE) */
         .contest-panel {
             position: fixed;
-            top: 130px;
+            top: 105px;
             left: 15px;
             z-index: 100;
             background: transparent;
-            padding: 3px 0;
+            padding: 2px 0;
             color: #fff;
             text-align: left;
             max-width: 140px;
             text-shadow: 1px 1px 3px #000;
         }
         .contest-title {
-            font-size: 7.5px;
+            font-size: 7px;
             color: #d4af37;
             text-transform: uppercase;
         }
         .contest-stats {
-            font-size: 10px;
+            font-size: 9.5px;
             font-weight: bold;
             color: #fff;
         }
         .contest-timer {
-            font-size: 7.5px;
+            font-size: 7px;
             color: #53fc18;
         }
 
-        /* GUÍA DE REGALOS KICK (TRANSPARENTE) */
+        /* GUÍA DE REGALOS KICK (IZQUIERDA) */
         .vip-gifts-guide {
             position: fixed;
             bottom: 26vh;
@@ -241,22 +241,22 @@
             100% { transform: translateX(-50%) scale(1.15) rotate(2deg); opacity: 1; }
         }
 
-        /* SALA DE ESPERA (BIEN ARRIBA A LA DERECHA) */
+        /* SALA DE ESPERA (SUBIDA AL MÁXIMO ARRIBA A LA DERECHA) */
         .waiting-queue {
             position: fixed;
-            top: 5px;
+            top: 2px;
             right: 15px;
             width: 160px;
             background: transparent;
-            padding: 2px 0;
+            padding: 1px 0;
             color: #fff;
             z-index: 100;
             text-shadow: 1px 1px 3px #000;
         }
         .waiting-queue h4 {
-            margin: 0 0 2px 0;
+            margin: 0 0 1px 0;
             color: #d4af37;
-            font-size: 8px;
+            font-size: 7.5px;
             text-align: right;
             border-bottom: 1px solid rgba(212, 175, 55, 0.5);
             padding-bottom: 1px;
@@ -269,12 +269,12 @@
             display: flex;
             flex-direction: column;
             gap: 1px;
-            max-height: 90px;
+            max-height: 75px;
             overflow: hidden;
         }
         .queue-item {
-            font-size: 7px;
-            padding: 1px 3px;
+            font-size: 6.5px;
+            padding: 1px 2px;
             background: transparent;
             border-radius: 2px;
             display: flex;
@@ -287,31 +287,31 @@
             text-shadow: 0 0 6px #d4af37;
         }
 
-        /* REGALOS RECIENTES DE KICK (SUBIDO Y LIBRE DE LAS LETRAS) */
+        /* REGALOS RECIENTES DE KICK (¡SUBIDO AÚN MÁS ARRIBA, PEGADO AL BORDE SUPERIOR!) */
         .gifts-panel {
             position: fixed;
-            top: 110px;
+            top: 85px;
             right: 15px;
             width: 160px;
             background: transparent;
-            padding: 2px 0;
+            padding: 1px 0;
             color: #fff;
             z-index: 90;
             text-shadow: 1px 1px 3px #000;
         }
         .gifts-panel h5 {
-            margin: 0 0 2px 0;
+            margin: 0 0 1px 0;
             color: #53fc18;
             font-size: 7.5px;
             text-align: right;
             text-transform: uppercase;
         }
         .gift-feed {
-            font-size: 7px;
+            font-size: 6.5px;
             display: flex;
             flex-direction: column;
             gap: 1px;
-            max-height: 55px;
+            max-height: 45px;
             overflow: hidden;
             align-items: flex-end;
         }
@@ -347,7 +347,7 @@
             font-size: 38px;
         }
 
-        /* SUBTÍTULOS DINÁMICOS RÁPIDOS Y AL DÍA CON LA VOZ */
+        /* SUBTÍTULOS DINÁMICOS ULTRA-RÁPIDOS Y AL DÍA CON LA VOZ */
         .speech-floating {
             position: absolute;
             bottom: 28vh;
@@ -517,7 +517,7 @@
             <ul class="queue-list" id="queueList"></ul>
         </div>
 
-        <!-- REGALOS RECIENTES DE KICK (SUBIDO Y LIBRE DE LAS LETRAS) -->
+        <!-- REGALOS RECIENTES DE KICK (SUBIDO AL MÁXIMO SUPERIOR) -->
         <div class="gifts-panel">
             <h5>🎁 Recientes Kick</h5>
             <div class="gift-feed" id="giftFeed">
@@ -533,7 +533,7 @@
             <div style="font-size: 10px; color: #fff;" id="giftPopupText">¡Envió un regalo VIP en Kick!</div>
         </div>
 
-        <!-- SUBTÍTULOS DINÁMICOS MÁS RÁPIDOS Y ACORDES A LA LECTURA -->
+        <!-- SUBTÍTULOS DINÁMICOS ULTRA-RÁPIDOS Y SINCRONIZADOS -->
         <div class="speech-floating">
             <h3 id="speechTitle">Asistente de Don Juan Caramba</h3>
             <p id="speechText">"Iniciando transmisión en vivo por Kick..."</p>
@@ -567,7 +567,7 @@
                 invocacionArcangel: "Invocalo los domingos a las 7 AM para atraer clientes y liquidez inmediata.",
                 serafin: "Serafín de los Siete Cielos", consejoSerafin: "Abre portales dimensionales de prosperidad en tus empresas.",
                 cuandoInvocarsSerafin: "Al mediodía del domingo", paraQueInvocarsSerafin: "Para blindar tus negocios contra la escasez y la mala racha.",
-                vela: "Vela Amarilla o Naranja", whenVela: "Domingo a las 7 AM", cuandoVela: "Domingo a las 7 AM", paraQueVela: "Para atraer clientes y liquidez inmediata.",
+                vela: "Vela Amarilla o Naranja", cuandoVela: "Domingo a las 7 AM", paraQueVela: "Para atraer clientes y liquidez inmediata.",
                 diagnosticoGeneral: "El diagnóstico unificado de tu tirada señala que las trabas comerciales que tenías se desvanecen; la energía de Jofiel combinada con tus cartas marca el inicio de una etapa de entrada fluida de dinero y consolidación de tus proyectos.",
                 libroSecretos: "La riqueza verdadera no solo se cuenta en billetes, sino en la solidez de las bases que construyes cada mañana con disciplina.",
                 afirmacion: "La abundancia fluye hacia mis manos de forma constante y abundante.",
@@ -633,7 +633,7 @@
             { name: "La Muerte", file: "La muerte.jpg" },
             { name: "La Templanza", file: "La templanza.jpg" },
             { name: "El Diablo", file: "El diablo.jpg" },
-            { name: "La Torre", file: "La torres.jpg" },
+            { name: "La Torre", file: "El torres.jpg" },
             { name: "La Estrella", file: "La estrella.jpg" },
             { name: "La Luna", file: "La luna.jpg" },
             { name: "El Sol", file: "El sol.jpg" },
@@ -661,7 +661,7 @@
 
             let utterance = new SpeechSynthesisUtterance(textoCompleto);
             utterance.lang = 'es-ES';
-            utterance.rate = 0.78; 
+            utterance.rate = 0.82; 
             utterance.pitch = 0.95; 
 
             let voices = window.speechSynthesis.getVoices();
@@ -692,7 +692,7 @@
 
             palabras.forEach((palabra) => {
                 bloqueActual += palabra + " ";
-                if (bloqueActual.split(" ").length >= 9) {
+                if (bloqueActual.split(" ").length >= 7) {
                     bloques.push(bloqueActual.trim());
                     bloqueActual = "";
                 }
@@ -706,7 +706,6 @@
                 speechText.innerText = `"${bloques[0]}"`;
             }
 
-            // VELOCIDAD DE LOS TEXTOS AUMENTADA Y SINCRONIZADA A LA PAR CON LA VOZ
             window.currentBlockTimer = setInterval(() => {
                 indexBloque++;
                 if (indexBloque < bloques.length) {
@@ -716,7 +715,7 @@
                 } else {
                     clearInterval(window.currentBlockTimer);
                 }
-            }, 4800);
+            }, 3400);
         }
 
         if ('speechSynthesis' in window) {
@@ -831,10 +830,18 @@
                     if(!seleccionadas.includes(carta)) seleccionadas.push(carta);
                 }
 
-                const nombresCartasSalidas = [];
+                let contadorInvertidas = 0;
+                const datosCartasMesa = [];
+
                 seleccionadas.forEach((carta, index) => {
-                    const esInvertida = Math.random() < 0.5;
-                    nombresCartasSalidas.push(`${carta.name} ${esInvertida ? 'invertida' : 'al derecho'}`);
+                    const esInvertida = (cantidadCartas === 2 && actual.veredicto === "¡NO!") ? true : (Math.random() < 0.45);
+                    if (esInvertida) contadorInvertidas++;
+
+                    datosCartasMesa.push({
+                        nombre: carta.name,
+                        file: carta.file,
+                        invertida: esInvertida
+                    });
 
                     setTimeout(() => {
                         const cardDiv = document.createElement('div');
@@ -847,17 +854,29 @@
                     }, index * 200);
                 });
 
-                let lecturaCompleta = `Hola, soy la asistente de Don Juan Caramba. Atendiendo la consulta de ${actual.nombre} sobre "${actual.pregunta}"... ¡${actual.veredicto} Tu matriz astral (${actual.matrizAstral}) se conecta con el oráculo! En mesa han salido: ${nombresCartasSalidas.join(", ")}. `;
+                let estadoTiradaTexto = "";
+                let diagnosticoReal = actual.diagnosticoGeneral;
+
+                if (contadorInvertidas >= Math.ceil(cantidadCartas / 2)) {
+                    estadoTiradaTexto = `¡Atención! Las cartas muestran una fuerte carga de bloqueos e inversión en mesa.`;
+                    diagnosticoReal = `La presencia de cartas invertidas frena temporalmente tus aspiraciones y te exige precaución absoluta; ${actual.diagnosticoGeneral.toLowerCase()}`;
+                } else {
+                    estadoTiradaTexto = `¡${actual.veredicto} El flujo energético se muestra propicio en la mesa!`;
+                }
+
+                let nombresSalidaTexto = datosCartasMesa.map(c => `${c.nombre} ${c.invertida ? 'invertida' : 'al derecho'}`).join(", ");
+
+                let lecturaCompleta = `Hola, soy la asistente de Don Juan Caramba. Atendiendo la consulta de ${actual.nombre} sobre "${actual.pregunta}"... Matriz astral: ${actual.matrizAstral}. ${estadoTiradaTexto} En mesa han salido: ${nombresSalidaTexto}. `;
 
                 if (cantidadCartas === 4) {
-                    lecturaCompleta += `El diagnóstico unificado de tu tirada indica que ${actual.diagnosticoGeneral} `;
-                    lecturaCompleta += `Estás bajo la guía de tu arcángel regente, ${actual.arcangel}, quien te aconseja: ${actual.consejoArcangel}. Asimismo, te acompaña el serafín ${actual.serafin}, cuyo consejo es: ${actual.consejoSerafin}. Debes invocarlo ${actual.cuandoInvocarsSerafin} para ${actual.paraQueInvocarsSerafin}. Enciende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}). Consejo final: ${actual.consejo} Hasta aquí tu consulta.`;
+                    lecturaCompleta += `El diagnóstico unificado de tu tirada indica que ${diagnosticoReal} `;
+                    lecturaCompleta += `Te rige el arcángel ${actual.arcangel}: ${actual.consejoArcangel}. Te acompaña el serafín ${actual.serafin}, cuyo consejo es: ${actual.consejoSerafin}. Invocálo ${actual.cuandoInvocarsSerafin} para ${actual.paraQueInvocarsSerafin}. Enciende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}). Consejo final: ${actual.consejo} Hasta aquí tu consulta VIP.`;
                 } else if (cantidadCartas === 10) {
-                    lecturaCompleta += `Cruz Celta completa analizada en conjunto: el diagnóstico profundo señala que ${actual.diagnosticoGeneral} `;
-                    lecturaCompleta += `Tu guía espiritual es el arcángel ${actual.arcangel}: ${actual.consejoArcangel}. Te respalda el serafín ${actual.serafin}, cuyo consejo es ${actual.consejoSerafin}, debiendo invocarlo ${actual.cuandoInvocarsSerafin} para ${actual.paraQueInvocarsSerafin}. Enciende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}). Libro de los secretos: ${actual.libroSecretos} Afirmación: "${actual.afirmacion}" Consejo final: ${actual.consejo} Hasta aquí tu consulta.`;
+                    lecturaCompleta += `Cruz Celta analizada en conjunto: el diagnóstico profundo señala que ${diagnosticoReal} `;
+                    lecturaCompleta += `Tu guía espiritual es el arcángel ${actual.arcangel}: ${actual.consejoArcangel}. Te respalda el serafín ${actual.serafin}: ${actual.consejoSerafin}, debiendo invocarlo ${actual.cuandoInvocarsSerafin} para ${actual.paraQueInvocarsSerafin}. Enciende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}). Libro secreto: ${actual.libroSecretos} Afirmación: "${actual.afirmacion}" Consejo final: ${actual.consejo} Hasta aquí tu consulta máxima.`;
                 } else {
-                    lecturaCompleta += `Uniendo el mensaje de ambas cartas, el diagnóstico del oráculo para tu situación es el siguiente: ${actual.diagnosticoGeneral} `;
-                    lecturaCompleta += `En este momento te rige el arcángel ${actual.arcangel}, quien te aconseja: ${actual.consejoArcangel}. ${actual.invocacionArcangel}. Prende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}). Y presta atención a este consejo final: ${actual.consejo} Hasta aquí tu lectura gratis.`;
+                    lecturaCompleta += `El diagnóstico directo del oráculo para tu situación es el siguiente: ${diagnosticoReal} `;
+                    lecturaCompleta += `Te rige el arcángel ${actual.arcangel}, quien te aconseja: ${actual.consejoArcangel}. ${actual.invocacionArcangel}. Prende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}). Y presta atención a este consejo final: ${actual.consejo} Hasta aquí tu lectura gratis.`;
                 }
                 
                 hablarYSubtitularBloques(lecturaCompleta, `Oráculo para ${actual.nombre} (${cantidadCartas} Cartas)`, () => {
