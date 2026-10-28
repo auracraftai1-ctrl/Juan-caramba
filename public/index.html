@@ -546,7 +546,7 @@
                 cuandoVela: "martes a las 6 PM", 
                 paraQueVela: "atraer afecto sincero y disipar amarguras",
                 accionFuegoBano: "Baño de rosas rojas con miel y canela en rama durante tres noches seguidas.",
-                prohibicionEstricta: "Prohibido revisar redes sociales de amores pasados.",
+                prohibicionEstricta: "Prohibido guardar objetos o fotografías de exparejas bajo tu almohada.",
                 diagnosticoPositivo: "Tus cartas marcan el florecimiento definitivo de tu corazón y la llegada de un ser con intenciones nobles.",
                 diagnosticoDenso: "Las sombras en mesa revelan apegos tóxicos; debes sanar primero antes de entregar tu corazón.",
                 libroSecretos: "El amor verdadero no se suplica ni se fuerza, nace de la paz espiritual.",
@@ -653,8 +653,7 @@
             { name: "XX. El Juicio", file: "El mundo.jpg" },
             { name: "XXI. El Mundo", file: "El mundo.jpg" },
 
-            // 56 ARCANOS MENORES
-            // BASTOS
+            // 56 ARCANOS MENORES (BASTOS, COPAS, ESPADAS, OROS)
             { name: "As de Bastos", file: "El Mago.jpg" },
             { name: "2 de Bastos", file: "El carro.jpg" },
             { name: "3 de Bastos", file: "El emperador.jpg" },
@@ -670,7 +669,6 @@
             { name: "Reina de Bastos", file: "El emperatriz.jpg" },
             { name: "Rey de Bastos", file: "El emperador.jpg" },
 
-            // COPAS
             { name: "As de Copas", file: "La Sacerdotisa.jpg" },
             { name: "2 de Copas", file: "Los amantes.jpg" },
             { name: "3 de Copas", file: "El sol.jpg" },
@@ -686,7 +684,6 @@
             { name: "Reina de Copas", file: "La Sacerdotisa.jpg" },
             { name: "Rey de Copas", file: "El emperador.jpg" },
 
-            // ESPADAS
             { name: "As de Espadas", file: "La justicia.jpg" },
             { name: "2 de Espadas", file: "La luna.jpg" },
             { name: "3 de Espadas", file: "La muerte.jpg" },
@@ -702,7 +699,6 @@
             { name: "Reina de Espadas", file: "La justicia.jpg" },
             { name: "Rey de Espadas", file: "El emperador.jpg" },
 
-            // OROS
             { name: "As de Oros", file: "El Mago.jpg" },
             { name: "2 de Oros", file: "La rueda de la fortuna.jpg" },
             { name: "3 de Oros", file: "El emperatriz.jpg" },
@@ -923,7 +919,6 @@
                 container.innerHTML = '';
                 const seleccionadas = [];
                 
-                // Selección aleatoria sobre las 78 cartas sin repetir
                 while(seleccionadas.length < cantidadCartas) {
                     let carta = tarotDeck[Math.floor(Math.random() * tarotDeck.length)];
                     if(!seleccionadas.includes(carta)) seleccionadas.push(carta);
@@ -953,17 +948,19 @@
                     }, index * 180);
                 });
 
-                // Evaluación de coherencia entre cartas invertidas y el diagnóstico
                 let esTiradaDensa = contadorInvertidas >= Math.ceil(cantidadCartas / 2);
                 let diagnosticoReal = esTiradaDensa ? actual.diagnosticoDenso : actual.diagnosticoPositivo;
 
                 let nombresSalidaTexto = datosCartasMesa.map(c => `${c.nombre} ${c.invertida ? 'invertida' : 'al derecho'}`).join(", ");
 
-                let lecturaCompleta = "";
+                // FRASE OBLIGATORIA PEDIDA
+                let introduccionAsistente = `Hola, soy la asistente de Juan Caramba. En estos momentos no se encuentra. Yo atenderé tu consulta de ${actual.nombre} sobre "${actual.pregunta}"... `;
+
+                let lecturaCompleta = introduccionAsistente;
 
                 if (cantidadCartas === 4) {
-                    // 4 CARTAS (VIP - COCHE / CAZA)
-                    lecturaCompleta = `Atendiendo la consulta VIP de ${actual.nombre} sobre "${actual.pregunta}"... Cartas en mesa: ${nombresSalidaTexto}. `;
+                    // 4 CARTAS (VIP - Coche / Caza)
+                    lecturaCompleta += `Cartas en mesa: ${nombresSalidaTexto}. `;
                     lecturaCompleta += `Diagnóstico unificado del oráculo y tarot: La combinación de tus cartas revela que ${diagnosticoReal} `;
                     lecturaCompleta += `Matriz Astral: Sol en ${actual.sol}, Luna en ${actual.luna}, Ascendente en ${actual.ascendente}. Frecuencia Energética: ${actual.frecuencia}. Número de Poder Personal: ${actual.numPoderPersonal}. Número de Poder del Día: ${actual.numPoderDia}. `;
                     lecturaCompleta += `Recomendación Explícita: ${actual.recomendacionExplicita} `;
@@ -975,8 +972,8 @@
                     lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura VIP.`;
 
                 } else if (cantidadCartas === 10) {
-                    // 10 CARTAS (CRUZ CELTA / MÁXIMA - OVNI / YATE)
-                    lecturaCompleta = `Atendiendo la tirada Máxima de Cruz Celta para ${actual.nombre} sobre "${actual.pregunta}"... Cartas reveladas: ${nombresSalidaTexto}. `;
+                    // 10 CARTAS (Cruz Celta / Máxima - OVNI / Yate)
+                    lecturaCompleta += `Cruz Celta revelada: ${nombresSalidaTexto}. `;
                     lecturaCompleta += `Diagnóstico unificado profundo del oráculo y tarot: La combinación de tus diez cartas indica que ${diagnosticoReal} `;
                     lecturaCompleta += `Matriz Astral completa: Sol en ${actual.sol}, Luna en ${actual.luna}, Ascendente en ${actual.ascendente}. Frecuencia Energética: ${actual.frecuencia}. Número de Poder Personal: ${actual.numPoderPersonal}. Número de Poder del Día: ${actual.numPoderDia}. `;
                     lecturaCompleta += `Recomendación Explícita: ${actual.recomendacionExplicita} `;
@@ -990,8 +987,8 @@
                     lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura Máxima.`;
 
                 } else {
-                    // 2 CARTAS (GRATIS)
-                    lecturaCompleta = `Atendiendo la consulta gratis para ${actual.nombre} sobre "${actual.pregunta}"... Cartas en mesa: ${nombresSalidaTexto}. `;
+                    // 2 CARTAS (Gratis)
+                    lecturaCompleta += `Cartas en mesa: ${nombresSalidaTexto}. `;
                     lecturaCompleta += `Diagnóstico unificado directo del oráculo y tarot: ${diagnosticoReal} `;
                     lecturaCompleta += `Matriz Astral: Sol en ${actual.sol} y Luna en ${actual.luna}. `;
                     lecturaCompleta += `Arcángel Regente: ${actual.arcangel}. Consejo puntual: ${actual.consejoArcangel}. Deberás invocarlo ${actual.cuandoInvocarsArcangel} (${actual.invocacionArcangel}). `;
