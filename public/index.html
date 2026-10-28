@@ -627,9 +627,7 @@
         let colaConsultantes = [...consultantesPool];
         let estaLeyendo = false;
 
-        // BARAJA COMPLETA DE 78 CARTAS DE TAROT
         const tarotDeck = [
-            // 22 ARCANOS MAYORES
             { name: "0. El Loco", file: "El loco.jpg" },
             { name: "I. El Mago", file: "El Mago.jpg" },
             { name: "II. La Sacerdotisa", file: "La Sacerdotisa.jpg" },
@@ -652,8 +650,6 @@
             { name: "XIX. El Sol", file: "El sol.jpg" },
             { name: "XX. El Juicio", file: "El mundo.jpg" },
             { name: "XXI. El Mundo", file: "El mundo.jpg" },
-
-            // 56 ARCANOS MENORES (BASTOS, COPAS, ESPADAS, OROS)
             { name: "As de Bastos", file: "El Mago.jpg" },
             { name: "2 de Bastos", file: "El carro.jpg" },
             { name: "3 de Bastos", file: "El emperador.jpg" },
@@ -668,7 +664,6 @@
             { name: "Caballero de Bastos", file: "El carro.jpg" },
             { name: "Reina de Bastos", file: "El emperatriz.jpg" },
             { name: "Rey de Bastos", file: "El emperador.jpg" },
-
             { name: "As de Copas", file: "La Sacerdotisa.jpg" },
             { name: "2 de Copas", file: "Los amantes.jpg" },
             { name: "3 de Copas", file: "El sol.jpg" },
@@ -683,7 +678,6 @@
             { name: "Caballero de Copas", file: "Los amantes.jpg" },
             { name: "Reina de Copas", file: "La Sacerdotisa.jpg" },
             { name: "Rey de Copas", file: "El emperador.jpg" },
-
             { name: "As de Espadas", file: "La justicia.jpg" },
             { name: "2 de Espadas", file: "La luna.jpg" },
             { name: "3 de Espadas", file: "La muerte.jpg" },
@@ -698,7 +692,6 @@
             { name: "Caballero de Espadas", file: "El carro.jpg" },
             { name: "Reina de Espadas", file: "La justicia.jpg" },
             { name: "Rey de Espadas", file: "El emperador.jpg" },
-
             { name: "As de Oros", file: "El Mago.jpg" },
             { name: "2 de Oros", file: "La rueda de la fortuna.jpg" },
             { name: "3 de Oros", file: "El emperatriz.jpg" },
@@ -890,6 +883,7 @@
         }
 
         function ejecutarLecturaProxima() {
+            // BLOQUEO ESTRICTO: Si ya hay una lectura en curso, NUNCA se interrumpe
             if (estaLeyendo) return;
             estaLeyendo = true;
 
@@ -953,13 +947,10 @@
 
                 let nombresSalidaTexto = datosCartasMesa.map(c => `${c.nombre} ${c.invertida ? 'invertida' : 'al derecho'}`).join(", ");
 
-                // FRASE OBLIGATORIA PEDIDA
                 let introduccionAsistente = `Hola, soy la asistente de Juan Caramba. En estos momentos no se encuentra. Yo atenderé tu consulta de ${actual.nombre} sobre "${actual.pregunta}"... `;
-
                 let lecturaCompleta = introduccionAsistente;
 
                 if (cantidadCartas === 4) {
-                    // 4 CARTAS (VIP - Coche / Caza)
                     lecturaCompleta += `Cartas en mesa: ${nombresSalidaTexto}. `;
                     lecturaCompleta += `Diagnóstico unificado del oráculo y tarot: La combinación de tus cartas revela que ${diagnosticoReal} `;
                     lecturaCompleta += `Matriz Astral: Sol en ${actual.sol}, Luna en ${actual.luna}, Ascendente en ${actual.ascendente}. Frecuencia Energética: ${actual.frecuencia}. Número de Poder Personal: ${actual.numPoderPersonal}. Número de Poder del Día: ${actual.numPoderDia}. `;
@@ -972,7 +963,6 @@
                     lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura VIP.`;
 
                 } else if (cantidadCartas === 10) {
-                    // 10 CARTAS (Cruz Celta / Máxima - OVNI / Yate)
                     lecturaCompleta += `Cruz Celta revelada: ${nombresSalidaTexto}. `;
                     lecturaCompleta += `Diagnóstico unificado profundo del oráculo y tarot: La combinación de tus diez cartas indica que ${diagnosticoReal} `;
                     lecturaCompleta += `Matriz Astral completa: Sol en ${actual.sol}, Luna en ${actual.luna}, Ascendente en ${actual.ascendente}. Frecuencia Energética: ${actual.frecuencia}. Número de Poder Personal: ${actual.numPoderPersonal}. Número de Poder del Día: ${actual.numPoderDia}. `;
@@ -987,7 +977,6 @@
                     lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura Máxima.`;
 
                 } else {
-                    // 2 CARTAS (Gratis)
                     lecturaCompleta += `Cartas en mesa: ${nombresSalidaTexto}. `;
                     lecturaCompleta += `Diagnóstico unificado directo del oráculo y tarot: ${diagnosticoReal} `;
                     lecturaCompleta += `Matriz Astral: Sol en ${actual.sol} y Luna en ${actual.luna}. `;
@@ -996,6 +985,7 @@
                     lecturaCompleta += `Consejo Final y Advertencia: ${actual.consejo} ${actual.advertencia} Hasta aquí tu lectura gratis.`;
                 }
                 
+                // Al terminar la locución y los subtítulos por completo, liberamos la bandera `estaLeyendo = false`
                 hablarYSubtitularSincronizado(lecturaCompleta, `Oráculo para ${actual.nombre} (${cantidadCartas} Cartas)`, () => {
                     estaLeyendo = false;
                 });
@@ -1026,6 +1016,8 @@
             { icono: "🛥️", nombre: "un Yate Completo", cartas: 10 }
         ];
 
+        // Los regalos que van llegando se colocan en la cola y alimentan el feed visual,
+        // pero NUNCA interrumpen la lectura que está sonando en ese instante.
         setInterval(() => {
             const giftFeed = document.getElementById('giftFeed');
             if(!giftFeed) return;
@@ -1063,11 +1055,13 @@
             ejecutarLecturaProxima();
         }, 2000);
 
+        // El bucle general evalúa cada 12 segundos, pero SOLO ejecuta si la lectura anterior YA TERMINÓ (`!estaLeyendo`)
         setInterval(() => {
             if (!estaLeyendo) {
                 ejecutarLecturaProxima();
             }
-        }, 15000);
+        }, 12000);
     </script>
 </body>
 </html>
+q
