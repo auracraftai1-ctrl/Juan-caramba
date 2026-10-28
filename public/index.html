@@ -358,6 +358,44 @@
             font-size: 30px;
         }
 
+        /* SUBTÍTULOS DINÁMICOS POR BLOQUES */
+        .speech-floating {
+            position: absolute;
+            bottom: 24vh;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 750px;
+            text-align: center;
+            z-index: 160;
+            pointer-events: none;
+            padding: 6px 14px;
+            background: rgba(0, 0, 0, 0.65);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 8px;
+            backdrop-filter: blur(3px);
+            min-height: 45px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .speech-floating h3 {
+            margin: 0 0 2px 0;
+            color: #ffdf73;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .speech-floating p {
+            margin: 0;
+            font-size: 11px;
+            font-weight: bold;
+            color: #ffffff;
+            line-height: 1.3;
+            text-shadow: 1px 1px 4px #000;
+        }
+
         /* CONTENEDOR DE CARTAS */
         .tarot-slot {
             position: absolute;
@@ -511,6 +549,12 @@
             <div style="font-size: 9px; color: #fff;" id="giftPopupText">¡Envió un regalo VIP!</div>
         </div>
 
+        <!-- SUBTÍTULOS DINÁMICOS POR BLOQUES -->
+        <div class="speech-floating">
+            <h3 id="speechTitle">Asistente de Don Juan Caramba</h3>
+            <p id="speechText">"Hola, soy la asistente de Don Juan Caramba, él en este momento no se encuentra..."</p>
+        </div>
+
         <!-- CARTAS EN MESA -->
         <div class="tarot-slot" id="cardContainer"></div>
     </div>
@@ -629,15 +673,21 @@
         let yaSiguio = false;
         let tiempoRestanteContrato = 3600;
 
-        // MOTOR DE ASISTENTE DE VOZ LIMPIO Y NATURAL (SIN MENCIONAR TAPS)
-        function hablarAsistente(texto) {
+        // MOTOR DE ASISTENTE DE VOZ Y SUBTÍTULOS ROTATIVOS POR BLOQUES
+        function hablarYSubtitularBloques(textoCompleto, titulo) {
             if (!('speechSynthesis' in window)) return;
             window.speechSynthesis.cancel();
+            if (window.currentBlockTimer) clearInterval(window.currentBlockTimer);
 
-            let utterance = new SpeechSynthesisUtterance(texto);
+            const speechTitle = document.getElementById('speechTitle');
+            const speechText = document.getElementById('speechText');
+            if(speechTitle) speechTitle.innerText = titulo;
+
+            // 1. Lanzar la voz de la asistente de corrido
+            let utterance = new SpeechSynthesisUtterance(textoCompleto);
             utterance.lang = 'es-ES';
-            utterance.rate = 0.82; // Velocidad pausada y perfectamente audible
-            utterance.pitch = 0.95; // Tono claro y agradable de asistente
+            utterance.rate = 0.82; 
+            utterance.pitch = 0.95; 
 
             let voices = window.speechSynthesis.getVoices();
             let vozAsistente = voices.find(v => v.lang.startsWith('es') && (
@@ -653,6 +703,39 @@
             }
 
             window.speechSynthesis.speak(utterance);
+
+            // 2. Dividir el texto en bloques de unas 15-18 palabras (aprox. 2 líneas limpias)
+            let palabras = textoCompleto.split(" ");
+            let bloques = [];
+            let bloqueActual = "";
+
+            palabras.forEach((palabra) => {
+                bloqueActual += palabra + " ";
+                if (bloqueActual.split(" ").length >= 16) {
+                    bloques.push(bloqueActual.trim());
+                    bloqueActual = "";
+                }
+            });
+            if (bloqueActual.trim().length > 0) {
+                bloques.push(bloqueActual.trim());
+            }
+
+            // 3. Rotar los bloques en pantalla cada 6 segundos
+            let indexBloque = 0;
+            if(speechText && bloques.length > 0) {
+                speechText.innerText = `"${bloques[0]}"`;
+            }
+
+            window.currentBlockTimer = setInterval(() => {
+                indexBloque++;
+                if (indexBloque < bloques.length) {
+                    if(speechText) {
+                        speechText.innerText = `"${bloques[indexBloque]}"`;
+                    }
+                } else {
+                    clearInterval(window.currentBlockTimer);
+                }
+            }, 6000);
         }
 
         if ('speechSynthesis' in window) {
@@ -711,8 +794,6 @@
             heart.style.top = (event.clientY - 12) + 'px';
             document.getElementById('mainContainer').appendChild(heart);
             setTimeout(() => heart.remove(), 1200);
-
-            // ¡CERO VOZ AL TOCAR LA PANTALLA! Solo sube la energía visualmente.
         });
 
         function seguirAccion(event) {
@@ -725,7 +806,7 @@
                 yaSiguio = true;
                 if(btn) btn.classList.add('followed');
                 if(text) text.innerText = "Siguiendo";
-                hablarAsistente("¡Muchas gracias por seguir el canal! Don Juan Caramba te envía bendiciones desde el llano.");
+                hablarYSubtitularBloques("¡Muchas gracias por seguir el canal! Don Juan Caramba te envía bendiciones desde el llano.", "Asistente de Don Juan Caramba");
             } else {
                 numSeguidores--;
                 yaSiguio = false;
@@ -738,7 +819,7 @@
 
         function quieremeAccion(event) {
             event.stopPropagation();
-            hablarAsistente("¡Eso me gusta! Sigan mandando cariño y energía positiva al chat de la transmisión.");
+            hablarYSubtitularBloques("¡Eso me gusta! Sigan mandando cariño y energía positiva al chat de la transmisión.", "Asistente de Don Juan Caramba");
         }
 
         function mostrarAnimacionRegalo(usuario, regaloIcono, regaloNombre) {
@@ -767,10 +848,6 @@
 
             container.innerHTML = '';
             
-            // SALUDO OBLIGATORIO Y EXACTO DE LA ASISTENTE EN CADA TIRADA
-            let saludoInicial = `Hola, soy la asistente de Don Juan Caramba. Él ahorita no se encuentra, pero conectamos la carta astral y los datos de ${actual.nombre} para su lectura.`;
-            hablarAsistente(saludoInicial);
-
             for(let i = 0; i < 3; i++) {
                 const cardDiv = document.createElement('div');
                 cardDiv.className = 'card shuffling';
@@ -803,11 +880,11 @@
                     }, index * 250);
                 });
 
-                // LECTURA DINÁMICA 100% COMPLETA Y EXTENDIDA HASTA EL FINAL
-                const mensajeFinal = `Atendiendo a tu consulta sobre "${actual.pregunta}"... ¡${actual.veredicto} Estimado o estimada ${actual.nombre}, tu matriz astral (${actual.matrizAstral}) se conecta con el oráculo! La tirada nos muestra en mesa a ${descripcionesCartas[0]}, seguida por ${descripcionesCartas[1]}, y culminando con ${descripcionesCartas[2]}. Ante esta situación, el arcángel protector ${actual.arcangel} te aconseja: ${actual.consejoArcangel}. De igual manera, el serafín ${actual.serafin} te transmite: ${actual.consejoSerafin}. Como acción espiritual de fuego debes cumplir con lo siguiente: ${actual.accionFuego} Y recuerda evitar por completo: ${actual.evitarFuego} Sella este propósito en el momento indicado: ${actual.momentoFuego} Utiliza el color protector ${actual.colorDia}, enciende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}) y prepara tu baño especial de ${actual.bano} (${actual.paraQueBano}). Tu vibración numérica es el ${actual.numerologia}, lo que nos indica que ${actual.significadoNum}. Y presta mucha atención a este consejo final de parte de la casa: ${actual.consejo}`;
+                // LECTURA COMPLETA, CON EL SALUDO OFICIAL Y LA FRASE DE CIERRE EXACTA
+                const lecturaCompleta = `Hola, soy la asistente de Don Juan Caramba, él en este momento no se encuentra, pero yo le daré su lectura a ${actual.nombre}. Atendiendo a tu consulta sobre "${actual.pregunta}"... ¡${actual.veredicto} Estimado o estimada ${actual.nombre}, tu matriz astral (${actual.matrizAstral}) se conecta con el oráculo! La tirada nos muestra en mesa a ${descripcionesCartas[0]}, seguida por ${descripcionesCartas[1]}, y culminando con ${descripcionesCartas[2]}. Ante esta situación, el arcángel protector ${actual.arcangel} te aconseja: ${actual.consejoArcangel}. De igual manera, el serafín ${actual.serafin} te transmite: ${actual.consejoSerafin}. Como acción espiritual de fuego debes cumplir con lo siguiente: ${actual.accionFuego} Y recuerda evitar por completo: ${actual.evitarFuego} Sella este propósito en el momento indicado: ${actual.momentoFuego} Utiliza el color protector ${actual.colorDia}, enciende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}) y prepara tu baño especial de ${actual.bano} (${actual.paraQueBano}). Tu vibración numérica es el ${actual.numerologia}, lo que nos indica que ${actual.significadoNum}. Presta mucha atención a este consejo final: ${actual.consejo}. Bueno, hasta aquí llegó tu consulta. Que la luz del oráculo te acompañe.`;
                 
-                hablarAsistente(mensajeFinal);
-            }, 6000);
+                hablarYSubtitularBloques(lecturaCompleta, `Oráculo para ${actual.nombre}`);
+            }, 4000);
         }
 
         setInterval(() => {
@@ -847,8 +924,8 @@
         inicializarCola();
         generarParticulas();
         
-        // TIEMPO CALCULADO A 110 SEGUNDOS PARA QUE LA VOZ TERMINE DE LEER TODA LA TIRADA SIN CORTES
-        setInterval(realizarTirada, 110000);
+        // TIEMPO AMPLIADO A 140 SEGUNDOS (2 MINUTOS Y 20 SEGUNDOS) PARA CERRAR LA LECTURA HASTA EL FINAL
+        setInterval(realizarTirada, 140000);
         setTimeout(realizarTirada, 2000);
     </script>
 </body>
