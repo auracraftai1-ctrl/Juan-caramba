@@ -3,841 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Don Juan Caramba - Tarot 24/7 Live Stream (English)</title>
+    <title>Don Juan Caramba - English Stream Overlay</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
         body {
             margin: 0;
-            background-color: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            user-select: none;
-        }
-        .container {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* DYNAMIC BACKGROUND */
-        .bg-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            animation: backgroundPulse 8s infinite alternate ease-in-out;
-        }
-        @keyframes backgroundPulse {
-            0% { transform: scale(1); filter: brightness(1); }
-            50% { transform: scale(1.02); filter: brightness(1.05); }
-            100% { transform: scale(1); filter: brightness(1); }
-        }
-
-        /* MYSTICAL PARTICLES */
-        .mystic-particle {
-            position: absolute;
-            background: rgba(212, 175, 55, 0.7);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 2;
-            animation: floatParticle 6s infinite linear;
-        }
-        @keyframes floatParticle {
-            0% { transform: translateY(100vh) scale(0.2); opacity: 0; }
-            50% { opacity: 0.8; }
-            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
-        }
-
-        /* ACTIONS PANEL (TOP LEFT) */
-        .tiktok-actions-container {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            align-items: flex-start;
-        }
-
-        .follow-btn {
-            background: linear-gradient(135deg, #fe2c55, #ff4654);
-            color: white;
-            border: none;
-            padding: 4px 10px;
-            font-size: 11px;
-            font-weight: bold;
-            border-radius: 16px;
-            cursor: pointer;
-            box-shadow: 0 3px 8px rgba(254, 44, 85, 0.5);
-            display: flex;
-            align-items: center;
-            gap: 3px;
-        }
-        .follow-btn.followed {
-            background: rgba(255, 255, 255, 0.25);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .love-btn {
-            background: linear-gradient(135deg, #ff007f, #e6005c);
-            color: white;
-            border: none;
-            padding: 3px 8px;
-            font-size: 10px;
-            font-weight: bold;
-            border-radius: 14px;
-            cursor: pointer;
-            box-shadow: 0 2px 6px rgba(255, 0, 127, 0.4);
-            display: flex;
-            align-items: center;
-            gap: 2px;
-        }
-
-        .follower-count {
-            color: #fff;
-            font-size: 9px;
-            font-weight: bold;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 2px 5px;
-            border-radius: 5px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-        }
-
-        /* ENERGY BAR */
-        .energy-bar-container {
-            position: fixed;
-            top: 90px;
-            left: 10px;
-            z-index: 100;
-            background: rgba(0, 0, 0, 0.65);
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            padding: 3px 6px;
-            border-radius: 6px;
-            width: 140px;
-            backdrop-filter: blur(2px);
-        }
-        .energy-title {
-            font-size: 7px;
-            color: #ffdf73;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 2px;
-        }
-        .energy-outer {
-            width: 100%;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        .energy-inner {
-            height: 100%;
-            background: linear-gradient(90deg, #fe2c55, #ffdf73);
-            transition: width 0.3s ease;
-        }
-
-        /* CONTEST PANEL */
-        .contest-panel {
-            position: fixed;
-            top: 125px;
-            left: 10px;
-            z-index: 100;
-            background: rgba(0, 0, 0, 0.65);
-            border: 1px solid #fe2c55;
-            border-radius: 6px;
-            padding: 3px 6px;
-            color: #fff;
-            text-align: center;
-            max-width: 140px;
-            backdrop-filter: blur(2px);
-        }
-        .contest-title {
-            font-size: 7.5px;
-            color: #d4af37;
-            text-transform: uppercase;
-        }
-        .contest-stats {
-            font-size: 10px;
-            font-weight: bold;
-            color: #fff;
-        }
-        .contest-timer {
-            font-size: 7.5px;
-            color: #ff4654;
-        }
-
-        /* GIFTS GUIDE */
-        .vip-gifts-guide {
-            position: fixed;
-            bottom: 30vh;
-            left: 10px;
-            z-index: 50;
-            background: rgba(0, 0, 0, 0.75);
-            border: 1px solid rgba(212, 175, 55, 0.6);
-            border-radius: 6px;
-            padding: 4px 6px;
-            color: #fff;
-            max-width: 150px;
-            backdrop-filter: blur(3px);
-        }
-        .vip-gifts-guide h6 {
-            margin: 0 0 2px 0;
-            color: #ffdf73;
-            font-size: 8px;
-            text-align: center;
-            text-transform: uppercase;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-            padding-bottom: 1px;
-        }
-        .vip-gifts-guide ul {
-            list-style: none;
             padding: 0;
-            margin: 0;
+            background: transparent;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            overflow: hidden;
+        }
+        .overlay-container {
+            position: relative;
+            width: 1920px;
+            height: 1080px;
+            background-image: url('../juan-caramba-bg.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .hud-top-left {
+            position: absolute;
+            top: 30px;
+            left: 30px;
             display: flex;
             flex-direction: column;
-            gap: 2px;
-            font-size: 6px;
+            gap: 10px;
         }
-        .vip-gifts-guide li {
-            line-height: 1.1;
-            color: #f5f5f5;
+        .btn-action {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            border: none;
+            padding: 10px 20px;
+            color: white;
+            font-weight: bold;
+            border-radius: 20px;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(255, 65, 108, 0.4);
         }
-        .vip-gifts-guide li strong {
-            color: #ffdf73;
-        }
-
-        /* CANDLE */
-        .candle-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 18px;
-            height: 55px;
-            background: linear-gradient(#d4af37, #8b5a2b);
-            border-radius: 4px;
-            z-index: 80;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-        }
-        .flame {
+        .queue-box {
             position: absolute;
-            top: -18px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 12px;
-            height: 20px;
-            background: #ff9d00;
-            border-radius: 50% 50% 20% 20%;
-            box-shadow: 0 0 12px #ff4500, 0 0 22px #ffd700;
-            animation: flicker 0.1s infinite alternate ease-in-out;
+            top: 30px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.85);
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            padding: 15px;
+            width: 320px;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
         }
-        @keyframes flicker {
-            0% { transform: translateX(-50%) scale(1) rotate(-1deg); opacity: 0.85; }
-            100% { transform: translateX(-50%) scale(1.15) rotate(2deg); opacity: 1; }
-        }
-
-        /* WAITING QUEUE */
-        .waiting-queue {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            width: 130px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1.5px solid rgba(212, 175, 55, 0.7);
-            border-radius: 6px;
-            padding: 4px;
-            color: #fff;
-            z-index: 100;
-            backdrop-filter: blur(2px);
-        }
-        .waiting-queue h4 {
-            margin: 0 0 2px 0;
-            color: #d4af37;
-            font-size: 8.5px;
+        .queue-title {
+            color: #ffd700;
+            font-weight: bold;
+            margin-bottom: 10px;
             text-align: center;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.5);
-            padding-bottom: 2px;
-            text-transform: uppercase;
+            font-size: 16px;
+            letter-spacing: 1px;
         }
         .queue-list {
             list-style: none;
             padding: 0;
             margin: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            max-height: 145px;
-            overflow: hidden;
+            font-size: 14px;
         }
-        .queue-item {
-            font-size: 7.5px;
-            padding: 2px 3px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 2px;
+        .queue-list li {
+            padding: 8px 5px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
             display: flex;
             justify-content: space-between;
-            align-items: center;
         }
-        .queue-item.active {
-            background: rgba(212, 175, 55, 0.3);
-            border: 1px solid #d4af37;
-            font-weight: bold;
-            color: #ffdf73;
-        }
-
-        /* RECENT GIFTS */
-        .gifts-panel {
-            position: fixed;
-            top: 170px;
-            right: 10px;
-            width: 130px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(254, 44, 85, 0.6);
-            border-radius: 6px;
-            padding: 3px;
-            color: #fff;
-            z-index: 90;
-            backdrop-filter: blur(2px);
-        }
-        .gifts-panel h5 {
-            margin: 0 0 2px 0;
-            color: #fe2c55;
-            font-size: 7.5px;
-            text-align: center;
-            text-transform: uppercase;
-        }
-        .gift-feed {
-            font-size: 7px;
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            max-height: 55px;
-            overflow: hidden;
-        }
-        .gift-item {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 2px 3px;
-            border-radius: 2px;
-            display: flex;
-            align-items: center;
-            gap: 2px;
-        }
-
-        /* GIFT POPUP */
-        .gift-popup-animation {
+        .rules-box {
             position: absolute;
-            top: 35%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
+            bottom: 30px;
+            left: 30px;
             background: rgba(0, 0, 0, 0.85);
-            border: 2px solid #fe2c55;
-            border-radius: 12px;
-            padding: 10px 20px;
-            color: #fff;
-            text-align: center;
-            z-index: 150;
-            pointer-events: none;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            opacity: 0;
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            padding: 15px;
+            width: 340px;
         }
-        .gift-popup-animation.show {
-            transform: translate(-50%, -50%) scale(1.1);
-            opacity: 1;
-        }
-        .gift-popup-icon {
-            font-size: 30px;
-        }
-
-        /* TAROT CARDS CONTAINER */
-        .tarot-slot {
-            position: absolute;
-            bottom: 14vh;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            z-index: 150;
-            width: 100%;
-            padding: 0 10px;
-        }
-        .card {
-            width: 58px;
-            height: 85px;
-            background: #1a1a1a;
-            border-radius: 4px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.95);
-            border: 2px solid #d4af37;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            text-align: center;
-            padding: 2px;
+        .rules-title {
+            color: #ffd700;
             font-weight: bold;
-            color: #fff;
-            overflow: hidden;
+            margin-bottom: 8px;
         }
-        .card img {
-            width: 100%;
-            height: 62px;
-            object-fit: cover;
-            border-radius: 2px;
-            border: 1px solid #d4af37;
-            display: block;
-        }
-        .card img.reversed {
-            transform: rotate(180deg);
-            filter: brightness(0.9);
-        }
-        .card span {
-            font-size: 5.5px;
-            color: #ffdf73;
-            margin-top: 1px;
-            text-transform: uppercase;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            width: 100%;
-        }
-
-        /* SHUFFLE ANIMATION */
-        .shuffling {
-            animation: shuffleCard 0.4s infinite alternate ease-in-out;
-            filter: brightness(0.85);
-        }
-        @keyframes shuffleCard {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-6px) rotate(3deg); }
-            100% { transform: translateY(6px) rotate(-3deg); }
-        }
-
-        /* FLOATING SPEECH TEXT */
-        .speech-floating {
-            position: absolute;
-            bottom: 3vh;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 700px;
-            text-align: center;
-            z-index: 12;
-            pointer-events: none;
-            background: rgba(0, 0, 0, 0.65);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            padding: 6px 12px;
-            border-radius: 8px;
-            backdrop-filter: blur(3px);
-        }
-        .speech-floating h3 {
-            margin: 0 0 2px 0;
-            color: #d4af37;
-            font-size: 10px;
-            text-shadow: 1px 1px 3px #000;
-        }
-        .speech-floating p {
+        .rules-list {
+            font-size: 13px;
+            line-height: 1.5;
             margin: 0;
-            font-size: 9px;
-            font-weight: bold;
-            color: #fff;
-            line-height: 1.2;
-            text-shadow: 1px 1px 3px #000;
+            padding-left: 15px;
         }
-
-        .tap-heart {
+        .card-container {
             position: absolute;
-            font-size: 24px;
-            animation: floatUpHeart 1.2s ease-out forwards;
-            pointer-events: none;
-            z-index: 200;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            gap: 25px;
+            perspective: 1000px;
         }
-        @keyframes floatUpHeart {
-            0% { transform: translateY(0) scale(0.6); opacity: 1; }
-            100% { transform: translateY(-110px) scale(1.3); opacity: 0; }
+        .tarot-card {
+            width: 150px;
+            height: 240px;
+            background: #222;
+            border: 3px solid #ffd700;
+            border-radius: 12px;
+            background-image: url('../card-back.jpg');
+            background-size: cover;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+            transition: transform 0.6s ease;
+        }
+        .tarot-card.flipped {
+            transform: rotateY(180deg);
+        }
+        .candle {
+            position: absolute;
+            bottom: 30px;
+            right: 50px;
+            width: 50px;
+            height: 80px;
+            background: linear-gradient(to top, #ff8c00, #ffd700);
+            border-radius: 10px;
+            box-shadow: 0 0 35px #ff4500;
         }
     </style>
 </head>
-<body onclick="registrarTapTap(event)">
+<body>
 
-    <div class="container" id="mainContainer">
-        <!-- Original background -->
-        <img src="juan-caramba-bg.jpg" alt="Don Juan Caramba Tarot" class="bg-image">
-
-        <!-- BACKGROUND AUDIO -->
-        <audio id="bgMusic" loop>
-            <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=venezuelan-harp-instrumental-111394.mp3" type="audio/mpeg">
-        </audio>
-
-        <!-- KICK / SOCIAL ACTIONS -->
-        <div class="tiktok-actions-container">
-            <button class="follow-btn" id="followBtn" onclick="seguirAccion(event)">
-                <span id="followIcon">➔❤️</span> <span id="followText">Follow</span>
-            </button>
-            <button class="love-btn" onclick="quieremeAccion(event)">
-                <span>💖</span> <span>Sub</span>
-            </button>
-            <div class="follower-count" id="followerCount">Followers: 14.8K</div>
+    <div class="overlay-container">
+        <!-- HUD Superior -->
+        <div class="hud-top-left">
+            <button class="btn-action">❤️ Follow</button>
+            <button class="btn-action">⭐ Subscribe</button>
+            <div style="font-weight: bold; margin-top: 5px;">Followers: <span id="follower-count">14,800</span></div>
         </div>
 
-        <!-- MYSTICAL ENERGY -->
-        <div class="energy-bar-container">
-            <div class="energy-title">⚡ MYSTICAL ENERGY</div>
-            <div class="energy-outer">
-                <div class="energy-inner" id="energyFill" style="width: 0%;"></div>
-            </div>
-        </div>
-
-        <!-- CONTEST PANEL -->
-        <div class="contest-panel">
-            <div class="contest-title">🏆 Tap Contest</div>
-            <div class="contest-stats"><span id="tapCountDisplay">0</span> / 100 Taps</div>
-            <div class="contest-timer">Resets in: <span id="timerDisplay">59:59</span></div>
-        </div>
-
-        <!-- GIFTS & READINGS GUIDE -->
-        <div class="vip-gifts-guide">
-            <h6>🔮 Gifts & Readings</h6>
-            <ul>
-                <li><strong>🌹 Rose:</strong> 2 Cards (70 pts)</li>
-                <li><strong>😎 Shades:</strong> 4 Cards (100 pts)</li>
-                <li><strong>🦁 Lion:</strong> 10 Cards (150 pts)</li>
-                <li><strong>🌌 Universe:</strong> Full Spread (160 pts)</li>
+        <!-- Cola de Espera de Kick -->
+        <div class="queue-box">
+            <div class="queue-title">KICK LIVE QUEUE</div>
+            <ul class="queue-list" id="queue">
+                <li><span>1. @Michael_92</span> <span>(Sub 👑)</span></li>
+                <li><span>2. @Sarah_K</span> <span>(Free 3-Card)</span></li>
+                <li><span>3. @Alex_V</span> <span>(Free 3-Card)</span></li>
+                <li><span>4. @Sophia_Tarot</span> <span>(Epic 5-Card)</span></li>
+                <li><span>5. @Daniel_USA</span> <span>(Free 3-Card)</span></li>
             </ul>
         </div>
 
-        <!-- CANDLE -->
-        <div class="candle-container">
-            <div class="flame"></div>
+        <!-- Zona de Cartas Dinámica (Cambia entre 3 y 5 cartas) -->
+        <div class="card-container" id="card-slot">
+            <!-- Se generan mediante JavaScript -->
         </div>
 
-        <!-- WAITING QUEUE -->
-        <div class="waiting-queue">
-            <h4>Waiting Queue (10)</h4>
-            <ul class="queue-list" id="queueList"></ul>
+        <!-- Reglas de Donaciones y Regalos específicos para Kick -->
+        <div class="rules-box">
+            <div class="rules-title">🎁 KICK GIFTS & READINGS</div>
+            <ul class="rules-list">
+                <li><strong>Free Chat / Follow:</strong> Standard 3-Card Reading</li>
+                <li><strong>Subs / Medium Gifts:</strong> Mystic 3-Card Spread</li>
+                <li><strong>Epic Donations / Whales:</strong> Ultimate 5-Card Master Reading</li>
+            </ul>
         </div>
 
-        <!-- RECENT GIFTS -->
-        <div class="gifts-panel">
-            <h5>🎁 Recent</h5>
-            <div class="gift-feed" id="giftFeed">
-                <div class="gift-item">🌹 @Michael_92 Rose</div>
-                <div class="gift-item">😎 @Sarah_K Shades</div>
-            </div>
-        </div>
-
-        <!-- GIFT POPUP -->
-        <div class="gift-popup-animation" id="giftPopup">
-            <div class="gift-popup-icon" id="giftPopupIcon">🎁</div>
-            <div style="font-size: 11px; font-weight: bold; color: #ffdf73;" id="giftPopupUser">@User</div>
-            <div style="font-size: 9px; color: #fff;" id="giftPopupText">Sent a VIP Gift!</div>
-        </div>
-
-        <!-- CARDS ON TABLE -->
-        <div class="tarot-slot" id="cardContainer"></div>
-
-        <!-- SPEECH -->
-        <div class="speech-floating">
-            <h3>Don Juan Caramba</h3>
-            <p id="speechText">"Greetings, wandering soul... Send your Full Name and Birthdate in chat."</p>
-        </div>
+        <!-- Elemento Místico (Vela) -->
+        <div class="candle"></div>
     </div>
 
+    <!-- Audio de fondo -->
+    <audio id="bg-music" loop>
+        <source src="../background-music.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
-        const nombresUsuarios = [
-            "Michael_92", "Sarah_K", "Alex_V", "Sophia_Tarot", "Daniel_USA",
-            "Valerie_Moon", "Jack_G", "Emma_Rose", "Luke_Mystic", "Gabriella_St",
-            "Frank_V", "Oriana_Sun", "Peter_P", "Kenia_Fan", "Mystic_Rosa",
-            "Jennifer_77", "Ernest_Tarot", "Marcus_P", "Astral_Ana", "Grace_V"
-        ];
-
-        // TAROT DECK MATCHING YOUR GITHUB FILENAMES EXACTLY + ENGLISH DISPLAY NAMES
-        const tarotDeck = [
-            { name: "The Fool", file: "El loco.jpg" },
-            { name: "The Magician", file: "El Mago.jpg" },
-            { name: "High Priestess", file: "La Sacerdotisa.jpg" },
-            { name: "The Empress", file: "La emperatriz.jpg" },
-            { name: "The Emperor", file: "El emperador.jpg" },
-            { name: "The Hermit", file: "El ermitaño.jpg" },
-            { name: "The Chariot", file: "El carro.jpg" },
-            { name: "Strength", file: "La fuerza.jpg" },
-            { name: "Justice", file: "La justicia.jpg" },
-            { name: "Death", file: "La muerte.jpg" },
-            { name: "Temperance", file: "La templanza.jpg" },
-            { name: "The Devil", file: "El diablo.jpg" },
-            { name: "The Tower", file: "La torres.jpg" },
-            { name: "The Star", file: "La estrella.jpg" },
-            { name: "The Moon", file: "La luna.jpg" },
-            { name: "The Sun", file: "El sol.jpg" },
-            { name: "The World", file: "El mundo.jpg" },
-            { name: "The Lovers", file: "Los amantes.jpg" },
-            { name: "Wheel of Fortune", file: "La rueda de la fortuna.jpg" },
-
-            // Cups
-            { name: "Two of Cups", file: "Dos de copas.jpg" },
-            { name: "Three of Cups", file: "Tres de copas.jpg" },
-            { name: "Four of Cups", file: "Cuatro de copas.jpg" },
-            { name: "Five of Cups", file: "Cinco de copas.jpg" },
-            { name: "Six of Cups", file: "Seis de copas.jpg" },
-            { name: "Seven of Cups", file: "Siete de copas.jpg" },
-            { name: "Eight of Cups", file: "Ocho de copas.jpg" },
-            { name: "Nine of Cups", file: "Nueve de copas.jpg" },
-            { name: "Page of Cups", file: "Sota de copas.jpg" },
-            { name: "Knight of Cups", file: "Caballo de copas.jpg" },
-            { name: "Queen of Cups", file: "Reina de copas.jpg" },
-            { name: "King of Cups", file: "Rey de copas.jpg" },
-
-            // Swords
-            { name: "Ace of Swords", file: "As de espadas.jpg" },
-            { name: "Two of Swords", file: "Dos de espadas.jpg" },
-            { name: "Three of Swords", file: "Tres de espadas.jpg" },
-            { name: "Four of Swords", file: "Cuatro de espadas.jpg" },
-            { name: "Five of Swords", file: "Cinco de espadas.jpg" },
-            { name: "Six of Swords", file: "Seis de espadas.jpg" },
-            { name: "Seven of Swords", file: "Siete de espadas.jpg" },
-            { name: "Eight of Swords", file: "Ocho de espadas.jpg" },
-            { name: "Nine of Swords", file: "Nueve de espadas.jpg" },
-            { name: "Knight of Swords", file: "Caballo de espadas.jpg" },
-            { name: "Queen of Swords", file: "Reina de espadas.jpg" },
-            { name: "King of Swords", file: "Rey de espadas.jpg" },
-
-            // Pentacles / Coins
-            { name: "Ace of Pentacles", file: "As de oro.jpg" },
-            { name: "Two of Pentacles", file: "Dos de oro.jpg" },
-            { name: "Three of Pentacles", file: "Tres de oro.jpg" },
-            { name: "Four of Pentacles", file: "Cuatro de oro.jpg" },
-            { name: "Five of Pentacles", file: "Cinco de oro.jpg" },
-            { name: "Six of Pentacles", file: "Seis de oro.jpg" },
-            { name: "Seven of Pentacles", file: "Siete de oro.jpg" },
-            { name: "Eight of Pentacles", file: "Ocho de oro.jpg" },
-            { name: "Nine of Pentacles", file: "Nueve de oro.jpg" },
-            { name: "Ten of Pentacles", file: "Diez de oro.jpg" },
-            { name: "Queen of Pentacles", file: "Reina de oro.jpg" },
-            { name: "King of Pentacles", file: "Rey de oro.jpg" },
-
-            // Wands
-            { name: "Nine of Wands", file: "Nueve de bastos.jpg" },
-            { name: "Six of Wands", file: "Seis de bastos.jpg" },
-            { name: "Seven of Wands", file: "Siete de bajos.jpg" },
-            { name: "Eight of Wands", file: "Ocho de bajos.jpg" }
-        ];
-
-        let totalTaps = 0;
-        let colaUsuarios = [];
-        let numSeguidores = 14820;
-        let yaSiguio = false;
-        let tiempoRestanteContrato = 3600;
-        let musicaActivada = false;
-
-        function generarParticulas() {
-            const container = document.getElementById('mainContainer');
-            setInterval(() => {
-                const particle = document.createElement('div');
-                particle.className = 'mystic-particle';
-                const size = Math.random() * 4 + 2 + 'px';
-                particle.style.width = size;
-                particle.style.height = size;
-                particle.style.left = Math.random() * 100 + 'vw';
-                particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
-                container.appendChild(particle);
-                setTimeout(() => particle.remove(), 6000);
-            }, 800);
-        }
-
-        function inicializarCola() {
-            colaUsuarios = [];
-            for(let i = 0; i < 10; i++) {
-                colaUsuarios.push(nombresUsuarios[i % nombresUsuarios.length]);
+        // Reproducir música ambiental
+        window.addEventListener('DOMContentLoaded', () => {
+            const music = document.getElementById('bg-music');
+            if(music) {
+                music.volume = 0.25;
+                music.play().catch(e => console.log("Audio autoplay restricted"));
             }
-            actualizarVistaCola();
-        }
+            // Iniciar con la tirada estándar de 3 cartas
+            setupTable(3);
+        });
 
-        function actualizarVistaCola() {
-            const queueList = document.getElementById('queueList');
-            if(!queueList) return;
-            queueList.innerHTML = '';
-            colaUsuarios.forEach((usuario, index) => {
-                const li = document.createElement('li');
-                li.className = `queue-item ${index === 0 ? 'active' : ''}`;
-                li.innerHTML = `<span>${index + 1}. @${usuario}</span> <span>${index === 0 ? '🔮' : ''}</span>`;
-                queueList.appendChild(li);
-            });
-        }
-
-        function registrarTapTap(event) {
-            if (!musicaActivada) {
-                const bgMusic = document.getElementById('bgMusic');
-                if(bgMusic) {
-                    bgMusic.volume = 0.3;
-                    bgMusic.play().catch(() => {});
-                    musicaActivada = true;
-                }
-            }
-
-            totalTaps++;
-            const tapDisplay = document.getElementById('tapCountDisplay');
-            if(tapDisplay) tapDisplay.innerText = totalTaps;
-
-            const energyFill = document.getElementById('energyFill');
-            if (energyFill) {
-                let porcentaje = (totalTaps % 100);
-                energyFill.style.width = porcentaje + '%';
-            }
-
-            const heart = document.createElement('div');
-            heart.className = 'tap-heart';
-            heart.innerText = ['❤️', '💖', '✨', '🔥'][Math.floor(Math.random() * 4)];
-            heart.style.left = (event.clientX - 12) + 'px';
-            heart.style.top = (event.clientY - 12) + 'px';
-            document.getElementById('mainContainer').appendChild(heart);
-            setTimeout(() => heart.remove(), 1200);
-
-            if(totalTaps === 100) {
-                const speech = document.getElementById('speechText');
-                if(speech) speech.innerHTML = `"100 Taps reached! Unlocking free live room reading!"`;
+        // Motor de voz mística en inglés para Don Juan Caramba
+        function speakEnglishMessage(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.pitch = 0.75; // Voz grave y misteriosa
+                utterance.rate = 0.95;
+                window.speechSynthesis.speak(utterance);
             }
         }
 
-        function seguirAccion(event) {
-            event.stopPropagation();
-            const btn = document.getElementById('followBtn');
-            const text = document.getElementById('followText');
-            const speechText = document.getElementById('speechText');
+        // Función para cambiar dinámicamente el número de cartas en la mesa (3 o 5)
+        function setupTable(cardCount) {
+            const container = document.getElementById('card-slot');
+            container.innerHTML = ''; // Limpiar cartas anteriores
             
-            if (!yaSiguio) {
-                numSeguidores++;
-                yaSiguio = true;
-                if(btn) btn.classList.add('followed');
-                if(text) text.innerText = "Following";
-                if(speechText) speechText.innerHTML = `"Thank you for following Don Juan Caramba, my friend!"`;
-            } else {
-                numSeguidores--;
-                yaSiguio = false;
-                if(btn) btn.classList.remove('followed');
-                if(text) text.innerText = "Follow";
-            }
-            const countDiv = document.getElementById('followerCount');
-            if(countDiv) countDiv.innerText = `Followers: ${(numSeguidores / 1000).toFixed(1)}K`;
-        }
-
-        function quieremeAccion(event) {
-            event.stopPropagation();
-            const speechText = document.getElementById('speechText');
-            if(speechText) speechText.innerHTML = `"Thank you for the support, my friend!"`;
-        }
-
-        function mostrarAnimacionRegalo(usuario, regaloIcono, regaloNombre) {
-            const popup = document.getElementById('giftPopup');
-            const icon = document.getElementById('giftPopupIcon');
-            const user = document.getElementById('giftPopupUser');
-            const text = document.getElementById('giftPopupText');
-
-            if(popup && icon && user && text) {
-                icon.innerText = regaloIcono;
-                user.innerText = `@${usuario}`;
-                text.innerText = `Sent ${regaloNombre}!`;
-
-                popup.classList.add('show');
-                setTimeout(() => { popup.classList.remove('show'); }, 2500);
+            for (let i = 0; i < cardCount; i++) {
+                const card = document.createElement('div');
+                card.className = 'tarot-card';
+                container.appendChild(card);
             }
         }
 
-        function realizarTirada() {
-            const container = document.getElementById('cardContainer');
-            const speechText = document.getElementById('speechText');
-            if(!container || !speechText) return;
-
-            const usuarioActual = colaUsuarios.shift();
-            const nuevoUsuario = nombresUsuarios[Math.floor(Math.random() * nombresUsuarios.length)];
-            colaUsuarios.push(nuevoUsuario);
-            actualizarVistaCola();
-
-            container.innerHTML = '';
-            speechText.innerHTML = `"Attention @${usuarioActual}... Don Juan Caramba is shuffling the deck..."`;
-
-            // SHUFFLE ANIMATION USING OFFICIAL BACK Auracraftai-bg.jpg
-            for(let i = 0; i < 4; i++) {
-                const cardDiv = document.createElement('div');
-                cardDiv.className = 'card shuffling';
-                cardDiv.innerHTML = `<img src="Auracraftai-bg.jpg" alt="Back"><span>Shuffling</span>`;
-                container.appendChild(cardDiv);
-            }
-
-            setTimeout(() => {
-                container.innerHTML = '';
-                const seleccionadas = [];
-                while(seleccionadas.length < 4) {
-                    let carta = tarotDeck[Math.floor(Math.random() * tarotDeck.length)];
-                    if(!seleccionadas.includes(carta)) seleccionadas.push(carta);
-                }
-
-                seleccionadas.forEach((carta, index) => {
-                    setTimeout(() => {
-                        const esInvertida = Math.random() < 0.5;
-                        const cardDiv = document.createElement('div');
-                        cardDiv.className = `card`;
-                        
-                        // CARD IMAGE + FALLBACK TO OFFICIAL BACK Auracraftai-bg.jpg
-                        cardDiv.innerHTML = `
-                            <img class="${esInvertida ? 'reversed' : ''}" src="${carta.file}" alt="${carta.name}" onerror="this.onerror=null; this.src='Auracraftai-bg.jpg';">
-                            <span>${carta.name} ${esInvertida ? '(Rev.)' : ''}</span>
-                        `;
-                        container.appendChild(cardDiv);
-                    }, index * 250);
-                });
-
-                speechText.innerHTML = `"${usuarioActual}, here is your reading. Listen closely to the message!"`;
-            }, 3000);
+        // Simulación de eventos en vivo para Kick (Ej: Al recibir una donación épica cambia a 5 cartas)
+        function triggerEpicDonation(username) {
+            speakEnglishMessage(`Attention! Epic donation from ${username}! The spirits summon the ultimate 5-card master reading!`);
+            setupTable(5); // Cambia automáticamente a 5 cartas
         }
 
-        setInterval(() => {
-            if(tiempoRestanteContrato > 0) {
-                tiempoRestanteContrato--;
-                let m = Math.floor(tiempoRestanteContrato / 60);
-                let s = tiempoRestanteContrato % 60;
-                const timerDisp = document.getElementById('timerDisplay');
-                if(timerDisp) timerDisp.innerText = `${m < 10 ? '0'+m : m}:${s < 10 ? '0'+s : s}`;
-            } else {
-                tiempoRestanteContrato = 3600;
-                totalTaps = 0;
-                const tapDisp = document.getElementById('tapCountDisplay');
-                if(tapDisp) tapDisp.innerText = 0;
-                const energyFill = document.getElementById('energyFill');
-                if(energyFill) energyFill.style.width = '0%';
-            }
-        }, 1000);
-
-        const listaRegalos = [
-            { icono: "🌹", nombre: "a Rose (2 Cards - 70 pts)" },
-            { icono: "😎", nombre: "Shades (4 Cards - 100 pts)" },
-            { icono: "🦁", nombre: "a Lion (10 Cards - 150 pts)" },
-            { icono: "🌌", nombre: "a Universe (Full Spread - 160 pts)" }
-        ];
-
-        setInterval(() => {
-            const giftFeed = document.getElementById('giftFeed');
-            if(!giftFeed) return;
-            const randomUser = nombresUsuarios[Math.floor(Math.random() * nombresUsuarios.length)];
-            const randomGift = listaRegalos[Math.floor(Math.random() * listaRegalos.length)];
-            
-            giftFeed.innerHTML = `<div class="gift-item">${randomGift.icono} @${randomUser}</div>` + giftFeed.innerHTML;
-            mostrarAnimacionRegalo(randomUser, randomGift.icono, randomGift.nombre);
-        }, 12000);
-
-        inicializarCola();
-        generarParticules();
-        setInterval(realizarTirada, 18000);
-        setTimeout(realizarTirada, 2000);
+        // Mensaje de bienvenida inicial de Don Juan
+        setTimeout(() => {
+            speakEnglishMessage("Welcome to the English sanctuary of Don Juan Caramba. The cards never lie.");
+        }, 2500);
     </script>
 </body>
 </html>
