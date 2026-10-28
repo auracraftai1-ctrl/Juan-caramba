@@ -58,10 +58,35 @@
             100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
+        /* BOTÓN DE ACTIVACIÓN DE VOZ (GARANTÍA PARA OBS / KICK) */
+        .voice-activate-btn {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 200;
+            background: linear-gradient(135deg, #d4af37, #ffdf73);
+            color: #000;
+            border: 2px solid #fff;
+            padding: 6px 12px;
+            font-size: 11px;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.6);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            animation: pulseVoiceBtn 2s infinite alternate;
+        }
+        @keyframes pulseVoiceBtn {
+            0% { transform: scale(1); box-shadow: 0 0 10px rgba(212, 175, 55, 0.6); }
+            100% { transform: scale(1.05); box-shadow: 0 0 20px rgba(255, 223, 115, 0.9); }
+        }
+
         /* ACCIONES KICK / SOCIALES (IZQUIERDA SUPERIOR - 100% TRANSPARENTE) */
         .tiktok-actions-container {
             position: fixed;
-            top: 10px;
+            top: 52px;
             left: 10px;
             z-index: 100;
             display: flex;
@@ -118,7 +143,7 @@
         /* BARRA DE ENERGÍA (TRANSPARENTE) */
         .energy-bar-container {
             position: fixed;
-            top: 90px;
+            top: 132px;
             left: 10px;
             z-index: 100;
             background: transparent;
@@ -149,7 +174,7 @@
         /* CONCURSO (TRANSPARENTE) */
         .contest-panel {
             position: fixed;
-            top: 125px;
+            top: 168px;
             left: 10px;
             z-index: 100;
             background: transparent;
@@ -174,10 +199,10 @@
             color: #53fc18;
         }
 
-        /* GUÍA DE REGALOS KICK (TRANSPARENTE) */
+        /* GUÍA DE REGALOS KICK (TRANSPARENTE Y SUBIDA) */
         .vip-gifts-guide {
             position: fixed;
-            bottom: 20vh;
+            bottom: 24vh;
             left: 10px;
             z-index: 50;
             background: transparent;
@@ -350,7 +375,7 @@
         /* SUBTÍTULOS DINÁMICOS 100% TRANSPARENTES */
         .speech-floating {
             position: absolute;
-            bottom: 24vh;
+            bottom: 28vh;
             left: 50%;
             transform: translateX(-50%);
             width: 95%;
@@ -382,20 +407,21 @@
         /* CONTENEDOR DE CARTAS */
         .tarot-slot {
             position: absolute;
-            bottom: 12vh;
+            bottom: 16vh;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
             z-index: 150;
             width: 100%;
             padding: 0 10px;
+            flex-wrap: wrap;
         }
         .card {
-            width: 72px;
-            height: 105px;
+            width: 60px;
+            height: 90px;
             background: #1a1a1a;
             border-radius: 6px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.95);
@@ -405,14 +431,14 @@
             justify-content: space-between;
             align-items: center;
             text-align: center;
-            padding: 3px;
+            padding: 2px;
             font-weight: bold;
             color: #fff;
             overflow: hidden;
         }
         .card img {
             width: 100%;
-            height: 78px;
+            height: 65px;
             object-fit: cover;
             border-radius: 4px;
             border: 1px solid #d4af37;
@@ -423,7 +449,7 @@
             filter: brightness(0.9);
         }
         .card span {
-            font-size: 6.5px;
+            font-size: 5.5px;
             color: #ffdf73;
             margin-top: 2px;
             text-transform: uppercase;
@@ -468,6 +494,11 @@
             <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=venezuelan-harp-instrumental-111394.mp3" type="audio/mpeg">
         </audio>
 
+        <!-- BOTÓN DE ACTIVACIÓN DE VOZ (GARANTÍA ABSOLUTA PARA OBS / NAVEGADOR) -->
+        <button class="voice-activate-btn" id="voiceBtn" onclick="activarVozManualmente()">
+            🔊 Activar Voz del Oráculo
+        </button>
+
         <!-- ACCIONES KICK -->
         <div class="tiktok-actions-container">
             <button class="follow-btn" id="followBtn" onclick="seguirAccion(event)">
@@ -498,10 +529,10 @@
         <div class="vip-gifts-guide">
             <h6>🔮 Regalos Kick & Lecturas</h6>
             <ul>
-                <li><strong>🚗 Coche:</strong> 2 Cartas (VIP)</li>
-                <li><strong>✈️ Caza:</strong> 4 Cartas (VIP)</li>
-                <li><strong>🛸 OVNI:</strong> 10 Cartas (Max)</li>
-                <li><strong>🛥️ Yate:</strong> 10 Cartas Comp.</li>
+                <li><strong>🚗 Coche:</strong> 4 Cartas (VIP)</li>
+                <li><strong>✈️ Caza:</strong> 6 Cartas (VIP)</li>
+                <li><strong>🛸 OVNI:</strong> 10 Cartas (Cruz Celta)</li>
+                <li><strong>🛥️ Yate:</strong> 10 Cartas + Secretos</li>
             </ul>
         </div>
 
@@ -535,7 +566,7 @@
         <!-- SUBTÍTULOS DINÁMICOS 100% TRANSPARENTES -->
         <div class="speech-floating">
             <h3 id="speechTitle">Asistente de Don Juan Caramba</h3>
-            <p id="speechText">"Hola, soy la asistente de Don Juan Caramba..."</p>
+            <p id="speechText">"Haz clic en el botón superior para activar la voz..."</p>
         </div>
 
         <!-- CARTAS EN MESA -->
@@ -558,6 +589,8 @@
                 bano: "Baño de Claridad con manzanilla, sal marina y pétalos de rosa.",
                 paraQueBano: "Para limpiar tu campo energético de pensamientos intrusivos antes de dormir.",
                 numerologia: "Número 6 de Armonía y Vínculos", significadoNum: "Cierra tu ciclo de soledad para dar paso a un compromiso firme.",
+                libroSecretos: "El secreto del corazón abierto radica en soltar el control y permitir que la energía del universo te guíe sin resistencia.",
+                afirmacion: "Yo merezco un amor sincero, puro y libre de cargas pasadas.",
                 consejo: "Ay, mi Mariana de Caracas... Como dice el dicho: el amor es como el arroz, el que no se aviva se queda sin comer y con la olla raspada. Sella este proceso con fe."
             },
             { 
@@ -574,6 +607,8 @@
                 bano: "Baño de Oro y Miel con girasol, miel pura y canela.",
                 paraQueBano: "Para barrer salaciones financieras y abrir caminos de prosperidad.",
                 numerologia: "Número 8 de Poder y Abundancia", significadoNum: "Te recuerda que eres arquitecto de tu propia realidad económica.",
+                libroSecretos: "La riqueza verdadera no solo se cuenta en billetes, sino en la solidez de las bases que construyes cada mañana con disciplina.",
+                afirmacion: "La abundancia fluye hacia mis manos de forma constante y abundante.",
                 consejo: "Mi estimado Carlos de Valencia, recuerda lo que decía mi abuelo en el estero: camarón que se duerme se lo lleva la corriente, se queda sin billete y comiendo casabe seco."
             },
             { 
@@ -590,6 +625,8 @@
                 bano: "Baño de Ruda macho y Romero fresco.",
                 paraQueBano: "Para una limpieza profunda contra trabajos oscuros y pesadez.",
                 numerologia: "Número 1 de Liderazgo y Poder Personal", significadoNum: "Te impulsa a brillar con luz propia sin depender de socios dudosos.",
+                libroSecretos: "El escudo más poderoso contra la traición es la intuición alerta combinada con la prudencia absoluta en tus decisiones.",
+                afirmacion: "Mi camino está blindado y protegido de toda energía malintencionada.",
                 consejo: "Ajá, mi compadre Alejandro desde Maracaibo; ojo pelao con esa gente, porque el que tenga rabo de paja que no se acerque a la candela porque aquí se quema hasta el apellido."
             },
             { 
@@ -604,8 +641,10 @@
                 colorDia: "Verde Esmeralda para equilibrar tus emociones y mente.",
                 vela: "Vela Verde", cuandoVela: "Jueves a las 6 PM", paraQueVela: "Para calmar la mente y sintonizar guías de luz.",
                 bano: "Baño de Eucalipto y Manzanilla fresca.",
-                paraQueBano: "Para despejar el pensamiento y aclarar tus sueños premonitorios.",
+                paraQueBano: "Para despejar el pensamiento y aclarar tu mente intuitiva.",
                 numerologia: "Número 7 de Sabiduría e Intuición", significadoNum: "Confirma que tu voz interior es tu guía más fiel.",
+                libroSecretos: "La verdadera paz mental nace al aceptar que el universo tiene sus propios tiempos perfectos para revelarte la verdad.",
+                afirmacion: "Mi mente es un templo de paz, claridad y sabiduría divina.",
                 consejo: "Mi querida Sofía de Barquisimeto, no comas cuento de nadie; más sabe el diablo por viejo que por diablo."
             },
             { 
@@ -618,10 +657,12 @@
                 evitarFuego: "Evita mirar atrás con nostalgia o culpa innecesaria.",
                 momentoFuego: "Sella tu liberación sabatina con fuego violeta.",
                 colorDia: "Violeta Transmutador para elevar tu vibración kármica.",
-                vela: "Vela Violeta", cuandoVela: "Sábado a las 8 PM", paraQueVela: "Para soltar ataduras y deudas kármicas.",
+                vela: "Vela Violeta", whenVela: "Sábado a las 8 PM", cuandoVela: "Sábado a las 8 PM", paraQueVela: "Para soltar ataduras y deudas kármicas.",
                 bano: "Baño de Lavanda e Incienso natural.",
                 paraQueBano: "Para armonizar el espíritu y dar paso a la victoria.",
                 numerologia: "Número 9 de Evolución y Cierre", significadoNum: "Anuncia el fin de la tormenta para abrir portales de éxito.",
+                libroSecretos: "Cerrar un ciclo con honor es abrirle la puerta dorada a la justicia divina y a la prosperidad inquebrantable.",
+                afirmacion: "Libero el pasado con gracia y recibo la victoria que me corresponde por derecho divino.",
                 consejo: "Daniel de los Altos Mirandinos, al mal tiempo buena cara y al acreedor... ¡que espere sentado en la talanquera!"
             }
         ];
@@ -654,10 +695,24 @@
         let numSeguidores = 14820;
         let yaSiguio = false;
         let tiempoRestanteContrato = 3600;
+        let vozActivada = false;
 
-        // MOTOR DE VOZ AUTOMÁTICO Y SUBTÍTULOS AMPLIADOS (9 SEGUNDOS POR BLOQUE)
+        function activarVozManualmente() {
+            vozActivada = true;
+            const btn = document.getElementById('voiceBtn');
+            if(btn) btn.style.display = 'none';
+
+            if ('speechSynthesis' in window) {
+                let dummy = new SpeechSynthesisUtterance("Oráculo activado");
+                dummy.volume = 0;
+                window.speechSynthesis.speak(dummy);
+            }
+
+            realizarTirada(2);
+        }
+
         function hablarYSubtitularBloques(textoCompleto, titulo) {
-            if (!('speechSynthesis' in window)) return;
+            if (!vozActivada || !('speechSynthesis' in window)) return;
             window.speechSynthesis.cancel();
             if (window.currentBlockTimer) clearInterval(window.currentBlockTimer);
 
@@ -683,7 +738,6 @@
                 utterance.voice = vozAsistente;
             }
 
-            // Reproducción automática nativa
             window.speechSynthesis.speak(utterance);
 
             let palabras = textoCompleto.split(" ");
@@ -736,7 +790,6 @@
             });
         }
 
-        // Clicks solo para acumular taps y corazones flotantes (la voz ya no depende de esto)
         window.addEventListener('click', (event) => {
             totalTaps++;
             const tapDisplay = document.getElementById('tapCountDisplay');
@@ -799,7 +852,7 @@
             }
         }
 
-        function realizarTirada() {
+        function realizarTirada(cantidadCartas = 2) {
             const container = document.getElementById('cardContainer');
             if(!container) return;
 
@@ -809,7 +862,7 @@
 
             container.innerHTML = '';
             
-            for(let i = 0; i < 3; i++) {
+            for(let i = 0; i < cantidadCartas; i++) {
                 const cardDiv = document.createElement('div');
                 cardDiv.className = 'card shuffling';
                 cardDiv.innerHTML = `<img src="Auracraftai-bg.jpg" alt="Reverso"><span>Barajando</span>`;
@@ -819,7 +872,7 @@
             setTimeout(() => {
                 container.innerHTML = '';
                 const seleccionadas = [];
-                while(seleccionadas.length < 3) {
+                while(seleccionadas.length < cantidadCartas) {
                     let carta = tarotDeck[Math.floor(Math.random() * tarotDeck.length)];
                     if(!seleccionadas.includes(carta)) seleccionadas.push(carta);
                 }
@@ -827,23 +880,53 @@
                 const descripcionesCartas = [];
                 seleccionadas.forEach((carta, index) => {
                     const esInvertida = Math.random() < 0.5;
-                    const posicionTexto = esInvertida ? "Invertida, bloqueando su energía natural" : "al derecho, fluyendo con todo su poder";
-                    descripcionesCartas.push(`la carta ${carta.name} ${posicionTexto}, cuyo significado revela ${carta.significado}`);
+                    const posicionTexto = esInvertida ? "Invertida (bloqueada)" : "al derecho (fluyendo)";
+                    
+                    let etiquetaPosicion = "";
+                    if (cantidadCartas === 4) {
+                        const nombres4 = ["El Origen", "El Nudo", "La Acción", "El Veredicto"];
+                        etetiquetaPosicion = nombres4[index];
+                    } else if (cantidadCartas === 10) {
+                        const nombres10 = ["El Presente", "El Desafío", "Pasado Cercano", "Futuro Inmediato", "Mente Consciente", "Subconsciente", "Tu Actitud", "El Entorno", "Esperanzas y Temores", "Desenlace Definitivo"];
+                        etiquetaPosicion = nombres10[index];
+                    } else {
+                        etiquetaPosicion = `Carta ${index + 1}`;
+                    }
+
+                    descripcionesCartas.push(`${etiquetaPosicion}: ${carta.name} ${posicionTexto}, revelando que ${carta.significado}`);
 
                     setTimeout(() => {
                         const cardDiv = document.createElement('div');
                         cardDiv.className = `card`;
                         cardDiv.innerHTML = `
                             <img class="${esInvertida ? 'reversed' : ''}" src="${carta.file}" alt="${carta.name}" onerror="this.onerror=null; this.src='Auracraftai-bg.jpg';">
-                            <span>${carta.name} ${esInvertida ? '(Inv.)' : ''}</span>
+                            <span>${carta.name}</span>
                         `;
                         container.appendChild(cardDiv);
-                    }, index * 250);
+                    }, index * 200);
                 });
 
-                const lecturaCompleta = `Hola, soy la asistente de Don Juan Caramba, él en este momento no se encuentra, pero yo le daré su lectura a ${actual.nombre}. Atendiendo a tu consulta sobre "${actual.pregunta}"... ¡${actual.veredicto} Estimado o estimada ${actual.nombre}, tu matriz astral (${actual.matrizAstral}) se conecta profundamente con el oráculo! La tirada nos muestra en mesa a ${descripcionesCartas[0]}, seguida por ${descripcionesCartas[1]}, y culminando con ${descripcionesCartas[2]}. Ante esta situación, el arcángel protector ${actual.arcangel} te aconseja: ${actual.consejoArcangel}. De igual manera, el serafín ${actual.serafin} te transmite: ${actual.consejoSerafin}. Como acción espiritual de fuego debes cumplir estrictamente con lo siguiente: ${actual.accionFuego} Y recuerda evitar por completo: ${actual.evitarFuego} Sella este propósito en el momento indicado: ${actual.momentoFuego} Utiliza el color protector ${actual.colorDia}, enciende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}) y prepara tu baño especial de ${actual.bano} (${actual.paraQueBano}). Tu vibración numérica es el ${actual.numerologia}, lo que nos indica que ${actual.significadoNum}. Presta mucha atención a este consejo final: ${actual.consejo}. Bueno, hasta aquí llegó tu consulta. Que la luz del oráculo te acompañe y te guíe siempre en tu camino.`;
+                // CONSTRUCCIÓN DE LECTURA SEGÚN EL TAMAÑO (2, 4 o 10 CARTAS)
+                let lecturaCompleta = `Hola, soy la asistente de Don Juan Caramba, él en este momento no se encuentra, pero yo le daré su lectura a ${actual.nombre}. Atendiendo a tu consulta sobre "${actual.pregunta}"... ¡${actual.veredicto} Estimado o estimada ${actual.nombre}, tu matriz astral (${actual.matrizAstral}) se conecta con el oráculo! `;
+
+                if (cantidadCartas === 4) {
+                    lecturaCompleta += `Analizamos tu tirada VIP de cuatro cartas: primero, ${descripcionesCartas[0]}. Segundo, ${descripcionesCartas[1]}. Tercero, ${descripcionesCartas[2]}. Y cuarto, ${descripcionesCartas[3]}. `;
+                } else if (cantidadCartas === 10) {
+                    lecturaCompleta += `Abrimos la Cruz Celta completa de diez cartas: 1, ${descripcionesCartas[0]}. 2, ${descripcionesCartas[1]}. 3, ${descripcionesCartas[2]}. 4, ${descripcionesCartas[3]}. 5, ${descripcionesCartas[4]}. 6, ${descripcionesCartas[5]}. 7, ${descripcionesCartas[6]}. 8, ${descripcionesCartas[7]}. 9, ${descripcionesCartas[8]}. 10, ${descripcionesCartas[9]}. `;
+                } else {
+                    lecturaCompleta += `La tirada muestra a ${descripcionesCartas[0]} y ${descripcionesCartas[1]}. `;
+                }
+
+                lecturaCompleta += `Ante esta situación, el arcángel ${actual.arcangel} te aconseja: ${actual.consejoArcangel}. El serafín ${actual.serafin} te transmite: ${actual.consejoSerafin}. Como acción de fuego debes cumplir: ${actual.accionFuego} Evita por completo: ${actual.evitarFuego} Sella tu propósito: ${actual.momentoFuego} Usa el color ${actual.colorDia}, enciende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}) y toma tu baño de ${actual.bano} (${actual.paraQueBano}). Tu número es el ${actual.numerologia}: ${actual.significadoNum}. `;
+
+                // SI ES DE 10 CARTAS, SE LE SUMAN LOS SECRETOS Y LA AFIRMACIÓN DEL DÍA (EXCLUIDO EN 4 CARTAS)
+                if (cantidadCartas === 10) {
+                    lecturaCompleta += `Como consejo supremo del libro de los secretos: ${actual.libroSecretos} Y tu afirmación de poder para hoy es: "${actual.afirmacion}" `;
+                }
+
+                lecturaCompleta += `Presta atención a este consejo final: ${actual.consejo} Bueno, hasta aquí llegó tu consulta. Que la luz del oráculo te acompañe siempre.`;
                 
-                hablarYSubtitularBloques(lecturaCompleta, `Oráculo para ${actual.nombre}`);
+                hablarYSubtitularBloques(lecturaCompleta, `Oráculo para ${actual.nombre} (${cantidadCartas} Cartas)`);
             }, 4000);
         }
 
@@ -865,13 +948,15 @@
         }, 1000);
 
         const listaRegalos = [
-            { icono: "🚗", nombre: "un Coche VIP" },
-            { icono: "✈️", nombre: "un Caza VIP" },
-            { icono: "🛸", nombre: "un OVNI Max" },
-            { icono: "🛥️", nombre: "un Yate Completo" }
+            { icono: "🚗", nombre: "un Coche VIP", cartas: 4 },
+            { icono: "✈️", nombre: "un Caza VIP", cartas: 4 },
+            { icono: "🛸", nombre: "un OVNI Max", cartas: 10 },
+            { icono: "🛥️", nombre: "un Yate Completo", cartas: 10 }
         ];
 
+        // Simulación de llegada de regalos de Kick que disparan tiradas de 4 o 10 cartas
         setInterval(() => {
+            if (!vozActivada) return;
             const giftFeed = document.getElementById('giftFeed');
             if(!giftFeed) return;
             const randomUser = consultantesPool[Math.floor(Math.random() * consultantesPool.length)].user;
@@ -879,7 +964,12 @@
             
             giftFeed.innerHTML = `<div class="gift-item">${randomGift.icono} @${randomUser}</div>` + giftFeed.innerHTML;
             mostrarAnimacionRegalo(randomUser, randomGift.icono, randomGift.nombre);
-        }, 14000);
+
+            setTimeout(() => {
+                realizarTirada(randomGift.cartas);
+            }, 3500);
+
+        }, 40000);
 
         actualizarVistaCola();
 
@@ -897,9 +987,10 @@
             setTimeout(() => particle.remove(), 6000);
         }, 800);
         
-        // CICLO DE 200 SEGUNDOS Y ARRANQUE AUTOMÁTICO DE LA VOZ
-        setInterval(realizarTirada, 200000);
-        setTimeout(realizarTirada, 1500);
+        // CICLO GENERAL DE CONSULTAS GRATIS (2 CARTAS) CADA 200 SEGUNDOS
+        setInterval(() => {
+            if (vozActivada) realizarTirada(2);
+        }, 200000);
     </script>
 </body>
 </html>
