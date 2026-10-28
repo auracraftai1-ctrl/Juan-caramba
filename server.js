@@ -4,21 +4,12 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-// Servir todos los archivos estáticos de la raíz (imágenes, audios, css, js)
+// Servir de forma automática todos los archivos estáticos de la raíz (imágenes, audios, etc.)
 app.use(express.static(path.join(__dirname)));
 
-// Ruta principal en Español
+// Ruta principal para servir tu archivo index.html original en español
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-// Ruta secundaria en Inglés
-app.get('/english', (req, res) => {
-    res.sendFile(path.join(__dirname, 'english', 'index.html'));
-});
-
-app.get('/english/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'english', 'index.html'));
 });
 
 app.listen(PORT, () => {
