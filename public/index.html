@@ -358,7 +358,51 @@
             font-size: 30px;
         }
 
-        /* --- CONTENEDOR DE CARTAS AL FRENTE ABSOLUTO (Z-INDEX 150) --- */
+        /* PANEL DE CONSEJO MÍSTICO ADICIONAL */
+        .mystic-advice-panel {
+            position: absolute;
+            top: 21vh;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85%;
+            max-width: 480px;
+            background: rgba(0, 0, 0, 0.88);
+            border: 1.5px solid #d4af37;
+            border-radius: 8px;
+            padding: 5px 10px;
+            color: #fff;
+            z-index: 130;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            display: none;
+        }
+        .mystic-advice-panel h4 {
+            margin: 0 0 2px 0;
+            color: #ffdf73;
+            font-size: 8px;
+            text-align: center;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+            padding-bottom: 2px;
+        }
+        .advice-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            font-size: 6.5px;
+        }
+        .advice-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2px 4px;
+            border-radius: 3px;
+            border-left: 2px solid #d4af37;
+            line-height: 1.1;
+        }
+        .advice-item strong {
+            color: #ffdf73;
+        }
+
+        /* CONTENEDOR DE CARTAS */
         .tarot-slot {
             position: absolute;
             bottom: 14vh;
@@ -397,12 +441,10 @@
             border: 1px solid #d4af37;
             display: block;
         }
-        /* SOLO LA IMAGEN GIRA CUANDO ESTÁ INVERTIDA */
         .card img.reversed {
             transform: rotate(180deg);
             filter: brightness(0.9);
         }
-        /* EL TEXTO SE QUEDA SIEMPRE DERECHO Y LEGIBLE */
         .card span {
             font-size: 5.5px;
             color: #ffdf73;
@@ -473,7 +515,7 @@
 <body onclick="registrarTapTap(event)">
 
     <div class="container" id="mainContainer">
-        <!-- Fondo de pantalla original de Juan Caramba -->
+        <!-- Fondo de pantalla original -->
         <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image">
 
         <!-- AUDIO DE FONDO -->
@@ -543,6 +585,18 @@
             <div class="gift-popup-icon" id="giftPopupIcon">🎁</div>
             <div style="font-size: 11px; font-weight: bold; color: #ffdf73;" id="giftPopupUser">@Usuario</div>
             <div style="font-size: 9px; color: #fff;" id="giftPopupText">¡Envió un regalo VIP!</div>
+        </div>
+
+        <!-- PANEL DE CONSEJO MÍSTICO INTEGRAL -->
+        <div class="mystic-advice-panel" id="mysticAdvicePanel">
+            <h4 id="adviceTitle">🔮 Revelación Mística de Don Juan Caramba</h4>
+            <div class="advice-grid">
+                <div class="advice-item"><strong>Arcángel:</strong> <span id="arcangelText">Miguel</span></div>
+                <div class="advice-item"><strong>Serafín:</strong> <span id="serafinText">Luz de Pureza</span></div>
+                <div class="advice-item"><strong>Vela del Día:</strong> <span id="velaText">Blanca de Protección</span></div>
+                <div class="advice-item"><strong>Baño Herbal:</strong> <span id="banoText">Ruda y Abrecaminos</span></div>
+                <div class="advice-item" style="grid-column: span 2;"><strong>Numerología & Consejo:</strong> <span id="consejoText">Número 7: Sabiduría y evolución espiritual.</span></div>
+            </div>
         </div>
 
         <!-- CARTAS EN MESA -->
@@ -632,6 +686,30 @@
             { name: "Seis de Bastos", file: "Seis de bastos.jpg" },
             { name: "Siete de Bastos", file: "Siete de bajos.jpg" },
             { name: "Ocho de Bastos", file: "Ocho de bajos.jpg" }
+        ];
+
+        // BANCOS DE CONSEJERÍA MÍSTICA
+        const arcangelesPool = [
+            { name: "Arcángel Miguel", vela: "Azul (Protección y fuerza contra enemigos)", bano: "Ruda, Romero y Albahaca" },
+            { name: "Arcángel Rafael", vela: "Verde (Salud física y sanación del alma)", bano: "Eucalipto, Manzanilla y Hojas de Higos" },
+            { name: "Arcángel Jofiel", vela: "Amarilla (Sabiduría, estudios y claridad mental)", bano: "Canela, Miel y Girasol" },
+            { name: "Arcángel Chamuel", vela: "Rosa (Amor propio, pareja y armonía)", bano: "Pétalos de Rosa Roja, Azahares y Canela" },
+            { name: "Arcángel Zadquiel", vela: "Violeta (Transmutación y perdón de deudas karmicas)", bano: "Lavanda, Violetas e Incienso" }
+        ];
+
+        const serafinesPool = [
+            "Serafín del Fuego Sagrado (Purificación de caminos)",
+            "Serafín de la Divina Misericordia (Paz interior absoluta)",
+            "Serafín de los Siete Cielos (Apertura de destinos y puertas cerradas)",
+            "Serafín de la Estrella del Alba (Renovación total de energía)"
+        ];
+
+        const numerologiaPool = [
+            { num: "1", consejo: "Inicio de ciclos. Toma el control de tu destino sin mirar atrás." },
+            { num: "3", consejo: "Expresión y creatividad. Tus palabras tienen poder ante el cosmos." },
+            { num: "7", consejo: "Misticismo e intuición. Escucha las señales ocultas que te rodean." },
+            { num: "9", consejo: "Cierre de etapas. Suelta el pasado para recibir la verdadera abundancia." },
+            { num: "11", consejo: "Maestría espiritual. Estás alineado con una vibración superior de éxito." }
         ];
 
         let totalTaps = 0;
@@ -754,9 +832,11 @@
             }
         }
 
+        // FUNCIÓN DE TIRADA COMPLETA DE 3 CARTAS + CONSEJO ESPIRITUAL + MENSAJE COMERCIAL
         function realizarTirada() {
             const container = document.getElementById('cardContainer');
             const speechText = document.getElementById('speechText');
+            const advicePanel = document.getElementById('mysticAdvicePanel');
             if(!container || !speechText) return;
 
             const usuarioActual = colaUsuarios.shift();
@@ -765,10 +845,12 @@
             actualizarVistaCola();
 
             container.innerHTML = '';
-            speechText.innerHTML = `"Atención @${usuarioActual}... Don Juan Caramba está barajando las cartas..."`;
+            if(advicePanel) advicePanel.style.display = 'none'; // Ocultar panel mientras baraja
+            
+            speechText.innerHTML = `"Atención @${usuarioActual}... Don Juan Caramba invoca los Arcángeles para tu lectura de 3 cartas..."`;
 
-            // BARAJEO USANDO EXCLUSIVAMENTE Auracraftai-bg.jpg COMO REVERSO DE LAS CARTAS
-            for(let i = 0; i < 4; i++) {
+            // BARAJA CON EL REVERSO DE CARTAS
+            for(let i = 0; i < 3; i++) {
                 const cardDiv = document.createElement('div');
                 cardDiv.className = 'card shuffling';
                 cardDiv.innerHTML = `<img src="Auracraftai-bg.jpg" alt="Reverso"><span>Barajando</span>`;
@@ -778,7 +860,7 @@
             setTimeout(() => {
                 container.innerHTML = '';
                 const seleccionadas = [];
-                while(seleccionadas.length < 4) {
+                while(seleccionadas.length < 3) {
                     let carta = tarotDeck[Math.floor(Math.random() * tarotDeck.length)];
                     if(!seleccionadas.includes(carta)) seleccionadas.push(carta);
                 }
@@ -789,7 +871,6 @@
                         const cardDiv = document.createElement('div');
                         cardDiv.className = `card`;
                         
-                        // CARTA CORRESPONDIENTE + RESPALDO SEGURO AL REVERSO Auracraftai-bg.jpg
                         cardDiv.innerHTML = `
                             <img class="${esInvertida ? 'reversed' : ''}" src="${carta.file}" alt="${carta.name}" onerror="this.onerror=null; this.src='Auracraftai-bg.jpg';">
                             <span>${carta.name} ${esInvertida ? '(Inv.)' : ''}</span>
@@ -798,7 +879,21 @@
                     }, index * 250);
                 });
 
-                speechText.innerHTML = `"${usuarioActual}, aquí tienes tu lectura. ¡Atento al consejo!"`;
+                // Seleccionar datos místicos aleatorios únicos para el usuario
+                const arcangelRandom = arcangelesPool[Math.floor(Math.random() * arcangelesPool.length)];
+                const serafinRandom = serafinesPool[Math.floor(Math.random() * serafinesPool.length)];
+                const numeroRandom = numerologiaPool[Math.floor(Math.random() * numerologiaPool.length)];
+
+                // Inyectar en el panel visual
+                document.getElementById('arcangelText').innerText = arcangelRandom.name;
+                document.getElementById('serafinText').innerText = serafinRandom;
+                document.getElementById('velaText').innerText = arcangelRandom.vela;
+                document.getElementById('banoText').innerText = arcangelRandom.bano;
+                document.getElementById('consejoText').innerText = `Núm. ${numeroRandom.num}: ${numeroRandom.consejo}`;
+                
+                if(advicePanel) advicePanel.style.display = 'block'; // Mostrar el panel místico
+
+                speechText.innerHTML = `"${usuarioActual}, aquí tienes tus 3 cartas. Para el contenido completo entra y regístrate con alguno de los planes en https://aura-craft-mystic.base44.app/ donde obtendrás toda la información que necesites"`;
             }, 3000);
         }
 
