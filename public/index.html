@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juan Caramba - Tarot 24/7 Live Stream</title>
+    <title>Juan Caramba - Super Tarot 24/7 Live Stream</title>
     <style>
         * {
             box-sizing: border-box;
@@ -361,7 +361,7 @@
         /* CONTENEDOR DE CARTAS */
         .tarot-slot {
             position: absolute;
-            bottom: 10vh;
+            bottom: 7vh;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -423,34 +423,34 @@
             100% { transform: translateY(6px) rotate(-3deg); }
         }
 
-        /* SUBTÍTULOS ESTILO PELÍCULA (JUSTO ARRIBA DE LAS CARTAS) */
+        /* SUBTÍTULOS FLOTANTES TIPO PELÍCULA (JUSTO ARRIBA DE LAS CARTAS) */
         .speech-floating {
             position: absolute;
-            bottom: 30vh;
+            bottom: 24vh;
             left: 50%;
             transform: translateX(-50%);
-            width: 90%;
-            max-width: 750px;
+            width: 94%;
+            max-width: 850px;
             text-align: center;
             z-index: 160;
             pointer-events: none;
             padding: 4px 12px;
         }
         .speech-floating h3 {
-            margin: 0 0 2px 0;
+            margin: 0 0 3px 0;
             color: #ffdf73;
             font-size: 11px;
-            text-shadow: 2px 2px 5px #000, 0 0 12px rgba(212, 175, 55, 0.9);
+            text-shadow: 2px 2px 6px #000, 0 0 12px rgba(212, 175, 55, 0.9);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
         .speech-floating p {
             margin: 0;
-            font-size: 9.5px;
+            font-size: 9px;
             font-weight: bold;
             color: #ffffff;
-            line-height: 1.3;
-            text-shadow: 2px 2px 4px #000, 0 0 8px rgba(0, 0, 0, 0.95);
+            line-height: 1.35;
+            text-shadow: 2px 2px 5px #000, 0 0 10px rgba(0, 0, 0, 0.95);
         }
 
         .tap-heart {
@@ -544,7 +544,7 @@
         <!-- SUBTÍTULOS FLOTANTES TIPO PELÍCULA (JUSTO ARRIBA DE LAS CARTAS) -->
         <div class="speech-floating">
             <h3 id="speechTitle">Don Juan Caramba</h3>
-            <p id="speechText">"Saludos, alma errante... Envía tu Nombre Completo, Fecha de Nacimiento y Lugar de Nacimiento para abrir tu oráculo."</p>
+            <p id="speechText">"Saludos, alma errante... Siente la sabana abierta. Envía tu Nombre Completo, Fecha de Nacimiento y Lugar para abrir tu super oráculo..."</p>
         </div>
 
         <!-- CARTAS EN MESA -->
@@ -555,53 +555,88 @@
         const consultantesPool = [
             { 
                 user: "Mariana_92", nombre: "Mariana Gómez", fecha: "14/03/1995", lugar: "Caracas, Venezuela",
-                palabras: "Renacer, Ruptura, Destino, Fe, Valor, Sanación, Cima",
-                arcangel: "Arcángel Chamuel (Rayo Rosa)", consejoArcangel: "Te otorga el poder del perdón profundo para sanar heridas sentimentales del pasado.",
-                serafin: "Serafín de la Divina Misericordia", consejoSerafin: "Purifica tu campo emocional y te conecta con tu verdadera alma gemela.",
-                vela: "Rosa Intenso", cuandoVela: "Martes a las 8:00 PM", paraQueVela: "Para activar el amor propio y atraer una relación sincera.",
-                bano: "Pétalos de Rosa Roja y Canela en rama", paraQueBano: "Para limpiar bloqueos kármicos en el chakra del corazón.",
-                numerologia: "Número 6 (Armonía y Familia)", significadoNum: "Indica que tu ciclo de soledad termina para dar paso a un compromiso firme.",
-                consejo: "Mariana desde Caracas, tus 7 palabras marcan un corte definitivo; enciende tu vela rosa los martes a las 8 PM y toma el baño de rosas para abrir el amor. Para el contenido completo entra y regístrate con alguno de los planes en https://aura-craft-mystic.base44.app/"
+                veredicto: "¡SÍ!", pregunta: "¿Sanaré este dolor del corazón y encontraré el amor sincero?",
+                matrizAstral: "Sol en Escorpio y Ascendente Leo: intensidad emocional profunda que magnifica el rechazo social.",
+                tarotLectura: "El 8 de Espadas revela ataduras mentales y el 4 de Espadas exige una pausa espiritual urgente.",
+                arcangel: "Arcángel Chamuel (Rayo Rosa)", consejoArcangel: "Te otorga el perdón profundo para sanar las heridas sentimentales.",
+                serafin: "Serafín de la Llama Celeste", consejoSerafin: "Te alinea con el fuego de la verdad para despejar sombras mentales[span_7](start_span)[span_7](end_span).",
+                accionFuego: "Cuestiona tus suposiciones sobre por qué los demás actúan como lo hacen[span_8](start_span)[span_8](end_span).",
+                evitarFuego: "Evita dramatizar situaciones sociales o alimentar la queja constante[span_9](start_span)[span_9](end_span).",
+                momentoFuego: "Sella al caer el sol encendiendo una vela azul[span_10](start_span)[span_10](end_span).",
+                colorDia: "Azul Zafiro (para proyectar serenidad y seguridad emocional)[span_11](start_span)[span_11](end_span)[span_12](start_span)[span_12](end_span).",
+                vela: "Vela Azul Claro", cuandoVela: "Al atardecer", paraQueVela: "Para disipar las dudas y revelar tu valor interior[span_13](start_span)[span_13](end_span)[span_14](start_span)[span_14](end_span).",
+                bano: "Baño de Claridad (3 ramas de manzanilla, 2 cdas de sal marina, 1 cáscara de naranja, 3 pétalos de rosa)[span_15](start_span)[span_15](end_span).",
+                paraQueBano: "Para limpiar tu campo energético de pensamientos intrusivos antes de dormir[span_16](start_span)[span_16](end_span).",
+                numerologia: "Número 6 (Armonía y Vínculos)", significadoNum: "Cierra tu ciclo de soledad para dar paso a un compromiso firme.",
+                consejo: "Ay, mi Mariana de Caracas... Para que dejes de buscar afuera lo que llevas dentro, sella este proceso al caer el sol[span_17](start_span)[span_17](end_span). Para el estudio completo entra y regístrate en https://aura-craft-mystic.base44.app/"
             },
             { 
                 user: "CarlosVe", nombre: "Carlos Pérez", fecha: "22/07/1988", lugar: "Valencia, Venezuela",
-                palabras: "Traba, Dinero, Esfuerzo, Clave, Triunfo, Oro, Poder",
-                arcangel: "Arcángel Jofiel (Rayo Dorado)", consejoArcangel: "Ilumina tu mente para descubrir la estrategia financiera que rompe la escasez.",
-                serafin: "Serafín de los Siete Cielos", consejoSerafin: "Abre puertas dimensionales de abundancia y prosperidad económica.",
-                vela: "Amarilla o Naranja", cuandoVela: "Domingo a las 7:00 AM", paraQueVela: "Para atraer clientes, empleos y liquidez inmediata a tus bolsillos.",
-                bano: "Girasol, Miel de abeja y Canela", paraQueBano: "Para barrer salaciones financieras y atraer oro puro.",
-                numerologia: "Número 8 (Poder y Abundancia Material)", significadoNum: "Significa que tu esfuerzo comercial rinde frutos multiplicados si mantienes la disciplina.",
-                consejo: "Carlos de Valencia, el dinero se traba por envidias; enciende vela amarilla los domingos a las 7 AM y usa el baño de miel. Para el contenido completo entra y regístrate con alguno de los planes en https://aura-craft-mystic.base44.app/"
+                veredicto: "¡SÍ!", pregunta: "¿Se destrabará mi negocio y entrará liquidez a mis bolsillos?",
+                matrizAstral: "Sol en Cáncer y Ascendente Tauro: arraigo material y protección de los frutos comerciales.",
+                tarotLectura: "El As de Oro combinado con el 3 de Oros abre portales de bonanza económica inmediata.",
+                arcangel: "Arcángel Jofiel (Rayo Dorado)", consejoArcangel: "Ilumina tu mente para romper la escasez material.",
+                serafin: "Serafín de los Siete Cielos", consejoSerafin: "Abre portales dimensionales de prosperidad en tus empresas.",
+                accionFuego: "Analiza con frialdad la estrategia comercial de tu inventario.",
+                evitarFuego: "Evita gastar en lo que no produce riqueza a corto plazo.",
+                momentoFuego: "Prende tu luz dorada al romper el alba del domingo.",
+                colorDia: "Amarillo Solar (para atraer la energía de la abundancia líquida).",
+                vela: "Vela Amarilla o Naranja", cuandoVela: "Domingo a las 7:00 AM", paraQueVela: "Para atraer clientes y liquidez inmediata a tus bolsillos.",
+                bano: "Baño de Oro y Miel (girasol, miel pura y canela).",
+                paraQueBano: "Para barrer salaciones financieras y abrir caminos de prosperidad.",
+                numerologia: "Número 8 (Poder y Abundancia)", significadoNum: "Te recuerda que eres arquitecto de tu propia realidad económica[span_18](start_span)[span_18](end_span).",
+                consejo: "Mi estimado Carlos de Valencia, el dinero fluye cuando sueltas el afán[span_19](start_span)[span_19](end_span). Conoce tu frecuencia completa en https://aura-craft-mystic.base44.app/"
             },
             { 
                 user: "Alejandro_X", nombre: "Alejandro Silva", fecha: "05/11/1992", lugar: "Maracaibo, Venezuela",
-                palabras: "Lucha, Sombra, Norte, Guía, Escudo, Triunfo, Paz",
-                arcangel: "Arcángel Miguel (Rayo Azul)", consejoArcangel: "Te envuelve en su manto de cobalto para cortar toda maldad y energía densa.",
-                serafin: "Serafín del Fuego Sagrado", consejoSerafin: "Quema los obstáculos kármicos que sabotean tus metas principales.",
-                vela: "Azul Fuerte", cuandoVela: "Lunes a las 9:00 PM", paraQueVela: "Para romper brujerías, envidias y proteger tu entorno laboral.",
-                bano: "Ruda macho, Romero y Albahaca", paraQueBano: "Para una limpieza profunda de aura contra trabajos oscuros.",
-                numerologia: "Número 1 (Liderazgo y Nuevo Comienzo)", significadoNum: "Te impulsa a tomar las riendas sin depender de la opinión ajena.",
-                consejo: "Alejandro desde Maracaibo, el escudo de Miguel te protege de traiciones; enciende vela azul los lunes a las 9 PM y usa ruda. Para el contenido completo entra y regístrate con alguno de los planes en https://aura-craft-mystic.base44.app/"
+                veredicto: "¡NO!", pregunta: "¿Debo confiar en esta nueva sociedad comercial que me proponen?",
+                matrizAstral: "Sol en Escorpio y Ascendente Aries: impulso de lucha que choca con sombras ocultas.",
+                tarotLectura: "El 7 de Espadas advierte engaños ocultos y traiciones en el entorno laboral.",
+                arcangel: "Arcángel Miguel (Rayo Azul)", consejoArcangel: "Te envuelve en su manto para cortar toda energía densa.",
+                serafin: "Serafín del Fuego Sagrado", consejoSerafin: "Quema los obstáculos y falsas alianzas que sabotean tus metas.",
+                accionFuego: "Protege tu espacio vital de opiniones ajenas y personas malintencionadas.",
+                evitarFuego: "Evita firmar papeles importantes sin revisar la letra pequeña.",
+                momentoFuego: "Enciende tu protección al iniciar la semana.",
+                colorDia: "Azul Cobalto (para blindar tu aura de cualquier maldad).",
+                vela: "Vela Azul Fuerte", cuandoVela: "Lunes a las 9:00 PM", paraQueVela: "Para romper envidias y blindar tu entorno.",
+                bano: "Baño de Ruda macho y Romero fresco.",
+                paraQueBano: "Para una limpieza profunda contra trabajos oscuros y pesadez.",
+                numerologia: "Número 1 (Liderazgo y Poder Personal)", significadoNum: "Te impulsa a brillar con luz propia sin depender de socios dudosos.",
+                consejo: "Ajá, mi compadre Alejandro desde Maracaibo; sácate las cargas pesadas[span_20](start_span)[span_20](end_span). Mira todo tu potencial en https://aura-craft-mystic.base44.app/"
             },
             { 
                 user: "Sofia_Tarot", nombre: "Sofía Montenegro", fecha: "10/01/1996", lugar: "Barquisimeto, Venezuela",
-                palabras: "Intuición, Secreto, Velo, Verdad, Luz, Destino, Clave",
+                veredicto: "¡SÍ!", pregunta: "¿Encontraré la paz mental y la respuesta que tanto busco?",
+                matrizAstral: "Sol en Capricornio y Ascendente Virgo: mente analítica que busca claridad y orden.",
+                tarotLectura: "La Sacerdotisa y la Estrella confirman que tu intuición es infalible y guiada por la luz.",
                 arcangel: "Arcángel Rafael (Rayo Verde)", consejoArcangel: "Sana tu cuerpo físico y eleva tu percepción espiritual al máximo.",
-                serafin: "Serafín de la Estrella del Alba", consejoSerafin: "Te guía hacia la revelación de secretos que cambiarán tu rumbo.",
-                vela: "Verde Esmeralda", cuandoVela: "Jueves a las 6:00 PM", paraQueVela: "Para sanar dolencias ocultas y sintonizar con guías de luz.",
-                bano: "Eucalipto y Manzanilla fresca", paraQueBano: "Para calmar la ansiedad mental y clarificar los sueños.",
-                numerologia: "Número 7 (Misticismo y Sabiduría)", significadoNum: "Confirma que tu intuición es infalible en este momento de tu vida.",
-                consejo: "Sofía de Barquisimeto, confía en tu sexto sentido; enciende vela verde los jueves a las 6 PM y usa eucalipto. Para el contenido completo entra y regístrate con alguno de los planes en https://aura-craft-mystic.base44.app/"
+                serafin: "Serafín de la Estrella del Alba", consejoSerafin: "Te guía hacia la revelación de verdades ocultas.",
+                accionFuego: "Medita en silencio para escuchar las respuestas de tu voz interior.",
+                evitarFuego: "Evita sobrepensar escenarios que aún no han ocurrido.",
+                momentoFuego: "Realiza tu pausa sanadora al caer la tarde.",
+                colorDia: "Verde Esmeralda (para equilibrar tus emociones y mente).",
+                vela: "Vela Verde", whenVela: "Jueves a las 6:00 PM", paraQueVela: "Para calmar la mente y sintonizar con guías de luz.",
+                bano: "Baño de Eucalipto y Manzanilla fresca.",
+                paraQueBano: "Para despejar el pensamiento y aclarar tus sueños premonitorios.",
+                numerologia: "Número 7 (Sabiduría e Intuición)", significadoNum: "Confirma que tu voz interior es tu guía más fiel.",
+                consejo: "Mi querida Sofía de Barquisimeto, confía en lo que palpita en tu pecho. Entra y descúbrelo todo en https://aura-craft-mystic.base44.app/"
             },
             { 
                 user: "Daniel_88", nombre: "Daniel Rodríguez", fecha: "30/09/1988", lugar: "San Antonio de los Altos",
-                palabras: "Ciclo, Cierre, Puerta, Salida, Éxito, Norte, Ley",
+                veredicto: "¡SÍ!", pregunta: "¿Se resolverá a mi favor este ciclo legal y de deudas?",
+                matrizAstral: "Sol en Libra y Ascendente Escorpio: balanza de justicia impulsada por transformación total.",
+                tarotLectura: "La Justicia y el Mundo anuncian el fin de un ciclo pesado y el triunfo absoluto.",
                 arcangel: "Arcángel Zadquiel (Rayo Violeta)", consejoArcangel: "Transmuta el dolor y las deudas del pasado en sabiduría pura.",
-                serafin: "Serafín de la Divina Misericordia", consejoSerafin: "Te otorga gracia divina ante situaciones legales o bloqueos difíciles.",
-                vela: "Violeta o Lila", whenVela: "Sábado a las 8:00 PM", paraQueVela: "Para cerrar ciclos kármicos pesados y liberar juicios.",
-                bano: "Lavanda e Incienso natural", paraQueBano: "Para armonizar la energía del hogar y cortar ataduras.",
-                numerologia: "Número 9 (Cierre de Etapas y Evolución)", significadoNum: "Anuncia el fin de un ciclo doloroso para abrir la puerta del éxito.",
-                consejo: "Daniel de los Altos Mirandinos, cierra ciclos con firmeza; enciende vela violeta los sábados a las 8 PM y usa lavanda. Para el contenido completo entra y regístrate con alguno de los planes en https://aura-craft-mystic.base44.app/"
+                serafin: "Serafín de la Divina Misericordia", consejoSerafin: "Te otorga gracia divina ante juicios y cierres difíciles.",
+                accionFuego: "Firma, decide y corta de raíz aquello que ya cumplió su tiempo.",
+                evitarFuego: "Evita mirar atrás con nostalgia o culpa innecesaria.",
+                momentoFuego: "Sella tu liberación sabatina con fuego violeta.",
+                colorDia: "Violeta Transmutador (para elevar tu vibración kármica).",
+                vela: "Vela Violeta", whenVela: "Sábado a las 8:00 PM", paraQueVela: "Para soltar ataduras y deudas kármicas.",
+                bano: "Baño de Lavanda e Incensio natural.",
+                paraQueBano: "Para armonizar el espíritu y dar paso a la victoria.",
+                numerologia: "Número 9 (Evolución y Cierre)", significadoNum: "Anuncia el fin de la tormenta para abrir portales de éxito.",
+                consejo: "Daniel de los Altos Mirandinos, cierra esa puerta con temple. Conoce tu matriz completa en https://aura-craft-mystic.base44.app/"
             }
         ];
 
@@ -737,7 +772,7 @@
             setTimeout(() => heart.remove(), 1200);
 
             if(totalTaps === 100) {
-                escribirEfectoMaquina("¡Caramba! Alcanzamos los 100 Tap Taps. ¡Iniciando lectura gratuita de la sala!", "Don Juan Caramba");
+                escribirEfectoMaquina("¡Caramba, mi gente! Llegamos a los 100 Tap Taps. Arranca la lectura colectiva de la sala...", "Don Juan Caramba");
             }
         }
 
@@ -751,7 +786,7 @@
                 yaSiguio = true;
                 if(btn) btn.classList.add('followed');
                 if(text) text.innerText = "Siguiendo";
-                escribirEfectoMaquina("¡Muchas gracias por seguir la cuenta de Don Juan Caramba, mi pana!", "Don Juan Caramba");
+                escribirEfectoMaquina("¡Dios te me bendiga por seguir la cuenta de este viejo del llano!", "Don Juan Caramba");
             } else {
                 numSeguidores--;
                 yaSiguio = false;
@@ -764,7 +799,7 @@
 
         function quieremeAccion(event) {
             event.stopPropagation();
-            escribirEfectoMaquina("¡Gracias por ese cariño, mi pana!", "Don Juan Caramba");
+            escribirEfectoMaquina("¡Se siente el buen caudal de ese cariño, mi pana!", "Don Juan Caramba");
         }
 
         function mostrarAnimacionRegalo(usuario, regaloIcono, regaloNombre) {
@@ -783,6 +818,7 @@
             }
         }
 
+        // VELOCIDAD LENTA Y PAUSADA (VIEJO DEL LLANO / CINE)
         function escribirEfectoMaquina(textoCompleto, titulo) {
             const speechTitle = document.getElementById('speechTitle');
             const speechText = document.getElementById('speechText');
@@ -801,7 +837,7 @@
                 } else {
                     clearInterval(window.currentTyping);
                 }
-            }, 25);
+            }, 55); // 55ms por letra para lectura pausada y profunda
         }
 
         function realizarTirada() {
@@ -813,7 +849,7 @@
             actualizarVistaCola();
 
             container.innerHTML = '';
-            escribirEfectoMaquina(`Canalizando energía de ${actual.nombre}, nacido el ${actual.fecha} en ${actual.lugar}. Barajando cartas sagradas...`, `Don Juan Caramba para ${actual.nombre} (@${actual.user})`);
+            escribirEfectoMaquina(`Conectando carta astral, fecha y lugar de ${actual.nombre} (${actual.fecha}, ${actual.lugar}). Analizando su pregunta...`, `Don Juan Caramba para ${actual.nombre} (@${actual.user})`);
 
             for(let i = 0; i < 3; i++) {
                 const cardDiv = document.createElement('div');
@@ -844,10 +880,11 @@
                     }, index * 250);
                 });
 
-                const mensajeFinal = `${actual.nombre}, tus 7 palabras (${actual.palabras}). El ${actual.arcangel} te aconseja: ${actual.consejoArcangel} Te asiste el ${actual.serafin} (${actual.consejoSerafin}). Prende tu vela ${actual.vela} el ${actual.cuandoVela || actual.whenVela} (${actual.paraQueVela}). Usa el baño de ${actual.bano} (${actual.paraQueBano}). Tu ${actual.numerologia} significa: ${actual.significadoNum}. ${actual.consejo} Para el contenido completo entra y regístrate con alguno de los planes en https://aura-craft-mystic.base44.app/`;
+                // LECTURA 100% PERSONALIZADA: INCLUYE SÍ/NO, PREGUNTA, MATRIZ ASTRAL, TERCER CLAVO Y SUPER ORÁCULO COMPLETO
+                const mensajeFinal = `A tu pregunta "${actual.pregunta}"... ¡${actual.veredicto} Alma de ${actual.nombre}, tu matriz astral (${actual.matrizAstral}) se alinea con el tarot: ${actual.tarotLectura}. El ${actual.arcangel} te aconseja: ${actual.consejoArcangel} Te asiste el ${actual.serafin}: ${actual.consejoSerafin}. Acción de fuego: ${actual.accionFuego} Evita: ${actual.evitarFuego} Momento: ${actual.momentoFuego} Color del día: ${actual.colorDia} Prende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}). Prepara tu ${actual.bano} (${actual.paraQueBano}). Tu ${actual.numerologia} indica que ${actual.significadoNum}. ${actual.consejo}`;
                 
-                escribirEfectoMaquina(mensajeFinal, `Oráculo Sagrado para ${actual.nombre}`);
-            }, 3000);
+                escribirEfectoMaquina(mensajeFinal, `Super Oráculo Personalizado para ${actual.nombre}`);
+            }, 4000);
         }
 
         setInterval(() => {
@@ -886,7 +923,7 @@
 
         inicializarCola();
         generarParticulas();
-        setInterval(realizarTirada, 18000);
+        setInterval(realizarTirada, 24000);
         setTimeout(realizarTirada, 2000);
     </script>
 </body>
