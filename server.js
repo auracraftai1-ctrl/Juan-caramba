@@ -4,19 +4,23 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-// Habilitar la carpeta actual para assets (imágenes, audios, etc.)
-app.use(express.static(__dirname));
+// Servir todos los archivos estáticos de la raíz (imágenes, audios, css, js)
+app.use(express.static(path.join(__dirname)));
 
-// Ruta principal en español
+// Ruta principal en Español
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Ruta en inglés
+// Ruta secundaria en Inglés
 app.get('/english', (req, res) => {
     res.sendFile(path.join(__dirname, 'english', 'index.html'));
 });
 
+app.get('/english/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'english', 'index.html'));
+});
+
 app.listen(PORT, () => {
-    console.log(`Servidor activo en el puerto ${PORT}`);
+    console.log(`Servidor de Don Juan Caramba activo en el puerto ${PORT}`);
 });
