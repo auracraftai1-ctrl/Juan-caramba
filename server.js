@@ -4,19 +4,19 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-// Servir de forma automática toda la carpeta del proyecto (esto lee la raíz y carpetas como /english/)
-app.use(express.static(path.join(__dirname)));
+// Habilitar la carpeta actual para assets (imágenes, audios, etc.)
+app.use(express.static(__dirname));
 
-// Si entran a la raíz y no carga automático, redirige o busca el index principal
-app.get('/', (req, res, next) => {
-    res.sendFile(path.join(__dirname, 'index.html'), (err) => {
-        if (err) {
-            // Si el index principal está en otra ruta, evitamos que se caiga el servidor
-            next();
-        }
-    });
+// Ruta principal en español
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Ruta en inglés
+app.get('/english', (req, res) => {
+    res.sendFile(path.join(__dirname, 'english', 'index.html'));
 });
 
 app.listen(PORT, () => {
-    console.log(`Servidor de Don Juan Caramba corriendo en el puerto ${PORT}`);
+    console.log(`Servidor activo en el puerto ${PORT}`);
 });
