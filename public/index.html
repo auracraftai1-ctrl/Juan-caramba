@@ -627,7 +627,6 @@
         let colaConsultantes = [...consultantesPool];
         let estaLeyendo = false;
 
-        // MAZO COMPLETO Y CORREGIDO CON LOS NOMBRES EXACTOS DE GITHUB
         const tarotDeck = [
             { name: "As de Copas", file: "Las copas.jpg" },
             { name: "2 de Copas", file: "Dos de copas.jpg" },
@@ -891,7 +890,10 @@
                 let nombresSalidaTexto = datosCartasMesa.map(c => `${c.nombre} ${c.invertida ? 'invertida' : 'al derecho'}`).join(", ");
 
                 let introduccionAsistente = `Hola, soy el asistente de Juan Caramba. En estos momentos no se encuentra. Yo atenderé tu consulta de ${actual.nombre} sobre "${actual.pregunta}"... `;
-                let llamadaAccionFinal = ` Para más lecturas, te invito a entrar en aura-craft-mystic.base44.app. Y recuerda suscribirte a mi cuenta en Kick para no perderte ninguna transmisión.`;
+                
+                // LLAMADO EXACTO SOLICITADO
+                let llamadaAccionFinal = ` Entra a mi página web, https://aura-craft-mystic.base44.app/, para más lecturas. Y recuerda suscribirte a mi cuenta en Kick para no perderte ninguna transmisión.`;
+                
                 let lecturaCompleta = introduccionAsistente;
 
                 if (cantidadCartas === 4) {
