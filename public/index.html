@@ -472,7 +472,7 @@
         <!-- Fondo de pantalla original -->
         <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image">
 
-        <!-- AUDIO DE FONDO AUTOMÁTICO -->
+        <!-- AUDIO DE FONDO AUTOMÁTICO (MÚSICA DE ARPA) -->
         <audio id="bgMusic" loop autoplay>
             <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=venezuelan-harp-instrumental-111394.mp3" type="audio/mpeg">
         </audio>
@@ -557,7 +557,6 @@
                 user: "Mariana_92", nombre: "Mariana Gómez", fecha: "14/03/1995", lugar: "Caracas, Venezuela",
                 veredicto: "¡SÍ!", pregunta: "¿Sanaré este dolor del corazón y encontraré el amor sincero?",
                 matrizAstral: "Sol en Escorpio y Ascendente Leo: intensidad emocional profunda que magnifica el rechazo social.",
-                tarotLectura: "El 8 de Espadas revela ataduras mentales y el 4 de Espadas exige una pausa espiritual urgente.",
                 arcangel: "Arcángel Chamuel (Rayo Rosa)", consejoArcangel: "Te otorga el perdón profundo para sanar las heridas sentimentales.",
                 serafin: "Serafín de la Llama Celeste", consejoSerafin: "Te alinea con el fuego de la verdad para despejar sombras mentales.",
                 accionFuego: "Cuestiona tus suposiciones sobre por qué los demás actúan como lo hacen.",
@@ -574,7 +573,6 @@
                 user: "CarlosVe", nombre: "Carlos Pérez", fecha: "22/07/1988", lugar: "Valencia, Venezuela",
                 veredicto: "¡SÍ!", pregunta: "¿Se destrabará mi negocio y entrará liquidez a mis bolsillos?",
                 matrizAstral: "Sol en Cáncer y Ascendente Tauro: arraigo material y protección de los frutos comerciales.",
-                tarotLectura: "El As de Oro combinado con el Tres de Oros abre portales de bonanza económica inmediata.",
                 arcangel: "Arcángel Jofiel (Rayo Dorado)", consejoArcangel: "Ilumina tu mente para romper la escasez material.",
                 serafin: "Serafín de los Siete Cielos", consejoSerafin: "Abre portales dimensionales de prosperidad en tus empresas.",
                 accionFuego: "Analiza con frialdad la estrategia comercial de tu inventario.",
@@ -591,7 +589,6 @@
                 user: "Alejandro_X", nombre: "Alejandro Silva", fecha: "05/11/1992", lugar: "Maracaibo, Venezuela",
                 veredicto: "¡NO!", pregunta: "¿Debo confiar en esta nueva sociedad comercial que me proponen?",
                 matrizAstral: "Sol en Escorpio y Ascendente Aries: impulso de lucha que choca con sombras ocultas.",
-                tarotLectura: "El Siete de Espadas advierte engaños ocultos y traiciones en el entorno laboral.",
                 arcangel: "Arcángel Miguel (Rayo Azul)", consejoArcangel: "Te envuelve en su manto para cortar toda energía densa.",
                 serafin: "Serafín del Fuego Sagrado", consejoSerafin: "Quema los obstáculos y falsas alianzas que sabotean tus metas.",
                 accionFuego: "Protege tu espacio vital de opiniones ajenas y personas malintencionadas.",
@@ -608,10 +605,9 @@
                 user: "Sofia_Tarot", nombre: "Sofía Montenegro", fecha: "10/01/1996", lugar: "Barquisimeto, Venezuela",
                 veredicto: "¡SÍ!", pregunta: "¿Encontraré la paz mental y la respuesta que tanto busco?",
                 matrizAstral: "Sol en Capricornio y Ascendente Virgo: mente analítica que busca claridad y orden.",
-                tarotLectura: "La Sacerdotisa y la Estrella confirman que tu intuición es infalible y guiada por la luz.",
                 arcangel: "Arcángel Rafael (Rayo Verde)", consejoArcangel: "Sana tu cuerpo físico y eleva tu percepción espiritual al máximo.",
                 serafin: "Serafín de la Estrella del Alba", consejoSerafin: "Te guía hacia la revelación de verdades ocultas.",
-                accionFuego: "Medita in silencio para escuchar las respuestas de tu voz interior.",
+                accionFuego: "Medita en silencio para escuchar las respuestas de tu voz interior.",
                 evitarFuego: "Evita sobrepensar escenarios que aún no han ocurrido.",
                 momentoFuego: "Realiza tu pausa sanadora al caer la tarde.",
                 colorDia: "Verde Esmeralda para equilibrar tus emociones y mente.",
@@ -625,7 +621,6 @@
                 user: "Daniel_88", nombre: "Daniel Rodríguez", fecha: "30/09/1988", lugar: "San Antonio de los Altos",
                 veredicto: "¡SÍ!", pregunta: "¿Se resolverá a mi favor este ciclo legal y de deudas?",
                 matrizAstral: "Sol en Libra y Ascendente Escorpio: balanza de justicia impulsada por transformación total.",
-                tarotLectura: "La Justicia y el Mundo anuncian el fin de un ciclo pesado y el triunfo absoluto.",
                 arcangel: "Arcángel Zadquiel (Rayo Violeta)", consejoArcangel: "Transmuta el dolor y las deudas del pasado en sabiduría pura.",
                 serafin: "Serafín de la Divina Misericordia", consejoSerafin: "Te otorga gracia divina ante juicios y cierres difíciles.",
                 accionFuego: "Firma, decide y corta de raíz aquello que ya cumplió su tiempo.",
@@ -710,6 +705,12 @@
         let yaSiguio = false;
         let tiempoRestanteContrato = 3600;
 
+        function reproducirAudioVoz(nombreArchivo) {
+            let audio = new Audio(nombreArchivo);
+            audio.volume = 1.0;
+            audio.play().catch(e => console.log("Audio en espera de interacción o archivo faltante:", e));
+        }
+
         function generarParticulas() {
             const container = document.getElementById('mainContainer');
             setInterval(() => {
@@ -762,7 +763,8 @@
             setTimeout(() => heart.remove(), 1200);
 
             if(totalTaps === 100) {
-                escribirEfectoMaquinaYVoz("¡Caramba, mi gente! Llegamos a los 100 Taps. ¡El que no aplaude aquí se queda sin novio o sin novia por un año!", "Don Juan Caramba");
+                reproducirAudioVoz('taps.mp3');
+                escribirEfectoMaquina("¡Caramba, mi gente! Llegamos al centenar de Taps. ¡El que no aplaude aquí se queda sin novio o sin novia por un año!", "Don Juan Caramba");
             }
         });
 
@@ -776,7 +778,8 @@
                 yaSiguio = true;
                 if(btn) btn.classList.add('followed');
                 if(text) text.innerText = "Siguiendo";
-                escribirEfectoMaquinaYVoz("¡Dios te me bendiga! El amor de tu vida te está buscando... y seguro está más perdido que tarzán en carro por forzar la marcha.", "Don Juan Caramba");
+                reproducirAudioVoz('chiste.mp3');
+                escribirEfectoMaquina("¡Dios te me bendiga! El amor de tu vida te está buscando... y seguro está más perdido que tarzán en carro por forzar la marcha.", "Don Juan Caramba");
             } else {
                 numSeguidores--;
                 yaSiguio = false;
@@ -789,7 +792,8 @@
 
         function quieremeAccion(event) {
             event.stopPropagation();
-            escribirEfectoMaquinaYVoz("¡Eso, mi pana! Mándame cariño que este viejo del llano está más soltero que un gabán en estero hondo.", "Don Juan Caramba");
+            reproducirAudioVoz('chiste.mp3');
+            escribirEfectoMaquina("¡Eso, mi pana! Mándame cariño que este viejo del llano está más soltero que un gabán en estero hondo.", "Don Juan Caramba");
         }
 
         function mostrarAnimacionRegalo(usuario, regaloIcono, regaloNombre) {
@@ -808,7 +812,7 @@
             }
         }
 
-        function escribirEfectoMaquinaYVoz(textoCompleto, titulo) {
+        function escribirEfectoMaquina(textoCompleto, titulo) {
             const speechTitle = document.getElementById('speechTitle');
             const speechText = document.getElementById('speechText');
             if(!speechTitle || !speechText) return;
@@ -818,22 +822,6 @@
             let i = 0;
             
             if (window.currentTyping) clearInterval(window.currentTyping);
-
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                let utterance = new SpeechSynthesisUtterance(textoCompleto);
-                utterance.lang = 'es-ES';
-                utterance.rate = 0.92; 
-                utterance.pitch = 0.4; 
-
-                let voices = window.speechSynthesis.getVoices();
-                let vozHombre = voices.find(v => v.lang.startsWith('es') && (v.name.toLowerCase().includes('male') || v.name.toLowerCase().includes('pablo') || v.name.toLowerCase().includes('carlos') || v.name.toLowerCase().includes('alvaro') || v.name.toLowerCase().includes('jorge') || v.name.toLowerCase().includes('diego')));
-                if (vozHombre) {
-                    utterance.voice = vozHombre;
-                }
-
-                window.speechSynthesis.speak(utterance);
-            }
 
             window.currentTyping = setInterval(() => {
                 if (i < textoCompleto.length) {
@@ -845,12 +833,6 @@
             }, 55); 
         }
 
-        if ('speechSynthesis' in window) {
-            window.speechSynthesis.onvoiceschanged = () => {
-                window.speechSynthesis.getVoices();
-            };
-        }
-
         function realizarTirada() {
             const container = document.getElementById('cardContainer');
             if(!container) return;
@@ -860,7 +842,9 @@
             actualizarVistaCola();
 
             container.innerHTML = '';
-            escribirEfectoMaquinaYVoz(`Conectando carta astral, fecha y lugar de ${actual.nombre} (${actual.fecha}, ${actual.lugar}). Analizando su pregunta...`, `Don Juan Caramba para ${actual.nombre} (@${actual.user})`);
+            
+            reproducirAudioVoz('saludo.mp3');
+            escribirEfectoMaquina(`Conectando carta astral, fecha y lugar de ${actual.nombre} (${actual.fecha}, ${actual.lugar}). Barajando las cartas...`, `Don Juan Caramba para ${actual.nombre} (@${actual.user})`);
 
             for(let i = 0; i < 3; i++) {
                 const cardDiv = document.createElement('div');
@@ -877,12 +861,14 @@
                     if(!seleccionadas.includes(carta)) seleccionadas.push(carta);
                 }
 
+                const cartasInfo = [];
                 seleccionadas.forEach((carta, index) => {
+                    const esInvertida = Math.random() < 0.5;
+                    cartasInfo.push(`${carta.name} ${esInvertida ? '(Invertida)' : '(Derecha)'}`);
+
                     setTimeout(() => {
-                        const esInvertida = Math.random() < 0.5;
                         const cardDiv = document.createElement('div');
                         cardDiv.className = `card`;
-                        
                         cardDiv.innerHTML = `
                             <img class="${esInvertida ? 'reversed' : ''}" src="${carta.file}" alt="${carta.name}" onerror="this.onerror=null; this.src='Auracraftai-bg.jpg';">
                             <span>${carta.name} ${esInvertida ? '(Inv.)' : ''}</span>
@@ -891,9 +877,16 @@
                     }, index * 250);
                 });
 
-                const mensajeFinal = `A tu pregunta "${actual.pregunta}"... ¡${actual.veredicto} Alma de ${actual.nombre}, tu matriz astral (${actual.matrizAstral}) se alinea con el tarot: ${actual.tarotLectura}. El ${actual.arcangel} te aconseja: ${actual.consejoArcangel} Te asiste el ${actual.serafin}: ${actual.consejoSerafin}. Acción de fuego: ${actual.accionFuego} Evita: ${actual.evitarFuego} Momento: ${actual.momentoFuego} Color del día: ${actual.colorDia} Prende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}). Prepara tu ${actual.bano} (${actual.paraQueBano}). Tu ${actual.numerologia} indica que ${actual.significadoNum}. ${actual.consejo}`;
+                if (actual.veredicto.includes("SÍ")) {
+                    reproducirAudioVoz('veredicto_si.mp3');
+                } else {
+                    reproducirAudioVoz('veredicto_no.mp3');
+                }
+
+                // Generar lectura dinámica usando exactamente las cartas que salieron en la mesa
+                const mensajeFinal = `A tu pregunta "${actual.pregunta}"... ¡${actual.veredicto} Alma de ${actual.nombre}, tu matriz astral (${actual.matrizAstral}) se alinea con el tarot! La tirada revela en mesa a ${cartasInfo[0]}, acompañada por ${cartasInfo[1]} y cerrando con ${cartasInfo[2]}. El ${actual.arcangel} te aconseja: ${actual.consejoArcangel} Te asiste el ${actual.serafin}: ${actual.consejoSerafin}. Acción de fuego: ${actual.accionFuego} Evita: ${actual.evitarFuego} Momento: ${actual.momentoFuego} Color del día: ${actual.colorDia} Prende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}). Prepara tu ${actual.bano} (${actual.paraQueBano}). Tu ${actual.numerologia} indica que ${actual.significadoNum}. ${actual.consejo}`;
                 
-                escribirEfectoMaquinaYVoz(mensajeFinal, `Super Oráculo Personalizado para ${actual.nombre}`);
+                escribirEfectoMaquina(mensajeFinal, `Super Oráculo Personalizado para ${actual.nombre}`);
             }, 4500);
         }
 
