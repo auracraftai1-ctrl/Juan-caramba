@@ -534,7 +534,7 @@
             </div>
         </div>
 
-        /* POPUP DE REGALO */
+        <!-- POPUP DE REGALO -->
         <div class="gift-popup-animation" id="giftPopup">
             <div class="gift-popup-icon" id="giftPopupIcon">🎁</div>
             <div style="font-size: 11px; font-weight: bold; color: #ffdf73;" id="giftPopupUser">@Usuario</div>
@@ -543,8 +543,8 @@
 
         <!-- SUBTÍTULOS FLOTANTES TIPO PELÍCULA -->
         <div class="speech-floating">
-            <h3 id="speechTitle">Don Juan Caramba</h3>
-            <p id="speechText">"¡Caramba, mi gente! Siente la sabana abierta. Ojo pelao... ¡El oráculo ha comenzado!"</p>
+            <h3 id="speechTitle">Asistente de Don Juan Caramba</h3>
+            <p id="speechText">"Saludos a toda la comunidad. Soy la asistente de Don Juan Caramba. Él ahorita no se encuentra, pero las cartas ya van a hablar."</p>
         </div>
 
         <!-- CARTAS EN MESA -->
@@ -627,7 +627,7 @@
                 evitarFuego: "Evita mirar atrás con nostalgia o culpa innecesaria.",
                 momentoFuego: "Sella tu liberación sabatina con fuego violeta.",
                 colorDia: "Violeta Transmutador para elevar tu vibración kármica.",
-                vela: "Vela Violeta", whenVela: "Sábado a las 8 PM", paraQueVela: "Para soltar ataduras y deudas kármicas.",
+                vela: "Vela Violeta", cuandoVela: "Sábado a las 8 PM", paraQueVela: "Para soltar ataduras y deudas kármicas.",
                 bano: "Baño de Lavanda e Incienso natural.",
                 paraQueBano: "Para armonizar el espíritu y dar paso a la victoria.",
                 numerologia: "Número 9 de Evolución y Cierre", significadoNum: "Anuncia el fin de la tormenta para abrir portales de éxito.",
@@ -650,7 +650,7 @@
             { name: "La Muerte", file: "La muerte.jpg", significado: "Transformación radical, cierre definitivo de ciclos pesados para renacer con fuerza." },
             { name: "La Templanza", file: "La templanza.jpg", significado: "Armonía, paciencia, sanación emocional y combinación perfecta de energías." },
             { name: "El Diablo", file: "El diablo.jpg", significado: "Ataduras materiales, pasiones ocultas, tentaciones y necesidad de romper cadenas." },
-            { name: "La Torre", file: "La torres.jpg", significado: "Cambio drástico, derrumbe de falsas estructuras y liberación de situaciones falsas." },
+            { name: "La Torre", file: "El torres.jpg", significado: "Cambio drástico, derrumbe de falsas estructuras y liberación de situaciones falsas." },
             { name: "La Estrella", file: "La estrella.jpg", significado: "Esperanza renovada, bendición divina, inspiración y fe absoluta en el mañana." },
             { name: "La Luna", file: "La luna.jpg", significado: "Ilusiones, miedos subconscientes, engaños por aclarar y sueños premonitorios." },
             { name: "El Sol", file: "El sol.jpg", significado: "Claridad absoluta, éxito rotundo, alegría radiante y vitalidad desbordante." },
@@ -665,7 +665,7 @@
         let yaSiguio = false;
         let tiempoRestanteContrato = 3600;
 
-        // MOTOR MAESTRO DE VOZ Y SUBTÍTULOS 100% SINCRONIZADOS POR INTERVALO
+        // MOTOR DE ASISTENTE NATURAL (VOZ CLARA Y CÁLIDA, SIN TONOS GROSERAMENTE GRAVES)
         function hablarYSubtitularSincronizado(texto, titulo) {
             if (!('speechSynthesis' in window)) return;
             window.speechSynthesis.cancel();
@@ -678,32 +678,28 @@
 
             let utterance = new SpeechSynthesisUtterance(texto);
             utterance.lang = 'es-ES';
-            utterance.rate = 0.85; // Voz pausada, seria y de viejo sabio
-            utterance.pitch = 0.4; // Tono grave de hombre
+            utterance.rate = 0.82; // Velocidad pausada y perfectamente audible
+            utterance.pitch = 0.95; // Tono natural de asistente (ni muy agudo, ni ultragrave)
 
             let voices = window.speechSynthesis.getVoices();
-            let vozHombre = voices.find(v => v.lang.startsWith('es') && (
-                v.name.toLowerCase().includes('male') || 
-                v.name.toLowerCase().includes('pablo') || 
-                v.name.toLowerCase().includes('carlos') || 
-                v.name.toLowerCase().includes('alvaro') || 
-                v.name.toLowerCase().includes('jorge') || 
-                v.name.toLowerCase().includes('diego') ||
-                v.name.toLowerCase().includes('microsoft')
-            ));
+            let vozAsistente = voices.find(v => v.lang.startsWith('es') && (
+                v.name.toLowerCase().includes('google español') || 
+                v.name.toLowerCase().includes('helena') || 
+                v.name.toLowerCase().includes('laura') || 
+                v.name.toLowerCase().includes('pablo') ||
+                v.name.toLowerCase().includes('sabina')
+            )) || voices.find(v => v.lang.startsWith('es'));
 
-            if (vozHombre) {
-                utterance.voice = vozHombre;
+            if (vozAsistente) {
+                utterance.voice = vozAsistente;
             }
 
-            // Lanzar la voz hablada
             window.speechSynthesis.speak(utterance);
 
-            // SINCRONIZACIÓN PERFECTA: Escribir palabra por palabra al mismo ritmo medido
+            // SINCRONIZACIÓN PRECISA: Cálculo dinámico basado en la longitud del texto
             let palabras = texto.split(" ");
             let indexPalabra = 0;
-            // Calculamos el intervalo para que el texto termine exactamente cuando la voz habla
-            let velocidadIntervalo = Math.max(280, Math.floor(65000 / palabras.length));
+            let velocidadIntervalo = Math.max(340, Math.floor(75000 / palabras.length));
 
             window.currentSpeechTimer = setInterval(() => {
                 if (indexPalabra < palabras.length) {
@@ -775,8 +771,8 @@
             setTimeout(() => heart.remove(), 1200);
 
             if(totalTaps === 100) {
-                let textoTaps = "¡Caramba, mi gente! Llegamos a los 100 Taps. ¡El que no aplaude aquí se queda sin novio o sin novia por un año!";
-                hablarYSubtitularSincronizado(textoTaps, "Don Juan Caramba");
+                let textoTaps = "¡Atención mi gente! Hemos llegado a los 100 Taps en pantalla. Recuerden apoyar la transmisión de Don Juan Caramba.";
+                hablarYSubtitularSincronizado(textoTaps, "Asistente de Don Juan Caramba");
             }
         });
 
@@ -790,8 +786,8 @@
                 yaSiguio = true;
                 if(btn) btn.classList.add('followed');
                 if(text) text.innerText = "Siguiendo";
-                let msg = "¡Dios te me bendiga! El amor de tu vida te está buscando y seguro está más perdido que tarzán en carro.";
-                hablarYSubtitularSincronizado(msg, "Don Juan Caramba");
+                let msg = "¡Muchas gracias por seguir el canal! Don Juan Caramba te envía bendiciones desde el llano.";
+                hablarYSubtitularSincronizado(msg, "Asistente de Don Juan Caramba");
             } else {
                 numSeguidores--;
                 yaSiguio = false;
@@ -804,8 +800,8 @@
 
         function quieremeAccion(event) {
             event.stopPropagation();
-            let msg = "¡Eso, mi pana! Mándame cariño que este viejo del llano está más soltero que un gabán en estero hondo.";
-            hablarYSubtitularSincronizado(msg, "Don Juan Caramba");
+            let msg = "¡Eso me gusta! Sigan mandando cariño y energía positiva al chat de la transmisión.";
+            hablarYSubtitularSincronizado(msg, "Asistente de Don Juan Caramba");
         }
 
         function mostrarAnimacionRegalo(usuario, regaloIcono, regaloNombre) {
@@ -834,8 +830,8 @@
 
             container.innerHTML = '';
             
-            let saludoInicial = `Conectando carta astral y fecha de ${actual.nombre}. Preparando el oráculo...`;
-            hablarYSubtitularSincronizado(saludoInicial, `Don Juan Caramba para ${actual.nombre} (@${actual.user})`);
+            let saludoInicial = `Saludos a toda la comunidad. Soy la asistente de Don Juan Caramba. Él ahorita no se encuentra en la mesa, pero conectamos la carta astral y los datos de ${actual.nombre} para su lectura.`;
+            hablarYSubtitularSincronizado(saludoInicial, `Lectura para ${actual.nombre} (@${actual.user})`);
 
             for(let i = 0; i < 3; i++) {
                 const cardDiv = document.createElement('div');
@@ -869,11 +865,11 @@
                     }, index * 250);
                 });
 
-                // LECTURA DINÁMICA 100% PERSONALIZADA Y CONECTADA
-                const mensajeFinal = `A tu pregunta, ${actual.pregunta}... ¡${actual.veredicto} Alma de ${actual.nombre}, tu matriz astral (${actual.matrizAstral}) se alinea con el destino! En la mesa sagrada del tarot han salido tres arcanos clave: Primero, ${descripcionesCartas[0]}. Segundo, ${descripcionesCartas[1]}. Y cerrando la tirada, ${descripcionesCartas[2]}. Ante este panorama, te asiste el protector ${actual.arcangel}, quien te aconseja: ${actual.consejoArcangel}. Asimismo, el ${actual.serafin} te indica: ${actual.consejoSerafin}. Como acción de fuego debes hacer lo siguiente: ${actual.accionFuego} Y evita a toda costa: ${actual.evitarFuego} Sella este ciclo en el momento indicado: ${actual.momentoFuego} Viste el color ${actual.colorDia}, y prende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}). Prepara también tu ${actual.bano} (${actual.paraQueBano}). Tu vibración numérica es el ${actual.numerologia}, lo que significa que ${actual.significadoNum}. Escucha bien este consejo final: ${actual.consejo}`;
+                // LECTURA DINÁMICA 100% PROFUNDA Y EXTENDIDA
+                const mensajeFinal = `Atendiendo a tu consulta sobre "${actual.pregunta}"... ¡${actual.veredicto} Estimado o estimada ${actual.nombre}, tu matriz astral (${actual.matrizAstral}) se conecta con el oráculo! La tirada nos muestra en mesa a ${descripcionesCartas[0]}, seguida por ${descripcionesCartas[1]}, y culminando con ${descripcionesCartas[2]}. Ante esta situación, el arcángel protector ${actual.arcangel} te aconseja: ${actual.consejoArcangel}. De igual manera, el serafín ${actual.serafin} te transmite: ${actual.consejoSerafin}. Como acción espiritual de fuego debes cumplir con lo siguiente: ${actual.accionFuego} Y recuerda evitar por completo: ${actual.evitarFuego} Sella este propósito en el momento indicado: ${actual.momentoFuego} Utiliza el color protector ${actual.colorDia}, enciende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}) y prepara tu baño especial de ${actual.bano} (${actual.paraQueBano}). Tu vibración numérica es el ${actual.numerologia}, lo que nos indica que ${actual.significadoNum}. Y presta mucha atención a este consejo final de parte de la casa: ${actual.consejo}`;
                 
-                hablarYSubtitularSincronizado(mensajeFinal, `Super Oráculo para ${actual.nombre}`);
-            }, 5500);
+                hablarYSubtitularSincronizado(mensajeFinal, `Oráculo Personalizado - ${actual.nombre}`);
+            }, 6000);
         }
 
         setInterval(() => {
@@ -913,8 +909,8 @@
         inicializarCola();
         generarParticulas();
         
-        // TIEMPO EXTENDIDO A 75 SEGUNDOS PARA QUE LA LECTURA TERMINE DE HABLAR CON CALMA
-        setInterval(realizarTirada, 75000);
+        // TIEMPO EXTENDIDO A 95 SEGUNDOS PARA CALZAR PERFECTAMENTE CON TODA LA EXPLICACIÓN
+        setInterval(realizarTirada, 95000);
         setTimeout(realizarTirada, 2000);
     </script>
 </body>
