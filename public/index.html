@@ -358,42 +358,36 @@
             font-size: 30px;
         }
 
-        /* SUBTÍTULOS DINÁMICOS POR BLOQUES */
+        /* SUBTÍTULOS FLOTANTES SIN CUADRO NEGRO (SOLO LETRAS CON SOMBRA) */
         .speech-floating {
             position: absolute;
             bottom: 24vh;
             left: 50%;
             transform: translateX(-50%);
-            width: 90%;
-            max-width: 750px;
+            width: 92%;
+            max-width: 800px;
             text-align: center;
             z-index: 160;
             pointer-events: none;
-            padding: 6px 14px;
-            background: rgba(0, 0, 0, 0.65);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            border-radius: 8px;
-            backdrop-filter: blur(3px);
-            min-height: 45px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            padding: 4px;
+            background: transparent; /* Cero cuadro negro */
+            border: none;
         }
         .speech-floating h3 {
-            margin: 0 0 2px 0;
+            margin: 0 0 3px 0;
             color: #ffdf73;
-            font-size: 10px;
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            text-shadow: 2px 2px 6px #000, 0 0 10px rgba(212, 175, 55, 0.8);
         }
         .speech-floating p {
             margin: 0;
-            font-size: 11px;
+            font-size: 13px;
             font-weight: bold;
             color: #ffffff;
-            line-height: 1.3;
-            text-shadow: 1px 1px 4px #000;
+            line-height: 1.4;
+            text-shadow: 2px 2px 8px #000, 0 0 12px rgba(0, 0, 0, 0.9);
         }
 
         /* CONTENEDOR DE CARTAS */
@@ -549,7 +543,7 @@
             <div style="font-size: 9px; color: #fff;" id="giftPopupText">¡Envió un regalo VIP!</div>
         </div>
 
-        <!-- SUBTÍTULOS DINÁMICOS POR BLOQUES -->
+        <!-- SUBTÍTULOS DINÁMICOS SIN CAJA NEGRA (SOLO LETRAS CON SOMBRA) -->
         <div class="speech-floating">
             <h3 id="speechTitle">Asistente de Don Juan Caramba</h3>
             <p id="speechText">"Hola, soy la asistente de Don Juan Caramba, él en este momento no se encuentra..."</p>
@@ -580,7 +574,7 @@
             { 
                 user: "CarlosVe", nombre: "Carlos Pérez", fecha: "22/07/1988", lugar: "Valencia, Venezuela",
                 veredicto: "¡SÍ!", pregunta: "¿Se destrabará mi negocio y entrará liquidez a mis bolsillos?",
-                matrizAstral: "Sol en Cáncer y Ascendente Tauro: arraigo material y protección de los frutos comerciales.",
+                matrizAstral: "Sol en Cáncer y Ascendente Tauro: arraigo material y protection de los frutos comerciales.",
                 arcangel: "Arcángel Jofiel", consejoArcangel: "Ilumina tu mente para romper la escasez material y comercial.",
                 serafin: "Serafín de los Siete Cielos", consejoSerafin: "Abre portales dimensionales de prosperidad en tus empresas.",
                 accionFuego: "Analiza con frialdad la estrategia comercial de tu inventario.",
@@ -619,7 +613,7 @@
                 evitarFuego: "Evita sobrepensar escenarios que aún no han ocurrido.",
                 momentoFuego: "Realiza tu pausa sanadora al caer la tarde.",
                 colorDia: "Verde Esmeralda para equilibrar tus emociones y mente.",
-                vela: "Vela Verde", cuandoVela: "Jueves a las 6 PM", paraQueVela: "Para calmar la mente y sintonizar guías de luz.",
+                vela: "Vela Verde", whenVela: "Jueves a las 6 PM", cuandoVela: "Jueves a las 6 PM", paraQueVela: "Para calmar la mente y sintonizar guías de luz.",
                 bano: "Baño de Eucalipto y Manzanilla fresca.",
                 paraQueBano: "Para despejar el pensamiento y aclarar tus sueños premonitorios.",
                 numerologia: "Número 7 de Sabiduría e Intuición", significadoNum: "Confirma que tu voz interior es tu guía más fiel.",
@@ -673,7 +667,7 @@
         let yaSiguio = false;
         let tiempoRestanteContrato = 3600;
 
-        // MOTOR DE ASISTENTE DE VOZ Y SUBTÍTULOS ROTATIVOS POR BLOQUES
+        // MOTOR DE ASISTENTE DE VOZ Y SUBTÍTULOS SIN CAJA NEGRA Y TIEMPO RETRASADO (8 SEGUNDOS POR BLOQUE)
         function hablarYSubtitularBloques(textoCompleto, titulo) {
             if (!('speechSynthesis' in window)) return;
             window.speechSynthesis.cancel();
@@ -683,10 +677,10 @@
             const speechText = document.getElementById('speechText');
             if(speechTitle) speechTitle.innerText = titulo;
 
-            // 1. Lanzar la voz de la asistente de corrido
+            // 1. Lanzar la voz de la asistente con velocidad reposada
             let utterance = new SpeechSynthesisUtterance(textoCompleto);
             utterance.lang = 'es-ES';
-            utterance.rate = 0.82; 
+            utterance.rate = 0.80; // Un toque más pausada para perfecta sincronía
             utterance.pitch = 0.95; 
 
             let voices = window.speechSynthesis.getVoices();
@@ -704,14 +698,14 @@
 
             window.speechSynthesis.speak(utterance);
 
-            // 2. Dividir el texto en bloques de unas 15-18 palabras (aprox. 2 líneas limpias)
+            // 2. Dividir el texto en bloques de 14 palabras
             let palabras = textoCompleto.split(" ");
             let bloques = [];
             let bloqueActual = "";
 
             palabras.forEach((palabra) => {
                 bloqueActual += palabra + " ";
-                if (bloqueActual.split(" ").length >= 16) {
+                if (bloqueActual.split(" ").length >= 14) {
                     bloques.push(bloqueActual.trim());
                     bloqueActual = "";
                 }
@@ -720,7 +714,7 @@
                 bloques.push(bloqueActual.trim());
             }
 
-            // 3. Rotar los bloques en pantalla cada 6 segundos
+            // 3. Rotar los bloques cada 8 segundos para que vayan lentos y sincronizados
             let indexBloque = 0;
             if(speechText && bloques.length > 0) {
                 speechText.innerText = `"${bloques[0]}"`;
@@ -735,7 +729,7 @@
                 } else {
                     clearInterval(window.currentBlockTimer);
                 }
-            }, 6000);
+            }, 8000); // 8 segundos exactos por bloque
         }
 
         if ('speechSynthesis' in window) {
@@ -924,8 +918,8 @@
         inicializarCola();
         generarParticulas();
         
-        // TIEMPO AMPLIADO A 140 SEGUNDOS (2 MINUTOS Y 20 SEGUNDOS) PARA CERRAR LA LECTURA HASTA EL FINAL
-        setInterval(realizarTirada, 140000);
+        // TIEMPO AMPLIADO A 170 SEGUNDOS PARA QUE LA VOZ TERMINE DE CABO A RABO SIN APURO
+        setInterval(realizarTirada, 170000);
         setTimeout(realizarTirada, 2000);
     </script>
 </body>
