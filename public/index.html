@@ -26,7 +26,7 @@
             overflow: hidden;
         }
 
-        /* FONDO DE PANTALLA ORIGINAL */
+        /* FONDO DE PANTALLA */
         .bg-image {
             width: 100%;
             height: 100%;
@@ -115,7 +115,7 @@
             text-shadow: 1px 1px 3px #000;
         }
 
-        /* BARRA DE ENERGÍA (TRANSPARENTE) */
+        /* BARRA DE ENERGÍA */
         .energy-bar-container {
             position: fixed;
             top: 75px;
@@ -146,7 +146,7 @@
             transition: width 0.3s ease;
         }
 
-        /* CONCURSO (TRANSPARENTE) */
+        /* CONCURSO */
         .contest-panel {
             position: fixed;
             top: 105px;
@@ -174,7 +174,7 @@
             color: #53fc18;
         }
 
-        /* GUÍA DE REGALOS KICK (IZQUIERDA) */
+        /* GUÍA DE REGALOS KICK */
         .vip-gifts-guide {
             position: fixed;
             bottom: 26vh;
@@ -241,7 +241,7 @@
             100% { transform: translateX(-50%) scale(1.15) rotate(2deg); opacity: 1; }
         }
 
-        /* SALA DE ESPERA (SUBIDA AL MÁXIMO ARRIBA A LA DERECHA) */
+        /* SALA DE ESPERA (SUPERIOR DERECHA) */
         .waiting-queue {
             position: fixed;
             top: 2px;
@@ -287,7 +287,7 @@
             text-shadow: 0 0 6px #d4af37;
         }
 
-        /* REGALOS RECIENTES DE KICK (¡SUBIDO AÚN MÁS ARRIBA, PEGADO AL BORDE SUPERIOR!) */
+        /* REGALOS RECIENTES DE KICK (UBICACIÓN ALTA) */
         .gifts-panel {
             position: fixed;
             top: 85px;
@@ -323,7 +323,7 @@
             gap: 2px;
         }
 
-        /* POPUP DE REGALO FLOTANTE (TRANSPARENTE) */
+        /* POPUP DE REGALO FLOTANTE */
         .gift-popup-animation {
             position: absolute;
             top: 35%;
@@ -347,7 +347,7 @@
             font-size: 38px;
         }
 
-        /* SUBTÍTULOS DINÁMICOS ULTRA-RÁPIDOS Y AL DÍA CON LA VOZ */
+        /* SUBTÍTULOS TELEPROMPTER SINCRONIZADOS */
         .speech-floating {
             position: absolute;
             bottom: 28vh;
@@ -511,13 +511,13 @@
             <div class="flame"></div>
         </div>
 
-        <!-- SALA DE ESPERA (BIEN ARRIBA A LA DERECHA) -->
+        <!-- SALA DE ESPERA (SUBIDA Y LIBRE DE LAS LETRAS) -->
         <div class="waiting-queue">
             <h4>Sala de Espera</h4>
             <ul class="queue-list" id="queueList"></ul>
         </div>
 
-        <!-- REGALOS RECIENTES DE KICK (SUBIDO AL MÁXIMO SUPERIOR) -->
+        <!-- REGALOS RECIENTES DE KICK -->
         <div class="gifts-panel">
             <h5>🎁 Recientes Kick</h5>
             <div class="gift-feed" id="giftFeed">
@@ -533,7 +533,7 @@
             <div style="font-size: 10px; color: #fff;" id="giftPopupText">¡Envió un regalo VIP en Kick!</div>
         </div>
 
-        <!-- SUBTÍTULOS DINÁMICOS ULTRA-RÁPIDOS Y SINCRONIZADOS -->
+        <!-- TELEPROMPTER SUBTÍTULOS DINÁMICOS -->
         <div class="speech-floating">
             <h3 id="speechTitle">Asistente de Don Juan Caramba</h3>
             <p id="speechText">"Iniciando transmisión en vivo por Kick..."</p>
@@ -546,70 +546,160 @@
     <script>
         const consultantesPool = [
             { 
-                user: "Mariana_92", nombre: "Mariana Gómez", fecha: "14/03/1995", lugar: "Caracas, Venezuela",
-                veredicto: "¡SÍ!", pregunta: "¿Sanaré este dolor del corazón y encontraré el amor sincero?",
-                matrizAstral: "Sol en Escorpio y Ascendente Leo: intensidad emocional profunda.",
-                arcangel: "Arcángel Chamuel", consejoArcangel: "Te otorga el perdón profundo para sanar las heridas sentimentales.",
+                user: "Mariana_92", 
+                nombre: "Mariana Gómez", 
+                fecha: "14/03/1995", 
+                lugar: "Caracas, Venezuela",
+                veredicto: "¡SÍ!", 
+                pregunta: "¿Sanaré este dolor del corazón y encontraré el amor sincero?",
+                sol: "Escorpio", 
+                luna: "Piscis", 
+                ascendente: "Leo",
+                frecuencia: "528 Hz (Transformación y Sanación)",
+                numPoderPersonal: "7",
+                numPoderDia: "21",
+                recomendacionExplicita: "Acepta las invitaciones sociales este fin de semana y corta contacto definitivo con exparejas.",
+                arcangel: "Arcángel Chamuel", 
+                consejoArcangel: "Te otorga el perdón profundo para sanar las heridas sentimentales.",
                 invocacionArcangel: "Invocalo los martes al atardecer para abrir los caminos del afecto puro.",
-                serafin: "Serafín de la Llama Celeste", consejoSerafin: "Te alinea con el fuego de la verdad para despejar sombras mentales.",
-                cuandoInvocarsSerafin: "Al romper el alba", paraQueInvocarsSerafin: "Para quemar ilusiones falsas y limpiar tu mente de dudas.",
-                vela: "Vela Azul Claro", cuandoVela: "Al atardecer", paraQueVela: "Para disipar las dudas y revelar tu valor interior.",
+                cuandoInvocarsArcangel: "martes al atardecer",
+                serafin: "Serafín de la Llama Celeste", 
+                consejoSerafin: "Te alinea con el fuego de la verdad para despejar sombras mentales.",
+                cuandoInvocarsSerafin: "Al romper el alba los viernes", 
+                paraQueInvocarsSerafin: "Para quemar ilusiones falsas y limpiar tu mente de dudas.",
+                vela: "Vela Azul Claro", 
+                cuandoVela: "Martes al atardecer", 
+                paraQueVela: "Para disipar las dudas y revelar tu valor interior.",
+                accionFuegoBano: "Baño sagrado con pétalos de rosa roja, miel y esónica de canela durante tres noches seguidas.",
+                prohibicionEstricta: "Prohibido guardar objetos o fotografías de exparejas bajo tu almohada.",
                 diagnosticoGeneral: "La combinación de tus cartas revela que estás cerrando un ciclo de desamor doloroso pero necesario; al unir tu energía al fuego de Chamuel, el universo te prepara para un encuentro con bases firmes y sin ataduras del pasado.",
                 libroSecretos: "El secreto del corazón abierto radica en soltar el control y permitir que la energía del universo te guíe sin resistencia.",
                 afirmacion: "Yo merezco un amor sincero, puro y libre de cargas pasadas.",
                 consejo: "Ay, mi Mariana de Caracas... Como dice el dicho: el amor es como el arroz, el que no se aviva se queda sin comer y con la olla raspada. Sella este proceso con fe."
             },
             { 
-                user: "CarlosVe", nombre: "Carlos Pérez", fecha: "22/07/1988", lugar: "Valencia, Venezuela",
-                veredicto: "¡SÍ!", pregunta: "¿Se destrabará mi negocio y entrará liquidez a mis bolsillos?",
-                matrizAstral: "Sol en Cáncer y Ascendente Tauro: arraigo material y protección de los frutos comerciales.",
-                arcangel: "Arcángel Jofiel", consejoArcangel: "Ilumina tu mente para romper la escasez material y comercial.",
+                user: "CarlosVe", 
+                nombre: "Carlos Pérez", 
+                fecha: "22/07/1988", 
+                lugar: "Valencia, Venezuela",
+                veredicto: "¡SÍ!", 
+                pregunta: "¿Se destrabará mi negocio y entrará liquidez a mis bolsillos?",
+                sol: "Cáncer", 
+                luna: "Tauro", 
+                ascendente: "Tauro",
+                frecuencia: "888 Hz (Abundancia e Inflorescencia Financiera)",
+                numPoderPersonal: "8",
+                numPoderDia: "44",
+                recomendacionExplicita: "Revisa las cuentas pendientes y firma los nuevos contratos antes del jueves al mediodía.",
+                arcangel: "Arcángel Jofiel", 
+                consejoArcangel: "Ilumina tu mente para romper la escasez material y comercial.",
                 invocacionArcangel: "Invocalo los domingos a las 7 AM para atraer clientes y liquidez inmediata.",
-                serafin: "Serafín de los Siete Cielos", consejoSerafin: "Abre portales dimensionales de prosperidad en tus empresas.",
-                cuandoInvocarsSerafin: "Al mediodía del domingo", paraQueInvocarsSerafin: "Para blindar tus negocios contra la escasez y la mala racha.",
-                vela: "Vela Amarilla o Naranja", cuandoVela: "Domingo a las 7 AM", paraQueVela: "Para atraer clientes y liquidez inmediata.",
+                cuandoInvocarsArcangel: "domingos a las 7 AM",
+                serafin: "Serafín de los Siete Cielos", 
+                consejoSerafin: "Abre portales dimensionales de prosperidad en tus empresas.",
+                cuandoInvocarsSerafin: "Al mediodía del domingo", 
+                paraQueInvocarsSerafin: "Para blindar tus negocios contra la escasez y la mala racha.",
+                vela: "Vela Amarilla o Naranja", 
+                cuandoVela: "Domingo a las 7 AM", 
+                paraQueVela: "Para atraer clientes y liquidez inmediata.",
+                accionFuegoBano: "Limpieza de negocio quemando cáscaras de mandarina seca con carbón dulce al iniciar la mañana.",
+                prohibicionEstricta: "Prohibido prestar dinero o mercancía fiada durante los próximos catorce días.",
                 diagnosticoGeneral: "El diagnóstico unificado de tu tirada señala que las trabas comerciales que tenías se desvanecen; la energía de Jofiel combinada con tus cartas marca el inicio de una etapa de entrada fluida de dinero y consolidación de tus proyectos.",
                 libroSecretos: "La riqueza verdadera no solo se cuenta en billetes, sino en la solidez de las bases que construyes cada mañana con disciplina.",
                 afirmacion: "La abundancia fluye hacia mis manos de forma constante y abundante.",
                 consejo: "Mi estimado Carlos de Valencia, recuerda lo que decía mi abuelo en el estero: camarón que se duerme se lo lleva la corriente, se queda sin billete y comiendo casabe seco."
             },
             { 
-                user: "Alejandro_X", nombre: "Alejandro Silva", fecha: "05/11/1992", lugar: "Maracaibo, Venezuela",
-                veredicto: "¡NO!", pregunta: "¿Debo confiar en esta nueva sociedad comercial que me proponen?",
-                matrizAstral: "Sol en Escorpio y Ascendente Aries: impulso de lucha que choca con sombras ocultas.",
-                arcangel: "Arcángel Miguel", consejoArcangel: "Te envuelve en su manto para cortar toda energía densa y oscura.",
+                user: "Alejandro_X", 
+                nombre: "Alejandro Silva", 
+                fecha: "05/11/1992", 
+                lugar: "Maracaibo, Venezuela",
+                veredicto: "¡NO!", 
+                pregunta: "¿Debo confiar en esta nueva sociedad comercial que me proponen?",
+                sol: "Escorpio", 
+                luna: "Aries", 
+                ascendente: "Aries",
+                frecuencia: "417 Hz (Disolución de Patrones Negativos)",
+                numPoderPersonal: "5",
+                numPoderDia: "13",
+                recomendacionExplicita: "Exige auditoría por escrito y rechaza acuerdos verbales sin respaldo legal inmediato.",
+                arcangel: "Arcángel Miguel", 
+                consejoArcangel: "Te envuelve en su manto para cortar toda energía densa y oscura.",
                 invocacionArcangel: "Invocalo los lunes a las 9 PM para romper envidias y blindar tu entorno.",
-                serafin: "Serafín del Fuego Sagrado", consejoSerafin: "Quema los obstáculos y falsas alianzas que sabotean tus metas.",
-                cuandoInvocarsSerafin: "Al iniciar la noche del lunes", paraQueInvocarsSerafin: "Para destruir trabajos oscuros y cortar traiciones.",
-                vela: "Vela Azul Fuerte", cuandoVela: "Lunes a las 9 PM", paraQueVela: "Para romper envidias y blindar tu entorno.",
+                cuandoInvocarsArcangel: "lunes a las 9 PM",
+                serafin: "Serafín del Fuego Sagrado", 
+                consejoSerafin: "Quema los obstáculos y falsas alianzas que sabotean tus metas.",
+                cuandoInvocarsSerafin: "Al iniciar la noche del lunes", 
+                paraQueInvocarsSerafin: "Para destruir trabajos oscuros y cortar traiciones.",
+                vela: "Vela Azul Fuerte", 
+                cuandoVela: "Lunes a las 9 PM", 
+                paraQueVela: "Para romper envidias y blindar tu entorno.",
+                accionFuegoBano: "Baño de despojo con ruda, albahaca y sal marina disuelta en agua tibia de la cabeza a los pies.",
+                prohibicionEstricta: "Prohibido revelar tus planes financieros o montos de inversión a personas fuera del núcleo familiar.",
                 diagnosticoGeneral: "Al juntar el mensaje de tus cartas, el oráculo advierte una trampa oculta detrás de esa propuesta; las energías apuntan a falsas alianzas y pérdidas si te arriesgas a firmar sin revisar cada detalle.",
                 libroSecretos: "El escudo más poderoso contra la traición es la intuición alerta combinada con la prudencia absoluta en tus decisiones.",
                 afirmacion: "Mi camino está blindado y protegido de toda energía malintencionada.",
                 consejo: "Ajá, mi compadre Alejandro desde Maracaibo; ojo pelao con esa gente, porque el que tenga rabo de paja que no se acerque a la candela porque aquí se quema hasta el apellido."
             },
             { 
-                user: "Sofia_Tarot", nombre: "Sofía Montenegro", fecha: "10/01/1996", lugar: "Barquisimeto, Venezuela",
-                veredicto: "¡SÍ!", pregunta: "¿Encontraré la paz mental y la respuesta que tanto busco?",
-                matrizAstral: "Sol en Capricornio y Ascendente Virgo: mente analítica que busca claridad.",
-                arcangel: "Arcángel Rafael", consejoArcangel: "Sana tu cuerpo físico y eleva tu percepción espiritual al máximo.",
+                user: "Sofia_Tarot", 
+                nombre: "Sofía Montenegro", 
+                fecha: "10/01/1996", 
+                lugar: "Barquisimeto, Venezuela",
+                veredicto: "¡SÍ!", 
+                pregunta: "¿Encontraré la paz mental y la respuesta que tanto busco?",
+                sol: "Capricornio", 
+                luna: "Virgo", 
+                ascendente: "Virgo",
+                frecuencia: "741 Hz (Despertar de la Intuición y Claridad)",
+                numPoderPersonal: "11",
+                numPoderDia: "33",
+                recomendacionExplicita: "Practica silencio consciente al despertar y escribe tus sueños en una libreta antes del mediodía.",
+                arcangel: "Arcángel Rafael", 
+                consejoArcangel: "Sana tu cuerpo físico y eleva tu percepción espiritual al máximo.",
                 invocacionArcangel: "Invocalo los jueves a las 6 PM para calmar la mente y sintonizar guías de luz.",
-                serafin: "Serafín de la Estrella del Alba", consejoSerafin: "Te guía hacia la revelación de verdades ocultas.",
-                cuandoInvocarsSerafin: "Al caer la tarde del jueves", paraQueInvocarsSerafin: "Para despejar el pensamiento y aclarar sueños premonitorios.",
-                vela: "Vela Verde", cuandoVela: "Jueves a las 6 PM", paraQueVela: "Para calmar la mente y sintonizar guías de luz.",
+                cuandoInvocarsArcangel: "jueves a las 6 PM",
+                serafin: "Serafín de la Estrella del Alba", 
+                consejoSerafin: "Te guía hacia la revelación de verdades ocultas.",
+                cuandoInvocarsSerafin: "Al caer la tarde del jueves", 
+                paraQueInvocarsSerafin: "Para despejar el pensamiento y aclarar sueños premonitorios.",
+                vela: "Vela Verde", 
+                cuandoVela: "Jueves a las 6 PM", 
+                paraQueVela: "Para calmar la mente y sintonizar guías de luz.",
+                accionFuegoBano: "Limpia con incienso de sándalo y baño armonizador de hojas de menta con manzanilla.",
+                prohibicionEstricta: "Prohibido engancharte en discusiones ajenas o cargar con culpas que no te pertenecen.",
                 diagnosticoGeneral: "El análisis conjunto de tus cartas confirma que la confusión mental que te atormentaba llega a su fin; la sanación de Rafael disipa la neblina y te devuelve la certeza absoluta que estabas esperando.",
                 libroSecretos: "La verdadera paz mental nace al aceptar que el universo tiene sus propios tiempos perfectos para revelarte la verdad.",
                 afirmacion: "Mi mente es un templo de paz, claridad y sabiduría divina.",
                 consejo: "Mi querida Sofía de Barquisimeto, no comas cuento de nadie; más sabe el diablo por viejo que por diablo."
             },
             { 
-                user: "Daniel_88", nombre: "Daniel Rodríguez", fecha: "30/09/1988", lugar: "San Antonio de los Altos",
-                veredicto: "¡SÍ!", pregunta: "¿Se resolverá a mi favor este ciclo legal y de deudas?",
-                matrizAstral: "Sol en Libra y Ascendente Escorpio: balanza de justicia impulsada por transformación.",
-                arcangel: "Arcángel Zadquiel", consejoArcangel: "Transmuta el dolor y las deudas del pasado en sabiduría pura.",
+                user: "Daniel_88", 
+                nombre: "Daniel Rodríguez", 
+                fecha: "30/09/1988", 
+                lugar: "San Antonio de los Altos",
+                veredicto: "¡SÍ!", 
+                pregunta: "¿Se resolverá a mi favor este ciclo legal y de deudas?",
+                sol: "Libra", 
+                luna: "Escorpio", 
+                ascendente: "Escorpio",
+                frecuencia: "963 Hz (Conexión Divina y Cierre de Kármicos)",
+                numPoderPersonal: "9",
+                numPoderDia: "18",
+                recomendacionExplicita: "Mantén orden riguroso en tus folios legales y acude a las citaciones vistiendo prenda blanca o azul.",
+                arcangel: "Arcángel Zadquiel", 
+                consejoArcangel: "Transmuta el dolor y las deudas del pasado en sabiduría pura.",
                 invocacionArcangel: "Invocalo los sábados a las 8 PM para soltar ataduras y deudas kármicas.",
-                serafin: "Serafín de la Divina Misericordia", consejoSerafin: "Te otorga gracia divina ante juicios y cierres difíciles.",
-                cuandoInvocarsSerafin: "Al anochecer del sábado", paraQueInvocarsSerafin: "Para armonizar el espíritu y dar paso a la victoria judicial.",
-                vela: "Vela Violeta", cuandoVela: "Sábado a las 8 PM", paraQueVela: "Para soltar ataduras y deudas kármicas.",
+                cuandoInvocarsArcangel: "sábados a las 8 PM",
+                serafin: "Serafín de la Divina Misericordia", 
+                consejoSerafin: "Te otorga gracia divina ante juicios y cierres difíciles.",
+                cuandoInvocarsSerafin: "Al anochecer del sábado", 
+                paraQueInvocarsSerafin: "Para armonizar el espíritu y dar paso a la victoria judicial.",
+                vela: "Vela Violeta", 
+                cuandoVela: "Sábado a las 8 PM", 
+                paraQueVela: "Para soltar ataduras y deudas kármicas.",
+                accionFuegoBano: "Acción de fuego encendiendo una vela morada sobre sal gruesa para consumir ataduras legales.",
+                prohibicionEstricta: "Prohibido guardar resentimientos hacia tus contrapartes; delega la justicia en el oráculo.",
                 diagnosticoGeneral: "La lectura unificada de tus cartas decreta una victoria inminente en tus asuntos legales; la balanza se inclina a tu favor, cerrando de manera definitiva los ciclos de deudas y cargas pesadas.",
                 libroSecretos: "Cerrar un ciclo con honor es abrirle la puerta dorada a la justicia divina y a la prosperidad inquebrantable.",
                 afirmacion: "Libero el pasado con gracia y recibo la victoria que me corresponde por derecho divino.",
@@ -633,7 +723,7 @@
             { name: "La Muerte", file: "La muerte.jpg" },
             { name: "La Templanza", file: "La templanza.jpg" },
             { name: "El Diablo", file: "El diablo.jpg" },
-            { name: "La Torre", file: "El torres.jpg" },
+            { name: "La Torre", file: "La torres.jpg" },
             { name: "La Estrella", file: "La estrella.jpg" },
             { name: "La Luna", file: "La luna.jpg" },
             { name: "El Sol", file: "El sol.jpg" },
@@ -661,7 +751,7 @@
 
             let utterance = new SpeechSynthesisUtterance(textoCompleto);
             utterance.lang = 'es-ES';
-            utterance.rate = 0.82; 
+            utterance.rate = 0.85; 
             utterance.pitch = 0.95; 
 
             let voices = window.speechSynthesis.getVoices();
@@ -692,7 +782,7 @@
 
             palabras.forEach((palabra) => {
                 bloqueActual += palabra + " ";
-                if (bloqueActual.split(" ").length >= 7) {
+                if (bloqueActual.split(" ").length >= 6) {
                     bloques.push(bloqueActual.trim());
                     bloqueActual = "";
                 }
@@ -715,7 +805,7 @@
                 } else {
                     clearInterval(window.currentBlockTimer);
                 }
-            }, 3400);
+            }, 3100);
         }
 
         if ('speechSynthesis' in window) {
@@ -866,17 +956,44 @@
 
                 let nombresSalidaTexto = datosCartasMesa.map(c => `${c.nombre} ${c.invertida ? 'invertida' : 'al derecho'}`).join(", ");
 
-                let lecturaCompleta = `Hola, soy la asistente de Don Juan Caramba. Atendiendo la consulta de ${actual.nombre} sobre "${actual.pregunta}"... Matriz astral: ${actual.matrizAstral}. ${estadoTiradaTexto} En mesa han salido: ${nombresSalidaTexto}. `;
+                let lecturaCompleta = "";
 
                 if (cantidadCartas === 4) {
-                    lecturaCompleta += `El diagnóstico unificado de tu tirada indica que ${diagnosticoReal} `;
-                    lecturaCompleta += `Te rige el arcángel ${actual.arcangel}: ${actual.consejoArcangel}. Te acompaña el serafín ${actual.serafin}, cuyo consejo es: ${actual.consejoSerafin}. Invocálo ${actual.cuandoInvocarsSerafin} para ${actual.paraQueInvocarsSerafin}. Enciende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}). Consejo final: ${actual.consejo} Hasta aquí tu consulta VIP.`;
+                    // 4 CARTAS (VIP - COCHE / CAZA)
+                    lecturaCompleta = `Atendiendo la consulta VIP de ${actual.nombre} sobre "${actual.pregunta}"... ${estadoTiradaTexto} Cartas en mesa: ${nombresSalidaTexto}. `;
+                    lecturaCompleta += `Diagnóstico del oráculo y tarot: La combinación de tus cartas señala que ${diagnosticoReal} `;
+                    lecturaCompleta += `Matriz Astral: Sol en ${actual.sol}, Luna en ${actual.luna}, Ascendente en ${actual.ascendente}. Tu Frecuencia Vibracional es de ${actual.frecuencia}. Tu Número de Poder Personal es el ${actual.numPoderPersonal} y tu Número de Poder del Día es el ${actual.numPoderDia}. `;
+                    lecturaCompleta += `Recomendación Explícita: ${actual.recomendacionExplicita} `;
+                    lecturaCompleta += `Te rige el ${actual.arcangel}: ${actual.consejoArcangel}. Debes invocarlo ${actual.cuandoInvocarsArcangel}. `;
+                    lecturaCompleta += `Te acompaña el ${actual.serafin}: ${actual.consejoSerafin}. Invocálo ${actual.cuandoInvocarsSerafin} para ${actual.paraQueInvocarsSerafin}. `;
+                    lecturaCompleta += `Consagra tu ${actual.vela} el día ${actual.cuandoVela} (${actual.paraQueVela}). `;
+                    lecturaCompleta += `Acción de Fuego y Baño Sagrado: ${actual.accionFuegoBano} `;
+                    lecturaCompleta += `Prohibición Estricta: ${actual.prohibicionEstricta} `;
+                    lecturaCompleta += `Consejo final: ${actual.consejo} Hasta aquí tu consulta VIP.`;
+
                 } else if (cantidadCartas === 10) {
-                    lecturaCompleta += `Cruz Celta analizada en conjunto: el diagnóstico profundo señala que ${diagnosticoReal} `;
-                    lecturaCompleta += `Tu guía espiritual es el arcángel ${actual.arcangel}: ${actual.consejoArcangel}. Te respalda el serafín ${actual.serafin}: ${actual.consejoSerafin}, debiendo invocarlo ${actual.cuandoInvocarsSerafin} para ${actual.paraQueInvocarsSerafin}. Enciende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}). Libro secreto: ${actual.libroSecretos} Afirmación: "${actual.afirmacion}" Consejo final: ${actual.consejo} Hasta aquí tu consulta máxima.`;
+                    // 10 CARTAS (CRUZ CELTA / MÁXIMA - OVNI / YATE)
+                    lecturaCompleta = `Atendiendo la tirada Máxima de Cruz Celta para ${actual.nombre} sobre "${actual.pregunta}"... ${estadoTiradaTexto} Cartas reveladas: ${nombresSalidaTexto}. `;
+                    lecturaCompleta += `Diagnóstico unificado del oráculo y tarot: La combinación de tus cartas revela que ${diagnosticoReal} `;
+                    lecturaCompleta += `Matriz Astral completa: Sol en ${actual.sol}, Luna en ${actual.luna}, Ascendente en ${actual.ascendente}. Frecuencia Energética: ${actual.frecuencia}. Número de Poder Personal: ${actual.numPoderPersonal}. Número de Poder del Día: ${actual.numPoderDia}. `;
+                    lecturaCompleta += `Recomendación Explícita: ${actual.recomendacionExplicita} `;
+                    lecturaCompleta += `Para tu pregunta te guía el ${actual.arcangel}: ${actual.consejoArcangel}. Invocálo ${actual.cuandoInvocarsArcangel}. `;
+                    lecturaCompleta += `Te respalda el ${actual.serafin}: ${actual.consejoSerafin}. Invocálo ${actual.cuandoInvocarsSerafin} para ${actual.paraQueInvocarsSerafin}. `;
+                    lecturaCompleta += `Ritual de Vela: Enciende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}). `;
+                    lecturaCompleta += `Acción de Fuego / Baño de Transmutación: ${actual.accionFuegoBano} `;
+                    lecturaCompleta += `Prohibición energética: ${actual.prohibicionEstricta} `;
+                    lecturaCompleta += `Secreto del Libro de los Secretos: ${actual.libroSecretos} `;
+                    lecturaCompleta += `Afirmación de Poder: "${actual.afirmacion}" `;
+                    lecturaCompleta += `Consejo final: ${actual.consejo} Hasta aquí tu consulta Máxima.`;
+
                 } else {
-                    lecturaCompleta += `El diagnóstico directo del oráculo para tu situación es el siguiente: ${diagnosticoReal} `;
-                    lecturaCompleta += `Te rige el arcángel ${actual.arcangel}, quien te aconseja: ${actual.consejoArcangel}. ${actual.invocacionArcangel}. Prende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}). Y presta atención a este consejo final: ${actual.consejo} Hasta aquí tu lectura gratis.`;
+                    // 2 CARTAS (GRATIS)
+                    lecturaCompleta = `Atendiendo la consulta gratis de ${actual.nombre} sobre "${actual.pregunta}"... ${estadoTiradaTexto} Cartas en mesa: ${nombresSalidaTexto}. `;
+                    lecturaCompleta += `Diagnóstico unificado del oráculo: ${diagnosticoReal} `;
+                    lecturaCompleta += `Matriz Astral: Sol en ${actual.sol} y Luna en ${actual.luna}. `;
+                    lecturaCompleta += `Te rige el ${actual.arcangel}, cuyo consejo es: ${actual.consejoArcangel}. ${actual.invocacionArcangel}. `;
+                    lecturaCompleta += `Prende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}). `;
+                    lecturaCompleta += `Consejo final: ${actual.consejo} Hasta aquí tu lectura gratis.`;
                 }
                 
                 hablarYSubtitularBloques(lecturaCompleta, `Oráculo para ${actual.nombre} (${cantidadCartas} Cartas)`, () => {
