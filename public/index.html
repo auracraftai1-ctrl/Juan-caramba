@@ -665,14 +665,20 @@
         let yaSiguio = false;
         let tiempoRestanteContrato = 3600;
 
-        function hablarVozHombre(texto) {
+        // FUNCIÓN MAESTRA CON SINCRONIZACIÓN PERFECTA DE VOZ Y SUBTÍTULOS
+        function hablarYSubtitularSincronizado(texto, titulo) {
             if (!('speechSynthesis' in window)) return;
             window.speechSynthesis.cancel();
 
+            const speechTitle = document.getElementById('speechTitle');
+            const speechText = document.getElementById('speechText');
+            if(speechTitle) speechTitle.innerText = titulo;
+            if(speechText) speechText.innerHTML = "";
+
             let utterance = new SpeechSynthesisUtterance(texto);
             utterance.lang = 'es-ES';
-            utterance.rate = 0.90; 
-            utterance.pitch = 0.4; 
+            utterance.rate = 0.88; // Velocidad pausada para que se entienda perfectamente
+            utterance.pitch = 0.4; // Tono grave de hombre maduro
 
             let voices = window.speechSynthesis.getVoices();
             let vozHombre = voices.find(v => v.lang.startsWith('es') && (
@@ -688,6 +694,21 @@
             if (vozHombre) {
                 utterance.voice = vozHombre;
             }
+
+            // SINCRONIZACIÓN EN TIEMPO REAL CON LA VOZ
+            utterance.onboundary = function(event) {
+                if (event.name === 'word') {
+                    let palabraActual = texto.substring(event.charIndex, event.charIndex + event.charLength);
+                    if(speechText) {
+                        speechText.innerHTML += palabraActual + " ";
+                    }
+                }
+            };
+
+            // Por seguridad si el navegador no dispara boundary correctamente
+            utterance.onerror = function() {
+                if(speechText) speechText.innerText = texto;
+            };
 
             window.speechSynthesis.speak(utterance);
         }
@@ -751,8 +772,7 @@
 
             if(totalTaps === 100) {
                 let textoTaps = "¡Caramba, mi gente! Llegamos a los 100 Taps. ¡El que no aplaude aquí se queda sin novio o sin novia por un año!";
-                hablarVozHombre(textoTaps);
-                escribirEfectoMaquina(textoTaps, "Don Juan Caramba");
+                hablarYSubtitularSincronizado(textoTaps, "Don Juan Caramba");
             }
         });
 
@@ -767,8 +787,7 @@
                 if(btn) btn.classList.add('followed');
                 if(text) text.innerText = "Siguiendo";
                 let msg = "¡Dios te me bendiga! El amor de tu vida te está buscando y seguro está más perdido que tarzán en carro.";
-                hablarVozHombre(msg);
-                escribirEfectoMaquina(msg, "Don Juan Caramba");
+                hablarYSubtitularSincronizado(msg, "Don Juan Caramba");
             } else {
                 numSeguidores--;
                 yaSiguio = false;
@@ -782,8 +801,7 @@
         function quieremeAccion(event) {
             event.stopPropagation();
             let msg = "¡Eso, mi pana! Mándame cariño que este viejo del llano está más soltero que un gabán en estero hondo.";
-            hablarVozHombre(msg);
-            escribirEfectoMaquina(msg, "Don Juan Caramba");
+            hablarYSubtitularSincronizado(msg, "Don Juan Caramba");
         }
 
         function mostrarAnimacionRegalo(usuario, regaloIcono, regaloNombre) {
@@ -802,27 +820,6 @@
             }
         }
 
-        function escribirEfectoMaquina(textoCompleto, titulo) {
-            const speechTitle = document.getElementById('speechTitle');
-            const speechText = document.getElementById('speechText');
-            if(!speechTitle || !speechText) return;
-
-            speechTitle.innerText = titulo;
-            speechText.innerHTML = "";
-            let i = 0;
-            
-            if (window.currentTyping) clearInterval(window.currentTyping);
-
-            window.currentTyping = setInterval(() => {
-                if (i < textoCompleto.length) {
-                    speechText.innerHTML += textoCompleto.charAt(i);
-                    i++;
-                } else {
-                    clearInterval(window.currentTyping);
-                }
-            }, 55); 
-        }
-
         function realizarTirada() {
             const container = document.getElementById('cardContainer');
             if(!container) return;
@@ -834,8 +831,7 @@
             container.innerHTML = '';
             
             let saludoInicial = `Conectando carta astral y fecha de ${actual.nombre}. Preparando el oráculo...`;
-            hablarVozHombre(saludoInicial);
-            escribirEfectoMaquina(saludoInicial, `Don Juan Caramba para ${actual.nombre} (@${actual.user})`);
+            hablarYSubtitularSincronizado(saludoInicial, `Don Juan Caramba para ${actual.nombre} (@${actual.user})`);
 
             for(let i = 0; i < 3; i++) {
                 const cardDiv = document.createElement('div');
@@ -872,8 +868,7 @@
                 // LECTURA DINÁMICA 100% PERSONALIZADA Y CONECTADA
                 const mensajeFinal = `A tu pregunta, ${actual.pregunta}... ¡${actual.veredicto} Alma de ${actual.nombre}, tu matriz astral (${actual.matrizAstral}) se alinea con el destino! En la mesa sagrada del tarot han salido tres arcanos clave: Primero, ${descripcionesCartas[0]}. Segundo, ${descripcionesCartas[1]}. Y cerrando la tirada, ${descripcionesCartas[2]}. Ante este panorama, te asiste el protector ${actual.arcangel}, quien te aconseja: ${actual.consejoArcangel}. Asimismo, el ${actual.serafin} te indica: ${actual.consejoSerafin}. Como acción de fuego debes hacer lo siguiente: ${actual.accionFuego} Y evita a toda costa: ${actual.evitarFuego} Sella este ciclo en el momento indicado: ${actual.momentoFuego} Viste el color ${actual.colorDia}, y prende tu ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}). Prepara también tu ${actual.bano} (${actual.paraQueBano}). Tu vibración numérica es el ${actual.numerologia}, lo que significa que ${actual.significadoNum}. Escucha bien este consejo final: ${actual.consejo}`;
                 
-                hablarVozHombre(mensajeFinal);
-                escribirEfectoMaquina(mensajeFinal, `Super Oráculo para ${actual.nombre}`);
+                hablarYSubtitularSincronizado(mensajeFinal, `Super Oráculo para ${actual.nombre}`);
             }, 4500);
         }
 
