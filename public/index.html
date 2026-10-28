@@ -358,68 +358,10 @@
             font-size: 30px;
         }
 
-        /* PANEL DE CONSEJO MÍSTICO EXACTO (70 PALABRAS) */
-        .mystic-advice-panel {
-            position: absolute;
-            top: 17vh;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 550px;
-            background: rgba(0, 0, 0, 0.94);
-            border: 1.5px solid #d4af37;
-            border-radius: 8px;
-            padding: 6px 10px;
-            color: #fff;
-            z-index: 130;
-            backdrop-filter: blur(4px);
-            box-shadow: 0 4px 18px rgba(212, 175, 55, 0.5);
-            display: none;
-        }
-        .mystic-advice-panel h4 {
-            margin: 0 0 2px 0;
-            color: #ffdf73;
-            font-size: 8.5px;
-            text-align: center;
-            text-transform: uppercase;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.4);
-            padding-bottom: 2px;
-        }
-        .user-info-banner {
-            font-size: 7px;
-            color: #00ffcc;
-            text-align: center;
-            margin-bottom: 2px;
-            font-weight: bold;
-        }
-        .words-power-banner {
-            font-size: 6.8px;
-            color: #ff9d00;
-            text-align: center;
-            margin-bottom: 3px;
-            font-style: italic;
-        }
-        .advice-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2px;
-            font-size: 6.5px;
-        }
-        .advice-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2px 4px;
-            border-radius: 3px;
-            border-left: 2px solid #d4af37;
-            line-height: 1.1;
-        }
-        .advice-item strong {
-            color: #ffdf73;
-        }
-
         /* CONTENEDOR DE CARTAS */
         .tarot-slot {
             position: absolute;
-            bottom: 14vh;
+            bottom: 16vh;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -481,36 +423,34 @@
             100% { transform: translateY(6px) rotate(-3deg); }
         }
 
-        /* TEXTO FLOTANTE DE LECTURA */
+        /* TEXTO FLOTANTE INFERIOR (SIN CUADRO CENTRAL, SOLO LETRAS LIMPIAS) */
         .speech-floating {
             position: absolute;
-            bottom: 3vh;
+            bottom: 2vh;
             left: 50%;
             transform: translateX(-50%);
-            width: 90%;
-            max-width: 700px;
+            width: 95%;
+            max-width: 800px;
             text-align: center;
-            z-index: 12;
+            z-index: 120;
             pointer-events: none;
-            background: rgba(0, 0, 0, 0.65);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            padding: 6px 12px;
-            border-radius: 8px;
-            backdrop-filter: blur(3px);
+            padding: 4px 10px;
         }
         .speech-floating h3 {
             margin: 0 0 2px 0;
             color: #d4af37;
-            font-size: 10px;
-            text-shadow: 1px 1px 3px #000;
+            font-size: 9.5px;
+            text-shadow: 2px 2px 4px #000, 0 0 10px rgba(212, 175, 55, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         .speech-floating p {
             margin: 0;
-            font-size: 9px;
+            font-size: 8.5px;
             font-weight: bold;
             color: #fff;
-            line-height: 1.2;
-            text-shadow: 1px 1px 3px #000;
+            line-height: 1.25;
+            text-shadow: 2px 2px 4px #000, 0 0 8px rgba(0, 0, 0, 0.9);
         }
 
         .tap-heart {
@@ -601,67 +541,68 @@
             <div style="font-size: 9px; color: #fff;" id="giftPopupText">¡Envió un regalo VIP!</div>
         </div>
 
-        <!-- PANEL DE CONSEJO MÍSTICO (EXACTAMENTE 70 PALABRAS DE CONTENIDO ESPECÍFICO) -->
-        <div class="mystic-advice-panel" id="mysticAdvicePanel">
-            <h4 id="adviceTitle">🔮 Oráculo Personal de Aura Craft para <span id="panelUserReal">@Usuario</span></h4>
-            <div class="user-info-banner" id="userInfoBanner">Nacimiento: 15/04/1992 en Caracas</div>
-            <div class="words-power-banner" id="wordsPowerBanner">✨ 7 Palabras Conectadas: Destino, Ruptura, Cima, Fe, Valor, Luz, Victoria</div>
-            <div class="advice-grid">
-                <div class="advice-item"><strong>Arcángel Regente:</strong> <span id="arcangelText">Miguel</span></div>
-                <div class="advice-item"><strong>Serafín Reflejo:</strong> <span id="serafinText">Fuego Sagrado</span></div>
-                <div class="advice-item"><strong>Vela del Día:</strong> <span id="velaText">Azul de Protección</span></div>
-                <div class="advice-item"><strong>Baño Herbal:</strong> <span id="banoText">Ruda y Romero</span></div>
-                <div class="advice-item" style="grid-column: span 2;"><strong>Consejo Específico:</strong> <span id="consejoText">Tus 7 palabras marcan un corte kármico definitivo; enciende vela azul y limpia tu aura para abrir el camino del éxito.</span></div>
-            </div>
-        </div>
-
         <!-- CARTAS EN MESA -->
         <div class="tarot-slot" id="cardContainer"></div>
 
-        <!-- LECTURA -->
+        <!-- LECTURA FLUIDA EN TEXTO INFERIOR (SIN CUADROS, VOZ DE DON JUAN CARAMBA) -->
         <div class="speech-floating">
-            <h3>Don Juan Caramba</h3>
-            <p id="speechText">"Saludos, alma errante... Envía tu Nombre Completo, Fecha de Nacimiento y Lugar de Nacimiento."</p>
+            <h3 id="speechTitle">Don Juan Caramba</h3>
+            <p id="speechText">"Saludos, alma errante... Envía tu Nombre Completo, Fecha de Nacimiento y Lugar de Nacimiento para abrir tu oráculo."</p>
         </div>
     </div>
 
     <script>
-        // CONSULTANTES CON SUS 7 PALABRAS DE PODER Y EXACTAMENTE 70 PALABRAS DE CONTENIDO EN SU MENSAJE PRINCIPAL
+        // CONSULTANTES PERSONALIZADOS CON SUS DATOS Y CONSEJOS ESPECÍFICOS COMPLETOS
         const consultantesPool = [
             { 
                 user: "Mariana_92", nombre: "Mariana Gómez", fecha: "14/03/1995", lugar: "Caracas, Venezuela",
                 palabras: "Renacer, Ruptura, Destino, Fe, Valor, Sanación, Cima",
-                arcangel: "Arcángel Chamuel (Rayo Rosa)", vela: "Rosa Intenso (Amor Propio)", bano: "Pétalos de Rosa y Canela",
-                serafin: "Serafín de la Divina Misericordia", 
-                consejo: "Tus siete palabras sagradas marcan un corte kármico definitivo en tu vida sentimental; enciende tu vela rosa y toma el baño herbal para limpiar tu aura y abrir de inmediato el verdadero camino del amor."
+                arcangel: "Arcángel Chamuel (Rayo Rosa)", consejoArcangel: "Te otorga el poder del perdón profundo para sanar heridas sentimentales del pasado.",
+                serafin: "Serafín de la Divina Misericordia", consejoSerafin: "Purifica tu campo emocional y te conecta con tu verdadera alma gemela.",
+                vela: "Rosa Intenso", cuandoVela: "Martes a las 8:00 PM", paraQueVela: "Para activar el amor propio y atraer una relación sincera.",
+                bano: "Pétalos de Rosa Roja y Canela en rama", paraQueBano: "Para limpiar bloqueos kármicos en el chakra del corazón.",
+                numerologia: "Número 6 (Armonía y Familia)", significadoNum: "Indica que tu ciclo de soledad termina para dar paso a un compromiso firme.",
+                consejo: "Mariana desde Caracas, tus 7 palabras marcan un corte definitivo; enciende tu vela rosa los martes a las 8 PM y toma el baño de rosas para abrir el amor. Para el contenido completo entra y regístrate con alguno de los planes en https://aura-craft-mystic.base44.app/"
             },
             { 
                 user: "CarlosVe", nombre: "Carlos Pérez", fecha: "22/07/1988", lugar: "Valencia, Venezuela",
                 palabras: "Traba, Dinero, Esfuerzo, Clave, Triunfo, Oro, Poder",
-                arcangel: "Arcángel Jofiel (Rayo Dorado)", vela: "Amarilla o Naranja (Prosperidad)", bano: "Girasol, Miel y Canela",
-                serafin: "Serafín de los Siete Cielos", 
-                consejo: "El dinero se traba en tus manos por energías oscuras del pasado; enciende una vela amarilla fuerte y realiza el baño de miel para destrabar tus arcas y atraer oro puro."
+                arcangel: "Arcángel Jofiel (Rayo Dorado)", consejoArcangel: "Ilumina tu mente para descubrir la estrategia financiera que rompe la escasez.",
+                serafin: "Serafín de los Siete Cielos", consejoSerafin: "Abre puertas dimensionales de abundancia y prosperidad económica.",
+                vela: "Amarilla o Naranja", cuandoVela: "Domingo a las 7:00 AM", paraQueVela: "Para atraer clientes, empleos y liquidez inmediata a tus bolsillos.",
+                bano: "Girasol, Miel de abeja y Canela", paraQueBano: "Para barrer salaciones financieras y atraer oro puro.",
+                numerologia: "Número 8 (Poder y Abundancia Material)", significadoNum: "Significa que tu esfuerzo comercial rinde frutos multiplicados si mantienes la disciplina.",
+                consejo: "Carlos de Valencia, el dinero se traba por envidias; enciende vela amarilla los domingos a las 7 AM y usa el baño de miel. Para el contenido completo entra y regístrate con alguno de los planes en https://aura-craft-mystic.base44.app/"
             },
             { 
                 user: "Alejandro_X", nombre: "Alejandro Silva", fecha: "05/11/1992", lugar: "Maracaibo, Venezuela",
                 palabras: "Lucha, Sombra, Norte, Guía, Escudo, Triunfo, Paz",
-                arcangel: "Arcángel Miguel (Rayo Azul)", vela: "Azul Fuerte (Corte de Negatividad)", bano: "Ruda macho y Romero",
-                serafin: "Serafín del Fuego Sagrado", 
-                consejo: "Cargas pesadas sobre tus hombros nublan tu verdadera visión; el escudo protector del Arcángel Miguel te protege hoy contra traiciones ocultas de falsas amistades y abre tu norte."
+                arcangel: "Arcángel Miguel (Rayo Azul)", consejoArcangel: "Te envuelve en su manto de cobalto para cortar toda maldad y energía densa.",
+                serafin: "Serafín del Fuego Sagrado", consejoSerafin: "Quema los obstáculos kármicos que sabotean tus metas principales.",
+                vela: "Azul Fuerte", cuandoVela: "Lunes a las 9:00 PM", paraQueVela: "Para romper brujerías, envidias y proteger tu entorno laboral.",
+                bano: "Ruda macho, Romero y Albahaca", paraQueBano: "Para una limpieza profunda de aura contra trabajos oscuros.",
+                numerologia: "Número 1 (Liderazgo y Nuevo Comienzo)", significadoNum: "Te impulsa a tomar las riendas sin depender de la opinión ajena.",
+                consejo: "Alejandro desde Maracaibo, el escudo de Miguel te protege de traiciones; enciende vela azul los lunes a las 9 PM y usa ruda. Para el contenido completo entra y regístrate con alguno de los planes en https://aura-craft-mystic.base44.app/"
             },
             { 
                 user: "Sofia_Tarot", nombre: "Sofía Montenegro", fecha: "10/01/1996", lugar: "Barquisimeto, Venezuela",
                 palabras: "Intuición, Secreto, Velo, Verdad, Luz, Destino, Clave",
-                arcangel: "Arcángel Rafael (Rayo Verde)", vela: "Verde Esmeralda (Sanación)", bano: "Eucalipto y Manzanilla",
-                serafin: "Serafín de la Estrella del Alba", 
-                consejo: "Confía ciegamente en tu sexto sentido porque una verdad muy oculta sale finalmente a la luz para sanar tu alma herida y guiar tus pasos hacia la paz total."
+                arcangel: "Arcángel Rafael (Rayo Verde)", consejoArcangel: "Sana tu cuerpo físico y eleva tu percepción espiritual al máximo.",
+                serafin: "Serafín de la Estrella del Alba", consejoSerafin: "Te guía hacia la revelación de secretos que cambiarán tu rumbo.",
+                vela: "Verde Esmeralda", cuandoVela: "Jueves a las 6:00 PM", paraQueVela: "Para sanar dolencias ocultas y sintonizar con guías de luz.",
+                bano: "Eucalipto y Manzanilla fresca", paraQueBano: "Para calmar la ansiedad mental y clarificar los sueños.",
+                numerologia: "Número 7 (Misticismo y Sabiduría)", significadoNum: "Confirma que tu intuición es infalible en este momento de tu vida.",
+                consejo: "Sofía de Barquisimeto, confía en tu sexto sentido; enciende vela verde los jueves a las 6 PM y usa eucalipto. Para el contenido completo entra y regístrate con alguno de los planes en https://aura-craft-mystic.base44.app/"
             },
             { 
                 user: "Daniel_88", nombre: "Daniel Rodríguez", fecha: "30/09/1988", lugar: "San Antonio de los Altos",
                 palabras: "Ciclo, Cierre, Puerta, Salida, Éxito, Norte, Ley",
-                arcangel: "Arcángel Zadquiel (Rayo Violeta)", vela: "Violeta o Lila (Transmutación)", bano: "Lavanda e Incienso",
-                serafin: "Serafín de la Divina Misericordia", 
-                consejo: "Debes cerrar este ciclo con firmeza absoluta; la ley divina está de tu lado para transmutar cada obstáculo en una victoria contundente y un nuevo comienzo."
+                arcangel: "Arcángel Zadquiel (Rayo Violeta)", consejoArcangel: "Transmuta el dolor y las deudas del pasado en sabiduría pura.",
+                serafin: "Serafín de la Divina Misericordia", consejoSerafin: "Te otorga gracia divina ante situaciones legales o bloqueos difíciles.",
+                vela: "Violeta o Lila", cuandoVela: "Sábado a las 8:00 PM", paraQueVela: "Para cerrar ciclos kármicos pesados y liberar juicios.",
+                bano: "Lavanda e Incienso natural", paraQueBano: "Para armonizar la energía del hogar y cortar ataduras.",
+                numerologia: "Número 9 (Cierre de Etapas y Evolución)", significadoNum: "Anuncia el fin de un ciclo doloroso para abrir la puerta del éxito.",
+                consejo: "Daniel de los Altos Mirandinos, cierra ciclos con firmeza; enciende vela violeta los sábados a las 8 PM y usa lavanda. Para el contenido completo entra y regístrate con alguno de los planes en https://aura-craft-mystic.base44.app/"
             }
         ];
 
@@ -855,11 +796,11 @@
             }
         }
 
-        // FUNCIÓN DE LECTURA DE 3 CARTAS CON LAS 7 PALABRAS Y 70 PALABRAS DE CONSEJO ESPECÍFICO
+        // LECTURA DE 3 CARTAS CON VOZ FLUIDA Y DETALLADA DE DON JUAN CARAMBA (SIN CUADROS)
         function realizarTirada() {
             const container = document.getElementById('cardContainer');
+            const speechTitle = document.getElementById('speechTitle');
             const speechText = document.getElementById('speechText');
-            const advicePanel = document.getElementById('mysticAdvicePanel');
             if(!container || !speechText) return;
 
             const actual = colaConsultantes.shift();
@@ -867,9 +808,8 @@
             actualizarVistaCola();
 
             container.innerHTML = '';
-            if(advicePanel) advicePanel.style.display = 'none';
-            
-            speechText.innerHTML = `"Canalizando las 7 palabras de poder para ${actual.nombre} desde ${actual.lugar}..."`;
+            speechTitle.innerText = `Don Juan Caramba para ${actual.nombre} (@${actual.user})`;
+            speechText.innerHTML = `"Canalizando energía de ${actual.nombre}, nacido el ${actual.fecha} en ${actual.lugar}. Barajando cartas sagradas..."`;
 
             for(let i = 0; i < 3; i++) {
                 const cardDiv = document.createElement('div');
@@ -900,19 +840,8 @@
                     }, index * 250);
                 });
 
-                // Inyectar datos específicos y de 70 palabras
-                document.getElementById('panelUserReal').innerText = `${actual.nombre} (@${actual.user})`;
-                document.getElementById('userInfoBanner').innerText = `Nacimiento: ${actual.fecha} | Origen: ${actual.lugar}`;
-                document.getElementById('wordsPowerBanner').innerText = `✨ 7 Palabras Conectadas: ${actual.palabras}`;
-                document.getElementById('arcangelText').innerText = actual.arcangel;
-                document.getElementById('serafinText').innerText = actual.serafin;
-                document.getElementById('velaText').innerText = actual.vela;
-                document.getElementById('banoText').innerText = actual.bano;
-                document.getElementById('consejoText').innerText = actual.consejo;
-                
-                if(advicePanel) advicePanel.style.display = 'block';
-
-                speechText.innerHTML = `"${actual.nombre}, aquí tienes tu oráculo. Para el contenido completo entra y regístrate con alguno de los planes en https://aura-craft-mystic.base44.app/ donde obtendrás toda la información que necesites"`;
+                // Texto fluido completo con todos los detalles específicos solicitados
+                speechText.innerHTML = `"${actual.nombre}, tus 7 palabras (${actual.palabras}). El ${actual.arcangel} te aconseja: ${actual.consejoArcangel} Te asiste el ${actual.serafin} (${actual.consejoSerafin}). Prende tu vela ${actual.vela} el ${actual.cuandoVela} (${actual.paraQueVela}). Usa el baño de ${actual.bano} (${actual.paraQueBano}). Tu ${actual.numerologia} significa: ${actual.significadoNum}. ${actual.consejo}"`;
             }, 3000);
         }
 
