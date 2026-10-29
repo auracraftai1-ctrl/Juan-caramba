@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const { WebcastChat } = require('tiktok-live-connector');
 
 const app = express();
 app.use(express.json());
@@ -28,46 +27,50 @@ app.get('/tiktok', (req, res) => {
 
 
 // ==========================================
-// CONEXIÓN DIRECTA AL CHAT DE TIKTOK LIVE
+// CONEXIÓN SEGURA AL CHAT DE TIKTOK LIVE
 // ==========================================
-const tiktokUsername = "@auracraftai3"; 
-const tiktokTv = new WebcastChat(tiktokUsername);
+try {
+    const { WebcastChat } = require('tiktok-live-connector');
+    const tiktokUsername = "@auracraftai3"; 
+    const tiktokTv = new WebcastChat(tiktokUsername);
 
-tiktokTv.connect().then(state => {
-    console.log(`[TikTok] Conectado a la sala ID de @auracraftai3: ${state.roomInfo.room_id}`);
-}).catch(err => {
-    console.error('[TikTok] Error al conectar con el chat en vivo:', err);
-});
+    tiktokTv.connect().then(state => {
+        console.log(`[TikTok] Conectado a la sala ID de @auracraftai3: ${state.roomInfo.room_id}`);
+    }).catch(err => {
+        console.error('[TikTok] Advertencia: No se pudo conectar al chat en vivo al iniciar:', err.message);
+    });
 
-// Cuando alguien escribe un comentario en tu directo de TikTok
-tiktokTv.on('chat', data => {
-    let usuario = data.uniqueId;
-    let mensaje = data.comment;
+    tiktokTv.on('chat', data => {
+        let usuario = data.uniqueId;
+        let mensaje = data.comment;
 
-    console.log(`[TikTok Chat] @${usuario}: ${mensaje}`);
+        console.log(`[TikTok Chat] @${usuario}: ${mensaje}`);
 
-    let nuevoConsultanteReal = {
-        user: usuario,
-        nombre: data.nickname || usuario,
-        pregunta: mensaje,
-        veredicto: "¡SÍ!",
-        sol: "Aries", luna: "Leo", ascendente: "Sagitario",
-        frecuencia: "528 Hz", numPoderPersonal: "7", numPoderDia: "14",
-        recomendacionExplicita: "Confía en tu intuición y mantén la fe.",
-        arcangel: "Arcángel Miguel", consejoArcangel: "Protege tu energía.",
-        cuandoInvocarsArcangel: "domingos al amanecer", invocacionArcangel: "Con vela azul.",
-        serafin: "Serafín de la Luz", consejoSerafin: "Camina firme.",
-        cuandoInvocarsSerafin: "al mediodía", paraQueInvocarsSerafin: "limpiar caminos",
-        vela: "Vela Blanca", cuandoVela: "lunes", paraQueVela: "paz",
-        accionFuegoBano: "Baño de manzanilla.", prohibicionEstricta: "No oigas envidias.",
-        diagnosticoPositivo: "El éxito está garantizado.", diagnosticoDenso: "Superarás los obstáculos.",
-        libroSecretos: "La constancia es la clave.", afirmacion: "Soy un imán de prosperidad.",
-        consejo: "El que persevera alcanza.", advertencia: "Cuidado con las finanzas.",
-        cartasAsignadas: 2 // Cartas por defecto para comentarios del chat
-    };
+        let nuevoConsultanteReal = {
+            user: usuario,
+            nombre: data.nickname || usuario,
+            pregunta: mensaje,
+            veredicto: "¡SÍ!",
+            sol: "Aries", luna: "Leo", ascendente: "Sagitario",
+            frecuencia: "528 Hz", numPoderPersonal: "7", numPoderDia: "14",
+            recomendacionExplicita: "Confía en tu intuición y mantén la fe.",
+            arcangel: "Arcángel Miguel", consejoArcangel: "Protege tu energía.",
+            cuandoInvocarsArcangel: "domingos al amanecer", invocacionArcangel: "Con vela azul.",
+            serafin: "Serafín de la Luz", consejoSerafin: "Camina firme.",
+            cuandoInvocarsSerafin: "al mediodía", paraQueInvocarsSerafin: "limpiar caminos",
+            vela: "Vela Blanca", cuandoVela: "lunes", paraQueVela: "paz",
+            accionFuegoBano: "Baño de manzanilla.", prohibicionEstricta: "No oigas envidias.",
+            diagnosticoPositivo: "El éxito está garantizado.", diagnosticoDenso: "Superarás los obstáculos.",
+            libroSecretos: "La constancia es la clave.", afirmacion: "Soy un imán de prosperidad.",
+            consejo: "El que persevera alcanza.", advertencia: "Cuidado con las finanzas.",
+            cartasAsignadas: 2
+        };
 
-    colaChatReal.push(nuevoConsultanteReal);
-});
+        colaChatReal.push(nuevoConsultanteReal);
+    });
+} catch (e) {
+    console.log("[TikTok] Módulo de conexión omitido o error al cargar:", e.message);
+}
 
 
 // ==========================================
