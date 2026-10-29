@@ -452,12 +452,13 @@
         <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image" onerror="this.onerror=null; this.src='Auracraftai-bg.jpg';">
 
         <!-- ======================================================= -->
-        <!-- MÚSICA DE FONDO Y AUDIOS LLANEROS DE DON JUAN CARAMBA   -->
+        <!-- MÚSICA DE FONDO Y LOS 7 AUDIOS LLANEROS DE DON JUAN     -->
         <!-- ======================================================= -->
         <audio id="musicaFondo" src="arpa.mp3" autoplay loop preload="auto"></audio>
         
         <audio id="audioCaramba" src="caramba-mi-gente.mp3" preload="auto"></audio>
         <audio id="audioOjo" src="ojo-pelao-con-eso.mp3" preload="auto"></audio>
+        <audio id="audioOjoGente" src="ojo-pelao-con-esa-gente.mp3" preload="auto"></audio>
         <audio id="audioSabio" src="mas-sabio-que-el-diablo.mp3" preload="auto"></audio>
         <audio id="audioCompadre" src="aja-compadre.mp3" preload="auto"></audio>
         <audio id="audioComadre" src="aja-comadre.mp3" preload="auto"></audio>
@@ -732,11 +733,12 @@
         let yaSiguio = false;
         let tiempoRestanteContrato = 3600;
 
-        // FUNCIÓN PARA REPRODUCIR AUDIOS LLANEROS EN MOMENTOS CUMBRE
+        // FUNCIÓN PARA REPRODUCIR LOS 7 AUDIOS LLANEROS EN MOMENTOS CUMBRE
         function reproducirFraseLlanera(tipo) {
             const audioMap = {
                 'caramba': 'audioCaramba',
                 'ojo': 'audioOjo',
+                'ojogente': 'audioOjoGente',
                 'sabio': 'audioSabio',
                 'compadre': 'audioCompadre',
                 'comadre': 'audioComadre',
@@ -1004,7 +1006,7 @@
 
                 let nombresSalidaTexto = datosCartasMesa.map(c => `${c.nombre} ${c.invertida ? 'invertida' : 'al derecho'}`).join(", ");
 
-                // 1. MOMENTO CUMBRE 1: ¡Aja compadre / comadre! al iniciar
+                // 1. Saludo inicial llanero
                 let esFemenino = actual.nombre.toLowerCase().endsWith('a') || actual.nombre.toLowerCase().includes('mariana');
                 reproducirFraseLlanera(esFemenino ? 'comadre' : 'compadre');
 
@@ -1023,8 +1025,8 @@
                     lecturaCompleta += `Vela Ritual: ${actual.vela}. Enciéndela el ${actual.cuandoVela} (${actual.paraQueVela}). `;
                     lecturaCompleta += `Acción de Fuego y Baño Sagrado: ${actual.accionFuegoBano} `;
                     
-                    // 2. MOMENTO CUMBRE 2: ¡Ojo pelao con eso! en prohibiciones estrictas
-                    setTimeout(() => reproducirFraseLlanera('ojo'), 9000);
+                    // 2. Advertencia de gente falsa (Ojo pelao con esa gente)
+                    setTimeout(() => reproducirFraseLlanera('ojogente'), 9000);
                     lecturaCompleta += `Prohibición Estricta Energética: ${actual.prohibicionEstricta} `;
                     lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura VIP.${llamadaAccionFinal}`;
 
@@ -1039,7 +1041,7 @@
                     lecturaCompleta += `Acción de Fuego / Baño de Transmutación: ${actual.accionFuegoBano} `;
                     lecturaCompleta += `Prohibición Energética Estricta: ${actual.prohibicionEstricta} `;
                     
-                    // 3. MOMENTO CUMBRE 3: ¡Más sabio que el diablo! en el Libro de los Secretos
+                    // 3. Más sabio que el diablo en el Libro de los Secretos
                     setTimeout(() => reproducirFraseLlanera('sabio'), 14000);
                     lecturaCompleta += `Secreto revelado del Libro de los Secretos: ${actual.libroSecretos} `;
                     lecturaCompleta += `Afirmación de Poder: "${actual.afirmacion}" `;
@@ -1052,12 +1054,12 @@
                     lecturaCompleta += `Arcángel Regente: ${actual.arcangel}. Consejo puntual: ${actual.consejoArcangel}. Deberás invocarlo ${actual.cuandoInvocarsArcangel} (${actual.invocacionArcangel}). `;
                     lecturaCompleta += `Vela de Poder: ${actual.vela}. Encender el ${actual.cuandoVela}. `;
                     
-                    // 4. MOMENTO CUMBRE 4: ¡Ojo pelao con eso! en advertencia gratis
+                    // 4. Ojo pelao con eso en la advertencia general
                     setTimeout(() => reproducirFraseLlanera('ojo'), 6000);
                     lecturaCompleta += `Consejo Final y Advertencia: ${actual.consejo} ${actual.advertencia} Hasta aquí tu lectura gratis.${llamadaAccionFinal}`;
                 }
                 
-                // 5. MOMENTO CUMBRE 5: ¡Sella ese proceso! al cerrar la lectura con la web
+                // 5. Cierre sellando el proceso
                 setTimeout(() => reproducirFraseLlanera('sella'), 22000);
 
                 hablarYSubtitularSincronizado(lecturaCompleta, `Oráculo para ${actual.nombre} (${cantidadCartas} Cartas)`, () => {
@@ -1105,7 +1107,7 @@
 
             giftFeed.innerHTML = `<div class="gift-item">${randomGift.icono} @${consultanteElegido.user}</div>` + giftFeed.innerHTML;
             
-            // 6. MOMENTO CUMBRE 6: ¡Caramba, mi gente! cuando envían un regalo
+            // 6. Sonido al recibir regalos
             reproducirFraseLlanera('caramba');
             mostrarAnimacionRegalo(consultanteElegido.user, randomGift.icono, randomGift.nombre);
 
