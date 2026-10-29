@@ -451,7 +451,7 @@
         <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image" onerror="this.onerror=null; this.src='Auracraftai-bg.jpg';">
 
         <!-- ======================================================= -->
-        <!-- MÚSICA DE FONDO: ARPA.MP3 (VOLUMEN BAJITO 15%)          -->
+        <!-- MÚSICA DE FONDO: ARPA.MP3 (VOLUMEN SUTIL AL 8%)         -->
         <!-- ======================================================= -->
         <audio id="musicaFondo" src="arpa.mp3" autoplay loop preload="auto"></audio>
 
@@ -628,46 +628,95 @@
         let colaConsultantes = [...consultantesPool];
         let estaLeyendo = false;
 
+        // LAS 78 CARTAS COMPLETAS (INCLUYENDO PAGES Y BASTOS/COPAS/ESPADAS/OROS)
         const tarotDeck = [
-            { name: "As de Copas", file: "Las copas.jpg" },
-            { name: "2 de Copas", file: "Dos de copas.jpg" },
-            { name: "3 de Copas", file: "Tres de copas.jpg" },
-            { name: "As de Espadas", file: "As de espadas.jpg" },
-            { name: "As de Oros", file: "As de oro.jpg" },
-            { name: "Caballero de Bastos", file: "Caballero de bajos.jpg" },
-            { name: "Caballero de Copas", file: "Caballero de copas.jpg" },
-            { name: "Caballero de Espadas", file: "Caballero de espadas.jpg" },
-            { name: "Caballero de Oros", file: "Caballero de oro.jpg" },
-            { name: "5 de Bastos", file: "Cinco de bajos.jpg" },
-            { name: "5 de Copas", file: "Cinco de copas.jpg" },
-            { name: "5 de Espadas", file: "Cinco de espadas.jpg" },
-            { name: "5 de Oros", file: "Cinco de oro.jpg" },
-            { name: "4 de Bastos", file: "Cuatro de bajos.jpg" },
-            { name: "4 de Copas", file: "Cuatro de copas.jpg" },
-            { name: "4 de Espadas", file: "Cuatro de espadas.jpg" },
-            { name: "4 de Oros", file: "Cuatro de oro.jpg" },
-            { name: "0. El Loco", file: "El loco.jpg" },
-            { name: "I. El Mago", file: "El Mago.jpg" },
-            { name: "II. La Sacerdotisa", file: "La Sacerdotisa.jpg" },
-            { name: "III. La Emperatriz", file: "El emperatriz.jpg" },
-            { name: "IV. El Emperador", file: "El emperador.jpg" },
-            { name: "V. El Sumo Sacerdote", file: "El ermitaño.jpg" },
-            { name: "VI. Los Enamorados", file: "Los amantes.jpg" },
-            { name: "VII. El Carro", file: "El carro.jpg" },
-            { name: "VIII. La Fuerza", file: "La fuerza.jpg" },
-            { name: "IX. El Ermitaño", file: "El ermitaño.jpg" },
-            { name: "X. La Rueda de la Fortuna", file: "La rueda de la fortuna.jpg" },
-            { name: "XI. La Justicia", file: "La justicia.jpg" },
-            { name: "XII. El Colgado", file: "El loco.jpg" },
-            { name: "XIII. La Muerte", file: "La muerte.jpg" },
-            { name: "XIV. La Templanza", file: "La templanza.jpg" },
-            { name: "XV. El Diablo", file: "El diablo.jpg" },
-            { name: "XVI. La Torre", file: "La torres.jpg" },
-            { name: "XVII. La Estrella", file: "La estrella.jpg" },
-            { name: "XVIII. La Luna", file: "La luna.jpg" },
-            { name: "XIX. El Sol", file: "El sol.jpg" },
-            { name: "XX. El Juicio", file: "El mundo.jpg" },
-            { name: "XXI. El Mundo", file: "El mundo.jpg" }
+            // --- ARCANOS MAYORES (22) ---
+            { name: "0. El Loco", file: "/el-loco.jpg" },
+            { name: "I. El Mago", file: "/el-mago.jpg" },
+            { name: "II. La Sacerdotisa", file: "/la-sacerdotisa.jpg" },
+            { name: "III. La Emperatriz", file: "/la-emperatriz.jpg" },
+            { name: "IV. El Emperador", file: "/el-emperador.jpg" },
+            { name: "V. El Hierofante", file: "/el-hierofante.jpg" },
+            { name: "VI. Los Enamorados", file: "/los-enamorados.jpg" },
+            { name: "VII. El Carro", file: "/el-carro.jpg" },
+            { name: "VIII. La Fuerza", file: "/la-fuerza.jpg" },
+            { name: "IX. El Ermitaño", file: "/el-ermitano.jpg" },
+            { name: "X. La Rueda de la Fortuna", file: "/la-rueda-de-la-fortuna.jpg" },
+            { name: "XI. La Justicia", file: "/la-justicia.jpg" },
+            { name: "XII. El Colgado", file: "/el-colgado.jpg" },
+            { name: "XIII. La Muerte", file: "/la-muerte.jpg" },
+            { name: "XIV. La Templanza", file: "/la-templanza.jpg" },
+            { name: "XV. El Diablo", file: "/el-diablo.jpg" },
+            { name: "XVI. La Torre", file: "/la-torre.jpg" },
+            { name: "XVII. La Estrella", file: "/la-estrella.jpg" },
+            { name: "XVIII. La Luna", file: "/la-luna.jpg" },
+            { name: "XIX. El Sol", file: "/el-sol.jpg" },
+            { name: "XX. El Juicio", file: "/el-juicio.jpg" },
+            { name: "XXI. El Mundo", file: "/el-mundo.jpg" },
+
+            // --- BASTOS (14) ---
+            { name: "As de Bastos", file: "/as-de-bastos.jpg" },
+            { name: "2 de Bastos", file: "/dos-de-bastos.jpg" },
+            { name: "3 de Bastos", file: "/tres-de-bastos.jpg" },
+            { name: "4 de Bastos", file: "/cuatro-de-bastos.jpg" },
+            { name: "5 de Bastos", file: "/cinco-de-bastos.jpg" },
+            { name: "6 de Bastos", file: "/seis-de-bastos.jpg" },
+            { name: "7 de Bastos", file: "/siete-de-bastos.jpg" },
+            { name: "8 de Bastos", file: "/ocho-de-bastos.jpg" },
+            { name: "9 de Bastos", file: "/nueve-de-bastos.jpg" },
+            { name: "10 de Bastos", file: "/diez-de-bastos.jpg" },
+            { name: "Page de Bastos", file: "/page-de-bastos.jpg" },
+            { name: "Caballero de Bastos", file: "/caballero-de-bastos.jpg" },
+            { name: "Reina de Bastos", file: "/reina-de-bastos.jpg" },
+            { name: "Rey de Bastos", file: "/rey-de-bastos.jpg" },
+
+            // --- COPAS (14) ---
+            { name: "As de Copas", file: "/as-de-copas.jpg" },
+            { name: "2 de Copas", file: "/dos-de-copas.jpg" },
+            { name: "3 de Copas", file: "/tres-de-copas.jpg" },
+            { name: "4 de Copas", file: "/cuatro-de-copas.jpg" },
+            { name: "5 de Copas", file: "/cinco-de-copas.jpg" },
+            { name: "6 de Copas", file: "/seis-de-copas.jpg" },
+            { name: "7 de Copas", file: "/siete-de-copas.jpg" },
+            { name: "8 de Copas", file: "/ocho-de-copas.jpg" },
+            { name: "9 de Copas", file: "/nueve-de-copas.jpg" },
+            { name: "10 de Copas", file: "/diez-de-copas.jpg" },
+            { name: "Page de Copas", file: "/page-de-copas.jpg" },
+            { name: "Caballero de Copas", file: "/caballero-de-copas.jpg" },
+            { name: "Reina de Copas", file: "/reina-de-copas.jpg" },
+            { name: "Rey de Copas", file: "/rey-de-copas.jpg" },
+
+            // --- ESPADAS (14) ---
+            { name: "As de Espadas", file: "/as-de-espadas.jpg" },
+            { name: "2 de Espadas", file: "/dos-de-espadas.jpg" },
+            { name: "3 de Espadas", file: "/tres-de-espadas.jpg" },
+            { name: "4 de Espadas", file: "/cuatro-de-espadas.jpg" },
+            { name: "5 de Espadas", file: "/cinco-de-espadas.jpg" },
+            { name: "6 de Espadas", file: "/seis-de-espadas.jpg" },
+            { name: "7 de Espadas", file: "/siete-de-espadas.jpg" },
+            { name: "8 de Espadas", file: "/ocho-de-espadas.jpg" },
+            { name: "9 de Espadas", file: "/nueve-de-espadas.jpg" },
+            { name: "10 de Espadas", file: "/diez-de-espadas.jpg" },
+            { name: "Page de Espadas", file: "/page-de-espadas.jpg" },
+            { name: "Caballero de Espadas", file: "/caballero-de-espadas.jpg" },
+            { name: "Reina de Espadas", file: "/reina-de-espadas.jpg" },
+            { name: "Rey de Espadas", file: "/rey-de-espadas.jpg" },
+
+            // --- OROS (14) ---
+            { name: "As de Oros", file: "/as-de-oro.jpg" },
+            { name: "2 de Oros", file: "/dos-de-oro.jpg" },
+            { name: "3 de Oros", file: "/tres-de-oro.jpg" },
+            { name: "4 de Oros", file: "/cuatro-de-oro.jpg" },
+            { name: "5 de Oros", file: "/cinco-de-oro.jpg" },
+            { name: "6 de Oros", file: "/seis-de-oro.jpg" },
+            { name: "7 de Oros", file: "/siete-de-oro.jpg" },
+            { name: "8 de Oros", file: "/ocho-de-oro.jpg" },
+            { name: "9 de Oros", file: "/nueve-de-oro.jpg" },
+            { name: "10 de Oros", file: "/diez-de-oro.jpg" },
+            { name: "Page de Oros", file: "/page-de-oro.jpg" },
+            { name: "Caballero de Oros", file: "/caballero-de-oro.jpg" },
+            { name: "Reina de Oros", file: "/reina-de-oro.jpg" },
+            { name: "Rey de Oros", file: "/rey-de-oro.jpg" }
         ];
 
         let totalTaps = 0;
@@ -675,13 +724,13 @@
         let yaSiguio = false;
         let tiempoRestanteContrato = 3600;
 
+        // VOZ CON SUBTÍTULOS SINCRONIZADOS POR EVENTO REAL DE PALABRA
         function hablarYSubtitularSincronizado(textoCompleto, titulo, onCompleteCallback) {
             if (!('speechSynthesis' in window)) {
                 if(onCompleteCallback) onCompleteCallback();
                 return;
             }
             window.speechSynthesis.cancel();
-            if (window.currentBlockTimer) clearInterval(window.currentBlockTimer);
 
             const speechTitle = document.getElementById('speechTitle');
             const speechText = document.getElementById('speechText');
@@ -689,7 +738,7 @@
 
             let utterance = new SpeechSynthesisUtterance(textoCompleto);
             utterance.lang = 'es-ES';
-            utterance.rate = 0.86; 
+            utterance.rate = 0.84; 
             utterance.pitch = 0.95; 
 
             let voices = window.speechSynthesis.getVoices();
@@ -711,7 +760,7 @@
 
             palabras.forEach((palabra) => {
                 bloqueActual += palabra + " ";
-                if (bloqueActual.split(" ").length >= 4) {
+                if (bloqueActual.split(" ").length >= 5) {
                     bloques.push(bloqueActual.trim());
                     bloqueActual = "";
                 }
@@ -720,32 +769,38 @@
                 bloques.push(bloqueActual.trim());
             }
 
-            let indexBloque = 0;
             if(speechText && bloques.length > 0) {
                 speechText.innerText = `"${bloques[0]}"`;
             }
 
+            let indiceBloqueActual = 0;
+            utterance.onboundary = (event) => {
+                if (event.name === 'word') {
+                    let charIndex = event.charIndex;
+                    let acumulado = 0;
+                    for (let i = 0; i < bloques.length; i++) {
+                        acumulado += bloques[i].length + 1;
+                        if (charIndex < acumulado) {
+                            if (indiceBloqueActual !== i) {
+                                indiceBloqueActual = i;
+                                if(speechText) {
+                                    speechText.innerText = `"${bloques[i]}"`;
+                                }
+                            }
+                            break;
+                        }
+                    }
+                }
+            };
+
             utterance.onend = () => {
-                if(window.currentBlockTimer) clearInterval(window.currentBlockTimer);
                 if(onCompleteCallback) onCompleteCallback();
             };
             utterance.onerror = () => {
-                if(window.currentBlockTimer) clearInterval(window.currentBlockTimer);
                 if(onCompleteCallback) onCompleteCallback();
             };
 
             window.speechSynthesis.speak(utterance);
-
-            window.currentBlockTimer = setInterval(() => {
-                indexBloque++;
-                if (indexBloque < bloques.length) {
-                    if(speechText) {
-                        speechText.innerText = `"${bloques[indexBloque]}"`;
-                    }
-                } else {
-                    clearInterval(window.currentBlockTimer);
-                }
-            }, 1450);
         }
 
         if ('speechSynthesis' in window) {
@@ -785,7 +840,6 @@
             document.getElementById('mainContainer').appendChild(heart);
             setTimeout(() => heart.remove(), 1200);
 
-            // Despierta el arpa bajito con el primer toque en pantalla si hace falta
             const audioArpa = document.getElementById('musicaFondo');
             if (audioArpa && audioArpa.paused) {
                 audioArpa.play().catch(() => {});
@@ -1009,11 +1063,11 @@
             }
         }, 12000);
 
-        // Activación automática del arpa al cargar la página (Volumen Bajito al 15%)
+        // Activación del arpa de fondo super sutil (8% de volumen)
         window.addEventListener('DOMContentLoaded', () => {
             const audioArpa = document.getElementById('musicaFondo');
             if (audioArpa) {
-                audioArpa.volume = 0.15; // 15% de volumen para que suene sutil de fondo
+                audioArpa.volume = 0.08;
                 audioArpa.play().catch(() => {
                     console.log("El navegador requiere un toque en pantalla para soltar el arpa llanera.");
                 });
