@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const { WebcastChat } = require('tiktok-live-connector'); // <-- 1. Importamos el conector de TikTok
+const { WebcastChat } = require('tiktok-live-connector'); // Librería oficial de TikTok Live
 
 const app = express();
 app.use(express.json());
@@ -30,12 +30,11 @@ app.get('/tiktok', (req, res) => {
 // ==========================================
 // CONEXIÓN DIRECTA AL CHAT DE TIKTOK LIVE
 // ==========================================
-// Cambia "@tu_usuario_tiktok" por tu nombre de usuario real en TikTok
-const tiktokUsername = "@tu_usuario_tiktok"; 
+const tiktokUsername = "@auracraftai3"; 
 const tiktokTv = new WebcastChat(tiktokUsername);
 
 tiktokTv.connect().then(state => {
-    console.log(`[TikTok] Conectado a la sala ID: ${state.roomInfo.room_id}`);
+    console.log(`[TikTok] Conectado a la sala ID de @auracraftai3: ${state.roomInfo.room_id}`);
 }).catch(err => {
     console.error('[TikTok] Error al conectar con el chat en vivo:', err);
 });
@@ -112,5 +111,5 @@ app.get('/obtener-siguiente-usuario', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Servidor activo en puerto ${PORT}`);
+    console.log(`Servidor activo en puerto ${PORT} para @auracraftai3`);
 });
