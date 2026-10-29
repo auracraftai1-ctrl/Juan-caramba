@@ -15,12 +15,12 @@ let colaChatReal = [];
 // RUTAS PARA LAS DIFERENTES PLATAFORMAS
 // ==========================================
 
-// Ruta para Kick
+// Ruta para Kick (Apunta a kick.html)
 app.get('/kick', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'kick.html'));
 });
 
-// Ruta para TikTok
+// Ruta para TikTok (Apunta a tiktok.html)
 app.get('/tiktok', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'tiktok.html'));
 });
