@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const { WebcastChat } = require('tiktok-live-connector'); // Librería oficial de TikTok Live
+const { WebcastChat } = require('tiktok-live-connector');
 
 const app = express();
 app.use(express.json());
