@@ -1028,3 +1028,16 @@
     </script>
 </body>
 </html>
+    <!-- Tu música de fondo -->
+    <audio id="musicaFondo" src="arpa.mp3" autoplay loop preload="auto"></audio>
+
+    <script>
+        window.addEventListener('click', () => {
+            const audio = document.getElementById('musicaFondo');
+            if (audio.paused) {
+                audio.play();
+            }
+        }, { once: true });
+    </script>
+</body>
+</html>
