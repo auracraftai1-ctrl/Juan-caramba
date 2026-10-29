@@ -487,7 +487,7 @@
             <h6>🔮 Regalos TikTok & Lecturas</h6>
             <ul>
                 <li><strong>Chat / Gratis:</strong> 2 Cartas (Básica)</li>
-                <li><strong>🌹 Rosa:</strong> 3 Cartas (Rápida)</li>
+                <li><strong>👓 Gafas/Sombrero:</strong> 3 Cartas (Rápida)</li>
                 <li><strong>🦁 León / 🚀 Cohete:</strong> 4 Cartas (VIP)</li>
                 <li><strong>👑 León Mayor:</strong> 10 Cartas (Cruz Celta)</li>
             </ul>
@@ -505,7 +505,7 @@
         <div class="gifts-panel">
             <h5>🎁 Regalos TikTok</h5>
             <div class="gift-feed" id="giftFeed">
-                <div class="gift-item">🌹 @Mariana_92 Rosa</div>
+                <div class="gift-item">👓 @Mariana_92 Gafas</div>
                 <div class="gift-item">🦁 @CarlosVe León</div>
             </div>
         </div>
@@ -981,7 +981,6 @@
             colaConsultantes.push(actual);
             actualizarVistaCola();
 
-            // LECTURA GRATIS O BÁSICA DEL CHAT = 2 CARTAS, ROSA = 3 CARTAS
             let cantidadCartas = actual.cartasAsignadas || 2;
             delete actual.cartasAsignadas;
 
@@ -1040,12 +1039,12 @@
                 let lecturaCompleta = introduccionAsistente;
 
                 if (cantidadCartas === 3) {
-                    lecturaCompleta += `Cartas de la Rosa en mesa: ${nombresSalidaTexto}. `;
-                    lecturaCompleta += `Diagnóstico de la Rosa: ${diagnosticoReal} `;
+                    lecturaCompleta += `Cartas de Gafas o Sombrero en mesa: ${nombresSalidaTexto}. `;
+                    lecturaCompleta += `Diagnóstico dinámico: ${diagnosticoReal} `;
                     lecturaCompleta += `Matriz Astral: Sol en ${actual.sol} y Luna en ${actual.luna}. `;
                     lecturaCompleta += `Arcángel Regente: ${actual.arcangel}. Consejo: ${actual.consejoArcangel}. Invocación: ${actual.invocacionArcangel}. `;
                     lecturaCompleta += `Vela Ritual: ${actual.vela}. Encender el ${actual.cuandoVela}. `;
-                    lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura de Rosa.${llamadaAccionFinal}`;
+                    lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura de Gafas y Sombrero.${llamadaAccionFinal}`;
                 } else if (cantidadCartas === 4) {
                     lecturaCompleta += `Cartas en mesa: ${nombresSalidaTexto}. `;
                     lecturaCompleta += `Diagnóstico unificado del oráculo y tarot: La combinación de tus cartas revela que ${diagnosticoReal} `;
@@ -1105,9 +1104,8 @@
             }
         }, 1000);
 
-        // LA ROSA AHORA DA 3 CARTAS (LECTURA RÁPIDA)
         const listaRegalos = [
-            { icono: "🌹", nombre: "una Rosa TikTok", cartas: 3 },
+            { icono: "👓", nombre: "Gafas / Sombrero", cartas: 3 },
             { icono: "🦁", nombre: "un León VIP", cartas: 4 },
             { icono: "🚀", nombre: "un Cohete Max", cartas: 10 },
             { icono: "👑", nombre: "un León Imperial", cartas: 10 }
