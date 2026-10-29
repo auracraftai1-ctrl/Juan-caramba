@@ -2,12 +2,13 @@
   "name": "Juan-Caramba",
   "version": "1.0.0",
   "description": "Tarot 24/7 Juan Caramba",
-  "main": "servidor.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node servidor.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "tiktok-live-connector": "^1.2.5"
   }
 }
