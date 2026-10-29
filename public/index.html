@@ -450,9 +450,10 @@
     <div class="container" id="mainContainer">
         <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image" onerror="this.onerror=null; this.src='Auracraftai-bg.jpg';">
 
-        <audio id="bgMusic" loop autoplay>
-            <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=venezuelan-harp-instrumental-111394.mp3" type="audio/mpeg">
-        </audio>
+        <!-- ======================================================= -->
+        <!-- MÚSICA DE FONDO: ARPA.MP3 (VOLUMEN BAJITO 15%)          -->
+        <!-- ======================================================= -->
+        <audio id="musicaFondo" src="arpa.mp3" autoplay loop preload="auto"></audio>
 
         <div class="tiktok-actions-container">
             <button class="follow-btn" id="followBtn" onclick="seguirAccion(event)">
@@ -627,7 +628,6 @@
         let colaConsultantes = [...consultantesPool];
         let estaLeyendo = false;
 
-        // MAZO COMPLETO Y CORREGIDO CON LOS NOMBRES EXACTOS DE GITHUB
         const tarotDeck = [
             { name: "As de Copas", file: "Las copas.jpg" },
             { name: "2 de Copas", file: "Dos de copas.jpg" },
@@ -784,6 +784,12 @@
             heart.style.top = (event.clientY - 12) + 'px';
             document.getElementById('mainContainer').appendChild(heart);
             setTimeout(() => heart.remove(), 1200);
+
+            // Despierta el arpa bajito con el primer toque en pantalla si hace falta
+            const audioArpa = document.getElementById('musicaFondo');
+            if (audioArpa && audioArpa.paused) {
+                audioArpa.play().catch(() => {});
+            }
         });
 
         function seguirAccion(event) {
@@ -891,7 +897,8 @@
                 let nombresSalidaTexto = datosCartasMesa.map(c => `${c.nombre} ${c.invertida ? 'invertida' : 'al derecho'}`).join(", ");
 
                 let introduccionAsistente = `Hola, soy el asistente de Juan Caramba. En estos momentos no se encuentra. Yo atenderé tu consulta de ${actual.nombre} sobre "${actual.pregunta}"... `;
-                let llamadaAccionFinal = ` Para más lecturas, te invito a entrar en aura-craft-mystic.base44.app. Y recuerda suscribirte a mi cuenta en Kick para no perderte ninguna transmisión.`;
+                let llamadaAccionFinal = ` Entra a mi página web, https://aura-craft-mystic.base44.app/, para más lecturas. Y recuerda suscribirte a mi cuenta en Kick para no perderte ninguna transmisión.`;
+                
                 let lecturaCompleta = introduccionAsistente;
 
                 if (cantidadCartas === 4) {
@@ -1001,6 +1008,17 @@
                 ejecutarLecturaProxima();
             }
         }, 12000);
+
+        // Activación automática del arpa al cargar la página (Volumen Bajito al 15%)
+        window.addEventListener('DOMContentLoaded', () => {
+            const audioArpa = document.getElementById('musicaFondo');
+            if (audioArpa) {
+                audioArpa.volume = 0.15; // 15% de volumen para que suene sutil de fondo
+                audioArpa.play().catch(() => {
+                    console.log("El navegador requiere un toque en pantalla para soltar el arpa llanera.");
+                });
+            }
+        });
     </script>
 
     <!-- ======================================================= -->
@@ -1025,19 +1043,6 @@
         }
 
         setInterval(verificarChatRealDeKick, 10000);
-    </script>
-</body>
-</html>
-    <!-- Tu música de fondo -->
-    <audio id="musicaFondo" src="arpa.mp3" autoplay loop preload="auto"></audio>
-
-    <script>
-        window.addEventListener('click', () => {
-            const audio = document.getElementById('musicaFondo');
-            if (audio.paused) {
-                audio.play();
-            }
-        }, { once: true });
     </script>
 </body>
 </html>
