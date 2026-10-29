@@ -486,10 +486,10 @@
         <div class="vip-gifts-guide">
             <h6>🔮 Regalos TikTok & Lecturas</h6>
             <ul>
-                <li><strong>🌹 Rosa:</strong> 2 Cartas (Rápida)</li>
+                <li><strong>Chat / Gratis:</strong> 2 Cartas (Básica)</li>
+                <li><strong>🌹 Rosa:</strong> 3 Cartas (Rápida)</li>
                 <li><strong>🦁 León / 🚀 Cohete:</strong> 4 Cartas (VIP)</li>
                 <li><strong>👑 León Mayor:</strong> 10 Cartas (Cruz Celta)</li>
-                <li><strong>🌌 Universo:</strong> 10 Cartas + Secretos</li>
             </ul>
         </div>
 
@@ -686,7 +686,6 @@
             { name: "Rey de Copas", file: "/rey-de-copas.jpg" },
             { name: "As de Espadas", file: "/as-de-espadas.jpg" },
             { name: "2 de Espadas", file: "/dos-de-espadas.jpg" },
-            { name: "3 de Espadas", file: "/dos-de-espadas.jpg" },
             { name: "3 de Espadas", file: "/tres-de-espadas.jpg" },
             { name: "4 de Espadas", file: "/cuatro-de-espadas.jpg" },
             { name: "5 de Espadas", file: "/cinco-de-espadas.jpg" },
@@ -720,7 +719,6 @@
         let yaSiguio = false;
         let tiempoRestanteContrato = 3600;
 
-        // FUNCIÓN PURA PARA REPRODUCIR LA VOZ DE DON JUAN SIN INTERRUMPIR EL FLUJO PRINCIPAL
         function reproducirSoloVozDonJuan(tipo) {
             const audioMap = {
                 'caramba': 'audioCaramba',
@@ -750,7 +748,6 @@
             }
         }
 
-        // FUNCIÓN SECUENCIAL PARA EL INICIO DE CADA CONSULTA (COMPADRE / COMADRE)
         function reproducirFraseLlaneraSecuencial(tipo, callbackDespues) {
             const audioMap = {
                 'compadre': 'audioCompadre',
@@ -970,7 +967,6 @@
             }
         }
 
-        // FLUJO DE CONSULTA PROTEGIDO (LOS REGALOS YA NO LO INTERRUMPEN NI REINICIAN)
         function ejecutarLecturaProxima() {
             if (estaLeyendo) return;
             estaLeyendo = true;
@@ -985,6 +981,7 @@
             colaConsultantes.push(actual);
             actualizarVistaCola();
 
+            // LECTURA GRATIS O BÁSICA DEL CHAT = 2 CARTAS, ROSA = 3 CARTAS
             let cantidadCartas = actual.cartasAsignadas || 2;
             delete actual.cartasAsignadas;
 
@@ -1042,7 +1039,14 @@
                 
                 let lecturaCompleta = introduccionAsistente;
 
-                if (cantidadCartas === 4) {
+                if (cantidadCartas === 3) {
+                    lecturaCompleta += `Cartas de la Rosa en mesa: ${nombresSalidaTexto}. `;
+                    lecturaCompleta += `Diagnóstico de la Rosa: ${diagnosticoReal} `;
+                    lecturaCompleta += `Matriz Astral: Sol en ${actual.sol} y Luna en ${actual.luna}. `;
+                    lecturaCompleta += `Arcángel Regente: ${actual.arcangel}. Consejo: ${actual.consejoArcangel}. Invocación: ${actual.invocacionArcangel}. `;
+                    lecturaCompleta += `Vela Ritual: ${actual.vela}. Encender el ${actual.cuandoVela}. `;
+                    lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura de Rosa.${llamadaAccionFinal}`;
+                } else if (cantidadCartas === 4) {
                     lecturaCompleta += `Cartas en mesa: ${nombresSalidaTexto}. `;
                     lecturaCompleta += `Diagnóstico unificado del oráculo y tarot: La combinación de tus cartas revela que ${diagnosticoReal} `;
                     lecturaCompleta += `Matriz Astral: Sol en ${actual.sol}, Luna en ${actual.luna}, Ascendente en ${actual.ascendente}. Frecuencia Energética: ${actual.frecuencia}. Número de Poder Personal: ${actual.numPoderPersonal}. Número de Poder del Día: ${actual.numPoderDia}. `;
@@ -1075,7 +1079,6 @@
                     lecturaCompleta += `Consejo Final y Advertencia: ${actual.consejo} ${actual.advertencia} Hasta aquí tu lectura gratis.${llamadaAccionFinal}`;
                 }
 
-                // HABLA DON JUAN AL INICIO, LUEGO EL ASISTENTE TERMINA TODA LA LECTURA SIN INTERRUPCIONES
                 reproducirFraseLlaneraSecuencial(tipoAudioInicial, () => {
                     hablarYSubtitularSincronizado(lecturaCompleta, `Oráculo para ${actual.nombre} (${cantidadCartas} Cartas)`, () => {
                         estaLeyendo = false;
@@ -1102,26 +1105,29 @@
             }
         }, 1000);
 
+        // LA ROSA AHORA DA 3 CARTAS (LECTURA RÁPIDA)
         const listaRegalos = [
-            { icono: "🌹", nombre: "una Rosa TikTok", cartas: 2 },
+            { icono: "🌹", nombre: "una Rosa TikTok", cartas: 3 },
             { icono: "🦁", nombre: "un León VIP", cartas: 4 },
             { icono: "🚀", nombre: "un Cohete Max", cartas: 10 },
             { icono: "👑", nombre: "un León Imperial", cartas: 10 }
         ];
 
-        // LOS REGALOS AHORA SOLO MUESTRAN EL POPUP Y SUENAN, SIN INTERRUMPIR LA CONSULTA ACTUAL
         setInterval(() => {
             const giftFeed = document.getElementById('giftFeed');
             if(!giftFeed) return;
 
-            let usuarioRandom = ["Mariana_92", "CarlosVe", "Alejandro_X", "Sofia_Lagos", "Jesus_Ve"][Math.floor(Math.random() * 5)];
+            let consultanteElegido = {...consultantesPool[Math.floor(Math.random() * consultantesPool.length)]};
             const randomGift = listaRegalos[Math.floor(Math.random() * listaRegalos.length)];
-
-            giftFeed.innerHTML = `<div class="gift-item">${randomGift.icono} @${usuarioRandom}</div>` + giftFeed.innerHTML;
             
-            // DON JUAN DICE SU FRASE, APARECE EL POPUP, PERO LA LECTURA ACTUAL SIGUE SU CURSO SIN CAMBIAR
+            consultanteElegido.cartasAsignadas = randomGift.cartas;
+            colaConsultantes.unshift(consultanteElegido);
+            actualizarVistaCola();
+
+            giftFeed.innerHTML = `<div class="gift-item">${randomGift.icono} @${consultanteElegido.user}</div>` + giftFeed.innerHTML;
+            
             reproducirSoloVozDonJuan('caramba');
-            mostrarAnimacionRegalo(usuarioRandom, randomGift.icono, randomGift.nombre);
+            mostrarAnimacionRegalo(consultanteElegido.user, randomGift.icono, randomGift.nombre);
 
         }, 45000);
 
