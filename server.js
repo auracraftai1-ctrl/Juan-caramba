@@ -6,10 +6,29 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Apunta directo a la carpeta 'public' donde está tu index.html
+// Apunta directo a la carpeta 'public' donde están tus archivos HTML y multimedia
 app.use(express.static(path.join(__dirname, 'public')));
 
 let colaChatReal = [];
+
+// ==========================================
+// RUTAS PARA LAS DIFERENTES PLATAFORMAS
+// ==========================================
+
+// Ruta para Kick
+app.get('/kick', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Ruta para TikTok
+app.get('/tiktok', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'tiktok.html'));
+});
+
+
+// ==========================================
+// WEBHOOK Y COLA DE CONSULTANTES
+// ==========================================
 
 app.post('/webhook-kick', (req, res) => {
     const datos = req.body;
