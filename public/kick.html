@@ -540,7 +540,7 @@
                 invocacionArcangel: "Invocálo los martes al atardecer en un rincón tranquilo.",
                 cuandoInvocarsArcangel: "martes al atardecer",
                 serafin: "Serafín de la Llama Celeste", 
-                consejoSerafin: "Purifica tus emociones para no repetir ciclos dolorosos.",
+                consejoSerafin: "Purifica tus emociones para não repetir ciclos dolorosos.",
                 cuandoInvocarsSerafin: "al amanecer de un viernes", 
                 paraQueInvocarsSerafin: "quemar dudas e ilusiones falsas",
                 vela: "Vela Rosada o Azul Claro", 
@@ -616,7 +616,7 @@
                 paraQueVela: "blindar tus proyectos contra la envidia",
                 accionFuegoBano: "Baño de despojo con ruda, albahaca y sal gruesa de la cabeza a los pies.",
                 prohibicionEstricta: "Prohibido revelar tus números o estrategias a personas ajenas.",
-                diagnosticoPositivo: "A pesar de las dudas, la alianza se muestra sólida si se respalda legalmente.",
+                diagnosticoPositivo: "A pesar de las dudas, alianzas se muestran sólidas si se respaldan legalmente.",
                 diagnosticoDenso: "Las cartas denotan engaños y dobles intenciones; entrar en esa sociedad sería una trampa financiera.",
                 libroSecretos: "Quien camina con precaución jamás cae en el foso de la traición.",
                 afirmacion: "Mi sabiduría protege mis bienes y mi destino.",
@@ -628,7 +628,7 @@
         let colaConsultantes = [...consultantesPool];
         let estaLeyendo = false;
 
-        // LAS 78 CARTAS COMPLETAS (INCLUYENDO PAGES Y BASTOS/COPAS/ESPADAS/OROS)
+        // LAS 78 CARTAS COMPLETAS CON PAGES Y RUTA ABSOLUTA
         const tarotDeck = [
             // --- ARCANOS MAYORES (22) ---
             { name: "0. El Loco", file: "/el-loco.jpg" },
@@ -724,20 +724,19 @@
         let yaSiguio = false;
         let tiempoRestanteContrato = 3600;
 
-        // FUNCIÓN BLINDADA CONTRA CONGELAMIENTOS (TEXTO FLUIDO POR BLOQUES + TEMPORIZADOR)
+        // FUNCIÓN DE VOZ Y SUBTÍTULOS BLINDADA (SUENA LA VOZ Y CAMBIA EL TEXTO)
         function hablarYSubtitularSincronizado(textoCompleto, titulo, onCompleteCallback) {
             const speechTitle = document.getElementById('speechTitle');
             const speechText = document.getElementById('speechText');
             if(speechTitle) speechTitle.innerText = titulo;
 
-            // Partimos el texto completo en bloques pequeños (frases de 6 palabras)
             let palabras = textoCompleto.split(" ");
             let bloques = [];
             let bloqueActual = "";
 
             palabras.forEach((palabra) => {
                 bloqueActual += palabra + " ";
-                if (bloqueActual.split(" ").length >= 6) {
+                if (bloqueActual.split(" ").length >= 5) {
                     bloques.push(bloqueActual.trim());
                     bloqueActual = "";
                 }
@@ -746,25 +745,93 @@
                 bloques.push(bloqueActual.trim());
             }
 
-            let indiceBloque = 0;
-
-            // Mostramos el primer bloque de inmediato
             if(speechText && bloques.length > 0) {
-                speechText.innerText = `"${bloques[indiceBloque]}"`;
+                speechText.innerText = `"${bloques[0]}"`;
             }
 
-            // Un temporizador limpio avanza los subtítulos como una película, sin bloquear jamás el navegador
-            let intervaloTexto = setInterval(() => {
-                indiceBloque++;
-                if (indiceBloque < bloques.length) {
+            if (!('speechSynthesis' in window)) {
+                let indiceBloque = 0;
+                let intervaloTexto = setInterval(() => {
+                    indiceBloque++;
+                    if (indiceBloque < bloques.length) {
+                        if(speechText) speechText.innerText = `"${bloques[indiceBloque]}"`;
+                    } else {
+                        clearInterval(intervaloTexto);
+                        if(onCompleteCallback) onCompleteCallback();
+                    }
+                }, 2200);
+                return;
+            }
+
+            window.speechSynthesis.cancel();
+
+            let utterance = new SpeechSynthesisUtterance(textoCompleto);
+            utterance.lang = 'es-ES';
+            utterance.rate = 0.84; 
+            utterance.pitch = 0.95; 
+
+            let voices = window.speechSynthesis.getVoices();
+            let vozAsistente = voices.find(v => v.lang.startsWith('es') && (
+                v.name.toLowerCase().includes('google español') || 
+                v.name.toLowerCase().includes('helena') || 
+                v.name.toLowerCase().includes('laura') || 
+                v.name.toLowerCase().includes('pablo') ||
+                v.name.toLowerCase().includes('sabina')
+            )) || voices.find(v => v.lang.startsWith('es'));
+
+            if (vozAsistente) {
+                utterance.voice = vozAsistente;
+            }
+
+            let indiceBloqueActual = 0;
+
+            utterance.onboundary = (event) => {
+                if (event.name === 'word') {
+                    let charIndex = event.charIndex;
+                    let acumulado = 0;
+                    for (let i = 0; i < bloques.length; i++) {
+                        acumulado += bloques[i].length + 1;
+                        if (charIndex < acumulado) {
+                            if (indiceBloqueActual !== i) {
+                                indiceBloqueActual = i;
+                                if(speechText) {
+                                    speechText.innerText = `"${bloques[i]}"`;
+                                }
+                            }
+                            break;
+                        }
+                    }
+                }
+            };
+
+            let backupTimer = setInterval(() => {
+                indiceBloqueActual++;
+                if (indiceBloqueActual < bloques.length) {
                     if(speechText) {
-                        speechText.innerText = `"${bloques[indiceBloque]}"`;
+                        speechText.innerText = `"${bloques[indiceBloqueActual]}"`;
                     }
                 } else {
-                    clearInterval(intervaloTexto);
-                    if(onCompleteCallback) onCompleteCallback();
+                    clearInterval(backupTimer);
                 }
-            }, 2200); // 2.2 segundos por cada frase, dando tiempo de sobra para leer
+            }, 2400);
+
+            utterance.onend = () => {
+                clearInterval(backupTimer);
+                if(onCompleteCallback) onCompleteCallback();
+            };
+            
+            utterance.onerror = () => {
+                clearInterval(backupTimer);
+                if(onCompleteCallback) onCompleteCallback();
+            };
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = () => {
+                window.speechSynthesis.getVoices();
+            };
         }
 
         function actualizarVistaCola() {
@@ -1026,9 +1093,7 @@
             const audioArpa = document.getElementById('musicaFondo');
             if (audioArpa) {
                 audioArpa.volume = 0.08;
-                audioArpa.play().catch(() => {
-                    console.log("El navegador requiere un toque en pantalla para soltar el arpa llanera.");
-                });
+                audioArpa.play().catch(() => {});
             }
         });
     </script>
@@ -1047,7 +1112,6 @@
                     if (typeof actualizarVistaCola === 'function') {
                         actualizarVistaCola();
                     }
-                    console.log("¡Nuevo consultante real inyectado desde el chat:", usuarioReal.nombre);
                 }
             } catch (e) {
                 // Modo silencioso
