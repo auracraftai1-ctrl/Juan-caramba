@@ -1,7 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const { WebcastChat } = require('tiktok-live-connector');
+const connector = require('tiktok-live-connector');
+const WebcastChat = connector.WebcastChat || connector;
 
 const app = express();
 app.use(express.json());
@@ -59,12 +60,12 @@ try {
             cuandoInvocarsArcangel: "domingos al amanecer", invocacionArcangel: "Con vela azul.",
             serafin: "Serafín de la Luz", consejoSerafin: "Camina firme.",
             cuandoInvocarsSerafin: "al mediodía", paraQueInvocarsSerafin: "limpiar caminos",
-            vela: "Vela Blanca", cuandoVela: "lunes", paraQueVela: "paz",
+            vela: "Vela Blanca", когдаVela: "lunes", paraQueVela: "paz",
             accionFuegoBano: "Baño de manzanilla.", prohibicionEstricta: "No oigas envidias.",
             diagnosticoPositivo: "El éxito está garantizado.", diagnosticoDenso: "Superarás los obstáculos.",
             libroSecretos: "La constancia es la clave.", afirmacion: "Soy un imán de prosperidad.",
             consejo: "El que persevera alcanza.", advertencia: "Cuidado con las finanzas.",
-            cartasAsignadas: 2 // Cartas por defecto para comentarios del chat
+            cartasAsignadas: 2 
         };
 
         colaChatReal.push(nuevoConsultanteReal);
