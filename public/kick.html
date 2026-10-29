@@ -450,6 +450,9 @@
     <div class="container" id="mainContainer">
         <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image" onerror="this.onerror=null; this.src='Auracraftai-bg.jpg';">
 
+        <!-- ======================================================= -->
+        <!-- MÚSICA DE FONDO Y LOS 7 AUDIOS LLANEROS DE DON JUAN     -->
+        <!-- ======================================================= -->
         <audio id="musicaFondo" src="arpa.mp3" autoplay loop preload="auto"></audio>
         
         <audio id="audioCaramba" src="caramba-mi-gente.mp3" preload="auto"></audio>
@@ -543,13 +546,13 @@
                 arcangel: "Arcángel Chamuel", 
                 consejoArcangel: "Perdona de corazón las faltas pasadas para liberar tu alma.",
                 invocacionArcangel: "Invocálo los martes al atardecer en un rincón tranquilo.",
-                quandoInvocarsArcangel: "martes al atardecer",
+                cuandoInvocarsArcangel: "martes al atardecer",
                 serafin: "Serafín de la Llama Celeste", 
                 consejoSerafin: "Purifica tus emociones para no repetir ciclos dolorosos.",
-                quandoInvocarsSerafin: "al amanecer de un viernes", 
+                cuandoInvocarsSerafin: "al amanecer de un viernes", 
                 paraQueInvocarsSerafin: "quemar dudas e ilusiones falsas",
                 vela: "Vela Rosada o Azul Claro", 
-                quandoVela: "martes a las 6 PM", 
+                cuandoVela: "martes a las 6 PM", 
                 paraQueVela: "atraer afecto sincero y disipar amarguras",
                 accionFuegoBano: "Baño de rosas rojas con miel y canela en rama durante tres noches seguidas.",
                 prohibicionEstricta: "Prohibido guardar objetos o fotografías de exparejas bajo tu almohada.",
@@ -577,13 +580,13 @@
                 arcangel: "Arcángel Jofiel", 
                 consejoArcangel: "Aclara tu mente comercial para ver oportunidades donde otros ven crisis.",
                 invocacionArcangel: "Invocálo los domingos al salir el sol.",
-                quandoInvocarsArcangel: "domingos a las 7 AM",
+                cuandoInvocarsArcangel: "domingos a las 7 AM",
                 serafin: "Serafín de la Prosperidad Divina", 
                 consejoSerafin: "Mantén la ética en tus negocios para que la abundancia sea duradera.",
                 cuandoInvocarsSerafin: "los domingos al mediodía", 
                 paraQueInvocarsSerafin: "proteger tu capital contra pérdidas injustificadas",
                 vela: "Vela Amarilla o Naranja", 
-                quandoVela: "domingo al despuntar el alba", 
+                cuandoVela: "domingo al despuntar el alba", 
                 paraQueVela: "atraer clientes y movimiento comercial",
                 accionFuegoBano: "Sahumerio de cáscara de mandarina seca con azúcar y café molido en la entrada de tu local.",
                 prohibicionEstricta: "Prohibido prestar dinero o dar mercancía fiada por los próximos catorce días.",
@@ -611,7 +614,7 @@
                 arcangel: "Arcángel Miguel", 
                 consejoArcangel: "Corta con tu espada de luz todo lazo engañoso o propuesta sospechosa.",
                 invocacionArcangel: "Invocálo los lunes por la noche.",
-                quandoInvocarsArcangel: "lunes a las 9 PM",
+                cuandoInvocarsArcangel: "lunes a las 9 PM",
                 serafin: "Serafín del Fuego Purificador", 
                 consejoSerafin: "Quema la falsedad de quienes intentan usar tu esfuerzo en su beneficio.",
                 cuandoInvocarsSerafin: "al anochecer del lunes", 
@@ -633,7 +636,9 @@
         let colaConsultantes = [...consultantesPool];
         let estaLeyendo = false;
 
+        // LAS 78 CARTAS COMPLETAS CON PAGES Y RUTA ABSOLUTA
         const tarotDeck = [
+            // --- ARCANOS MAYORES (22) ---
             { name: "0. El Loco", file: "/el-loco.jpg" },
             { name: "I. El Mago", file: "/el-mago.jpg" },
             { name: "II. La Sacerdotisa", file: "/la-sacerdotisa.jpg" },
@@ -656,6 +661,8 @@
             { name: "XIX. El Sol", file: "/el-sol.jpg" },
             { name: "XX. El Juicio", file: "/el-juicio.jpg" },
             { name: "XXI. El Mundo", file: "/el-mundo.jpg" },
+
+            // --- BASTOS (14) ---
             { name: "As de Bastos", file: "/as-de-bastos.jpg" },
             { name: "2 de Bastos", file: "/dos-de-bastos.jpg" },
             { name: "3 de Bastos", file: "/tres-de-bastos.jpg" },
@@ -670,6 +677,8 @@
             { name: "Caballero de Bastos", file: "/caballero-de-bastos.jpg" },
             { name: "Reina de Bastos", file: "/reina-de-bastos.jpg" },
             { name: "Rey de Bastos", file: "/rey-de-bastos.jpg" },
+
+            // --- COPAS (14) ---
             { name: "As de Copas", file: "/as-de-copas.jpg" },
             { name: "2 de Copas", file: "/dos-de-copas.jpg" },
             { name: "3 de Copas", file: "/tres-de-copas.jpg" },
@@ -684,6 +693,8 @@
             { name: "Caballero de Copas", file: "/caballero-de-copas.jpg" },
             { name: "Reina de Copas", file: "/reina-de-copas.jpg" },
             { name: "Rey de Copas", file: "/rey-de-copas.jpg" },
+
+            // --- ESPADAS (14) ---
             { name: "As de Espadas", file: "/as-de-espadas.jpg" },
             { name: "2 de Espadas", file: "/dos-de-espadas.jpg" },
             { name: "3 de Espadas", file: "/tres-de-espadas.jpg" },
@@ -698,6 +709,8 @@
             { name: "Caballero de Espadas", file: "/caballero-de-espadas.jpg" },
             { name: "Reina de Espadas", file: "/reina-de-espadas.jpg" },
             { name: "Rey de Espadas", file: "/rey-de-espadas.jpg" },
+
+            // --- OROS (14) ---
             { name: "As de Oros", file: "/as-de-oro.jpg" },
             { name: "2 de Oros", file: "/dos-de-oro.jpg" },
             { name: "3 de Oros", file: "/tres-de-oro.jpg" },
@@ -719,11 +732,8 @@
         let yaSiguio = false;
         let tiempoRestanteContrato = 3600;
 
-        function reproducirAudioDonJuan(tipo, callbackDespues) {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-            }
-
+        // FUNCIÓN PARA REPRODUCIR LOS 7 AUDIOS LLANEROS EN MOMENTOS CUMBRE
+        function reproducirFraseLlanera(tipo) {
             const audioMap = {
                 'caramba': 'audioCaramba',
                 'ojo': 'audioOjo',
@@ -734,34 +744,18 @@
                 'sella': 'audioSella'
             };
             const audioId = audioMap[tipo];
-            const elAudio = document.getElementById(audioId);
-
-            if (elAudio) {
-                elAudio.currentTime = 0;
-                elAudio.volume = 1.0; 
-
-                const audioArpa = document.getElementById('musicaFondo');
-                if (audioArpa) audioArpa.volume = 0.02;
-
-                elAudio.onended = () => {
-                    if (audioArpa) audioArpa.volume = 0.06;
-                    if (callbackDespues) callbackDespues();
-                };
-
-                elAudio.play().catch(() => {
-                    if (audioArpa) audioArpa.volume = 0.06;
-                    if (callbackDespues) callbackDespues();
-                });
-            } else {
-                if (callbackDespues) callbackDespues();
+            if (audioId) {
+                const elAudio = document.getElementById(audioId);
+                if (elAudio) {
+                    elAudio.currentTime = 0;
+                    elAudio.volume = 0.9;
+                    elAudio.play().catch(() => {});
+                }
             }
         }
 
+        // FUNCIÓN DE VOZ Y SUBTÍTULOS BLINDADA (SUENA LA VOZ Y CAMBIA EL TEXTO)
         function hablarYSubtitularSincronizado(textoCompleto, titulo, onCompleteCallback) {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-            }
-
             const speechTitle = document.getElementById('speechTitle');
             const speechText = document.getElementById('speechText');
             if(speechTitle) speechTitle.innerText = titulo;
@@ -798,6 +792,8 @@
                 }, 2200);
                 return;
             }
+
+            window.speechSynthesis.cancel();
 
             let utterance = new SpeechSynthesisUtterance(textoCompleto);
             utterance.lang = 'es-ES';
@@ -927,7 +923,6 @@
 
         function quieremeAccion(event) {
             event.stopPropagation();
-            reproducirAudioDonJuan('caramba');
         }
 
         function mostrarAnimacionRegalo(usuario, regaloIcono, regaloNombre) {
@@ -1007,10 +1002,12 @@
 
                 let esTiradaDensa = contadorInvertidas >= Math.ceil(cantidadCartas / 2);
                 let diagnosticoReal = esTiradaDensa ? actual.diagnosticoDenso : actual.diagnosticoPositivo;
+
                 let nombresSalidaTexto = datosCartasMesa.map(c => `${c.nombre} ${c.invertida ? 'invertida' : 'al derecho'}`).join(", ");
 
+                // 1. Saludo inicial llanero
                 let esFemenino = actual.nombre.toLowerCase().endsWith('a') || actual.nombre.toLowerCase().includes('mariana');
-                let tipoAudioInicial = esFemenino ? 'comadre' : 'compadre';
+                reproducirFraseLlanera(esFemenino ? 'comadre' : 'compadre');
 
                 let introduccionAsistente = `Hola, soy el asistente de Juan Caramba. En estos momentos no se encuentra. Yo atenderé tu consulta de ${actual.nombre} sobre "${actual.pregunta}"... `;
                 let llamadaAccionFinal = ` Entra a mi página web, aura-craft-mystic.base44.app, para más lecturas. Y recuerda suscribirte a mi cuenta en Kick para no perderte ninguna transmisión.`;
@@ -1023,9 +1020,12 @@
                     lecturaCompleta += `Matriz Astral: Sol en ${actual.sol}, Luna en ${actual.luna}, Ascendente en ${actual.ascendente}. Frecuencia Energética: ${actual.frecuencia}. Número de Poder Personal: ${actual.numPoderPersonal}. Número de Poder del Día: ${actual.numPoderDia}. `;
                     lecturaCompleta += `Recomendación Explícita: ${actual.recomendacionExplicita} `;
                     lecturaCompleta += `Arcángel: ${actual.arcangel}. Consejo: ${actual.consejoArcangel}. Invocación: ${actual.invocacionArcangel}. `;
-                    lecturaCompleta += `Serafín Guardián: ${actual.serafin}. Consejo: ${actual.consejoSerafin}. Debes invocarlo ${actual.quandoInvocarsSerafin || actual.cuandoInvocarsSerafin} para ${actual.paraQueInvocarsSerafin}. `;
+                    lecturaCompleta += `Serafín Guardián: ${actual.serafin}. Consejo: ${actual.consejoSerafin}. Debes invocarlo ${actual.cuandoInvocarsSerafin} para ${actual.paraQueInvocarsSerafin}. `;
                     lecturaCompleta += `Vela Ritual: ${actual.vela}. Enciéndela el ${actual.cuandoVela} (${actual.paraQueVela}). `;
                     lecturaCompleta += `Acción de Fuego y Baño Sagrado: ${actual.accionFuegoBano} `;
+                    
+                    // 2. Advertencia de gente falsa (Ojo pelao con esa gente)
+                    setTimeout(() => reproducirFraseLlanera('ojogente'), 9000);
                     lecturaCompleta += `Prohibición Estricta Energética: ${actual.prohibicionEstricta} `;
                     lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura VIP.${llamadaAccionFinal}`;
 
@@ -1034,11 +1034,14 @@
                     lecturaCompleta += `Diagnóstico unificado profundo del oráculo y tarot: La combinación de tus diez cartas indica que ${diagnosticoReal} `;
                     lecturaCompleta += `Matriz Astral completa: Sol en ${actual.sol}, Luna en ${actual.luna}, Ascendente en ${actual.ascendente}. Frecuencia Energética: ${actual.frecuencia}. Número de Poder Personal: ${actual.numPoderPersonal}. Número de Poder del Día: ${actual.numPoderDia}. `;
                     lecturaCompleta += `Recomendación Explícita: ${actual.recomendacionExplicita} `;
-                    lecturaCompleta += `Arcángel: ${actual.arcangel}. Consejo ajustado a tu pregunta: ${actual.consejoArcangel}. Debes invocarlo ${actual.quandoInvocarsArcangel || actual.quandoInvocarsArcangel}. `;
-                    lecturaCompleta += `Serafín Guardián: ${actual.serafin}. Consejo: ${actual.consejoSerafin}. Debes invocarlo ${actual.quandoInvocarsSerafin}. `;
+                    lecturaCompleta += `Arcángel: ${actual.arcangel}. Consejo ajustado a tu pregunta: ${actual.consejoArcangel}. Debes invocarlo ${actual.cuandoInvocarsArcangel}. `;
+                    lecturaCompleta += `Serafín Guardián: ${actual.serafin}. Consejo: ${actual.consejoSerafin}. Debes invocarlo ${actual.cuandoInvocarsSerafin}. `;
                     lecturaCompleta += `Vela Ritual de Consagración: ${actual.vela}. Enciéndela el ${actual.cuandoVela} (${actual.paraQueVela}). `;
                     lecturaCompleta += `Acción de Fuego / Baño de Transmutación: ${actual.accionFuegoBano} `;
                     lecturaCompleta += `Prohibición Energética Estricta: ${actual.prohibicionEstricta} `;
+                    
+                    // 3. Más sabio que el diablo en el Libro de los Secretos
+                    setTimeout(() => reproducirFraseLlanera('sabio'), 14000);
                     lecturaCompleta += `Secreto revelado del Libro de los Secretos: ${actual.libroSecretos} `;
                     lecturaCompleta += `Afirmación de Poder: "${actual.afirmacion}" `;
                     lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura Máxima.${llamadaAccionFinal}`;
@@ -1047,20 +1050,20 @@
                     lecturaCompleta += `Cartas en mesa: ${nombresSalidaTexto}. `;
                     lecturaCompleta += `Diagnóstico unificado directo del oráculo y tarot: ${diagnosticoReal} `;
                     lecturaCompleta += `Matriz Astral: Sol en ${actual.sol} y Luna en ${actual.luna}. `;
-                    lecturaCompleta += `Arcángel Regente: ${actual.arcangel}. Consejo puntual: ${actual.consejoArcangel}. Deberás invocarlo ${actual.quandoInvocarsArcangel || actual.quandoInvocarsArcangel} (${actual.invocacionArcangel}). `;
+                    lecturaCompleta += `Arcángel Regente: ${actual.arcangel}. Consejo puntual: ${actual.consejoArcangel}. Deberás invocarlo ${actual.cuandoInvocarsArcangel} (${actual.invocacionArcangel}). `;
                     lecturaCompleta += `Vela de Poder: ${actual.vela}. Encender el ${actual.cuandoVela}. `;
+                    
+                    // 4. Ojo pelao con eso en la advertencia general
+                    setTimeout(() => reproducirFraseLlanera('ojo'), 6000);
                     lecturaCompleta += `Consejo Final y Advertencia: ${actual.consejo} ${actual.advertencia} Hasta aquí tu lectura gratis.${llamadaAccionFinal}`;
                 }
                 
-                // SECUENCIA ESTRICTA: DON JUAN HABLA SOLO -> ASISTENTE HABLA SOLO -> DON JUAN SELLA
-                reproducirAudioDonJuan(tipoAudioInicial, () => {
-                    hablarYSubtitularSincronizado(lecturaCompleta, `Oráculo para ${actual.nombre} (${cantidadCartas} Cartas)`, () => {
-                        reproducirAudioDonJuan('sella', () => {
-                            estaLeyendo = false;
-                        });
-                    });
-                });
+                // 5. Cierre sellando el proceso
+                setTimeout(() => reproducirFraseLlanera('sella'), 22000);
 
+                hablarYSubtitularSincronizado(lecturaCompleta, `Oráculo para ${actual.nombre} (${cantidadCartas} Cartas)`, () => {
+                    estaLeyendo = false;
+                });
             }, 3800);
         }
 
@@ -1103,7 +1106,8 @@
 
             giftFeed.innerHTML = `<div class="gift-item">${randomGift.icono} @${consultanteElegido.user}</div>` + giftFeed.innerHTML;
             
-            reproducirAudioDonJuan('caramba');
+            // 6. Sonido al recibir regalos
+            reproducirFraseLlanera('caramba');
             mostrarAnimacionRegalo(consultanteElegido.user, randomGift.icono, randomGift.nombre);
 
         }, 45000);
@@ -1142,6 +1146,9 @@
         });
     </script>
 
+    <!-- ======================================================= -->
+    <!-- PUENTE DE CONEXIÓN CON EL CHAT DE RENDER                -->
+    <!-- ======================================================= -->
     <script>
         async function verificarChatRealDeKick() {
             try {
