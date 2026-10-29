@@ -977,7 +977,9 @@
                 let nombresSalidaTexto = datosCartasMesa.map(c => `${c.nombre} ${c.invertida ? 'invertida' : 'al derecho'}`).join(", ");
 
                 let introduccionAsistente = `Hola, soy el asistente de Juan Caramba. En estos momentos no se encuentra. Yo atenderé tu consulta de ${actual.nombre} sobre "${actual.pregunta}"... `;
-                let llamadaAccionFinal = ` Entra a mi página web, https://aura-craft-mystic.base44.app/, para más lecturas. Y recuerda seguirnos en el directo de TikTok.`;
+                
+                // MENCION NATURAL DE TU PÁGINA WEB PARA EL SINTETIZADOR DE VOZ
+                let llamadaAccionFinal = ` Entra a mi página web, aura-craft-mystic.base44.app, para más lecturas. Y recuerda seguirnos en el directo de TikTok.`;
                 
                 let lecturaCompleta = introduccionAsistente;
 
