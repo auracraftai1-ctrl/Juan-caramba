@@ -614,7 +614,7 @@
                 paraQueInvocarsSerafin: "destruir traiciones y malas intenciones",
                 vela: "Vela Azul Oscuro", 
                 cuandoVela: "lunes a las 9 PM", 
-                paraQueVela: "blindar tus proyectos contra la envidia",
+                paraQueVela: "blindar tu proyecto contra la envidia",
                 accionFuegoBano: "Baño de despojo con ruda, albahaca y sal gruesa de la cabeza a los pies.",
                 prohibicionEstricta: "Prohibido revelar tus números o estrategias a personas ajenas.",
                 diagnosticoPositivo: "A pesar de las dudas, la alianza se muestra sólida si se respalda legalmente.",
@@ -725,7 +725,7 @@
         let yaSiguio = false;
         let tiempoRestanteContrato = 3600;
 
-        // FUNCIÓN BLINDADA CONTRA CONGELAMIENTOS (TEXTO FLUIDO POR BLOQUES + TEMPORIZADOR)
+        // FUNCIÓN DE VOZ Y SUBTÍTULOS BLINDADA (SUENA LA VOZ Y CAMBIA EL TEXTO)
         function hablarYSubtitularSincronizado(textoCompleto, titulo, onCompleteCallback) {
             const speechTitle = document.getElementById('speechTitle');
             const speechText = document.getElementById('speechText');
@@ -737,7 +737,7 @@
 
             palabras.forEach((palabra) => {
                 bloqueActual += palabra + " ";
-                if (bloqueActual.split(" ").length >= 6) {
+                if (bloqueActual.split(" ").length >= 5) {
                     bloques.push(bloqueActual.trim());
                     bloqueActual = "";
                 }
@@ -746,22 +746,93 @@
                 bloques.push(bloqueActual.trim());
             }
 
-            let indiceBloque = 0;
             if(speechText && bloques.length > 0) {
-                speechText.innerText = `"${bloques[indiceBloque]}"`;
+                speechText.innerText = `"${bloques[0]}"`;
             }
 
-            let intervaloTexto = setInterval(() => {
-                indiceBloque++;
-                if (indiceBloque < bloques.length) {
+            if (!('speechSynthesis' in window)) {
+                let indiceBloque = 0;
+                let intervaloTexto = setInterval(() => {
+                    indiceBloque++;
+                    if (indiceBloque < bloques.length) {
+                        if(speechText) speechText.innerText = `"${bloques[indiceBloque]}"`;
+                    } else {
+                        clearInterval(intervaloTexto);
+                        if(onCompleteCallback) onCompleteCallback();
+                    }
+                }, 2200);
+                return;
+            }
+
+            window.speechSynthesis.cancel();
+
+            let utterance = new SpeechSynthesisUtterance(textoCompleto);
+            utterance.lang = 'es-ES';
+            utterance.rate = 0.84; 
+            utterance.pitch = 0.95; 
+
+            let voices = window.speechSynthesis.getVoices();
+            let vozAsistente = voices.find(v => v.lang.startsWith('es') && (
+                v.name.toLowerCase().includes('google español') || 
+                v.name.toLowerCase().includes('helena') || 
+                v.name.toLowerCase().includes('laura') || 
+                v.name.toLowerCase().includes('pablo') ||
+                v.name.toLowerCase().includes('sabina')
+            )) || voices.find(v => v.lang.startsWith('es'));
+
+            if (vozAsistente) {
+                utterance.voice = vozAsistente;
+            }
+
+            let indiceBloqueActual = 0;
+
+            utterance.onboundary = (event) => {
+                if (event.name === 'word') {
+                    let charIndex = event.charIndex;
+                    let acumulado = 0;
+                    for (let i = 0; i < bloques.length; i++) {
+                        acumulado += bloques[i].length + 1;
+                        if (charIndex < acumulado) {
+                            if (indiceBloqueActual !== i) {
+                                indiceBloqueActual = i;
+                                if(speechText) {
+                                    speechText.innerText = `"${bloques[i]}"`;
+                                }
+                            }
+                            break;
+                        }
+                    }
+                }
+            };
+
+            let backupTimer = setInterval(() => {
+                indiceBloqueActual++;
+                if (indiceBloqueActual < bloques.length) {
                     if(speechText) {
-                        speechText.innerText = `"${bloques[indiceBloque]}"`;
+                        speechText.innerText = `"${bloques[indiceBloqueActual]}"`;
                     }
                 } else {
-                    clearInterval(intervaloTexto);
-                    if(onCompleteCallback) onCompleteCallback();
+                    clearInterval(backupTimer);
                 }
-            }, 2200);
+            }, 2400);
+
+            utterance.onend = () => {
+                clearInterval(backupTimer);
+                if(onCompleteCallback) onCompleteCallback();
+            };
+            
+            utterance.onerror = () => {
+                clearInterval(backupTimer);
+                if(onCompleteCallback) onCompleteCallback();
+            };
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = () => {
+                window.speechSynthesis.getVoices();
+            };
         }
 
         function actualizarVistaCola() {
