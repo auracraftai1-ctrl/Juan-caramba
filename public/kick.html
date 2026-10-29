@@ -724,43 +724,20 @@
         let yaSiguio = false;
         let tiempoRestanteContrato = 3600;
 
-        // VOZ CON SUBTÍTULOS SINCRONIZADOS POR EVENTO REAL DE PALABRA
+        // FUNCIÓN BLINDADA CONTRA CONGELAMIENTOS (TEXTO FLUIDO POR BLOQUES + TEMPORIZADOR)
         function hablarYSubtitularSincronizado(textoCompleto, titulo, onCompleteCallback) {
-            if (!('speechSynthesis' in window)) {
-                if(onCompleteCallback) onCompleteCallback();
-                return;
-            }
-            window.speechSynthesis.cancel();
-
             const speechTitle = document.getElementById('speechTitle');
             const speechText = document.getElementById('speechText');
             if(speechTitle) speechTitle.innerText = titulo;
 
-            let utterance = new SpeechSynthesisUtterance(textoCompleto);
-            utterance.lang = 'es-ES';
-            utterance.rate = 0.84; 
-            utterance.pitch = 0.95; 
-
-            let voices = window.speechSynthesis.getVoices();
-            let vozAsistente = voices.find(v => v.lang.startsWith('es') && (
-                v.name.toLowerCase().includes('google español') || 
-                v.name.toLowerCase().includes('helena') || 
-                v.name.toLowerCase().includes('laura') || 
-                v.name.toLowerCase().includes('pablo') ||
-                v.name.toLowerCase().includes('sabina')
-            )) || voices.find(v => v.lang.startsWith('es'));
-
-            if (vozAsistente) {
-                utterance.voice = vozAsistente;
-            }
-
+            // Partimos el texto completo en bloques pequeños (frases de 6 palabras)
             let palabras = textoCompleto.split(" ");
             let bloques = [];
             let bloqueActual = "";
 
             palabras.forEach((palabra) => {
                 bloqueActual += palabra + " ";
-                if (bloqueActual.split(" ").length >= 5) {
+                if (bloqueActual.split(" ").length >= 6) {
                     bloques.push(bloqueActual.trim());
                     bloqueActual = "";
                 }
@@ -769,44 +746,25 @@
                 bloques.push(bloqueActual.trim());
             }
 
+            let indiceBloque = 0;
+
+            // Mostramos el primer bloque de inmediato
             if(speechText && bloques.length > 0) {
-                speechText.innerText = `"${bloques[0]}"`;
+                speechText.innerText = `"${bloques[indiceBloque]}"`;
             }
 
-            let indiceBloqueActual = 0;
-            utterance.onboundary = (event) => {
-                if (event.name === 'word') {
-                    let charIndex = event.charIndex;
-                    let acumulado = 0;
-                    for (let i = 0; i < bloques.length; i++) {
-                        acumulado += bloques[i].length + 1;
-                        if (charIndex < acumulado) {
-                            if (indiceBloqueActual !== i) {
-                                indiceBloqueActual = i;
-                                if(speechText) {
-                                    speechText.innerText = `"${bloques[i]}"`;
-                                }
-                            }
-                            break;
-                        }
+            // Un temporizador limpio avanza los subtítulos como una película, sin bloquear jamás el navegador
+            let intervaloTexto = setInterval(() => {
+                indiceBloque++;
+                if (indiceBloque < bloques.length) {
+                    if(speechText) {
+                        speechText.innerText = `"${bloques[indiceBloque]}"`;
                     }
+                } else {
+                    clearInterval(intervaloTexto);
+                    if(onCompleteCallback) onCompleteCallback();
                 }
-            };
-
-            utterance.onend = () => {
-                if(onCompleteCallback) onCompleteCallback();
-            };
-            utterance.onerror = () => {
-                if(onCompleteCallback) onCompleteCallback();
-            };
-
-            window.speechSynthesis.speak(utterance);
-        }
-
-        if ('speechSynthesis' in window) {
-            window.speechSynthesis.onvoiceschanged = () => {
-                window.speechSynthesis.getVoices();
-            };
+            }, 2200); // 2.2 segundos por cada frase, dando tiempo de sobra para leer
         }
 
         function actualizarVistaCola() {
