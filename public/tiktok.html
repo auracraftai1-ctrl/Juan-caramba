@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Don Juan Caramba - Tarot 24/7 Live TikTok</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            user-select: none;
+        }
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .bg-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            animation: backgroundPulse 8s infinite alternate ease-in-out;
+        }
+        @keyframes backgroundPulse {
+            0% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.02); filter: brightness(1.05); }
+            100% { transform: scale(1); filter: brightness(1); }
+        }
+
+        .mystic-particle {
+            position: absolute;
+            background: rgba(212, 175, 55, 0.7);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2;
+            animation: floatParticle 6s infinite linear;
+        }
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) scale(0.2); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+
+        /* ESTILO TIKTOK: BOTONES LATERALES IZQUIERDOS */
+        .tiktok-actions-container {
+            position: fixed;
+            top: 12px;
+            left: 15px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            align-items: flex-start;
+            background: transparent;
+        }
+
+        .follow-btn {
+            background: linear-gradient(135deg, #fe2c55, #ff0050);
+            color: #fff;
+            border: none;
+            padding: 4px 10px;
+            font-size: 10.5px;
+            font-weight: bold;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: 0 3px 8px rgba(254, 44, 85, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        .follow-btn.followed {
+            background: rgba(255, 255, 255, 0.25);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .share-btn {
+            background: linear-gradient(135deg, #25f4ee, #00c7b7);
+            color: #000;
+            border: none;
+            padding: 3px 9px;
+            font-size: 10px;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(37, 244, 238, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .follower-count {
+            color: #fff;
+            font-size: 9px;
+            font-weight: bold;
+            background: transparent;
+            padding: 1px 0;
+            text-shadow: 1px 1px 3px #000;
+        }
+
+        .energy-bar-container {
+            position: fixed;
+            top: 80px;
+            left: 15px;
+            z-index: 100;
+            background: transparent;
+            padding: 2px 0;
+            width: 140px;
+        }
+        .energy-title {
+            font-size: 7px;
+            color: #ffdf73;
+            font-weight: bold;
+            text-align: left;
+            margin-bottom: 2px;
+            text-shadow: 1px 1px 3px #000;
+        }
+        .energy-outer {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .energy-inner {
+            height: 100%;
+            background: linear-gradient(90deg, #fe2c55, #25f4ee);
+            transition: width 0.3s ease;
+        }
+
+        .contest-panel {
+            position: fixed;
+            top: 112px;
+            left: 15px;
+            z-index: 100;
+            background: transparent;
+            padding: 2px 0;
+            color: #fff;
+            text-align: left;
+            max-width: 140px;
+            text-shadow: 1px 1px 3px #000;
+        }
+        .contest-title {
+            font-size: 7px;
+            color: #d4af37;
+            text-transform: uppercase;
+        }
+        .contest-stats {
+            font-size: 9.5px;
+            font-weight: bold;
+            color: #fff;
+        }
+        .contest-timer {
+            font-size: 7px;
+            color: #53fc18;
+        }
+
+        .vip-gifts-guide {
+            position: fixed;
+            bottom: 26vh;
+            left: 15px;
+            z-index: 50;
+            background: transparent;
+            padding: 4px 0;
+            color: #fff;
+            max-width: 150px;
+            text-shadow: 1px 1px 3px #000;
+        }
+        .vip-gifts-guide h6 {
+            margin: 0 0 2px 0;
+            color: #ffdf73;
+            font-size: 8px;
+            text-align: left;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.5);
+            padding-bottom: 1px;
+        }
+        .vip-gifts-guide ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            font-size: 6.5px;
+        }
+        .vip-gifts-guide li {
+            line-height: 1.1;
+            color: #f5f5f5;
+        }
+        .vip-gifts-guide li strong {
+            color: #ffdf73;
+        }
+
+        .candle-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 18px;
+            height: 55px;
+            background: linear-gradient(#d4af37, #8b5a2b);
+            border-radius: 4px;
+            z-index: 80;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+        .flame {
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 20px;
+            background: #ff9d00;
+            border-radius: 50% 50% 20% 20%;
+            box-shadow: 0 0 12px #ff4500, 0 0 22px #ffd700;
+            animation: flicker 0.1s infinite alternate ease-in-out;
+        }
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1) rotate(-1deg); opacity: 0.85; }
+            100% { transform: translateX(-50%) scale(1.15) rotate(2deg); opacity: 1; }
+        }
+
+        .waiting-queue {
+            position: fixed;
+            top: 2px;
+            right: 15px;
+            width: 160px;
+            background: transparent;
+            padding: 1px 0;
+            color: #fff;
+            z-index: 100;
+            text-shadow: 1px 1px 3px #000;
+        }
+        .waiting-queue h4 {
+            margin: 0 0 1px 0;
+            color: #d4af37;
+            font-size: 7.5px;
+            text-align: right;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.5);
+            padding-bottom: 1px;
+            text-transform: uppercase;
+        }
+        .queue-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            max-height: 75px;
+            overflow: hidden;
+        }
+        .queue-item {
+            font-size: 6.5px;
+            padding: 1px 2px;
+            background: transparent;
+            border-radius: 2px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .queue-item.active {
+            color: #ffdf73;
+            font-weight: bold;
+            text-shadow: 0 0 6px #d4af37;
+        }
+
+        .gifts-panel {
+            position: fixed;
+            top: 85px;
+            right: 15px;
+            width: 160px;
+            background: transparent;
+            padding: 1px 0;
+            color: #fff;
+            z-index: 90;
+            text-shadow: 1px 1px 3px #000;
+        }
+        .gifts-panel h5 {
+            margin: 0 0 1px 0;
+            color: #fe2c55;
+            font-size: 7.5px;
+            text-align: right;
+            text-transform: uppercase;
+        }
+        .gift-feed {
+            font-size: 6.5px;
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            max-height: 45px;
+            overflow: hidden;
+            align-items: flex-end;
+        }
+        .gift-item {
+            background: transparent;
+            padding: 1px 0;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .gift-popup-animation {
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: transparent;
+            padding: 10px 20px;
+            color: #fff;
+            text-align: center;
+            z-index: 150;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            text-shadow: 2px 2px 8px #000, 0 0 15px rgba(254, 44, 85, 0.8);
+        }
+        .gift-popup-animation.show {
+            transform: translate(-50%, -50%) scale(1.2);
+            opacity: 1;
+        }
+        .gift-popup-icon {
+            font-size: 38px;
+        }
+
+        .speech-floating {
+            position: absolute;
+            bottom: 28vh;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            max-width: 850px;
+            text-align: center;
+            z-index: 160;
+            pointer-events: none;
+            padding: 4px;
+            background: transparent;
+            border: none;
+        }
+        .speech-floating h3 {
+            margin: 0 0 4px 0;
+            color: #ffdf73;
+            font-size: 11.5px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-shadow: 2px 2px 8px #000, 0 0 12px rgba(212, 175, 55, 0.9);
+        }
+        .speech-floating p {
+            margin: 0;
+            font-size: 14px;
+            font-weight: bold;
+            color: #ffffff;
+            line-height: 1.4;
+            text-shadow: 2px 2px 8px #000, 0 0 15px rgba(0, 0, 0, 0.95);
+        }
+
+        .tarot-slot {
+            position: absolute;
+            bottom: 16vh;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            z-index: 150;
+            width: 100%;
+            padding: 0 10px;
+            flex-wrap: wrap;
+        }
+        .card {
+            width: 58px;
+            height: 88px;
+            background: #1a1a1a;
+            border-radius: 6px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.95);
+            border: 2px solid #d4af37;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            padding: 2px;
+            font-weight: bold;
+            color: #fff;
+            overflow: hidden;
+        }
+        .card img {
+            width: 100%;
+            height: 63px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid #d4af37;
+            display: block;
+        }
+        .card img.reversed {
+            transform: rotate(180deg);
+            filter: brightness(0.85);
+        }
+        .card span {
+            font-size: 5px;
+            color: #ffdf73;
+            margin-top: 2px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
+
+        .shuffling {
+            animation: shuffleCard 0.4s infinite alternate ease-in-out;
+            filter: brightness(0.85);
+        }
+        @keyframes shuffleCard {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-6px) rotate(3deg); }
+            100% { transform: translateY(6px) rotate(-3deg); }
+        }
+
+        .tap-heart {
+            position: absolute;
+            font-size: 24px;
+            animation: floatUpHeart 1.2s ease-out forwards;
+            pointer-events: none;
+            z-index: 200;
+        }
+        @keyframes floatUpHeart {
+            0% { transform: translateY(0) scale(0.6); opacity: 1; }
+            100% { transform: translateY(-110px) scale(1.3); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainContainer">
+        <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image" onerror="this.onerror=null; this.src='Auracraftai-bg.jpg';">
+
+        <!-- ======================================================= -->
+        <!-- MÚSICA DE FONDO: ARPA.MP3 (VOLUMEN SUTIL AL 8%)         -->
+        <!-- ======================================================= -->
+        <audio id="musicaFondo" src="arpa.mp3" autoplay loop preload="auto"></audio>
+
+        <div class="tiktok-actions-container">
+            <button class="follow-btn" id="followBtn" onclick="seguirAccion(event)">
+                <span id="followIcon">➕</span> <span id="followText">Seguir</span>
+            </button>
+            <button class="share-btn" onclick="compartirAccion(event)">
+                <span>🔄</span> <span>Compartir</span>
+            </button>
+            <div class="follower-count" id="followerCount">Seguidores: 14.8K</div>
+        </div>
+
+        <div class="energy-bar-container">
+            <div class="energy-title">⚡ ENERGÍA TIKTOK LIVE</div>
+            <div class="energy-outer">
+                <div class="energy-inner" id="energyFill" style="width: 0%;"></div>
+            </div>
+        </div>
+
+        <div class="contest-panel">
+            <div class="contest-title">🏆 Concurso Taps</div>
+            <div class="contest-stats"><span id="tapCountDisplay">0</span> / 100 Taps</div>
+            <div class="contest-timer">Reinicia en: <span id="timerDisplay">59:59</span></div>
+        </div>
+
+        <div class="vip-gifts-guide">
+            <h6>🔮 Regalos TikTok & Lecturas</h6>
+            <ul>
+                <li><strong>🌹 Rosa:</strong> 2 Cartas (Rápida)</li>
+                <li><strong>🦁 León / 🚀 Cohete:</strong> 4 Cartas (VIP)</li>
+                <li><strong>👑 León Mayor:</strong> 10 Cartas (Cruz Celta)</li>
+                <li><strong>🌌 Universo:</strong> 10 Cartas + Secretos</li>
+            </ul>
+        </div>
+
+        <div class="candle-container">
+            <div class="flame"></div>
+        </div>
+
+        <div class="waiting-queue">
+            <h4>Sala de Espera</h4>
+            <ul class="queue-list" id="queueList"></ul>
+        </div>
+
+        <div class="gifts-panel">
+            <h5>🎁 Regalos TikTok</h5>
+            <div class="gift-feed" id="giftFeed">
+                <div class="gift-item">🌹 @Mariana_92 Rosa</div>
+                <div class="gift-item">🦁 @CarlosVe León</div>
+            </div>
+        </div>
+
+        <div class="gift-popup-animation" id="giftPopup">
+            <div class="gift-popup-icon" id="giftPopupIcon">🎁</div>
+            <div style="font-size: 12px; font-weight: bold; color: #ffdf73;" id="giftPopupUser">@Usuario</div>
+            <div style="font-size: 10px; color: #fff;" id="giftPopupText">¡Envió un regalo en TikTok Live!</div>
+        </div>
+
+        <div class="speech-floating">
+            <h3 id="speechTitle">Asistente de Don Juan Caramba</h3>
+            <p id="speechText">"Iniciando transmisión en vivo por TikTok..."</p>
+        </div>
+
+        <div class="tarot-slot" id="cardContainer"></div>
+    </div>
+
+    <script>
+        const consultantesPool = [
+            { 
+                user: "Mariana_92", 
+                nombre: "Mariana Gómez", 
+                fecha: "14/03/1995", 
+                lugar: "Caracas, Venezuela",
+                veredicto: "¡SÍ!", 
+                pregunta: "¿Sanaré este dolor del corazón y encontraré el amor sincero?",
+                sol: "Escorpio", 
+                luna: "Piscis", 
+                ascendente: "Leo",
+                frecuencia: "528 Hz",
+                numPoderPersonal: "7",
+                numPoderDia: "21",
+                recomendacionExplicita: "Corta contacto con tu pasado sentimental y mantén tus emociones bajo custodia.",
+                arcangel: "Arcángel Chamuel", 
+                consejoArcangel: "Perdona de corazón las faltas pasadas para liberar tu alma.",
+                invocacionArcangel: "Invocálo los martes al atardecer en un rincón tranquilo.",
+                cuandoInvocarsArcangel: "martes al atardecer",
+                serafin: "Serafín de la Llama Celeste", 
+                consejoSerafin: "Purifica tus emociones para no repetir ciclos dolorosos.",
+                cuandoInvocarsSerafin: "al amanecer de un viernes", 
+                paraQueInvocarsSerafin: "quemar dudas e ilusiones falsas",
+                vela: "Vela Rosada o Azul Claro", 
+                cuandoVela: "martes a las 6 PM", 
+                paraQueVela: "atraer afecto sincero y disipar amarguras",
+                accionFuegoBano: "Baño de rosas rojas con miel y canela en rama durante tres noches seguidas.",
+                prohibicionEstricta: "Prohibido guardar objetos o fotografías de exparejas bajo tu almohada.",
+                diagnosticoPositivo: "Tus cartas marcan el florecimiento definitivo de tu corazón y la llegada de un ser con intenciones nobles.",
+                diagnosticoDenso: "Las sombras en mesa revelan apegos tóxicos; debes sanar primero antes de entregar tu corazón.",
+                libroSecretos: "El amor verdadero no se suplica ni se fuerza, nace de la paz espiritual.",
+                afirmacion: "Yo merezco un amor sincero, puro y respetuoso.",
+                consejo: "Mariana, como decía mi abuela: el que no limpia la casa antes de recibir visitas, termina ofreciendo café sobre el polvo.",
+                advertencia: "Atenta con las falsas promesas de quien no ha demostrado cambios reales."
+            },
+            { 
+                user: "CarlosVe", 
+                nombre: "Carlos Pérez", 
+                fecha: "22/07/1988", 
+                lugar: "Valencia, Venezuela",
+                veredicto: "¡SÍ!", 
+                pregunta: "¿Se destrabará mi negocio y entrará liquidez a mis bolsillos?",
+                sol: "Cáncer", 
+                luna: "Tauro", 
+                ascendente: "Tauro",
+                frecuencia: "888 Hz",
+                numPoderPersonal: "8",
+                numPoderDia: "44",
+                recomendacionExplicita: "Audita tus números, firma con prudencia y exige garantías en cada transacción.",
+                arcangel: "Arcángel Jofiel", 
+                consejoArcangel: "Aclara tu mente comercial para ver oportunidades donde otros ven crisis.",
+                invocacionArcangel: "Invocálo los domingos al salir el sol.",
+                cuandoInvocarsArcangel: "domingos a las 7 AM",
+                serafin: "Serafín de la Prosperidad Divina", 
+                consejoSerafin: "Mantén la ética en tus negocios para que la abundancia sea duradera.",
+                cuandoInvocarsSerafin: "los domingos al mediodía", 
+                paraQueInvocarsSerafin: "proteger tu capital contra pérdidas injustificadas",
+                vela: "Vela Amarilla o Naranja", 
+                cuandoVela: "domingo al despuntar el alba", 
+                paraQueVela: "atraer clientes y movimiento comercial",
+                accionFuegoBano: "Sahumerio de cáscara de mandarina seca con azúcar y café molido en la entrada de tu local.",
+                prohibicionEstricta: "Prohibido prestar dinero o dar mercancía fiada por los próximos catorce días.",
+                diagnosticoPositivo: "El oráculo decreta una apertura financiera inminente y la entrada de recursos que esperabas.",
+                diagnosticoDenso: "Hay fuga de recursos y desorden contable; las cartas invertidas advierten pérdidas si no ajustas las tuercas.",
+                libroSecretos: "La prosperidad real es hija de la disciplina y madre de la libertad.",
+                afirmacion: "La abundancia fluye hacia mí de forma limpia y constante.",
+                consejo: "Carlos, recuerda en el comercio: camarón que se duerme se lo lleva la corriente y se queda sin billete.",
+                advertencia: "No firmes ningún documento sin leer minuciosamente las letras pequeñas."
+            },
+            { 
+                user: "Alejandro_X", 
+                nombre: "Alejandro Silva", 
+                fecha: "05/11/1992", 
+                lugar: "Maracaibo, Venezuela",
+                veredicto: "¡NO!", 
+                pregunta: "¿Debo confiar en esta nueva sociedad comercial que me proponen?",
+                sol: "Escorpio", 
+                luna: "Aries", 
+                ascendente: "Aries",
+                frecuencia: "417 Hz",
+                numPoderPersonal: "5",
+                numPoderDia: "13",
+                recomendacionExplicita: "Exige auditoría previa por escrito y no te dejes llevar por palabras bonitas.",
+                arcangel: "Arcángel Miguel", 
+                consejoArcangel: "Corta con tu espada de luz todo lazo engañoso o propuesta sospechosa.",
+                invocacionArcangel: "Invocálo los lunes por la noche.",
+                cuandoInvocarsArcangel: "lunes a las 9 PM",
+                serafin: "Serafín del Fuego Purificador", 
+                consejoSerafin: "Quema la falsedad de quienes intentan usar tu esfuerzo en su beneficio.",
+                cuandoInvocarsSerafin: "al anochecer del lunes", 
+                paraQueInvocarsSerafin: "destruir traiciones y malas intenciones",
+                vela: "Vela Azul Oscuro", 
+                cuandoVela: "lunes a las 9 PM", 
+                paraQueVela: "blindar tus proyectos contra la envidia",
+                accionFuegoBano: "Baño de despojo con ruda, albahaca y sal gruesa de la cabeza a los pies.",
+                prohibicionEstricta: "Prohibido revelar tus números o estrategias a personas ajenas.",
+                diagnosticoPositivo: "A pesar de las dudas, la alianza se muestra sólida si se respalda legalmente.",
+                diagnosticoDenso: "Las cartas denotan engaños y dobles intenciones; entrar en esa sociedad sería una trampa financiera.",
+                libroSecretos: "Quien camina con precaución jamás cae en el foso de la traición.",
+                afirmacion: "Mi sabiduría protege mis bienes y mi destino.",
+                consejo: "Alejandro, compadre: el que tiene rabo de paja no se acerca a la candela ni por equivocación.",
+                advertencia: "Ojo pelao, no entregues tu esfuerzo a manos dudosas."
+            }
+        ];
+
+        let colaConsultantes = [...consultantesPool];
+        let estaLeyendo = false;
+
+        // LAS 78 CARTAS COMPLETAS CON PAGES Y RUTA ABSOLUTA
+        const tarotDeck = [
+            // --- ARCANOS MAYORES (22) ---
+            { name: "0. El Loco", file: "/el-loco.jpg" },
+            { name: "I. El Mago", file: "/el-mago.jpg" },
+            { name: "II. La Sacerdotisa", file: "/la-sacerdotisa.jpg" },
+            { name: "III. La Emperatriz", file: "/la-emperatriz.jpg" },
+            { name: "IV. El Emperador", file: "/el-emperador.jpg" },
+            { name: "V. El Hierofante", file: "/el-hierofante.jpg" },
+            { name: "VI. Los Enamorados", file: "/los-enamorados.jpg" },
+            { name: "VII. El Carro", file: "/el-carro.jpg" },
+            { name: "VIII. La Fuerza", file: "/la-fuerza.jpg" },
+            { name: "IX. El Ermitaño", file: "/el-ermitano.jpg" },
+            { name: "X. La Rueda de la Fortuna", file: "/la-rueda-de-la-fortuna.jpg" },
+            { name: "XI. La Justicia", file: "/la-justicia.jpg" },
+            { name: "XII. El Colgado", file: "/el-colgado.jpg" },
+            { name: "XIII. La Muerte", file: "/la-muerte.jpg" },
+            { name: "XIV. La Templanza", file: "/la-templanza.jpg" },
+            { name: "XV. El Diablo", file: "/el-diablo.jpg" },
+            { name: "XVI. La Torre", file: "/la-torre.jpg" },
+            { name: "XVII. La Estrella", file: "/la-estrella.jpg" },
+            { name: "XVIII. La Luna", file: "/la-luna.jpg" },
+            { name: "XIX. El Sol", file: "/el-sol.jpg" },
+            { name: "XX. El Juicio", file: "/el-juicio.jpg" },
+            { name: "XXI. El Mundo", file: "/el-mundo.jpg" },
+
+            // --- BASTOS (14) ---
+            { name: "As de Bastos", file: "/as-de-bastos.jpg" },
+            { name: "2 de Bastos", file: "/dos-de-bastos.jpg" },
+            { name: "3 de Bastos", file: "/tres-de-bastos.jpg" },
+            { name: "4 de Bastos", file: "/cuatro-de-bastos.jpg" },
+            { name: "5 de Bastos", file: "/cinco-de-bastos.jpg" },
+            { name: "6 de Bastos", file: "/seis-de-bastos.jpg" },
+            { name: "7 de Bastos", file: "/siete-de-bastos.jpg" },
+            { name: "8 de Bastos", file: "/ocho-de-bastos.jpg" },
+            { name: "9 de Bastos", file: "/nueve-de-bastos.jpg" },
+            { name: "10 de Bastos", file: "/diez-de-bastos.jpg" },
+            { name: "Page de Bastos", file: "/page-de-bastos.jpg" },
+            { name: "Caballero de Bastos", file: "/caballero-de-bastos.jpg" },
+            { name: "Reina de Bastos", file: "/reina-de-bastos.jpg" },
+            { name: "Rey de Bastos", file: "/rey-de-bastos.jpg" },
+
+            // --- COPAS (14) ---
+            { name: "As de Copas", file: "/as-de-copas.jpg" },
+            { name: "2 de Copas", file: "/dos-de-copas.jpg" },
+            { name: "3 de Copas", file: "/tres-de-copas.jpg" },
+            { name: "4 de Copas", file: "/cuatro-de-copas.jpg" },
+            { name: "5 de Copas", file: "/cinco-de-copas.jpg" },
+            { name: "6 de Copas", file: "/seis-de-copas.jpg" },
+            { name: "7 de Copas", file: "/siete-de-copas.jpg" },
+            { name: "8 de Copas", file: "/ocho-de-copas.jpg" },
+            { name: "9 de Copas", file: "/nueve-de-copas.jpg" },
+            { name: "10 de Copas", file: "/diez-de-copas.jpg" },
+            { name: "Page de Copas", file: "/page-de-copas.jpg" },
+            { name: "Caballero de Copas", file: "/caballero-de-copas.jpg" },
+            { name: "Reina de Copas", file: "/reina-de-copas.jpg" },
+            { name: "Rey de Copas", file: "/rey-de-copas.jpg" },
+
+            // --- ESPADAS (14) ---
+            { name: "As de Espadas", file: "/as-de-espadas.jpg" },
+            { name: "2 de Espadas", file: "/dos-de-espadas.jpg" },
+            { name: "3 de Espadas", file: "/tres-de-espadas.jpg" },
+            { name: "4 de Espadas", file: "/cinco-de-espadas.jpg" },
+            { name: "5 de Espadas", file: "/cinco-de-espadas.jpg" },
+            { name: "6 de Espadas", file: "/seis-de-espadas.jpg" },
+            { name: "7 de Espadas", file: "/siete-de-espadas.jpg" },
+            { name: "8 de Espadas", file: "/ocho-de-espadas.jpg" },
+            { name: "9 de Espadas", file: "/nueve-de-espadas.jpg" },
+            { name: "10 de Espadas", file: "/diez-de-espadas.jpg" },
+            { name: "Page de Espadas", file: "/page-de-espadas.jpg" },
+            { name: "Caballero de Espadas", file: "/caballero-de-espadas.jpg" },
+            { name: "Reina de Espadas", file: "/reina-de-espadas.jpg" },
+            { name: "Rey de Espadas", file: "/rey-de-espadas.jpg" },
+
+            // --- OROS (14) ---
+            { name: "As de Oros", file: "/as-de-oro.jpg" },
+            { name: "2 de Oros", file: "/dos-de-oro.jpg" },
+            { name: "3 de Oros", file: "/tres-de-oro.jpg" },
+            { name: "4 de Oros", file: "/cuatro-de-oro.jpg" },
+            { name: "5 de Oros", file: "/cinco-de-oro.jpg" },
+            { name: "6 de Oros", file: "/seis-de-oro.jpg" },
+            { name: "7 de Oros", file: "/siete-de-oro.jpg" },
+            { name: "8 de Oros", file: "/ocho-de-oro.jpg" },
+            { name: "9 de Oros", file: "/nueve-de-oro.jpg" },
+            { name: "10 de Oros", file: "/diez-de-oro.jpg" },
+            { name: "Page de Oros", file: "/page-de-oro.jpg" },
+            { name: "Caballero de Oros", file: "/caballero-de-oro.jpg" },
+            { name: "Reina de Oros", file: "/reina-de-oro.jpg" },
+            { name: "Rey de Oros", file: "/rey-de-oro.jpg" }
+        ];
+
+        let totalTaps = 0;
+        let numSeguidores = 14820;
+        let yaSiguio = false;
+        let tiempoRestanteContrato = 3600;
+
+        // VOZ CON SUBTÍTULOS SINCRONIZADOS POR EVENTO REAL DE PALABRA
+        function hablarYSubtitularSincronizado(textoCompleto, titulo, onCompleteCallback) {
+            if (!('speechSynthesis' in window)) {
+                if(onCompleteCallback) onCompleteCallback();
+                return;
+            }
+            window.speechSynthesis.cancel();
+
+            const speechTitle = document.getElementById('speechTitle');
+            const speechText = document.getElementById('speechText');
+            if(speechTitle) speechTitle.innerText = titulo;
+
+            let utterance = new SpeechSynthesisUtterance(textoCompleto);
+            utterance.lang = 'es-ES';
+            utterance.rate = 0.84; 
+            utterance.pitch = 0.95; 
+
+            let voices = window.speechSynthesis.getVoices();
+            let vozAsistente = voices.find(v => v.lang.startsWith('es') && (
+                v.name.toLowerCase().includes('google español') || 
+                v.name.toLowerCase().includes('helena') || 
+                v.name.toLowerCase().includes('laura') || 
+                v.name.toLowerCase().includes('pablo') ||
+                v.name.toLowerCase().includes('sabina')
+            )) || voices.find(v => v.lang.startsWith('es'));
+
+            if (vozAsistente) {
+                utterance.voice = vozAsistente;
+            }
+
+            let palabras = textoCompleto.split(" ");
+            let bloques = [];
+            let bloqueActual = "";
+
+            palabras.forEach((palabra) => {
+                bloqueActual += palabra + " ";
+                if (bloqueActual.split(" ").length >= 5) {
+                    bloques.push(bloqueActual.trim());
+                    bloqueActual = "";
+                }
+            });
+            if (bloqueActual.trim().length > 0) {
+                bloques.push(bloqueActual.trim());
+            }
+
+            if(speechText && bloques.length > 0) {
+                speechText.innerText = `"${bloques[0]}"`;
+            }
+
+            let indiceBloqueActual = 0;
+            utterance.onboundary = (event) => {
+                if (event.name === 'word') {
+                    let charIndex = event.charIndex;
+                    let acumulado = 0;
+                    for (let i = 0; i < bloques.length; i++) {
+                        acumulado += bloques[i].length + 1;
+                        if (charIndex < acumulado) {
+                            if (indiceBloqueActual !== i) {
+                                indiceBloqueActual = i;
+                                if(speechText) {
+                                    speechText.innerText = `"${bloques[i]}"`;
+                                }
+                            }
+                            break;
+                        }
+                    }
+                }
+            };
+
+            utterance.onend = () => {
+                if(onCompleteCallback) onCompleteCallback();
+            };
+            utterance.onerror = () => {
+                if(onCompleteCallback) onCompleteCallback();
+            };
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = () => {
+                window.speechSynthesis.getVoices();
+            };
+        }
+
+        function actualizarVistaCola() {
+            const queueList = document.getElementById('queueList');
+            if(!queueList) return;
+            queueList.innerHTML = '';
+            colaConsultantes.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.className = `queue-item ${index === 0 ? 'active' : ''}`;
+                li.innerHTML = `<span>${index === 0 ? '🔮' : ''}</span> <span>${index + 1}. @${item.user}</span>`;
+                queueList.appendChild(li);
+            });
+        }
+
+        window.addEventListener('click', (event) => {
+            totalTaps++;
+            const tapDisplay = document.getElementById('tapCountDisplay');
+            if(tapDisplay) tapDisplay.innerText = totalTaps;
+
+            const energyFill = document.getElementById('energyFill');
+            if (energyFill) {
+                let porcentaje = (totalTaps % 100);
+                energyFill.style.width = porcentaje + '%';
+            }
+
+            const heart = document.createElement('div');
+            heart.className = 'tap-heart';
+            heart.innerText = ['❤️', '💖', '✨', '🔥'][Math.floor(Math.random() * 4)];
+            heart.style.left = (event.clientX - 12) + 'px';
+            heart.style.top = (event.clientY - 12) + 'px';
+            document.getElementById('mainContainer').appendChild(heart);
+            setTimeout(() => heart.remove(), 1200);
+
+            const audioArpa = document.getElementById('musicaFondo');
+            if (audioArpa && audioArpa.paused) {
+                audioArpa.play().catch(() => {});
+            }
+        });
+
+        function seguirAccion(event) {
+            event.stopPropagation();
+            const btn = document.getElementById('followBtn');
+            const text = document.getElementById('followText');
+            
+            if (!yaSiguio) {
+                numSeguidores++;
+                yaSiguio = true;
+                if(btn) btn.classList.add('followed');
+                if(text) text.innerText = "Siguiendo";
+            } else {
+                numSeguidores--;
+                yaSiguio = false;
+                if(btn) btn.classList.remove('followed');
+                if(text) text.innerText = "Seguir";
+            }
+            const countDiv = document.getElementById('followerCount');
+            if(countDiv) countDiv.innerText = `Seguidores: ${(numSeguidores / 1000).toFixed(1)}K`;
+        }
+
+        function compartirAccion(event) {
+            event.stopPropagation();
+        }
+
+        function mostrarAnimacionRegalo(usuario, regaloIcono, regaloNombre) {
+            const popup = document.getElementById('giftPopup');
+            const icon = document.getElementById('giftPopupIcon');
+            const user = document.getElementById('giftPopupUser');
+            const text = document.getElementById('giftPopupText');
+
+            if(popup && icon && user && text) {
+                icon.innerText = regaloIcono;
+                user.innerText = `@${usuario}`;
+                text.innerText = `¡Envió ${regaloNombre} en TikTok Live!`;
+
+                popup.classList.add('show');
+                setTimeout(() => { popup.classList.remove('show'); }, 3000);
+            }
+        }
+
+        function ejecutarLecturaProxima() {
+            if (estaLeyendo) return;
+            estaLeyendo = true;
+
+            const container = document.getElementById('cardContainer');
+            if(!container) {
+                estaLeyendo = false;
+                return;
+            }
+
+            const actual = colaConsultantes.shift();
+            colaConsultantes.push(actual);
+            actualizarVistaCola();
+
+            let cantidadCartas = actual.cartasAsignadas || 2;
+            delete actual.cartasAsignadas;
+
+            container.innerHTML = '';
+            
+            for(let i = 0; i < cantidadCartas; i++) {
+                const cardDiv = document.createElement('div');
+                cardDiv.className = 'card shuffling';
+                cardDiv.innerHTML = `<img src="Auracraftai-bg.jpg" alt="Reverso" onerror="this.onerror=null; this.src='Auracraftai-bg.jpg';"><span>Barajando</span>`;
+                container.appendChild(cardDiv);
+            }
+
+            setTimeout(() => {
+                container.innerHTML = '';
+                const seleccionadas = [];
+                
+                while(seleccionadas.length < cantidadCartas) {
+                    let carta = tarotDeck[Math.floor(Math.random() * tarotDeck.length)];
+                    if(!seleccionadas.includes(carta)) seleccionadas.push(carta);
+                }
+
+                let contadorInvertidas = 0;
+                const datosCartasMesa = [];
+
+                seleccionadas.forEach((carta, index) => {
+                    const esInvertida = (cantidadCartas === 2 && actual.veredicto === "¡NO!") ? true : (Math.random() < 0.45);
+                    if (esInvertida) contadorInvertidas++;
+
+                    datosCartasMesa.push({
+                        nombre: carta.name,
+                        file: carta.file,
+                        invertida: esInvertida
+                    });
+
+                    setTimeout(() => {
+                        const cardDiv = document.createElement('div');
+                        cardDiv.className = `card`;
+                        cardDiv.innerHTML = `
+                            <img class="${esInvertida ? 'reversed' : ''}" src="${carta.file}" alt="${carta.name}" onerror="this.onerror=null; this.src='Auracraftai-bg.jpg';">
+                            <span>${carta.name}</span>
+                        `;
+                        container.appendChild(cardDiv);
+                    }, index * 180);
+                });
+
+                let esTiradaDensa = contadorInvertidas >= Math.ceil(cantidadCartas / 2);
+                let diagnosticoReal = esTiradaDensa ? actual.diagnosticoDenso : actual.diagnosticoPositivo;
+
+                let nombresSalidaTexto = datosCartasMesa.map(c => `${c.nombre} ${c.invertida ? 'invertida' : 'al derecho'}`).join(", ");
+
+                let introduccionAsistente = `Hola, soy el asistente de Juan Caramba. En estos momentos no se encuentra. Yo atenderé tu consulta de ${actual.nombre} sobre "${actual.pregunta}"... `;
+                let llamadaAccionFinal = ` Entra a mi página web, https://aura-craft-mystic.base44.app/, para más lecturas. Y recuerda seguirnos en el directo de TikTok.`;
+                
+                let lecturaCompleta = introduccionAsistente;
+
+                if (cantidadCartas === 4) {
+                    lecturaCompleta += `Cartas en mesa: ${nombresSalidaTexto}. `;
+                    lecturaCompleta += `Diagnóstico unificado del oráculo y tarot: La combinación de tus cartas revela que ${diagnosticoReal} `;
+                    lecturaCompleta += `Matriz Astral: Sol en ${actual.sol}, Luna en ${actual.luna}, Ascendente en ${actual.ascendente}. Frecuencia Energética: ${actual.frecuencia}. Número de Poder Personal: ${actual.numPoderPersonal}. Número de Poder del Día: ${actual.numPoderDia}. `;
+                    lecturaCompleta += `Recomendación Explícita: ${actual.recomendacionExplicita} `;
+                    lecturaCompleta += `Arcángel: ${actual.arcangel}. Consejo: ${actual.consejoArcangel}. Invocación: ${actual.invocacionArcangel}. `;
+                    lecturaCompleta += `Serafín Guardián: ${actual.serafin}. Consejo: ${actual.consejoSerafin}. Debes invocarlo ${actual.cuandoInvocarsSerafin} para ${actual.paraQueInvocarsSerafin}. `;
+                    lecturaCompleta += `Vela Ritual: ${actual.vela}. Enciéndela el ${actual.cuandoVela} (${actual.paraQueVela}). `;
+                    lecturaCompleta += `Acción de Fuego y Baño Sagrado: ${actual.accionFuegoBano} `;
+                    lecturaCompleta += `Prohibición Estricta Energética: ${actual.prohibicionEstricta} `;
+                    lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura VIP.${llamadaAccionFinal}`;
+
+                } else if (cantidadCartas === 10) {
+                    lecturaCompleta += `Cruz Celta revelada: ${nombresSalidaTexto}. `;
+                    lecturaCompleta += `Diagnóstico unificado profundo del oráculo y tarot: La combinación de tus diez cartas indica que ${diagnosticoReal} `;
+                    lecturaCompleta += `Matriz Astral completa: Sol en ${actual.sol}, Luna en ${actual.luna}, Ascendente en ${actual.ascendente}. Frecuencia Energética: ${actual.frecuencia}. Número de Poder Personal: ${actual.numPoderPersonal}. Número de Poder del Día: ${actual.numPoderDia}. `;
+                    lecturaCompleta += `Recomendación Explícita: ${actual.recomendacionExplicita} `;
+                    lecturaCompleta += `Arcángel: ${actual.arcangel}. Consejo ajustado a tu pregunta: ${actual.consejoArcangel}. Debes invocarlo ${actual.cuandoInvocarsArcangel}. `;
+                    lecturaCompleta += `Serafín Guardián: ${actual.serafin}. Consejo: ${actual.consejoSerafin}. Debes invocarlo ${actual.cuandoInvocarsSerafin}. `;
+                    lecturaCompleta += `Vela Ritual de Consagración: ${actual.vela}. Enciéndela el ${actual.cuandoVela} (${actual.paraQueVela}). `;
+                    lecturaCompleta += `Acción de Fuego / Baño de Transmutación: ${actual.accionFuegoBano} `;
+                    lecturaCompleta += `Prohibición Energética Estricta: ${actual.prohibicionEstricta} `;
+                    lecturaCompleta += `Secreto revelado del Libro de los Secretos: ${actual.libroSecretos} `;
+                    lecturaCompleta += `Afirmación de Poder: "${actual.afirmacion}" `;
+                    lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura Máxima.${llamadaAccionFinal}`;
+
+                } else {
+                    lecturaCompleta += `Cartas en mesa: ${nombresSalidaTexto}. `;
+                    lecturaCompleta += `Diagnóstico unificado directo del oráculo y tarot: ${diagnosticoReal} `;
+                    lecturaCompleta += `Matriz Astral: Sol en ${actual.sol} y Luna en ${actual.luna}. `;
+                    lecturaCompleta += `Arcángel Regente: ${actual.arcangel}. Consejo puntual: ${actual.consejoArcangel}. Deberás invocarlo ${actual.cuandoInvocarsArcangel} (${actual.invocacionArcangel}). `;
+                    lecturaCompleta += `Vela de Poder: ${actual.vela}. Encender el ${actual.cuandoVela}. `;
+                    lecturaCompleta += `Consejo Final y Advertencia: ${actual.consejo} ${actual.advertencia} Hasta aquí tu lectura gratis.${llamadaAccionFinal}`;
+                }
+                
+                hablarYSubtitularSincronizado(lecturaCompleta, `Oráculo para ${actual.nombre} (${cantidadCartas} Cartas)`, () => {
+                    estaLeyendo = false;
+                });
+            }, 3800);
+        }
+
+        setInterval(() => {
+            if(tiempoRestanteContrato > 0) {
+                tiempoRestanteContrato--;
+                let m = Math.floor(tiempoRestanteContrato / 60);
+                let s = tiempoRestanteContrato % 60;
+                const timerDisp = document.getElementById('timerDisplay');
+                if(timerDisp) timerDisp.innerText = `${m < 10 ? '0'+m : m}:${s < 10 ? '0'+s : s}`;
+            } else {
+                tiempoRestanteContrato = 3600;
+                totalTaps = 0;
+                const tapDisp = document.getElementById('tapCountDisplay');
+                if(tapDisp) tapDisp.innerText = 0;
+                const energyFill = document.getElementById('energyFill');
+                if(energyFill) energyFill.style.width = '0%';
+            }
+        }, 1000);
+
+        const listaRegalos = [
+            { icono: "🌹", nombre: "una Rosa TikTok", cartas: 2 },
+            { icono: "🦁", nombre: "un León VIP", cartas: 4 },
+            { icono: "🚀", nombre: "un Cohete Max", cartas: 10 },
+            { icono: "👑", nombre: "un León Imperial", cartas: 10 }
+        ];
+
+        setInterval(() => {
+            const giftFeed = document.getElementById('giftFeed');
+            if(!giftFeed) return;
+
+            let indiceAleatorio = Math.floor(Math.random() * consultantesPool.length);
+            let consultanteElegido = {...consultantesPool[indiceAleatorio]};
+            const randomGift = listaRegalos[Math.floor(Math.random() * listaRegalos.length)];
+            
+            consultanteElegido.cartasAsignadas = randomGift.cartas;
+
+            colaConsultantes.unshift(consultanteElegido);
+            actualizarVistaCola();
+
+            giftFeed.innerHTML = `<div class="gift-item">${randomGift.icono} @${consultanteElegido.user}</div>` + giftFeed.innerHTML;
+            mostrarAnimacionRegalo(consultanteElegido.user, randomGift.icono, randomGift.nombre);
+
+        }, 45000);
+
+        actualizarVistaCola();
+
+        const container = document.getElementById('mainContainer');
+        setInterval(() => {
+            const particle = document.createElement('div');
+            particle.className = 'mystic-particle';
+            const size = Math.random() * 4 + 2 + 'px';
+            particle.style.width = size;
+            particle.style.height = size;
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            container.appendChild(particle);
+            setTimeout(() => particle.remove(), 6000);
+        }, 800);
+        
+        setTimeout(() => {
+            ejecutarLecturaProxima();
+        }, 2000);
+
+        setInterval(() => {
+            if (!estaLeyendo) {
+                ejecutarLecturaProxima();
+            }
+        }, 12000);
+
+        // Activación del arpa de fondo super sutil (8% de volumen)
+        window.addEventListener('DOMContentLoaded', () => {
+            const audioArpa = document.getElementById('musicaFondo');
+            if (audioArpa) {
+                audioArpa.volume = 0.08;
+                audioArpa.play().catch(() => {
+                    console.log("El navegador requiere un toque en pantalla para soltar el arpa llanera.");
+                });
+            }
+        });
+    </script>
+</body>
+</html>
