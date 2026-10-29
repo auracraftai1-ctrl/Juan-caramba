@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const WebcastChat = require('tiktok-live-connector');
 
 const app = express();
 app.use(express.json());
@@ -27,19 +28,19 @@ app.get('/tiktok', (req, res) => {
 
 
 // ==========================================
-// CONEXIÓN SEGURA AL CHAT DE TIKTOK LIVE
+// CONEXIÓN DIRECTA AL CHAT DE TIKTOK LIVE
 // ==========================================
 try {
-    const { WebcastChat } = require('tiktok-live-connector');
     const tiktokUsername = "@auracraftai3"; 
     const tiktokTv = new WebcastChat(tiktokUsername);
 
     tiktokTv.connect().then(state => {
         console.log(`[TikTok] Conectado a la sala ID de @auracraftai3: ${state.roomInfo.room_id}`);
     }).catch(err => {
-        console.error('[TikTok] Advertencia: No se pudo conectar al chat en vivo al iniciar:', err.message);
+        console.error('[TikTok] Error al conectar con el chat en vivo:', err.message);
     });
 
+    // Cuando alguien escribe un comentario en tu directo de TikTok
     tiktokTv.on('chat', data => {
         let usuario = data.uniqueId;
         let mensaje = data.comment;
@@ -63,13 +64,13 @@ try {
             diagnosticoPositivo: "El éxito está garantizado.", diagnosticoDenso: "Superarás los obstáculos.",
             libroSecretos: "La constancia es la clave.", afirmacion: "Soy un imán de prosperidad.",
             consejo: "El que persevera alcanza.", advertencia: "Cuidado con las finanzas.",
-            cartasAsignadas: 2
+            cartasAsignadas: 2 // Cartas por defecto para comentarios del chat
         };
 
         colaChatReal.push(nuevoConsultanteReal);
     });
 } catch (e) {
-    console.log("[TikTok] Módulo de conexión omitido o error al cargar:", e.message);
+    console.log("[TikTok] Error al inicializar el conector:", e.message);
 }
 
 
