@@ -56,7 +56,6 @@
             100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
-        /* ESTILO TIKTOK: BOTONES LATERALES IZQUIERDOS */
         .tiktok-actions-container {
             position: fixed;
             top: 12px;
@@ -637,9 +636,7 @@
         let colaConsultantes = [...consultantesPool];
         let estaLeyendo = false;
 
-        // LAS 78 CARTAS COMPLETAS CON PAGES Y RUTA ABSOLUTA
         const tarotDeck = [
-            // --- ARCANOS MAYORES (22) ---
             { name: "0. El Loco", file: "/el-loco.jpg" },
             { name: "I. El Mago", file: "/el-mago.jpg" },
             { name: "II. La Sacerdotisa", file: "/la-sacerdotisa.jpg" },
@@ -662,8 +659,6 @@
             { name: "XIX. El Sol", file: "/el-sol.jpg" },
             { name: "XX. El Juicio", file: "/el-juicio.jpg" },
             { name: "XXI. El Mundo", file: "/el-mundo.jpg" },
-
-            // --- BASTOS (14) ---
             { name: "As de Bastos", file: "/as-de-bastos.jpg" },
             { name: "2 de Bastos", file: "/dos-de-bastos.jpg" },
             { name: "3 de Bastos", file: "/tres-de-bastos.jpg" },
@@ -678,8 +673,6 @@
             { name: "Caballero de Bastos", file: "/caballero-de-bastos.jpg" },
             { name: "Reina de Bastos", file: "/reina-de-bastos.jpg" },
             { name: "Rey de Bastos", file: "/rey-de-bastos.jpg" },
-
-            // --- COPAS (14) ---
             { name: "As de Copas", file: "/as-de-copas.jpg" },
             { name: "2 de Copas", file: "/dos-de-copas.jpg" },
             { name: "3 de Copas", file: "/tres-de-copas.jpg" },
@@ -694,8 +687,6 @@
             { name: "Caballero de Copas", file: "/caballero-de-copas.jpg" },
             { name: "Reina de Copas", file: "/reina-de-copas.jpg" },
             { name: "Rey de Copas", file: "/rey-de-copas.jpg" },
-
-            // --- ESPADAS (14) ---
             { name: "As de Espadas", file: "/as-de-espadas.jpg" },
             { name: "2 de Espadas", file: "/dos-de-espadas.jpg" },
             { name: "3 de Espadas", file: "/tres-de-espadas.jpg" },
@@ -710,8 +701,6 @@
             { name: "Caballero de Espadas", file: "/caballero-de-espadas.jpg" },
             { name: "Reina de Espadas", file: "/reina-de-espadas.jpg" },
             { name: "Rey de Espadas", file: "/rey-de-espadas.jpg" },
-
-            // --- OROS (14) ---
             { name: "As de Oros", file: "/as-de-oro.jpg" },
             { name: "2 de Oros", file: "/dos-de-oro.jpg" },
             { name: "3 de Oros", file: "/tres-de-oro.jpg" },
@@ -733,8 +722,8 @@
         let yaSiguio = false;
         let tiempoRestanteContrato = 3600;
 
-        // FUNCIÓN PARA REPRODUCIR LOS 7 AUDIOS LLANEROS EN MOMENTOS CUMBRE
-        function reproducirFraseLlanera(tipo) {
+        // FUNCIÓN SECUENCIAL CON VOLUMEN AL MÁXIMO (1.0) PARA DON JUAN Y PAUSA DE MÚSICA
+        function reproducirFraseLlanera(tipo, callbackDespues) {
             const audioMap = {
                 'caramba': 'audioCaramba',
                 'ojo': 'audioOjo',
@@ -745,17 +734,34 @@
                 'sella': 'audioSella'
             };
             const audioId = audioMap[tipo];
-            if (audioId) {
-                const elAudio = document.getElementById(audioId);
-                if (elAudio) {
-                    elAudio.currentTime = 0;
-                    elAudio.volume = 0.9;
-                    elAudio.play().catch(() => {});
+            const elAudio = document.getElementById(audioId);
+
+            if (elAudio) {
+                if ('speechSynthesis' in window) {
+                    window.speechSynthesis.cancel();
                 }
+
+                elAudio.currentTime = 0;
+                elAudio.volume = 1.0; // Volumen a tope para que suene fuerte y claro
+
+                const audioArpa = document.getElementById('musicaFondo');
+                if (audioArpa) audioArpa.volume = 0.02; // Baja la música de fondo
+
+                elAudio.onended = () => {
+                    if (audioArpa) audioArpa.volume = 0.04; // Restaura el arpa suave
+                    if (callbackDespues) callbackDespues();
+                };
+
+                elAudio.play().catch(() => {
+                    if (audioArpa) audioArpa.volume = 0.04;
+                    if (callbackDespues) callbackDespues();
+                });
+            } else {
+                if (callbackDespues) callbackDespues();
             }
         }
 
-        // FUNCIÓN DE VOZ Y SUBTÍTULOS BLINDADA
+        // VOZ Y SUBTÍTULOS BLINDADOS DEL ASISTENTE
         function hablarYSubtitularSincronizado(textoCompleto, titulo, onCompleteCallback) {
             const speechTitle = document.getElementById('speechTitle');
             const speechText = document.getElementById('speechText');
@@ -942,6 +948,7 @@
             }
         }
 
+        // FLUJO MAESTRO DE LECTURA CON PAUSA Y ORDEN ESTRICTO
         function ejecutarLecturaProxima() {
             if (estaLeyendo) return;
             estaLeyendo = true;
@@ -1003,12 +1010,10 @@
 
                 let esTiradaDensa = contadorInvertidas >= Math.ceil(cantidadCartas / 2);
                 let diagnosticoReal = esTiradaDensa ? actual.diagnosticoDenso : actual.diagnosticoPositivo;
-
                 let nombresSalidaTexto = datosCartasMesa.map(c => `${c.nombre} ${c.invertida ? 'invertida' : 'al derecho'}`).join(", ");
 
-                // 1. Saludo inicial llanero
                 let esFemenino = actual.nombre.toLowerCase().endsWith('a') || actual.nombre.toLowerCase().includes('mariana');
-                reproducirFraseLlanera(esFemenino ? 'comadre' : 'compadre');
+                let tipoAudioInicial = esFemenino ? 'comadre' : 'compadre';
 
                 let introduccionAsistente = `Hola, soy el asistente de Juan Caramba. En estos momentos no se encuentra. Yo atenderé tu consulta de ${actual.nombre} sobre "${actual.pregunta}"... `;
                 let llamadaAccionFinal = ` Entra a mi página web, aura-craft-mystic.base44.app, para más lecturas. Y recuerda seguirnos en el directo de TikTok.`;
@@ -1024,12 +1029,8 @@
                     lecturaCompleta += `Serafín Guardián: ${actual.serafin}. Consejo: ${actual.consejoSerafin}. Debes invocarlo ${actual.cuandoInvocarsSerafin} para ${actual.paraQueInvocarsSerafin}. `;
                     lecturaCompleta += `Vela Ritual: ${actual.vela}. Enciéndela el ${actual.cuandoVela} (${actual.paraQueVela}). `;
                     lecturaCompleta += `Acción de Fuego y Baño Sagrado: ${actual.accionFuegoBano} `;
-                    
-                    // 2. Advertencia de gente falsa (Ojo pelao con esa gente)
-                    setTimeout(() => reproducirFraseLlanera('ojogente'), 9000);
                     lecturaCompleta += `Prohibición Estricta Energética: ${actual.prohibicionEstricta} `;
                     lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura VIP.${llamadaAccionFinal}`;
-
                 } else if (cantidadCartas === 10) {
                     lecturaCompleta += `Cruz Celta revelada: ${nombresSalidaTexto}. `;
                     lecturaCompleta += `Diagnóstico unificado profundo del oráculo y tarot: La combinación de tus diez cartas indica que ${diagnosticoReal} `;
@@ -1040,31 +1041,25 @@
                     lecturaCompleta += `Vela Ritual de Consagración: ${actual.vela}. Enciéndela el ${actual.cuandoVela} (${actual.paraQueVela}). `;
                     lecturaCompleta += `Acción de Fuego / Baño de Transmutación: ${actual.accionFuegoBano} `;
                     lecturaCompleta += `Prohibición Energética Estricta: ${actual.prohibicionEstricta} `;
-                    
-                    // 3. Más sabio que el diablo en el Libro de los Secretos
-                    setTimeout(() => reproducirFraseLlanera('sabio'), 14000);
                     lecturaCompleta += `Secreto revelado del Libro de los Secretos: ${actual.libroSecretos} `;
                     lecturaCompleta += `Afirmación de Poder: "${actual.afirmacion}" `;
                     lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura Máxima.${llamadaAccionFinal}`;
-
                 } else {
                     lecturaCompleta += `Cartas en mesa: ${nombresSalidaTexto}. `;
                     lecturaCompleta += `Diagnóstico unificado directo del oráculo y tarot: ${diagnosticoReal} `;
                     lecturaCompleta += `Matriz Astral: Sol en ${actual.sol} y Luna en ${actual.luna}. `;
                     lecturaCompleta += `Arcángel Regente: ${actual.arcangel}. Consejo puntual: ${actual.consejoArcangel}. Deberás invocarlo ${actual.cuandoInvocarsArcangel} (${actual.invocacionArcangel}). `;
                     lecturaCompleta += `Vela de Poder: ${actual.vela}. Encender el ${actual.cuandoVela}. `;
-                    
-                    // 4. Ojo pelao con eso en la advertencia general
-                    setTimeout(() => reproducirFraseLlanera('ojo'), 6000);
                     lecturaCompleta += `Consejo Final y Advertencia: ${actual.consejo} ${actual.advertencia} Hasta aquí tu lectura gratis.${llamadaAccionFinal}`;
                 }
-                
-                // 5. Cierre sellando el proceso
-                setTimeout(() => reproducirFraseLlanera('sella'), 22000);
 
-                hablarYSubtitularSincronizado(lecturaCompleta, `Oráculo para ${actual.nombre} (${cantidadCartas} Cartas)`, () => {
-                    estaLeyendo = false;
+                // PRIMERO HABLA DON JUAN (AUDIO FUERTE Y CLARO), SE PAUSA LA LECTURA, Y AL TERMINAR ARRANCA EL ASISTENTE
+                reproducirFraseLlanera(tipoAudioInicial, () => {
+                    hablarYSubtitularSincronizado(lecturaCompleta, `Oráculo para ${actual.nombre} (${cantidadCartas} Cartas)`, () => {
+                        estaLeyendo = false;
+                    });
                 });
+
             }, 3800);
         }
 
@@ -1107,8 +1102,8 @@
 
             giftFeed.innerHTML = `<div class="gift-item">${randomGift.icono} @${consultanteElegido.user}</div>` + giftFeed.innerHTML;
             
-            // 6. Sonido al recibir regalos
-            reproducirFraseLlanera('caramba');
+            // DON JUAN HABLA FUERTE CUANDO ENVÍAN UN REGALO
+            reproducirFraseLlanera('caramba', () => {});
             mostrarAnimacionRegalo(consultanteElegido.user, randomGift.icono, randomGift.nombre);
 
         }, 45000);
@@ -1138,11 +1133,11 @@
             }
         }, 12000);
 
-        // Activación de la música de fondo
+        // MÚSICA DE FONDO SUAVE AL CARGAR
         window.addEventListener('DOMContentLoaded', () => {
             const audioArpa = document.getElementById('musicaFondo');
             if (audioArpa) {
-                audioArpa.volume = 0.08;
+                audioArpa.volume = 0.04;
                 audioArpa.play().catch(() => {});
             }
         });
