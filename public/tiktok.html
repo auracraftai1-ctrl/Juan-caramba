@@ -450,9 +450,6 @@
     <div class="container" id="mainContainer">
         <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image" onerror="this.onerror=null; this.src='Auracraftai-bg.jpg';">
 
-        <!-- ======================================================= -->
-        <!-- MÚSICA DE FONDO Y LOS 7 AUDIOS LLANEROS DE DON JUAN     -->
-        <!-- ======================================================= -->
         <audio id="musicaFondo" src="arpa.mp3" autoplay loop preload="auto"></audio>
         
         <audio id="audioCaramba" src="caramba-mi-gente.mp3" preload="auto"></audio>
@@ -689,6 +686,7 @@
             { name: "Rey de Copas", file: "/rey-de-copas.jpg" },
             { name: "As de Espadas", file: "/as-de-espadas.jpg" },
             { name: "2 de Espadas", file: "/dos-de-espadas.jpg" },
+            { name: "3 de Espadas", file: "/dos-de-espadas.jpg" },
             { name: "3 de Espadas", file: "/tres-de-espadas.jpg" },
             { name: "4 de Espadas", file: "/cuatro-de-espadas.jpg" },
             { name: "5 de Espadas", file: "/cinco-de-espadas.jpg" },
@@ -722,8 +720,8 @@
         let yaSiguio = false;
         let tiempoRestanteContrato = 3600;
 
-        // FUNCIÓN SECUENCIAL CON VOLUMEN AL MÁXIMO (1.0) PARA DON JUAN Y PAUSA DE MÚSICA
-        function reproducirFraseLlanera(tipo, callbackDespues) {
+        // FUNCIÓN PURA PARA REPRODUCIR LA VOZ DE DON JUAN SIN INTERRUMPIR EL FLUJO PRINCIPAL
+        function reproducirSoloVozDonJuan(tipo) {
             const audioMap = {
                 'caramba': 'audioCaramba',
                 'ojo': 'audioOjo',
@@ -737,18 +735,43 @@
             const elAudio = document.getElementById(audioId);
 
             if (elAudio) {
+                elAudio.currentTime = 0;
+                elAudio.volume = 1.0;
+                const audioArpa = document.getElementById('musicaFondo');
+                if (audioArpa) audioArpa.volume = 0.02;
+
+                elAudio.onended = () => {
+                    if (audioArpa) audioArpa.volume = 0.04;
+                };
+
+                elAudio.play().catch(() => {
+                    if (audioArpa) audioArpa.volume = 0.04;
+                });
+            }
+        }
+
+        // FUNCIÓN SECUENCIAL PARA EL INICIO DE CADA CONSULTA (COMPADRE / COMADRE)
+        function reproducirFraseLlaneraSecuencial(tipo, callbackDespues) {
+            const audioMap = {
+                'compadre': 'audioCompadre',
+                'comadre': 'audioComadre'
+            };
+            const audioId = audioMap[tipo];
+            const elAudio = document.getElementById(audioId);
+
+            if (elAudio) {
                 if ('speechSynthesis' in window) {
                     window.speechSynthesis.cancel();
                 }
 
                 elAudio.currentTime = 0;
-                elAudio.volume = 1.0; // Volumen a tope para que suene fuerte y claro
+                elAudio.volume = 1.0; 
 
                 const audioArpa = document.getElementById('musicaFondo');
-                if (audioArpa) audioArpa.volume = 0.02; // Baja la música de fondo
+                if (audioArpa) audioArpa.volume = 0.02;
 
                 elAudio.onended = () => {
-                    if (audioArpa) audioArpa.volume = 0.04; // Restaura el arpa suave
+                    if (audioArpa) audioArpa.volume = 0.04;
                     if (callbackDespues) callbackDespues();
                 };
 
@@ -761,7 +784,6 @@
             }
         }
 
-        // VOZ Y SUBTÍTULOS BLINDADOS DEL ASISTENTE
         function hablarYSubtitularSincronizado(textoCompleto, titulo, onCompleteCallback) {
             const speechTitle = document.getElementById('speechTitle');
             const speechText = document.getElementById('speechText');
@@ -948,7 +970,7 @@
             }
         }
 
-        // FLUJO MAESTRO DE LECTURA CON PAUSA Y ORDEN ESTRICTO
+        // FLUJO DE CONSULTA PROTEGIDO (LOS REGALOS YA NO LO INTERRUMPEN NI REINICIAN)
         function ejecutarLecturaProxima() {
             if (estaLeyendo) return;
             estaLeyendo = true;
@@ -1053,8 +1075,8 @@
                     lecturaCompleta += `Consejo Final y Advertencia: ${actual.consejo} ${actual.advertencia} Hasta aquí tu lectura gratis.${llamadaAccionFinal}`;
                 }
 
-                // PRIMERO HABLA DON JUAN (AUDIO FUERTE Y CLARO), SE PAUSA LA LECTURA, Y AL TERMINAR ARRANCA EL ASISTENTE
-                reproducirFraseLlanera(tipoAudioInicial, () => {
+                // HABLA DON JUAN AL INICIO, LUEGO EL ASISTENTE TERMINA TODA LA LECTURA SIN INTERRUPCIONES
+                reproducirFraseLlaneraSecuencial(tipoAudioInicial, () => {
                     hablarYSubtitularSincronizado(lecturaCompleta, `Oráculo para ${actual.nombre} (${cantidadCartas} Cartas)`, () => {
                         estaLeyendo = false;
                     });
@@ -1087,24 +1109,19 @@
             { icono: "👑", nombre: "un León Imperial", cartas: 10 }
         ];
 
+        // LOS REGALOS AHORA SOLO MUESTRAN EL POPUP Y SUENAN, SIN INTERRUMPIR LA CONSULTA ACTUAL
         setInterval(() => {
             const giftFeed = document.getElementById('giftFeed');
             if(!giftFeed) return;
 
-            let indiceAleatorio = Math.floor(Math.random() * consultantesPool.length);
-            let consultanteElegido = {...consultantesPool[indiceAleatorio]};
+            let usuarioRandom = ["Mariana_92", "CarlosVe", "Alejandro_X", "Sofia_Lagos", "Jesus_Ve"][Math.floor(Math.random() * 5)];
             const randomGift = listaRegalos[Math.floor(Math.random() * listaRegalos.length)];
-            
-            consultanteElegido.cartasAsignadas = randomGift.cartas;
 
-            colaConsultantes.unshift(consultanteElegido);
-            actualizarVistaCola();
-
-            giftFeed.innerHTML = `<div class="gift-item">${randomGift.icono} @${consultanteElegido.user}</div>` + giftFeed.innerHTML;
+            giftFeed.innerHTML = `<div class="gift-item">${randomGift.icono} @${usuarioRandom}</div>` + giftFeed.innerHTML;
             
-            // DON JUAN HABLA FUERTE CUANDO ENVÍAN UN REGALO
-            reproducirFraseLlanera('caramba', () => {});
-            mostrarAnimacionRegalo(consultanteElegido.user, randomGift.icono, randomGift.nombre);
+            // DON JUAN DICE SU FRASE, APARECE EL POPUP, PERO LA LECTURA ACTUAL SIGUE SU CURSO SIN CAMBIAR
+            reproducirSoloVozDonJuan('caramba');
+            mostrarAnimacionRegalo(usuarioRandom, randomGift.icono, randomGift.nombre);
 
         }, 45000);
 
@@ -1133,7 +1150,6 @@
             }
         }, 12000);
 
-        // MÚSICA DE FONDO SUAVE AL CARGAR
         window.addEventListener('DOMContentLoaded', () => {
             const audioArpa = document.getElementById('musicaFondo');
             if (audioArpa) {
