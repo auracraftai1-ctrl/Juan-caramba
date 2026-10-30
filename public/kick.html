@@ -740,6 +740,7 @@
             }
         }
 
+        // MOTOR DE VOZ BLINDADO: Subtítulos fluidos y segurísimos contra congelamiento
         function hablarYSubtitularSincronizadoConAudios(textoCompleto, titulo, tipoTercio, onCompleteCallback) {
             const speechTitle = document.getElementById('speechTitle');
             const speechText = document.getElementById('speechText');
@@ -760,22 +761,44 @@
                 bloques.push(bloqueActual.trim());
             }
 
+            let indiceBloqueActual = 0;
             if(speechText && bloques.length > 0) {
                 speechText.innerText = `"${bloques[0]}"`;
             }
 
-            if (!('speechSynthesis' in window)) {
-                let indiceBloque = 0;
-                let intervaloTexto = setInterval(() => {
-                    indiceBloque++;
-                    if (indiceBloque < bloques.length) {
-                        if(speechText) speechText.innerText = `"${bloques[indiceBloque]}"`;
-                    } else {
-                        clearInterval(intervaloTexto);
-                        reproducirFraseLlanera('sella');
-                        if(onCompleteCallback) onCompleteCallback();
+            let audioIntermedioReproducido = false;
+            let finalizado = false;
+
+            function terminarLecturaSegura() {
+                if (finalizado) return;
+                finalizado = true;
+                clearInterval(intervaloForzado);
+                reproducirFraseLlanera('sella');
+                if(onCompleteCallback) onCompleteCallback();
+            }
+
+            let intervaloForzado = setInterval(() => {
+                indiceBloqueActual++;
+                if (indiceBloqueActual < bloques.length) {
+                    if(speechText) {
+                        speechText.innerText = `"${bloques[indiceBloqueActual]}"`;
                     }
-                }, 2200);
+                    if (!audioIntermedioReproducido && indiceBloqueActual >= Math.floor(bloques.length / 2)) {
+                        audioIntermedioReproducido = true;
+                        if (tipoTercio === 10) {
+                            reproducirFraseLlanera('sabio');
+                        } else if (tipoTercio === 4) {
+                            reproducirFraseLlanera('ojogente');
+                        } else {
+                            reproducirFraseLlanera('ojo');
+                        }
+                    }
+                } else {
+                    terminarLecturaSegura();
+                }
+            }, 2100);
+
+            if (!('speechSynthesis' in window)) {
                 return;
             }
 
@@ -783,7 +806,7 @@
 
             let utterance = new SpeechSynthesisUtterance(textoCompleto);
             utterance.lang = 'es-ES';
-            utterance.rate = 0.84; 
+            utterance.rate = 0.85; 
             utterance.pitch = 0.95; 
 
             let voices = window.speechSynthesis.getVoices();
@@ -799,49 +822,12 @@
                 utterance.voice = vozAsistente;
             }
 
-            let indiceBloqueActual = 0;
-            let audioIntermedioReproducido = false;
-
-            utterance.onboundary = (event) => {
-                if (event.name === 'word') {
-                    let charIndex = event.charIndex;
-                    let porcentajeLectura = charIndex / textoCompleto.length;
-
-                    if (!audioIntermedioReproducido && porcentajeLectura > 0.45) {
-                        audioIntermedioReproducido = true;
-                        if (tipoTercio === 10) {
-                            reproducirFraseLlanera('sabio');
-                        } else if (tipoTercio === 4) {
-                            reproducirFraseLlanera('ojogente');
-                        } else {
-                            reproducirFraseLlanera('ojo');
-                        }
-                    }
-
-                    let acumulado = 0;
-                    for (let i = 0; i < bloques.length; i++) {
-                        acumulado += bloques[i].length + 1;
-                        if (charIndex < acumulado) {
-                            if (indiceBloqueActual !== i) {
-                                indiceBloqueActual = i;
-                                if(speechText) {
-                                    speechText.innerText = `"${bloques[i]}"`;
-                                }
-                            }
-                            break;
-                        }
-                    }
-                }
-            };
-
             utterance.onend = () => {
-                reproducirFraseLlanera('sella');
-                if(onCompleteCallback) onCompleteCallback();
+                terminarLecturaSegura();
             };
             
             utterance.onerror = () => {
-                reproducirFraseLlanera('sella');
-                if(onCompleteCallback) onCompleteCallback();
+                terminarLecturaSegura();
             };
 
             window.speechSynthesis.speak(utterance);
