@@ -450,9 +450,6 @@
     <div class="container" id="mainContainer">
         <img src="juan-caramba-bg.jpg" alt="Juan Caramba Tarot" class="bg-image" onerror="this.onerror=null; this.src='Auracraftai-bg.jpg';">
 
-        <!-- ======================================================= -->
-        <!-- MÚSICA DE FONDO Y LOS 7 AUDIOS LLANEROS DE DON JUAN     -->
-        <!-- ======================================================= -->
         <audio id="musicaFondo" src="arpa.mp3" autoplay loop preload="auto"></audio>
         
         <audio id="audioCaramba" src="caramba-mi-gente.mp3" preload="auto"></audio>
@@ -586,7 +583,7 @@
                 cuandoInvocarsSerafin: "los domingos al mediodía", 
                 paraQueInvocarsSerafin: "proteger tu capital contra pérdidas injustificadas",
                 vela: "Vela Amarilla o Naranja", 
-                cuandoVela: "domingo al despuntar el alba", 
+                quandoVela: "domingo al despuntar el alba", 
                 paraQueVela: "atraer clientes y movimiento comercial",
                 accionFuegoBano: "Sahumerio de cáscara de mandarina seca con azúcar y café molido en la entrada de tu local.",
                 prohibicionEstricta: "Prohibido prestar dinero o dar mercancía fiada por los próximos catorce días.",
@@ -636,9 +633,7 @@
         let colaConsultantes = [...consultantesPool];
         let estaLeyendo = false;
 
-        // LAS 78 CARTAS COMPLETAS CON PAGES Y RUTA ABSOLUTA
         const tarotDeck = [
-            // --- ARCANOS MAYORES (22) ---
             { name: "0. El Loco", file: "/el-loco.jpg" },
             { name: "I. El Mago", file: "/el-mago.jpg" },
             { name: "II. La Sacerdotisa", file: "/la-sacerdotisa.jpg" },
@@ -661,8 +656,6 @@
             { name: "XIX. El Sol", file: "/el-sol.jpg" },
             { name: "XX. El Juicio", file: "/el-juicio.jpg" },
             { name: "XXI. El Mundo", file: "/el-mundo.jpg" },
-
-            // --- BASTOS (14) ---
             { name: "As de Bastos", file: "/as-de-bastos.jpg" },
             { name: "2 de Bastos", file: "/dos-de-bastos.jpg" },
             { name: "3 de Bastos", file: "/tres-de-bastos.jpg" },
@@ -677,8 +670,6 @@
             { name: "Caballero de Bastos", file: "/caballero-de-bastos.jpg" },
             { name: "Reina de Bastos", file: "/reina-de-bastos.jpg" },
             { name: "Rey de Bastos", file: "/rey-de-bastos.jpg" },
-
-            // --- COPAS (14) ---
             { name: "As de Copas", file: "/as-de-copas.jpg" },
             { name: "2 de Copas", file: "/dos-de-copas.jpg" },
             { name: "3 de Copas", file: "/tres-de-copas.jpg" },
@@ -693,8 +684,6 @@
             { name: "Caballero de Copas", file: "/caballero-de-copas.jpg" },
             { name: "Reina de Copas", file: "/reina-de-copas.jpg" },
             { name: "Rey de Copas", file: "/rey-de-copas.jpg" },
-
-            // --- ESPADAS (14) ---
             { name: "As de Espadas", file: "/as-de-espadas.jpg" },
             { name: "2 de Espadas", file: "/dos-de-espadas.jpg" },
             { name: "3 de Espadas", file: "/tres-de-espadas.jpg" },
@@ -709,8 +698,6 @@
             { name: "Caballero de Espadas", file: "/caballero-de-espadas.jpg" },
             { name: "Reina de Espadas", file: "/reina-de-espadas.jpg" },
             { name: "Rey de Espadas", file: "/rey-de-espadas.jpg" },
-
-            // --- OROS (14) ---
             { name: "As de Oros", file: "/as-de-oro.jpg" },
             { name: "2 de Oros", file: "/dos-de-oro.jpg" },
             { name: "3 de Oros", file: "/tres-de-oro.jpg" },
@@ -732,7 +719,6 @@
         let yaSiguio = false;
         let tiempoRestanteContrato = 3600;
 
-        // FUNCIÓN PARA REPRODUCIR LOS 7 AUDIOS LLANEROS EN MOMENTOS CUMBRE
         function reproducirFraseLlanera(tipo) {
             const audioMap = {
                 'caramba': 'audioCaramba',
@@ -754,8 +740,7 @@
             }
         }
 
-        // FUNCIÓN DE VOZ Y SUBTÍTULOS BLINDADA (SUENA LA VOZ Y CAMBIA EL TEXTO)
-        function hablarYSubtitularSincronizado(textoCompleto, titulo, onCompleteCallback) {
+        function hablarYSubtitularSincronizadoConAudios(textoCompleto, titulo, tipoTercio, onCompleteCallback) {
             const speechTitle = document.getElementById('speechTitle');
             const speechText = document.getElementById('speechText');
             if(speechTitle) speechTitle.innerText = titulo;
@@ -787,6 +772,7 @@
                         if(speechText) speechText.innerText = `"${bloques[indiceBloque]}"`;
                     } else {
                         clearInterval(intervaloTexto);
+                        reproducirFraseLlanera('sella');
                         if(onCompleteCallback) onCompleteCallback();
                     }
                 }, 2200);
@@ -814,10 +800,24 @@
             }
 
             let indiceBloqueActual = 0;
+            let audioIntermedioReproducido = false;
 
             utterance.onboundary = (event) => {
                 if (event.name === 'word') {
                     let charIndex = event.charIndex;
+                    let porcentajeLectura = charIndex / textoCompleto.length;
+
+                    if (!audioIntermedioReproducido && porcentajeLectura > 0.45) {
+                        audioIntermedioReproducido = true;
+                        if (tipoTercio === 10) {
+                            reproducirFraseLlanera('sabio');
+                        } else if (tipoTercio === 4) {
+                            reproducirFraseLlanera('ojogente');
+                        } else {
+                            reproducirFraseLlanera('ojo');
+                        }
+                    }
+
                     let acumulado = 0;
                     for (let i = 0; i < bloques.length; i++) {
                         acumulado += bloques[i].length + 1;
@@ -834,24 +834,13 @@
                 }
             };
 
-            let backupTimer = setInterval(() => {
-                indiceBloqueActual++;
-                if (indiceBloqueActual < bloques.length) {
-                    if(speechText) {
-                        speechText.innerText = `"${bloques[indiceBloqueActual]}"`;
-                    }
-                } else {
-                    clearInterval(backupTimer);
-                }
-            }, 2400);
-
             utterance.onend = () => {
-                clearInterval(backupTimer);
+                reproducirFraseLlanera('sella');
                 if(onCompleteCallback) onCompleteCallback();
             };
             
             utterance.onerror = () => {
-                clearInterval(backupTimer);
+                reproducirFraseLlanera('sella');
                 if(onCompleteCallback) onCompleteCallback();
             };
 
@@ -1005,7 +994,6 @@
 
                 let nombresSalidaTexto = datosCartasMesa.map(c => `${c.nombre} ${c.invertida ? 'invertida' : 'al derecho'}`).join(", ");
 
-                // 1. Saludo inicial llanero
                 let esFemenino = actual.nombre.toLowerCase().endsWith('a') || actual.nombre.toLowerCase().includes('mariana');
                 reproducirFraseLlanera(esFemenino ? 'comadre' : 'compadre');
 
@@ -1023,9 +1011,6 @@
                     lecturaCompleta += `Serafín Guardián: ${actual.serafin}. Consejo: ${actual.consejoSerafin}. Debes invocarlo ${actual.cuandoInvocarsSerafin} para ${actual.paraQueInvocarsSerafin}. `;
                     lecturaCompleta += `Vela Ritual: ${actual.vela}. Enciéndela el ${actual.cuandoVela} (${actual.paraQueVela}). `;
                     lecturaCompleta += `Acción de Fuego y Baño Sagrado: ${actual.accionFuegoBano} `;
-                    
-                    // 2. Advertencia de gente falsa (Ojo pelao con esa gente)
-                    setTimeout(() => reproducirFraseLlanera('ojogente'), 9000);
                     lecturaCompleta += `Prohibición Estricta Energética: ${actual.prohibicionEstricta} `;
                     lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura VIP.${llamadaAccionFinal}`;
 
@@ -1034,14 +1019,11 @@
                     lecturaCompleta += `Diagnóstico unificado profundo del oráculo y tarot: La combinación de tus diez cartas indica que ${diagnosticoReal} `;
                     lecturaCompleta += `Matriz Astral completa: Sol en ${actual.sol}, Luna en ${actual.luna}, Ascendente en ${actual.ascendente}. Frecuencia Energética: ${actual.frecuencia}. Número de Poder Personal: ${actual.numPoderPersonal}. Número de Poder del Día: ${actual.numPoderDia}. `;
                     lecturaCompleta += `Recomendación Explícita: ${actual.recomendacionExplicita} `;
-                    lecturaCompleta += `Arcángel: ${actual.arcangel}. Consejo ajustado a tu pregunta: ${actual.consejoArcangel}. Debes invocarlo ${actual.cuandoInvocarsArcangel}. `;
+                    lecturaCompleta += `Arcángel: ${actual.arcangel}. Consejo ajustado a tu pregunta: ${actual.consejoArcangel}. Debes invocarlo ${actual.quandoInvocarsArcangel}. `;
                     lecturaCompleta += `Serafín Guardián: ${actual.serafin}. Consejo: ${actual.consejoSerafin}. Debes invocarlo ${actual.cuandoInvocarsSerafin}. `;
                     lecturaCompleta += `Vela Ritual de Consagración: ${actual.vela}. Enciéndela el ${actual.cuandoVela} (${actual.paraQueVela}). `;
                     lecturaCompleta += `Acción de Fuego / Baño de Transmutación: ${actual.accionFuegoBano} `;
                     lecturaCompleta += `Prohibición Energética Estricta: ${actual.prohibicionEstricta} `;
-                    
-                    // 3. Más sabio que el diablo en el Libro de los Secretos
-                    setTimeout(() => reproducirFraseLlanera('sabio'), 14000);
                     lecturaCompleta += `Secreto revelado del Libro de los Secretos: ${actual.libroSecretos} `;
                     lecturaCompleta += `Afirmación de Poder: "${actual.afirmacion}" `;
                     lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura Máxima.${llamadaAccionFinal}`;
@@ -1050,18 +1032,12 @@
                     lecturaCompleta += `Cartas en mesa: ${nombresSalidaTexto}. `;
                     lecturaCompleta += `Diagnóstico unificado directo del oráculo y tarot: ${diagnosticoReal} `;
                     lecturaCompleta += `Matriz Astral: Sol en ${actual.sol} y Luna en ${actual.luna}. `;
-                    lecturaCompleta += `Arcángel Regente: ${actual.arcangel}. Consejo puntual: ${actual.consejoArcangel}. Deberás invocarlo ${actual.cuandoInvocarsArcangel} (${actual.invocacionArcangel}). `;
+                    lecturaCompleta += `Arcángel Regente: ${actual.arcangel}. Consejo puntual: ${actual.consejoArcangel}. Deberás invocarlo ${actual.quandoInvocarsArcangel} (${actual.invocacionArcangel}). `;
                     lecturaCompleta += `Vela de Poder: ${actual.vela}. Encender el ${actual.cuandoVela}. `;
-                    
-                    // 4. Ojo pelao con eso en la advertencia general
-                    setTimeout(() => reproducirFraseLlanera('ojo'), 6000);
                     lecturaCompleta += `Consejo Final y Advertencia: ${actual.consejo} ${actual.advertencia} Hasta aquí tu lectura gratis.${llamadaAccionFinal}`;
                 }
-                
-                // 5. Cierre sellando el proceso
-                setTimeout(() => reproducirFraseLlanera('sella'), 22000);
 
-                hablarYSubtitularSincronizado(lecturaCompleta, `Oráculo para ${actual.nombre} (${cantidadCartas} Cartas)`, () => {
+                hablarYSubtitularSincronizadoConAudios(lecturaCompleta, `Oráculo para ${actual.nombre} (${cantidadCartas} Cartas)`, cantidadCartas, () => {
                     estaLeyendo = false;
                 });
             }, 3800);
@@ -1106,7 +1082,6 @@
 
             giftFeed.innerHTML = `<div class="gift-item">${randomGift.icono} @${consultanteElegido.user}</div>` + giftFeed.innerHTML;
             
-            // 6. Sonido al recibir regalos
             reproducirFraseLlanera('caramba');
             mostrarAnimacionRegalo(consultanteElegido.user, randomGift.icono, randomGift.nombre);
 
@@ -1146,9 +1121,6 @@
         });
     </script>
 
-    <!-- ======================================================= -->
-    <!-- PUENTE DE CONEXIÓN CON EL CHAT DE RENDER                -->
-    <!-- ======================================================= -->
     <script>
         async function verificarChatRealDeKick() {
             try {
