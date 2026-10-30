@@ -524,7 +524,7 @@
         <div class="tarot-slot" id="cardContainer"></div>
     </div>
 
-    <!-- Enlazamos el mazo externo con las 78 cartas -->
+    <!-- Mazo externo con las 78 cartas -->
     <script src="tarotDeck.js"></script>
 
     <script>
@@ -583,7 +583,7 @@
                 cuandoInvocarsArcangel: "domingos al despuntar el alba",
                 serafin: "Serafín de la Prosperidad Divina", 
                 consejoSerafin: "Mantén la ética en tus negocios para que la abundancia sea duradera.",
-                cuandoInvocarsSerafin: "los domingos al mediodía", 
+                quandoInvocarsSerafin: "los domingos al mediodía", 
                 paraQueInvocarsSerafin: "proteger tu capital contra pérdidas injustificadas",
                 vela: "Vela Amarilla o Naranja", 
                 quandoVela: "domingo al despuntar el alba", 
@@ -620,7 +620,7 @@
                 quandoInvocarsSerafin: "al anochecer del lunes", 
                 paraQueInvocarsSerafin: "destruir traiciones y malas intenciones",
                 vela: "Vela Azul Oscuro", 
-                quandoVela: "lunes a las 9 PM", 
+                cuandoVela: "lunes a las 9 PM", 
                 paraQueVela: "blindar tu proyecto contra la envidia",
                 accionFuegoBano: "Baño de despojo con ruda, albahaca y sal gruesa de la cabeza a los pies.",
                 prohibicionEstricta: "Prohibido revelar tus números o estrategias a personas ajenas.",
@@ -714,7 +714,7 @@
 
             palabras.forEach((palabra) => {
                 bloqueActual += palabra + " ";
-                if (bloqueActual.split(" ").length >= 5) {
+                if (bloqueActual.split(" ").length >= 6) {
                     bloques.push(bloqueActual.trim());
                     bloqueActual = "";
                 }
@@ -737,7 +737,7 @@
                         clearInterval(intervaloTexto);
                         if(onCompleteCallback) onCompleteCallback();
                     }
-                }, 2200);
+                }, 3000);
                 return;
             }
 
@@ -745,7 +745,7 @@
 
             let utterance = new SpeechSynthesisUtterance(textoCompleto);
             utterance.lang = 'es-ES';
-            utterance.rate = 0.84; 
+            utterance.rate = 0.78; 
             utterance.pitch = 0.95; 
 
             let voices = window.speechSynthesis.getVoices();
@@ -763,6 +763,7 @@
 
             let indiceBloqueActual = 0;
 
+            // Sincronización directa basada en los caracteres leídos por la voz
             utterance.onboundary = (event) => {
                 if (event.name === 'word') {
                     let charIndex = event.charIndex;
@@ -782,24 +783,11 @@
                 }
             };
 
-            let backupTimer = setInterval(() => {
-                indiceBloqueActual++;
-                if (indiceBloqueActual < bloques.length) {
-                    if(speechText) {
-                        speechText.innerText = `"${bloques[indiceBloqueActual]}"`;
-                    }
-                } else {
-                    clearInterval(backupTimer);
-                }
-            }, 2400);
-
             utterance.onend = () => {
-                clearInterval(backupTimer);
                 if(onCompleteCallback) onCompleteCallback();
             };
             
             utterance.onerror = () => {
-                clearInterval(backupTimer);
                 if(onCompleteCallback) onCompleteCallback();
             };
 
@@ -919,7 +907,6 @@
                 container.innerHTML = '';
                 const seleccionadas = [];
                 
-                // Utiliza el mazo completo importado desde tarotDeck.js
                 while(seleccionadas.length < cantidadCartas) {
                     let carta = tarotDeck[Math.floor(Math.random() * tarotDeck.length)];
                     if(!seleccionadas.includes(carta)) seleccionadas.push(carta);
