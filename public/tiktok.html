@@ -444,7 +444,6 @@
             100% { transform: translateY(-110px) scale(1.3); opacity: 0; }
         }
 
-        /* NUEVO: aviso fijo y pantalla de inicio */
         .aviso {
             position: fixed;
             bottom: 2px;
@@ -537,10 +536,7 @@
 
         <div class="gifts-panel">
             <h5>🎁 Regalos TikTok</h5>
-            <div class="gift-feed" id="giftFeed">
-                <div class="gift-item">👓 @Mariana_92 Gafas</div>
-                <div class="gift-item">🦁 @CarlosVe León</div>
-            </div>
+            <div class="gift-feed" id="giftFeed"></div>
         </div>
 
         <div class="gift-popup-animation" id="giftPopup">
@@ -551,7 +547,7 @@
 
         <div class="speech-floating">
             <h3 id="speechTitle">Asistente de Don Juan Caramba</h3>
-            <p id="speechText">"Iniciando transmisión en vivo por TikTok..."</p>
+            <p id="speechText">Iniciando transmisión en vivo por TikTok...</p>
         </div>
 
         <div class="tarot-slot" id="cardContainer"></div>
@@ -563,7 +559,10 @@
 
     <!-- Mazo externo con las 78 cartas -->
     <script src="tarotDeck.js"></script>
-        <script>
+    <script>
+        // Cambia a true SOLO si quieres regalos simulados de prueba (no usar en vivo).
+        const SIMULAR_REGALOS = false;
+
         const consultantesPool = [
             { 
                 user: "Mariana_92", 
@@ -582,7 +581,7 @@
                 recomendacionExplicita: "Corta contacto con tu pasado sentimental y mantén tus emociones bajo custodia.",
                 arcangel: "Arcángel Chamuel", 
                 consejoArcangel: "Perdona de corazón las faltas pasadas para liberar tu alma.",
-                invocacionArcangel: "Invocálo los martes al atardecer en un rincón tranquilo.",
+                invocacionArcangel: "Invócalo los martes al atardecer en un rincón tranquilo.",
                 cuandoInvocarsArcangel: "martes al atardecer",
                 serafin: "Serafín de la Llama Celeste", 
                 consejoSerafin: "Purifica tus emociones para no repetir ciclos dolorosos.",
@@ -617,7 +616,7 @@
                 recomendacionExplicita: "Audita tus números, firma con prudencia y exige garantías en cada transacción.",
                 arcangel: "Arcángel Jofiel", 
                 consejoArcangel: "Aclara tu mente comercial para ver oportunidades donde otros ven crisis.",
-                invocacionArcangel: "Invocálo los domingos al salir el sol.",
+                invocacionArcangel: "Invócalo los domingos al salir el sol.",
                 cuandoInvocarsArcangel: "domingos al despuntar el alba",
                 serafin: "Serafín de la Prosperidad Divina", 
                 consejoSerafin: "Mantén la ética en tus negocios para que la abundancia sea duradera.",
@@ -652,7 +651,7 @@
                 recomendacionExplicita: "Exige auditoría previa por escrito y no te dejes llevar por palabras bonitas.",
                 arcangel: "Arcángel Miguel", 
                 consejoArcangel: "Corta con tu espada de luz todo lazo engañoso o propuesta sospechosa.",
-                invocacionArcangel: "Invocálo los lunes por la noche.",
+                invocacionArcangel: "Invócalo los lunes por la noche.",
                 cuandoInvocarsArcangel: "lunes a las 9 PM",
                 serafin: "Serafín del Fuego Purificador", 
                 consejoSerafin: "Quema la falsedad de quienes intentan usar tu esfuerzo en su beneficio.",
@@ -680,6 +679,21 @@
         let numSeguidores = 14820;
         let yaSiguio = false;
         let tiempoRestanteContrato = 3600;
+
+        // Limpia el texto para que la voz y los subtítulos no lleven
+        // comillas, paréntesis ni símbolos raros.
+        function limpiarParaVoz(texto) {
+            return texto
+                .replace(/aura-craft-mystic\.base44\.app/gi, 'aura craft mystic punto base cuarenta y cuatro punto app')
+                .replace(/\.{2,}/g, '.')
+                .replace(/[“”«»"'`´]/g, '')
+                .replace(/[()\[\]{}]/g, ', ')
+                .replace(/[*_#~^|\\\/<>=+]/g, ' ')
+                .replace(/\s*,(\s*,)+/g, ',')
+                .replace(/,\s*([.!?])/g, '$1')
+                .replace(/\s{2,}/g, ' ')
+                .trim();
+        }
 
         function reproducirSoloVozDonJuan(tipo) {
             const audioMap = {
@@ -747,21 +761,22 @@
         function hablarYSubtitularSincronizado(textoCompleto, titulo, onCompleteCallback) {
             const speechTitle = document.getElementById('speechTitle');
             const speechText = document.getElementById('speechText');
-            if(speechTitle) speechTitle.innerText = titulo;
+            if (speechTitle) speechTitle.innerText = titulo;
 
-            const frases = (textoCompleto.match(/[^.!?]+[.!?]*/g) || [textoCompleto])
+            const textoLimpio = limpiarParaVoz(textoCompleto);
+            const frases = (textoLimpio.match(/[^.!?]+[.!?]*/g) || [textoLimpio])
                 .map(f => f.trim())
-                .filter(Boolean);
+                .filter(f => f && /[A-Za-zÁÉÍÓÚáéíóúÑñ0-9]/.test(f));
             let indice = 0;
 
             if (!('speechSynthesis' in window)) {
                 let intervaloTexto = setInterval(() => {
                     if (indice < frases.length) {
-                        if(speechText) speechText.innerText = `"${frases[indice]}"`;
+                        if (speechText) speechText.innerText = frases[indice];
                         indice++;
                     } else {
                         clearInterval(intervaloTexto);
-                        if(onCompleteCallback) onCompleteCallback();
+                        if (onCompleteCallback) onCompleteCallback();
                     }
                 }, 3500);
                 return;
@@ -780,7 +795,7 @@
 
             const siguiente = () => {
                 if (indice >= frases.length) {
-                    if(onCompleteCallback) onCompleteCallback();
+                    if (onCompleteCallback) onCompleteCallback();
                     return;
                 }
                 let utterance = new SpeechSynthesisUtterance(frases[indice]);
@@ -789,7 +804,7 @@
                 utterance.pitch = 0.95; 
                 if (vozAsistente) utterance.voice = vozAsistente;
 
-                if(speechText) speechText.innerText = `"${frases[indice]}"`;
+                if (speechText) speechText.innerText = frases[indice];
                 indice++;
 
                 utterance.onend = siguiente;
@@ -808,7 +823,7 @@
 
         function actualizarVistaCola() {
             const queueList = document.getElementById('queueList');
-            if(!queueList) return;
+            if (!queueList) return;
             queueList.innerHTML = '';
             colaConsultantes.slice(0, 6).forEach((item, index) => {
                 const li = document.createElement('li');
@@ -822,7 +837,7 @@
             if (!iniciado) return;
             totalTaps++;
             const tapDisplay = document.getElementById('tapCountDisplay');
-            if(tapDisplay) tapDisplay.innerText = totalTaps;
+            if (tapDisplay) tapDisplay.innerText = totalTaps;
 
             const energyFill = document.getElementById('energyFill');
             if (energyFill) {
@@ -852,16 +867,16 @@
             if (!yaSiguio) {
                 numSeguidores++;
                 yaSiguio = true;
-                if(btn) btn.classList.add('followed');
-                if(text) text.innerText = "Siguiendo";
+                if (btn) btn.classList.add('followed');
+                if (text) text.innerText = "Siguiendo";
             } else {
                 numSeguidores--;
                 yaSiguio = false;
-                if(btn) btn.classList.remove('followed');
-                if(text) text.innerText = "Seguir";
+                if (btn) btn.classList.remove('followed');
+                if (text) text.innerText = "Seguir";
             }
             const countDiv = document.getElementById('followerCount');
-            if(countDiv) countDiv.innerText = `Seguidores: ${(numSeguidores / 1000).toFixed(1)}K`;
+            if (countDiv) countDiv.innerText = `Seguidores: ${(numSeguidores / 1000).toFixed(1)}K`;
         }
 
         function compartirAccion(event) {
@@ -879,7 +894,7 @@
             const user = document.getElementById('giftPopupUser');
             const text = document.getElementById('giftPopupText');
 
-            if(popup && icon && user && text) {
+            if (popup && icon && user && text) {
                 icon.innerText = regaloIcono;
                 user.innerText = `@${usuario}`;
                 text.innerText = `¡Envió ${regaloNombre} en TikTok Live!`;
@@ -888,7 +903,8 @@
                 setTimeout(() => { popup.classList.remove('show'); }, 3000);
             }
         }
-             function ejecutarLecturaProxima() {
+
+        function ejecutarLecturaProxima() {
             if (estaLeyendo) return;
             estaLeyendo = true;
 
@@ -964,7 +980,7 @@
                         let tipoAudioInicial = actual.genero === 'f' ? 'comadre' : 'compadre';
                         let veredictoHablado = actual.veredicto.replace(/[¡!]/g, '');
 
-                        let introduccionAsistente = `Hola, soy el asistente de Juan Caramba. En estos momentos no se encuentra. Yo atenderé tu consulta de ${actual.nombre} sobre "${actual.pregunta}"... El veredicto de las cartas es: ${veredictoHablado}. `;
+                        let introduccionAsistente = `Hola, soy el asistente de Juan Caramba. En estos momentos no se encuentra. Yo atenderé la consulta de ${actual.nombre}. Su pregunta es: ${actual.pregunta} El veredicto de las cartas es: ${veredictoHablado}. `;
                         let llamadaAccionFinal = ` Entra a mi página web, aura-craft-mystic.base44.app, para más lecturas. Y recuerda seguirnos en el directo de TikTok.`;
                         
                         let lecturaCompleta = introduccionAsistente;
@@ -973,7 +989,7 @@
                             lecturaCompleta += `Cartas de Gafas o Sombrero en mesa: ${nombresSalidaTexto}. `;
                             lecturaCompleta += `Diagnóstico dinámico: ${diagnosticoReal} `;
                             lecturaCompleta += `Matriz Astral: Sol en ${actual.sol} y Luna en ${actual.luna}. `;
-                            lecturaCompleta += `Arcángel Regente: ${actual.arcangel}. Consejo: ${actual.consejoArcangel}. Invocación: ${actual.invocacionArcangel}. `;
+                            lecturaCompleta += `Arcángel Regente: ${actual.arcangel}. Consejo: ${actual.consejoArcangel} Invocación: ${actual.invocacionArcangel} `;
                             lecturaCompleta += `Vela Ritual: ${actual.vela}. Encender el ${actual.cuandoVela}. `;
                             lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura de Gafas y Sombrero.${llamadaAccionFinal}`;
                         } else if (cantidadCartas === 4) {
@@ -981,9 +997,9 @@
                             lecturaCompleta += `Diagnóstico unificado del oráculo y tarot: La combinación de tus cartas revela que ${diagnosticoReal} `;
                             lecturaCompleta += `Matriz Astral: Sol en ${actual.sol}, Luna en ${actual.luna}, Ascendente en ${actual.ascendente}. Frecuencia Energética: ${actual.frecuencia}. Número de Poder Personal: ${actual.numPoderPersonal}. Número de Poder del Día: ${actual.numPoderDia}. `;
                             lecturaCompleta += `Recomendación Explícita: ${actual.recomendacionExplicita} `;
-                            lecturaCompleta += `Arcángel: ${actual.arcangel}. Consejo: ${actual.consejoArcangel}. Invocación: ${actual.invocacionArcangel}. `;
-                            lecturaCompleta += `Serafín Guardián: ${actual.serafin}. Consejo: ${actual.consejoSerafin}. Debes invocarlo ${actual.cuandoInvocarsSerafin} para ${actual.paraQueInvocarsSerafin}. `;
-                            lecturaCompleta += `Vela Ritual: ${actual.vela}. Enciéndela el ${actual.cuandoVela} (${actual.paraQueVela}). `;
+                            lecturaCompleta += `Arcángel: ${actual.arcangel}. Consejo: ${actual.consejoArcangel} Invocación: ${actual.invocacionArcangel} `;
+                            lecturaCompleta += `Serafín Guardián: ${actual.serafin}. Consejo: ${actual.consejoSerafin} Debes invocarlo ${actual.cuandoInvocarsSerafin} para ${actual.paraQueInvocarsSerafin}. `;
+                            lecturaCompleta += `Vela Ritual: ${actual.vela}. Enciéndela el ${actual.cuandoVela} para ${actual.paraQueVela}. `;
                             lecturaCompleta += `Acción de Fuego y Baño Sagrado: ${actual.accionFuegoBano} `;
                             lecturaCompleta += `Prohibición Estricta Energética: ${actual.prohibicionEstricta} `;
                             lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura VIP.${llamadaAccionFinal}`;
@@ -992,25 +1008,25 @@
                             lecturaCompleta += `Diagnóstico unificado profundo del oráculo y tarot: La combinación de tus diez cartas indica que ${diagnosticoReal} `;
                             lecturaCompleta += `Matriz Astral completa: Sol en ${actual.sol}, Luna en ${actual.luna}, Ascendente en ${actual.ascendente}. Frecuencia Energética: ${actual.frecuencia}. Número de Poder Personal: ${actual.numPoderPersonal}. Número de Poder del Día: ${actual.numPoderDia}. `;
                             lecturaCompleta += `Recomendación Explícita: ${actual.recomendacionExplicita} `;
-                            lecturaCompleta += `Arcángel: ${actual.arcangel}. Consejo ajustado a tu pregunta: ${actual.consejoArcangel}. Debes invocarlo ${actual.cuandoInvocarsArcangel}. `;
-                            lecturaCompleta += `Serafín Guardián: ${actual.serafin}. Consejo: ${actual.consejoSerafin}. Debes invocarlo ${actual.cuandoInvocarsSerafin}. `;
-                            lecturaCompleta += `Vela Ritual de Consagración: ${actual.vela}. Enciéndela el ${actual.cuandoVela} (${actual.paraQueVela}). `;
-                            lecturaCompleta += `Acción de Fuego / Baño de Transmutación: ${actual.accionFuegoBano} `;
+                            lecturaCompleta += `Arcángel: ${actual.arcangel}. Consejo ajustado a tu pregunta: ${actual.consejoArcangel} Debes invocarlo ${actual.cuandoInvocarsArcangel}. `;
+                            lecturaCompleta += `Serafín Guardián: ${actual.serafin}. Consejo: ${actual.consejoSerafin} Debes invocarlo ${actual.cuandoInvocarsSerafin}. `;
+                            lecturaCompleta += `Vela Ritual de Consagración: ${actual.vela}. Enciéndela el ${actual.cuandoVela} para ${actual.paraQueVela}. `;
+                            lecturaCompleta += `Acción de Fuego y Baño de Transmutación: ${actual.accionFuegoBano} `;
                             lecturaCompleta += `Prohibición Energética Estricta: ${actual.prohibicionEstricta} `;
                             lecturaCompleta += `Secreto revelado del Libro de los Secretos: ${actual.libroSecretos} `;
-                            lecturaCompleta += `Afirmación de Poder: "${actual.afirmacion}" `;
+                            lecturaCompleta += `Afirmación de Poder: ${actual.afirmacion} `;
                             lecturaCompleta += `Consejo Final: ${actual.consejo} Hasta aquí tu lectura Máxima.${llamadaAccionFinal}`;
                         } else {
                             lecturaCompleta += `Cartas en mesa: ${nombresSalidaTexto}. `;
                             lecturaCompleta += `Diagnóstico unificado directo del oráculo y tarot: ${diagnosticoReal} `;
                             lecturaCompleta += `Matriz Astral: Sol en ${actual.sol} y Luna en ${actual.luna}. `;
-                            lecturaCompleta += `Arcángel Regente: ${actual.arcangel}. Consejo puntual: ${actual.consejoArcangel}. Deberás invocarlo ${actual.cuandoInvocarsArcangel} (${actual.invocacionArcangel}). `;
+                            lecturaCompleta += `Arcángel Regente: ${actual.arcangel}. Consejo puntual: ${actual.consejoArcangel} Deberás invocarlo ${actual.cuandoInvocarsArcangel}. `;
                             lecturaCompleta += `Vela de Poder: ${actual.vela}. Encender el ${actual.cuandoVela}. `;
                             lecturaCompleta += `Consejo Final y Advertencia: ${actual.consejo} ${actual.advertencia} Hasta aquí tu lectura gratis.${llamadaAccionFinal}`;
                         }
 
                         reproducirFraseLlaneraSecuencial(tipoAudioInicial, () => {
-                            hablarYSubtitularSincronizado(lecturaCompleta, `Oráculo para ${actual.nombre} (${cantidadCartas} Cartas)`, terminar);
+                            hablarYSubtitularSincronizado(lecturaCompleta, `Oráculo para ${actual.nombre} · ${cantidadCartas} Cartas`, terminar);
                         });
                     } catch (err) {
                         console.error(err);
@@ -1026,19 +1042,19 @@
 
         // Reloj del concurso de taps
         setInterval(() => {
-            if(tiempoRestanteContrato > 0) {
+            if (tiempoRestanteContrato > 0) {
                 tiempoRestanteContrato--;
                 let m = Math.floor(tiempoRestanteContrato / 60);
                 let s = tiempoRestanteContrato % 60;
                 const timerDisp = document.getElementById('timerDisplay');
-                if(timerDisp) timerDisp.innerText = `${m < 10 ? '0'+m : m}:${s < 10 ? '0'+s : s}`;
+                if (timerDisp) timerDisp.innerText = `${m < 10 ? '0' + m : m}:${s < 10 ? '0' + s : s}`;
             } else {
                 tiempoRestanteContrato = 3600;
                 totalTaps = 0;
                 const tapDisp = document.getElementById('tapCountDisplay');
-                if(tapDisp) tapDisp.innerText = 0;
+                if (tapDisp) tapDisp.innerText = 0;
                 const energyFill = document.getElementById('energyFill');
-                if(energyFill) energyFill.style.width = '0%';
+                if (energyFill) energyFill.style.width = '0%';
             }
         }, 1000);
 
@@ -1049,13 +1065,14 @@
             { icono: "👑", nombre: "un León Imperial", cartas: 10 }
         ];
 
-        // Regalos simulados (modo demostración)
+        // Regalos simulados: solo si SIMULAR_REGALOS es true (pruebas, no en vivo)
         setInterval(() => {
+            if (!SIMULAR_REGALOS) return;
             if (!iniciado) return;
             if (colaConsultantes.length > 8) return; // tope de cola
 
             const giftFeed = document.getElementById('giftFeed');
-            if(!giftFeed) return;
+            if (!giftFeed) return;
 
             let consultanteElegido = {...consultantesPool[Math.floor(Math.random() * consultantesPool.length)]};
             const randomGift = listaRegalos[Math.floor(Math.random() * listaRegalos.length)];
@@ -1066,7 +1083,7 @@
             actualizarVistaCola();
 
             giftFeed.insertAdjacentHTML('afterbegin', `<div class="gift-item">${randomGift.icono} @${consultanteElegido.user}</div>`);
-            while (giftFeed.children.length > 3) giftFeed.lastElementChild.remove(); // sin fuga de memoria
+            while (giftFeed.children.length > 3) giftFeed.lastElementChild.remove();
             
             reproducirSoloVozDonJuan('caramba');
             mostrarAnimacionRegalo(consultanteElegido.user, randomGift.icono, randomGift.nombre);
@@ -1111,4 +1128,4 @@
         }
     </script>
 </body>
-</html>       
+</html>
