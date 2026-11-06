@@ -456,25 +456,6 @@
             text-shadow: 1px 1px 3px #000;
             pointer-events: none;
         }
-        #inicio {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: 500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        #inicio button {
-            background: linear-gradient(135deg, #d4af37, #8b5a2b);
-            color: #000;
-            font-size: 20px;
-            font-weight: bold;
-            border: none;
-            border-radius: 30px;
-            padding: 16px 34px;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
@@ -554,8 +535,6 @@
 
         <div class="aviso">Lecturas con fines de entretenimiento · Modo demostración</div>
     </div>
-
-    <div id="inicio"><button onclick="iniciar()">🔮 Toca para iniciar</button></div>
 
     <!-- Mazo externo con las 78 cartas -->
     <script src="tarotDeck.js"></script>
@@ -1106,18 +1085,16 @@
             setTimeout(() => particle.remove(), 6000);
         }, 800);
 
-        // Lecturas continuas (solo después de pulsar "Toca para iniciar")
+        // Lecturas continuas
         setInterval(() => {
             if (iniciado && !estaLeyendo) {
                 ejecutarLecturaProxima();
             }
         }, 12000);
 
-        // El clic de inicio desbloquea el audio y la voz del navegador
-        function iniciar() {
+        // ===== INICIO AUTOMÁTICO (sin botón) =====
+        function iniciarAutomatico() {
             iniciado = true;
-            const pantalla = document.getElementById('inicio');
-            if (pantalla) pantalla.remove();
 
             const audioArpa = document.getElementById('musicaFondo');
             if (audioArpa) {
@@ -1125,6 +1102,24 @@
                 audioArpa.play().catch(() => {});
             }
             setTimeout(ejecutarLecturaProxima, 1500);
+        }
+
+        // Si el navegador bloquea el audio al cargar, se activa en la primera interacción
+        function desbloquearAudio() {
+            const audioArpa = document.getElementById('musicaFondo');
+            if (audioArpa && audioArpa.paused) {
+                audioArpa.play().catch(() => {});
+            }
+        }
+        ['pointerdown', 'keydown', 'touchstart'].forEach(ev => {
+            window.addEventListener(ev, desbloquearAudio, { once: true });
+        });
+
+        // Arranca solo al cargar la página
+        if (document.readyState === 'loading') {
+            window.addEventListener('DOMContentLoaded', iniciarAutomatico);
+        } else {
+            iniciarAutomatico();
         }
     </script>
 </body>
