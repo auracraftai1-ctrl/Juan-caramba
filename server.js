@@ -12,6 +12,7 @@ const SIGN_API_KEY = process.env.TIKTOK_SIGN_API_KEY || undefined;
 
 const MAX_COLA = 15;                    // máximo de personas esperando
 const COOLDOWN_MS = 5 * 60 * 1000;      // 1 lectura gratis por usuario cada 5 min
+const REINTENTO_MS = 60 * 1000;         // cada cuánto reintenta conectar a TikTok
 const PALABRAS_BLOQUEADAS = ['puta', 'puto', 'mierda', 'marico', 'maricon', 'pendejo', 'verga', 'nazi', 'suicid', 'matarme'];
 
 let colaChatReal = [];
@@ -134,25 +135,61 @@ async function iniciarTikTok() {
     if (SIGN_API_KEY) opciones.signApiKey = SIGN_API_KEY;
 
     let reintento = null;
+    let actual = null;
+
     const reintentar = () => {
         if (reintento) return;
-        reintento = setTimeout(() => { reintento = null; intentar(); }, 30000);
+        reintento = setTimeout(() => { reintento = null; intentar(); }, REINTENTO_MS);
+    };
+
+    // Detecta el caso "el usuario no está en vivo" en cualquier forma en que llegue el error
+    const esOffline = (err) => {
+        let texto = '';
+        try {
+            texto = [
+                err && err.message,
+                err && err.info,
+                err && err.exception && err.exception.message,
+                typeof err === 'string' ? err : '',
+                (err && typeof err === 'object') ? JSON.stringify(err) : ''
+            ].join(' ');
+        } catch (e) {}
+        return /offline|isn't online|not online/i.test(texto);
     };
 
     function intentar() {
+        // Cierra la conexión anterior para no acumular conexiones muertas
+        if (actual) {
+            try { actual.disconnect(); } catch (e) {}
+            actual = null;
+        }
+
         const conn = new Conexion(TIKTOK_USER, opciones);
+        actual = conn;
+
         conn.on(Ev.CHAT || 'chat', manejarChat);
         conn.on(Ev.GIFT || 'gift', manejarRegalo);
-        conn.on(Ctl.DISCONNECTED || 'disconnected', () => {
-            console.log('[TikTok] Desconectado, reintentando en 30 s...');
+        conn.on(Ev.STREAM_END || 'streamEnd', () => {
+            console.log('[TikTok] El LIVE terminó. Reintentando en 60 s...');
             reintentar();
         });
-        conn.on(Ctl.ERROR || 'error', err => console.error('[TikTok] Error:', err?.message || err));
+        conn.on(Ctl.DISCONNECTED || 'disconnected', () => {
+            console.log('[TikTok] Desconectado. Reintentando en 60 s...');
+            reintentar();
+        });
+        conn.on(Ctl.ERROR || 'error', err => {
+            if (esOffline(err)) return; // lo maneja el catch de connect() con un aviso tranquilo
+            console.error('[TikTok] Error:', err && (err.message || err.info) || JSON.stringify(err));
+        });
 
         conn.connect()
             .then(state => console.log(`[TikTok] Conectado a @${TIKTOK_USER}, sala ${state.roomId || state.roomInfo?.room_id}`))
             .catch(err => {
-                console.error('[TikTok] No se pudo conectar (¿ya estás en vivo?):', err?.message || err);
+                if (esOffline(err)) {
+                    console.log(`[TikTok] @${TIKTOK_USER} todavía no está en vivo. Reintento en 60 s.`);
+                } else {
+                    console.error('[TikTok] No se pudo conectar:', err && (err.message || err.info) || JSON.stringify(err));
+                }
                 reintentar();
             });
     }
@@ -184,6 +221,13 @@ app.post('/webhook-kick', (req, res) => {
 app.get('/obtener-siguiente-usuario', (req, res) => {
     res.json(colaChatReal.length ? colaChatReal.shift() : null);
 });
+
+// Limpieza periódica para que los mapas no crezcan sin límite
+setInterval(() => {
+    const ahora = Date.now();
+    for (const [k, t] of ultimoPorUsuario) if (ahora - t > COOLDOWN_MS) ultimoPorUsuario.delete(k);
+    if (ultimaPregunta.size > 500) ultimaPregunta.clear();
+}, 10 * 60 * 1000);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor activo en puerto ${PORT} para @${TIKTOK_USER}`));
